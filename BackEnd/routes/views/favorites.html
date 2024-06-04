@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script
+      src="https://kit.fontawesome.com/262f393da5.js"
+      crossorigin="anonymous"
+    ></script>
+    <link rel="stylesheet" href="styles/StyleCatalog.css" />
+    <link rel="stylesheet" href="styles/footer.css" />
+    <link rel="stylesheet" href="styles/favorite.css" />
+  </head>
+  <body>
+    <div class="header__offer">
+      <p id="countdown"></p>
+    </div>
+    <header class="header-catalog">
+      <nav class="navbar-small">
+        <a href="/"
+          ><img class="logo" src="images/Terabade.svg" alt="Terabade"
+        /></a>
+        <label for="search"></label>
+        <input type="search" id="search" name="search" placeholder="Пошук" />
+        <ul class="ul-navbar-small">
+          <li class="li-navbar-small-first">
+            <a href="/Catalog.html"><p>Чоловіки</p></a>
+          </li>
+          <li class="li-navbar-small">Жінки</li>
+          <li class="li-navbar-small">Діти</li>
+          <li class="li-navbar-small">Розпродаж</li>
+          <li class="li-navbar-small">Про нас</li>
+        </ul>
+        <div class="header__icons">
+          <p class="tooltip" data-tooltip="" id="tooltipElement">
+            <a href="/login.html"
+              ><img class="icon" src="images/user.svg" alt="user" />
+            </a>
+          </p>
+          <a href="/favorites">
+            <img class="icon" src="images/heart.svg" alt="heart" />
+          </a>
+          <div class="cart-btn">
+            <span class="nav-icon span-courier">
+              <img class="icon" src="images/Basket.svg" alt="basket" />
+            </span>
+            <div class="cart-items">0</div>
+          </div>
+        </div>
+        <p class="language">UA</p>
+      </nav>
+      <nav class="navbar-interactive">
+        <ul class="ul-navbar-interactive">
+          <li class="li-navbar-interactive">
+            <p><a href="">Нові надходження</a></p>
+            <div class="wrapper-sub-li-navbar-interactive">
+              <p class="sub-li-navbar-interactive">
+                <a href="">Дивитися всі</a>
+              </p>
+            </div>
+          </li>
+          <li class="li-navbar-interactive">
+            <p><a href="">Обране</a></p>
+            <div class="wrapper-sub-li-navbar-interactive">
+              <p class="sub-li-navbar-interactive"><a href="">Трендові</a></p>
+              <p class="sub-li-navbar-interactive">
+                <a href="">Лідери продажу</a>
+              </p>
+              <p class="sub-li-navbar-interactive"><a href="">Набори</a></p>
+              <p class="sub-li-navbar-interactive"><a href="">Розпродаж</a></p>
+              <p class="sub-li-navbar-interactive"><a href="">Новинка</a></p>
+            </div>
+          </li>
+          <li class="li-navbar-interactive">
+            <p><a href="">Обмежений час</a></p>
+            <div class="wrapper-sub-li-navbar-interactive">
+              <p class="sub-li-navbar-interactive">
+                <a href="">Знижка <span class="span-courier">20%</span></a>
+              </p>
+            </div>
+          </li>
+          <li class="li-navbar-interactive">
+            <p><a href="">Взуття</a></p>
+            <div class="wrapper-sub-li-navbar-interactive">
+              <p class="sub-li-navbar-interactive">
+                <a href="">Повсякденні</a>
+              </p>
+              <p class="sub-li-navbar-interactive"><a href="">Jordan</a></p>
+              <p class="sub-li-navbar-interactive"><a href="">Air Max</a></p>
+              <p class="sub-li-navbar-interactive">
+                <a href="">Air Force <span class="span-courier">1</span></a>
+              </p>
+              <p class="sub-li-navbar-interactive">
+                <a href="">Dunks & Blazers</a>
+              </p>
+            </div>
+          </li>
+          <li class="li-navbar-interactive">
+            <p><a href="">Спорт</a></p>
+            <div class="wrapper-sub-li-navbar-interactive">
+              <p class="sub-li-navbar-interactive nowrap">
+                <a href="">Футбол</a>
+              </p>
+              <p class="sub-li-navbar-interactive"><a href="">Баскетбол</a></p>
+              <p class="sub-li-navbar-interactive"><a href="">Теніс</a></p>
+              <p class="sub-li-navbar-interactive"><a href="">Гольф</a></p>
+              <p class="sub-li-navbar-interactive"><a href="">Спорт-зал</a></p>
+              <p class="sub-li-navbar-interactive"><a href="">Біг</a></p>
+              <p class="sub-li-navbar-interactive"><a href="">Плавання</a></p>
+              <p class="sub-li-navbar-interactive"><a href="">Йога</a></p>
+            </div>
+          </li>
+        </ul>
+        <img src="images/ManHeader.svg" alt="Male" class="man-image" />
+      </nav>
+      <img class="white-spot" src="images/Navbar.png" alt="white-spot" />
+    </header>
+    <main>
+      <div id="favorite-products" class="products-center"></div>
+      <div class="cart-overlay">
+        <div class="cart">
+          <span class="close-cart">
+            <i class="fas fa-window-close"></i>
+          </span>
+          <h2>Ваша корзина</h2>
+          <div class="cart-content">
+            <!-- <div class="cart-item"></div> -->
+          </div>
+          <div class="cart-footer">
+            <h3>Вартість: $<span class="cart-total">0</span></h3>
+            <button class="clear-cart nowrap banner-btn">Очистити кошик</button>
+          </div>
+        </div>
+      </div>
+    </main>
+    <footer class="footer">
+      <ul class="footer-links">
+        <li class="about-info">About</li>
+        <li class="pricing-info">Pricing</li>
+        <li class="privacy-policy-info">Privacy Policy</li>
+        <li class="blog-info">Blog</li>
+        <li class="contact-info">Contant us</li>
+      </ul>
+      <p>
+        <span class="nowrap">Copyright &copy; <time id="year"></time></span>
+        <span class="nowrap">Terabade</span>
+      </p>
+    </footer>
+    <script type="module" src="/favorites/Favorites.js"></script>
+  </body>
+</html>
