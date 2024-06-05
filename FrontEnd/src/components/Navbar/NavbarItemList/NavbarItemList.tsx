@@ -2,13 +2,19 @@ import NavbarItem from "../NavbarItem/NavbarItem"
 import styles from "./NavbarItemList.module.css"
 
 const NavbarItemList = () => {
+  const links = [
+    { name: "Чоловіки", href: "/Catalog.html" },
+    { name: "Жінки", href: "#" },
+    { name: "Діти", href: "#" },
+    { name: "Розпродаж", href: "#" },
+    { name: "Про нас", href: "#" },
+  ]
+
   return (
     <ul className={styles.ulNavbarSmall}>
-      <NavbarItem href="/Catalog.html">Чоловіки</NavbarItem>
-      <NavbarItem href="#">Жінки</NavbarItem>
-      <NavbarItem href="#">Діти</NavbarItem>
-      <NavbarItem href="#">Розпродаж</NavbarItem>
-      <NavbarItem href="#">Про нас</NavbarItem>
+      {links.map((link, index) => (
+        <NavbarItem key={index} children={link.name} href={link.href} />
+      ))}
     </ul>
   )
 }
