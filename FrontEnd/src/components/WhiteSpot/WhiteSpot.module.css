@@ -1,0 +1,13 @@
+.whiteSpotContainer {
+  position: absolute;
+  right: 0px;
+  top: 0px;
+  height: 100vh;
+  z-index: 0;
+  width: 63.5%;
+}
+
+.whiteSpotImg {
+  width: 100%;
+  height: 99vh;
+}

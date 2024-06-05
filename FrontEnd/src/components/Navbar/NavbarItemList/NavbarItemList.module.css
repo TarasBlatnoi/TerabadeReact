@@ -1,0 +1,6 @@
+.ulNavbarSmall {
+  height: 30%;
+  list-style: none;
+  display: flex;
+  align-items: center;
+}
