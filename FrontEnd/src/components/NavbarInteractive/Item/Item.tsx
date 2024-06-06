@@ -1,13 +1,21 @@
-const NavbarInteractiveItem = () => {
+import { ReactNode } from "react"
+import SubItem from "./SubItem/SubItem"
+import styles from "./Item.module.css"
+
+type PropsType = {
+  mainLinkName: string
+  linksNames: ReactNode[]
+}
+const NavbarInteractiveItem = ({ mainLinkName, linksNames }: PropsType) => {
   return (
-    <li className="li-navbar-interactive">
+    <li className={styles.liNavbarInteractive}>
       <p>
-        <a href="">Нові надходження</a>
+        <a href="">{mainLinkName}</a>
       </p>
-      <div className="wrapper-sub-li-navbar-interactive">
-        <p className="sub-li-navbar-interactive">
-          <a href="">Дивитися всі</a>
-        </p>
+      <div className={styles.wrapperSubLiNavbarInteractive}>
+        {linksNames.map((subItem, index) => (
+          <SubItem children={subItem} key={index} />
+        ))}
       </div>
     </li>
   )

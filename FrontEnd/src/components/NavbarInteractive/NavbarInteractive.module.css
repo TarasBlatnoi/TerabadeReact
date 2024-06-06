@@ -1,0 +1,27 @@
+.navbarInteractive {
+  font-size: 1rem;
+  display: flex;
+  position: relative;
+  z-index: 105;
+  background-color: #fbfaff;
+  transform-origin: top center;
+  height: 310%;
+}
+
+.ulNavbarInteractive {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  list-style: none;
+  width: 40%;
+  margin: 1.7em;
+  margin-left: auto;
+}
+
+.manImage {
+  margin-left: 3em;
+  margin-right: 4em;
+}
+.spanCourier {
+  font-family: "Courier New", Courier, monospace;
+}
