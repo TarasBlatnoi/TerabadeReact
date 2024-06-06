@@ -1,4 +1,4 @@
-import NavbarInteractiveItem from "./NavbarInteractiveItem"
+import NavbarInteractiveItem from "./Item/Item"
 
 const NavbarInteractive = () => {
   return (

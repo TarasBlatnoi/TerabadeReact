@@ -79,8 +79,9 @@ html {
   font-family: var(--FF);
   color: #fbfaff;
   background-color: var(--BG-COLOR);
+  height: 300%;
 }
 body {
   background-color: #1c1c1c;
-  min-height: 100vh;
+  height: 100%;
 }
