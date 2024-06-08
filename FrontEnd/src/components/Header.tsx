@@ -3,14 +3,29 @@ import NavbarInteractive from "./NavbarInteractive/NavbarInteractive"
 import styles from "./Header.module.css"
 import WhiteSpot from "./WhiteSpot/WhiteSpot"
 import HeaderOffer from "./HeaderOffer/HeaderOffer"
+import { useState } from "react"
 
 const Header = () => {
+  const [ulHovered, setUlHovered] = useState(false)
+  const [navInteractiveHovered, setNavInteractiveHovered] = useState(false)
+  const [hasHovered, setHasHovered] = useState(false)
+
   return (
     <>
       <HeaderOffer />
       <header className={styles.header}>
-        <Navbar />
-        <NavbarInteractive />
+        <Navbar
+          navInteractiveHovered={navInteractiveHovered}
+          setUlHovered={setUlHovered}
+          setHasHovered={setHasHovered}
+        />
+        <NavbarInteractive
+          ulHovered={ulHovered}
+          hasHovered={hasHovered}
+          navInteractiveHovered={navInteractiveHovered}
+          setUlHovered={setUlHovered}
+          setNavInteractiveHovered={setNavInteractiveHovered}
+        />
         <WhiteSpot />
       </header>
     </>

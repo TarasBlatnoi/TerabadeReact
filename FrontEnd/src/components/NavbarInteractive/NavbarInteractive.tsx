@@ -1,8 +1,23 @@
 import NavbarInteractiveItem from "./Item/Item"
 import styles from "./NavbarInteractive.module.css"
 import manImage from "../../assets/images/ManHeader.svg"
+import { Dispatch, SetStateAction, useRef } from "react"
 
-const NavbarInteractive = () => {
+type PropsType = {
+  ulHovered: boolean
+  setNavInteractiveHovered: Dispatch<SetStateAction<boolean>>
+  setUlHovered: Dispatch<SetStateAction<boolean>>
+  navInteractiveHovered: boolean
+  hasHovered: boolean
+}
+
+const NavbarInteractive = ({
+  ulHovered,
+  setNavInteractiveHovered,
+  setUlHovered,
+  navInteractiveHovered,
+  hasHovered,
+}: PropsType) => {
   const listItems = [
     {
       mainLinkName: "Нові надходження",
@@ -53,8 +68,36 @@ const NavbarInteractive = () => {
       ],
     },
   ]
+
+  const navStyleFlex = {
+    display: "flex",
+  }
+
+  const navStyleNone = {
+    display: "none",
+  }
+
+  const navRef = useRef(null)
+
+  const handleMouseLeave = () => {
+    setNavInteractiveHovered(false)
+    setUlHovered(false)
+  }
+
+  const handleMouseEnter = () => {
+    setNavInteractiveHovered(true)
+  }
+
   return (
-    <nav className={styles.navbarInteractive}>
+    <nav
+      onMouseLeave={handleMouseLeave}
+      onMouseEnter={handleMouseEnter}
+      className={` ${styles.navbarInteractive} ${
+        ulHovered ? styles.animatedShow : hasHovered ? styles.animatedHide : ""
+      } `}
+      style={hasHovered ? navStyleFlex : navStyleNone}
+      ref={navRef}
+    >
       <ul className={styles.ulNavbarInteractive}>
         {listItems.map((item, index) => (
           <NavbarInteractiveItem

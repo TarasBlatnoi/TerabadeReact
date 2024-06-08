@@ -1,5 +1,6 @@
 import styles from "./HeaderOffer.module.css"
 import { useEffect, useState } from "react"
+//rewrite to use callBack
 const HeaderOffer = () => {
   const [counterText, setCounterText] = useState(``)
   useEffect(() => {
