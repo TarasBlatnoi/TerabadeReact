@@ -1,0 +1,23 @@
+.header__icons {
+  width: 10%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.icon {
+  width: 1.8em;
+}
+
+.cartBtn {
+  display: flex;
+  cursor: pointer;
+  position: relative;
+  justify-content: center;
+}
+
+.cartItems {
+  position: absolute;
+  font-size: 0.8em;
+  top: 0.65em;
+}

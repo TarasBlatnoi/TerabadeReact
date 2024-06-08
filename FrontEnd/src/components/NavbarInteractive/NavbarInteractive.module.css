@@ -1,0 +1,59 @@
+.navbarInteractive {
+  font-size: 1rem;
+  display: none;
+  position: relative;
+  z-index: 105;
+  background-color: #fbfaff;
+  transform-origin: top center;
+  height: 310%;
+}
+
+.ulNavbarInteractive {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  list-style: none;
+  width: 40%;
+  margin: 1.7em;
+  margin-left: auto;
+}
+
+.manImage {
+  margin-left: 3em;
+  margin-right: 4em;
+}
+.spanCourier {
+  font-family: "Courier New", Courier, monospace;
+}
+
+.animatedShow {
+  animation: showMenu 0.45s ease-in-out forwards;
+}
+
+.animatedHide {
+  animation: hideMenu 0.45s ease-in-out forwards;
+}
+
+@keyframes showMenu {
+  0% {
+    transform: scaleY(0);
+  }
+
+  80% {
+    transform: scaleY(1.1);
+  }
+
+  100% {
+    transform: scaleY(1);
+  }
+}
+
+@keyframes hideMenu {
+  0% {
+    transform: scaleY(1);
+  }
+
+  100% {
+    transform: scaleY(0);
+  }
+}

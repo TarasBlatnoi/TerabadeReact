@@ -1,0 +1,87 @@
+@font-face {
+  font-family: Ermilov;
+  src: url(./assets/fonts/Ermilov-bold.otf);
+}
+@font-face {
+  font-family: Arista-Pro-Light;
+  src: url(./assets/fonts/Arista-Pro-Light.ttf);
+}
+
+/* Reset */
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+img {
+  max-width: 100%;
+  height: auto;
+}
+input,
+button,
+textarea {
+  font: inherit;
+}
+.span-courier {
+  font-family: "Courier New", Courier, monospace;
+}
+
+a {
+  text-decoration: none;
+  display: inline-block;
+  color: #1c1c1c;
+}
+
+a:hover,
+a:focus {
+  transform: scale(1.08);
+  transition: all 0.3s;
+}
+/* Variables */
+:root {
+  /* COLORS */
+  --BG-COLOR: #fbfaff;
+  --FC: #1c1c1c;
+  /* Fonts */
+  --FF-OFFER: Arial;
+  --FF: Ermilov;
+  --FS: clamp(1rem, 2.2vh, 1.5rem);
+  --FS-HEADER: clamp(0.66rem, 1.2vh, 0.78rem);
+  /* PADDING */
+  --PADDDING-OFFER: 0.3em;
+  --index: calc(1vw + 1vh);
+  --primaryColor: #f09d51;
+  --mainWhite: #fff;
+  --mainBlack: #222;
+  --mainGrey: #ececec;
+  --mainSpacing: 0.1rem;
+  --mainTransition: all 0.3s linear;
+  --primaryColor: #f09d51;
+  --mainWhite: #fff;
+  --mainBlack: #222;
+  --mainGrey: #ececec;
+  --mainSpacing: 0.1rem;
+  --mainTransition: all 0.3s linear;
+}
+/* UTILITY CLASSES */
+.offscreen {
+  position: absolute;
+  left: -10000px;
+}
+.nowrap {
+  white-space: nowrap;
+}
+html {
+  scroll-behavior: smooth;
+  font-size: var(--FS);
+  font-family: var(--FF);
+  color: #fbfaff;
+  background-color: var(--BG-COLOR);
+  height: 300%;
+}
+body {
+  background-color: #1c1c1c;
+  height: 100%;
+}
