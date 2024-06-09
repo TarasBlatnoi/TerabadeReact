@@ -7,7 +7,6 @@ type PropsType = {
   ulHovered: boolean
   setNavInteractiveHovered: Dispatch<SetStateAction<boolean>>
   setUlHovered: Dispatch<SetStateAction<boolean>>
-  navInteractiveHovered: boolean
   hasHovered: boolean
 }
 
@@ -15,7 +14,6 @@ const NavbarInteractive = ({
   ulHovered,
   setNavInteractiveHovered,
   setUlHovered,
-  navInteractiveHovered,
   hasHovered,
 }: PropsType) => {
   const listItems = [
@@ -69,14 +67,6 @@ const NavbarInteractive = ({
     },
   ]
 
-  const navStyleFlex = {
-    display: "flex",
-  }
-
-  const navStyleNone = {
-    display: "none",
-  }
-
   const navRef = useRef(null)
 
   const handleMouseLeave = () => {
@@ -90,12 +80,13 @@ const NavbarInteractive = ({
 
   return (
     <nav
+      role="navigation"
+      aria-label="Interactive navigation"
       onMouseLeave={handleMouseLeave}
       onMouseEnter={handleMouseEnter}
       className={` ${styles.navbarInteractive} ${
         ulHovered ? styles.animatedShow : hasHovered ? styles.animatedHide : ""
-      } `}
-      style={hasHovered ? navStyleFlex : navStyleNone}
+      } ${hasHovered ? styles.navStyleFlex : styles.navStyleNone}`}
       ref={navRef}
     >
       <ul className={styles.ulNavbarInteractive}>
