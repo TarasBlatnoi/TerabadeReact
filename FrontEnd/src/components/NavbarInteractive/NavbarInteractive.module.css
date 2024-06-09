@@ -8,6 +8,14 @@
   height: 310%;
 }
 
+.navStyleFlex {
+  display: flex;
+}
+
+.navStyleNone {
+  display: none;
+}
+
 .ulNavbarInteractive {
   display: flex;
   flex-direction: column;

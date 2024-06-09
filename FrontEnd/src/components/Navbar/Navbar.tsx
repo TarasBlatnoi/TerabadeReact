@@ -3,7 +3,7 @@ import NavbarSearch from "./NavbarSearch/NavbarSearch"
 import NavbarItemList from "./NavbarItemList/NavbarItemList"
 import NavbarIcons from "./NavbarIcons/NavbarIcons"
 import styles from "./Navbar.module.css"
-import { Dispatch, SetStateAction, useRef } from "react"
+import { Dispatch, SetStateAction } from "react"
 
 type PropsType = {
   navInteractiveHovered: boolean
@@ -16,8 +16,6 @@ const Navbar = ({
   navInteractiveHovered,
   setHasHovered,
 }: PropsType) => {
-  const ulRef = useRef<HTMLUListElement>(null)
-
   return (
     <nav className={styles.navbarSmall}>
       <NavbarLogo />
@@ -26,7 +24,6 @@ const Navbar = ({
         navInteractiveHovered={navInteractiveHovered}
         setUlHovered={setUlHovered}
         setHasHovered={setHasHovered}
-        ref={ulRef}
       />
       <NavbarIcons />
       <p className={styles.language}>UA</p>

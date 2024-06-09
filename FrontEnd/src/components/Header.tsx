@@ -22,7 +22,6 @@ const Header = () => {
         <NavbarInteractive
           ulHovered={ulHovered}
           hasHovered={hasHovered}
-          navInteractiveHovered={navInteractiveHovered}
           setUlHovered={setUlHovered}
           setNavInteractiveHovered={setNavInteractiveHovered}
         />
