@@ -9,7 +9,6 @@ const Header = () => {
   const [ulHovered, setUlHovered] = useState(false)
   const [navInteractiveHovered, setNavInteractiveHovered] = useState(false)
   const [hasHovered, setHasHovered] = useState(false)
-
   return (
     <>
       <HeaderOffer />
@@ -18,6 +17,7 @@ const Header = () => {
           navInteractiveHovered={navInteractiveHovered}
           setUlHovered={setUlHovered}
           setHasHovered={setHasHovered}
+          setNavInteractiveHovered={setNavInteractiveHovered}
         />
         <NavbarInteractive
           ulHovered={ulHovered}

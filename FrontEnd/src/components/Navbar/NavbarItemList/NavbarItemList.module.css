@@ -1,8 +1,15 @@
 .ulNavbarSmall {
-  height: 30%;
   list-style: none;
   display: flex;
   align-items: center;
   justify-content: space-between;
   width: 32%;
+}
+
+.heightDefault {
+  height: 30%;
+}
+
+.heightHovered {
+  height: 100%;
 }

@@ -1,7 +1,7 @@
 import NavbarInteractiveItem from "./Item/Item"
 import styles from "./NavbarInteractive.module.css"
 import manImage from "../../assets/images/ManHeader.svg"
-import { Dispatch, SetStateAction, useRef } from "react"
+import { Dispatch, SetStateAction } from "react"
 
 type PropsType = {
   ulHovered: boolean
@@ -67,8 +67,6 @@ const NavbarInteractive = ({
     },
   ]
 
-  const navRef = useRef(null)
-
   const handleMouseLeave = () => {
     setNavInteractiveHovered(false)
     setUlHovered(false)
@@ -87,7 +85,6 @@ const NavbarInteractive = ({
       className={` ${styles.navbarInteractive} ${
         ulHovered ? styles.animatedShow : hasHovered ? styles.animatedHide : ""
       } ${hasHovered ? styles.navStyleFlex : styles.navStyleNone}`}
-      ref={navRef}
     >
       <ul className={styles.ulNavbarInteractive}>
         {listItems.map((item, index) => (

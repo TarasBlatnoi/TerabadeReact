@@ -9,12 +9,14 @@ type PropsType = {
   navInteractiveHovered: boolean
   setUlHovered: Dispatch<SetStateAction<boolean>>
   setHasHovered: Dispatch<SetStateAction<boolean>>
+  setNavInteractiveHovered: Dispatch<SetStateAction<boolean>>
 }
 
 const Navbar = ({
   setUlHovered,
   navInteractiveHovered,
   setHasHovered,
+  setNavInteractiveHovered,
 }: PropsType) => {
   return (
     <nav className={styles.navbarSmall}>
@@ -24,6 +26,7 @@ const Navbar = ({
         navInteractiveHovered={navInteractiveHovered}
         setUlHovered={setUlHovered}
         setHasHovered={setHasHovered}
+        setNavInteractiveHovered={setNavInteractiveHovered}
       />
       <NavbarIcons />
       <p className={styles.language}>UA</p>
