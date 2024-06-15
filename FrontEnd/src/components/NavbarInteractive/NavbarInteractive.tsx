@@ -1,21 +1,11 @@
 import NavbarInteractiveItem from "./Item/Item"
 import styles from "./NavbarInteractive.module.css"
 import manImage from "../../assets/images/ManHeader.svg"
-import { Dispatch, SetStateAction } from "react"
+import { useHeaderContext } from "../../context/HeaderContext"
 
-type PropsType = {
-  ulHovered: boolean
-  setNavInteractiveHovered: Dispatch<SetStateAction<boolean>>
-  setUlHovered: Dispatch<SetStateAction<boolean>>
-  hasHovered: boolean
-}
-
-const NavbarInteractive = ({
-  ulHovered,
-  setNavInteractiveHovered,
-  setUlHovered,
-  hasHovered,
-}: PropsType) => {
+const NavbarInteractive = () => {
+  const { ulHovered, setNavInteractiveHovered, setUlHovered, hasHovered } =
+    useHeaderContext()
   const listItems = [
     {
       mainLinkName: "Нові надходження",

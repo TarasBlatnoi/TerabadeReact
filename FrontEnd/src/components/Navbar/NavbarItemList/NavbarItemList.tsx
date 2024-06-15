@@ -1,20 +1,15 @@
-import React, { Dispatch, SetStateAction, useEffect, useRef } from "react"
+import { useEffect, useRef } from "react"
 import NavbarItem from "../NavbarItem/NavbarItem"
 import styles from "./NavbarItemList.module.css"
+import { useHeaderContext } from "../../../context/HeaderContext"
 
-type PropsType = {
-  setUlHovered: Dispatch<SetStateAction<boolean>>
-  setHasHovered: Dispatch<SetStateAction<boolean>>
-  setNavInteractiveHovered: Dispatch<SetStateAction<boolean>>
-  navInteractiveHovered: boolean
-}
-
-const NavbarItemList = ({
-  setUlHovered,
-  navInteractiveHovered,
-  setHasHovered,
-  setNavInteractiveHovered,
-}: PropsType) => {
+const NavbarItemList = () => {
+  const {
+    setUlHovered,
+    navInteractiveHovered,
+    setHasHovered,
+    setNavInteractiveHovered,
+  } = useHeaderContext()
   const ulRef = useRef<HTMLUListElement>(null)
 
   const links = [
@@ -57,7 +52,7 @@ const NavbarItemList = ({
         ulElement.removeEventListener("mouseout", handleMouseLeave)
       }
     }
-  }, [setUlHovered])
+  }, [setUlHovered, setNavInteractiveHovered])
 
   return (
     <ul
