@@ -7,7 +7,7 @@ const Copyright = function () {
       <span>
         Copyright &copy; <time id="year">{currentYear}</time>
       </span>
-      <span>Terabade</span>
+      <span> Terabade</span>
     </p>
   )
 }
