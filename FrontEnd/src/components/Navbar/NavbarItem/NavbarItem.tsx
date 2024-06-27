@@ -1,5 +1,6 @@
 import { ReactNode } from "react"
 import styles from "./NavbarItem.module.css"
+import { NavLink } from "react-router-dom"
 type PropsType = {
   href: string
   children: ReactNode
@@ -8,9 +9,9 @@ type PropsType = {
 const NavbarItem = ({ href, children }: PropsType) => {
   return (
     <li className={styles.liNavbarSmall}>
-      <a href={href}>
+      <NavLink to={href}>
         <p>{children}</p>
-      </a>
+      </NavLink>
     </li>
   )
 }

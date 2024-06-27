@@ -13,11 +13,11 @@ const NavbarItemList = () => {
   const ulRef = useRef<HTMLUListElement>(null)
 
   const links = [
-    { name: "Чоловіки", href: "/Catalog.html" },
-    { name: "Жінки", href: "#" },
-    { name: "Діти", href: "#" },
-    { name: "Розпродаж", href: "#" },
-    { name: "Про нас", href: "#" },
+    { name: "Чоловіки", href: "/catalog" },
+    { name: "Жінки", href: "/catalog" },
+    { name: "Діти", href: "/catalog" },
+    { name: "Розпродаж", href: "/sale" },
+    { name: "Про нас", href: "/about" },
   ]
 
   useEffect(() => {
