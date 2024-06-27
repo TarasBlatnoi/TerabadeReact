@@ -1,15 +1,18 @@
-import React from "react"
 import "./App.css"
-import Header from "./components/Header"
-import Footer from "./components/Footer/Footer"
+import Layout from "./components/Layout/Layout"
+import {
+  RouterProvider,
+  createBrowserRouter,
+  createRoutesFromElements,
+  Route,
+} from "react-router-dom"
 
-const App = () => {
-  return (
-    <div className="App">
-      <Header />
-      <Footer />
-    </div>
-  )
+const router = createBrowserRouter(
+  createRoutesFromElements(<Route path="/" element={<Layout />}></Route>)
+)
+
+function App() {
+  return <RouterProvider router={router} />
 }
 
 export default App
