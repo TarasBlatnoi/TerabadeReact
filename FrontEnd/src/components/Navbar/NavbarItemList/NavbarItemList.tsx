@@ -66,7 +66,7 @@ const NavbarItemList = () => {
       ref={ulRef}
     >
       {links.map((link, index) => (
-        <NavbarItem key={index} children={link.name} href={link.href} />
+        <NavbarItem key={index} name={link.name} href={link.href} />
       ))}
     </ul>
   )

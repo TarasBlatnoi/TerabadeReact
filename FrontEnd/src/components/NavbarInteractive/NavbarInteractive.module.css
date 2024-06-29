@@ -5,7 +5,8 @@
   z-index: 105;
   background-color: #fbfaff;
   transform-origin: top center;
-  height: 310%;
+  height: 55vh;
+  justify-content: center;
 }
 
 .navStyleFlex {
@@ -22,14 +23,45 @@
   flex-wrap: wrap;
   list-style: none;
   width: 40%;
-  margin: 1.7em;
-  margin-left: auto;
+  margin: 3em;
 }
 
 .manImage {
   margin-left: 3em;
   margin-right: 4em;
+  margin-top: 1em;
+  position: absolute;
+  height: 55vh;
+  right: 0;
 }
+
+.womanImage {
+  margin-left: 3em;
+  margin-right: 4em;
+  margin-top: 1em;
+  position: absolute;
+  height: 55vh;
+  left: 0;
+}
+
+.boyImage {
+  margin-left: 4em;
+  margin-right: 3em;
+  margin-top: 1em;
+  position: absolute;
+  height: 55vh;
+  right: 0;
+}
+
+.girlImage {
+  margin-left: 10em;
+  margin-right: 4em;
+  margin-top: 1em;
+  position: absolute;
+  height: 55vh;
+  left: 0;
+}
+
 .spanCourier {
   font-family: "Courier New", Courier, monospace;
 }
