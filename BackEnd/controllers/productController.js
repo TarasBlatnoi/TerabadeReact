@@ -12,9 +12,9 @@ const asyncWrapper = (callback) => {
       if (req.body) {
         args.push(req.body)
       }
-      const result = await callback(...args)
-      if (result.length) {
-        res.status(200).json({ result })
+      const data = await callback(...args)
+      if (data.length) {
+        res.status(200).json({ data })
       } else {
         res.status(404).json({ errorMessage: "No such product" })
       }
