@@ -6,6 +6,11 @@ class Product {
         SELECT * 
         FROM product;
         `,
+    findMenProducts: `
+        SELECT * 
+        FROM terabade.product
+        WHERE sex = "male";
+        `,
   }
 
   static async commitQuery(sql) {
@@ -27,6 +32,12 @@ class Product {
   static async findAllProducts() {
     const products = await Product.commitQuery(Product.sqlQueries.getAll)
     return products
+  }
+  static async findMenProducts() {
+    const menProducts = await Product.commitQuery(
+      Product.sqlQueries.findMenProducts,
+    )
+    return menProducts
   }
 }
 
