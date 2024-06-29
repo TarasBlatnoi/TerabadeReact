@@ -6,7 +6,7 @@ import {
   Route,
 } from "react-router-dom"
 import Home from "./pages/Home"
-import Men from "./pages/Men"
+import Men, { loader as menLoader } from "./pages/Men"
 import Woman from "./pages/Woman"
 import Children from "./pages/Children"
 import Login from "./pages/Login"
@@ -18,7 +18,7 @@ const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<Layout />}>
       <Route index element={<Home />} />
-      <Route path="men" element={<Men />} />
+      <Route path="men" element={<Men />} loader={menLoader} />
       <Route path="woman" element={<Woman />} />
       <Route path="children" element={<Children />} />
       <Route path="login" element={<Login />} />

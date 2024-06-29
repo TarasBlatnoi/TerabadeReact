@@ -14,7 +14,7 @@ const asyncWrapper = (callback) => {
       }
       const data = await callback(...args)
       if (data.length) {
-        res.status(200).json({ data })
+        res.status(200).json(data)
       } else {
         res.status(404).json({ errorMessage: "No such product" })
       }
