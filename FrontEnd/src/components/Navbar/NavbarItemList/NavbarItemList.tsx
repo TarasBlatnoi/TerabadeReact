@@ -9,6 +9,7 @@ const NavbarItemList = () => {
     navInteractiveHovered,
     setHasHovered,
     setNavInteractiveHovered,
+    setLinkHovered,
   } = useHeaderContext()
   const ulRef = useRef<HTMLUListElement>(null)
 
@@ -35,6 +36,7 @@ const NavbarItemList = () => {
         ) {
           setNavInteractiveHovered(false)
           setUlHovered(false)
+          setLinkHovered("")
         }
         if (mouseY > bounds.bottom) {
           setNavInteractiveHovered(true)
