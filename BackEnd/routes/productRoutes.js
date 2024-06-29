@@ -4,6 +4,7 @@ const express = require("express")
 const productController = require("../controllers/productController")
 const router = new express.Router()
 router.route("/").get(productController.getAllproducts)
+router.route("/men").get(productController.getMenProducts)
 //   .post(productController.createProduct)
 
 // router
