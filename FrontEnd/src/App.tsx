@@ -6,7 +6,9 @@ import {
   Route,
 } from "react-router-dom"
 import Home from "./pages/Home"
-import Catalog from "./pages/Catalog"
+import Men from "./pages/Men"
+import Woman from "./pages/Woman"
+import Children from "./pages/Children"
 import Login from "./pages/Login"
 import Favorites from "./pages/Favorites"
 import About from "./pages/About"
@@ -16,7 +18,9 @@ const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<Layout />}>
       <Route index element={<Home />} />
-      <Route path="catalog" element={<Catalog />} />
+      <Route path="men" element={<Men />} />
+      <Route path="woman" element={<Woman />} />
+      <Route path="children" element={<Children />} />
       <Route path="login" element={<Login />} />
       <Route path="favorites" element={<Favorites />} />
       <Route path="about" element={<About />} />
