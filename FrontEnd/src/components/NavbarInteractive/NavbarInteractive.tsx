@@ -13,6 +13,7 @@ const NavbarInteractive = () => {
     setUlHovered,
     hasHovered,
     linkHovered,
+    setLinkHovered,
   } = useHeaderContext()
   const listItems = [
     {
@@ -68,6 +69,7 @@ const NavbarInteractive = () => {
   const handleMouseLeave = () => {
     setNavInteractiveHovered(false)
     setUlHovered(false)
+    setLinkHovered("")
   }
 
   const handleMouseEnter = () => {
@@ -84,12 +86,21 @@ const NavbarInteractive = () => {
         ulHovered ? styles.animatedShow : hasHovered ? styles.animatedHide : ""
       } ${hasHovered ? styles.navStyleFlex : styles.navStyleNone}`}
     >
-      {linkHovered === "Жінки" && (
-        <img src={womanImage} alt="Male" className={styles.womanImage} />
-      )}
-      {linkHovered === "Діти" && (
-        <img src={girlImage} alt="Male" className={styles.girlImage} />
-      )}
+      <img
+        src={womanImage}
+        alt="Male"
+        className={`${styles.womanImage} ${
+          linkHovered === "Жінки" ? styles.visible : ""
+        }`}
+      />
+
+      <img
+        src={girlImage}
+        alt="Male"
+        className={`${styles.girlImage} ${
+          linkHovered === "Діти" ? styles.visible : ""
+        }`}
+      />
 
       <ul className={styles.ulNavbarInteractive}>
         {listItems.map((item, index) => (
@@ -100,12 +111,20 @@ const NavbarInteractive = () => {
           />
         ))}
       </ul>
-      {linkHovered === "Чоловіки" && (
-        <img src={manImage} alt="Male" className={styles.manImage} />
-      )}
-      {linkHovered === "Діти" && (
-        <img src={boyImage} alt="Male" className={styles.boyImage} />
-      )}
+      <img
+        src={manImage}
+        alt="Male"
+        className={`${styles.manImage} ${
+          linkHovered === "Чоловіки" ? styles.visible : ""
+        }`}
+      />
+      <img
+        src={boyImage}
+        alt="Male"
+        className={`${styles.boyImage} ${
+          linkHovered === "Діти" ? styles.visible : ""
+        }`}
+      />
     </nav>
   )
 }
