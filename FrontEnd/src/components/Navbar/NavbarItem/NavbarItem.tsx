@@ -1,16 +1,23 @@
-import { ReactNode } from "react"
 import styles from "./NavbarItem.module.css"
+import { NavLink } from "react-router-dom"
+import { useHeaderContext } from "../../../context/HeaderContext"
+
 type PropsType = {
   href: string
-  children: ReactNode
+  name: string
 }
 
-const NavbarItem = ({ href, children }: PropsType) => {
+const NavbarItem = ({ href, name }: PropsType) => {
+  const { setLinkHovered } = useHeaderContext()
+
   return (
-    <li className={styles.liNavbarSmall}>
-      <a href={href}>
-        <p>{children}</p>
-      </a>
+    <li
+      className={styles.liNavbarSmall}
+      onMouseEnter={() => setLinkHovered(name)}
+    >
+      <NavLink to={href}>
+        <p>{name}</p>
+      </NavLink>
     </li>
   )
 }

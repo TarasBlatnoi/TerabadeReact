@@ -1,11 +1,19 @@
 import NavbarInteractiveItem from "./Item/Item"
 import styles from "./NavbarInteractive.module.css"
 import manImage from "../../assets/images/ManHeader.svg"
+import womanImage from "../../assets/images/WomanHeader.svg"
+import boyImage from "../../assets/images/BoyHeader.svg"
+import girlImage from "../../assets/images/GirlHeader.svg"
 import { useHeaderContext } from "../../context/HeaderContext"
 
 const NavbarInteractive = () => {
-  const { ulHovered, setNavInteractiveHovered, setUlHovered, hasHovered } =
-    useHeaderContext()
+  const {
+    ulHovered,
+    setNavInteractiveHovered,
+    setUlHovered,
+    hasHovered,
+    linkHovered,
+  } = useHeaderContext()
   const listItems = [
     {
       mainLinkName: "Нові надходження",
@@ -76,6 +84,13 @@ const NavbarInteractive = () => {
         ulHovered ? styles.animatedShow : hasHovered ? styles.animatedHide : ""
       } ${hasHovered ? styles.navStyleFlex : styles.navStyleNone}`}
     >
+      {linkHovered === "Жінки" && (
+        <img src={womanImage} alt="Male" className={styles.womanImage} />
+      )}
+      {linkHovered === "Діти" && (
+        <img src={girlImage} alt="Male" className={styles.girlImage} />
+      )}
+
       <ul className={styles.ulNavbarInteractive}>
         {listItems.map((item, index) => (
           <NavbarInteractiveItem
@@ -85,7 +100,12 @@ const NavbarInteractive = () => {
           />
         ))}
       </ul>
-      <img src={manImage} alt="Male" className={styles.manImage} />
+      {linkHovered === "Чоловіки" && (
+        <img src={manImage} alt="Male" className={styles.manImage} />
+      )}
+      {linkHovered === "Діти" && (
+        <img src={boyImage} alt="Male" className={styles.boyImage} />
+      )}
     </nav>
   )
 }

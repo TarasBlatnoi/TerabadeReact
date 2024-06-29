@@ -12,8 +12,12 @@ const FooterItemList = function () {
 
   return (
     <ul className={styles.list}>
-      {itemsInfo.map((itemInfo) => (
-        <FooterItem itemName={itemInfo.itemName} href={itemInfo.href} />
+      {itemsInfo.map((itemInfo, index) => (
+        <FooterItem
+          itemName={itemInfo.itemName}
+          href={itemInfo.href}
+          key={index}
+        />
       ))}
     </ul>
   )
