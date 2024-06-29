@@ -54,7 +54,7 @@ const NavbarItemList = () => {
         ulElement.removeEventListener("mouseout", handleMouseLeave)
       }
     }
-  }, [setUlHovered, setNavInteractiveHovered])
+  }, [setUlHovered, setNavInteractiveHovered, setLinkHovered])
 
   return (
     <ul
