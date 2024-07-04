@@ -1,7 +1,6 @@
 import styles from "./Offer.module.css"
 
 function Offer() {
-  console.log(styles)
   return (
     <div className={styles.offer}>
       <h1 className={styles.offerText}>
