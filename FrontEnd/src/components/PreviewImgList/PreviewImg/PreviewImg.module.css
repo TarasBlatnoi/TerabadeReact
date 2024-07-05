@@ -1,0 +1,16 @@
+.imageContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  color: white;
+  row-gap: 1em;
+  font-size: 2.2rem;
+  font-family: inherit;
+  font-weight: 700;
+  transition: all 1s ease-in-out;
+}
+
+.imageContainer:hover {
+  transform: scale(0.97);
+}

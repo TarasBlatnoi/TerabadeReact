@@ -5,7 +5,7 @@ import {
   createRoutesFromElements,
   Route,
 } from "react-router-dom"
-import Home from "./pages/Home"
+import Home from "./pages/Home/Home"
 import Catalog from "./pages/Catalog"
 import Login from "./pages/Login"
 import Favorites from "./pages/Favorites"

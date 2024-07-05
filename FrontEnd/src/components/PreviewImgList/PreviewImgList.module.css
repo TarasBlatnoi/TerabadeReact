@@ -1,0 +1,10 @@
+.imgList {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  height: fit-content;
+  justify-content: space-around;
+  z-index: 1000;
+  margin-top: 40%;
+}

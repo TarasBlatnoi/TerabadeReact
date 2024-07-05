@@ -1,0 +1,37 @@
+.home {
+  display: flex;
+  flex-direction: column;
+}
+
+.layout {
+  z-index: 100;
+}
+
+.layout * {
+  position: absolute;
+}
+.sneakers {
+  right: 2.5em;
+  top: 10em;
+}
+.skater {
+  top: 35em;
+  left: 3em;
+  transform: scaleX(1.2);
+}
+
+.whiteArea {
+  top: 109.1%;
+  right: 10.6%;
+  transform: scaleX(1.32) scaleY(1.1);
+}
+.footSteps {
+  top: 66em;
+  right: 8em;
+  transform: rotate(25deg);
+}
+.footStepsRotated {
+  top: 78em;
+  right: 43em;
+  transform: rotate(25deg);
+}
