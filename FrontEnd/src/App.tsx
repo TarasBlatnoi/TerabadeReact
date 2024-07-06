@@ -5,7 +5,7 @@ import {
   createRoutesFromElements,
   Route,
 } from "react-router-dom"
-import Home from "./pages/Home"
+import Home from "./pages/Home/Home"
 import Men, { loader as menLoader } from "./pages/Men"
 import Woman from "./pages/Woman"
 import Children from "./pages/Children"
