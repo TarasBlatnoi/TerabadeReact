@@ -12,9 +12,9 @@ const asyncWrapper = (callback) => {
       if (req.body) {
         args.push(req.body)
       }
-      const result = await callback(...args)
-      if (result.length) {
-        res.status(200).json({ result })
+      const data = await callback(...args)
+      if (data.length) {
+        res.status(200).json(data)
       } else {
         res.status(404).json({ errorMessage: "No such product" })
       }
@@ -26,14 +26,16 @@ const asyncWrapper = (callback) => {
 }
 
 const getAllproducts = asyncWrapper(Product.findAllProducts)
-// const getProductById = asyncWrapper(Product.getById)
+const getMenProducts = asyncWrapper(Product.findMenProducts)
+const getProductById = asyncWrapper(Product.findById)
 // const createProduct = asyncWrapper(Product.create)
 // const updateProduct = asyncWrapper(Product.updateById)
 // const deleteProduct = asyncWrapper(Product.deleteById)
 
 module.exports = {
   getAllproducts,
-  //   getProductById,
+  getProductById,
+  getMenProducts,
   //   createProduct,
   //   updateProduct,
   //   deleteProduct,

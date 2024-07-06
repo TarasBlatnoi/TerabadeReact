@@ -9,13 +9,14 @@ const NavbarItemList = () => {
     navInteractiveHovered,
     setHasHovered,
     setNavInteractiveHovered,
+    setLinkHovered,
   } = useHeaderContext()
   const ulRef = useRef<HTMLUListElement>(null)
 
   const links = [
-    { name: "Чоловіки", href: "/catalog" },
-    { name: "Жінки", href: "/catalog" },
-    { name: "Діти", href: "/catalog" },
+    { name: "Чоловіки", href: "/men" },
+    { name: "Жінки", href: "/woman" },
+    { name: "Діти", href: "/children" },
     { name: "Розпродаж", href: "/sale" },
     { name: "Про нас", href: "/about" },
   ]
@@ -35,6 +36,7 @@ const NavbarItemList = () => {
         ) {
           setNavInteractiveHovered(false)
           setUlHovered(false)
+          setLinkHovered("")
         }
         if (mouseY > bounds.bottom) {
           setNavInteractiveHovered(true)
@@ -52,7 +54,7 @@ const NavbarItemList = () => {
         ulElement.removeEventListener("mouseout", handleMouseLeave)
       }
     }
-  }, [setUlHovered, setNavInteractiveHovered])
+  }, [setUlHovered, setNavInteractiveHovered, setLinkHovered])
 
   return (
     <ul
