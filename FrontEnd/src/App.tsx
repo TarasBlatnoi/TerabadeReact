@@ -6,7 +6,7 @@ import {
   Route,
 } from "react-router-dom"
 import Home from "./pages/Home/Home"
-import Men, { loader as menLoader } from "./pages/Men"
+import Men, { loader as menLoader } from "./pages/Men/Men"
 import Woman from "./pages/Woman"
 import Children from "./pages/Children"
 import Login from "./pages/Login"

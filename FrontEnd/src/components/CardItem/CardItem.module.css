@@ -1,0 +1,6 @@
+.item {
+  width: 27vw;
+  height: 40vh;
+  background-color: aquamarine;
+  z-index: 100;
+}

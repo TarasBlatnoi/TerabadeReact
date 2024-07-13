@@ -1,6 +1,8 @@
 import { useLoaderData } from "react-router-dom"
-import ProductAPI from "../api/Product/ProductAPI"
-import { ProductType } from "../types/Product"
+import ProductAPI from "../../api/Product/ProductAPI"
+import { ProductType } from "../../types/Product"
+import CardItem from "../../components/CardItem/CardItem"
+import styles from "./Men.module.css"
 
 export function loader(): Promise<ProductType[]> {
   return ProductAPI.getMenProducts()
@@ -10,9 +12,9 @@ const Men = () => {
   const menProducts = useLoaderData() as ProductType[]
 
   return (
-    <div>
+    <div className={styles.products}>
       {menProducts.map((product: ProductType) => {
-        return <h1>{product.name}</h1>
+        return <CardItem key={product.ProductID} product={product} />
       })}
     </div>
   )
