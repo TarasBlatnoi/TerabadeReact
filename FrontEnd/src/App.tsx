@@ -13,6 +13,7 @@ import Login from "./pages/Login"
 import Favorites from "./pages/Favorites"
 import About from "./pages/About"
 import Sale from "./pages/Sale"
+import CartProvider from "./context/CartContext"
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -30,7 +31,11 @@ const router = createBrowserRouter(
 )
 
 function App() {
-  return <RouterProvider router={router} />
+  return (
+    <CartProvider>
+      <RouterProvider router={router} />
+    </CartProvider>
+  )
 }
 
 export default App
