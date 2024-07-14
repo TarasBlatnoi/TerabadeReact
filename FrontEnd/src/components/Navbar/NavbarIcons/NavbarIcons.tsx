@@ -3,8 +3,11 @@ import userIcon from "../../../assets/images/user.svg"
 import heartIcon from "../../../assets/images/heart.svg"
 import baskerIcon from "../../../assets/images/Basket.svg"
 import { Link } from "react-router-dom"
+import { useContext } from "react"
+import { CartContext } from "../../../context/CartContext"
 
 const NavbarIcons = () => {
+  const { toggleCart } = useContext(CartContext)
   return (
     <div className={styles.header__icons}>
       <p className="tooltip" data-tooltip="" id="tooltipElement">
@@ -15,7 +18,7 @@ const NavbarIcons = () => {
       <Link to="favorites">
         <img className={styles.icon} src={heartIcon} alt="heart" />
       </Link>
-      <div className={styles.cartBtn}>
+      <div className={styles.cartBtn} onClick={toggleCart}>
         <span className="nav-icon">
           <img className={styles.icon} src={baskerIcon} alt="basket" />
         </span>

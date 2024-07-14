@@ -81,6 +81,7 @@ export default function CartProvider({ children }: CartProviderProps) {
     dispatch({ type: CartActionType.RESET_ITEMS })
   }
   function toggleCart() {
+    console.log("togglecart")
     setIsOpened((prev) => !prev)
   }
   const contextValue = {
