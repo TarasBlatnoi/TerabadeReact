@@ -7,7 +7,6 @@ type CardItemProps = {
 }
 
 const CardItem = ({ product }: CardItemProps) => {
-  function handleClick() {}
   return (
     <div className={styles.item}>
       <Link to={`${product.ProductID}`}>
@@ -19,9 +18,6 @@ const CardItem = ({ product }: CardItemProps) => {
           alt={product.name}
           style={{ width: "90%", height: "80%" }}
         />
-        <button onClick={handleClick}>
-          <i> додати в кошик</i>
-        </button>
       </Link>
     </div>
   )

@@ -1,8 +1,8 @@
 import { createContext, ReactNode, useReducer, useState } from "react"
 
 export const CartContext = createContext({
-  cartItems: [] as CartItem[],
-  addCartItem: (item: CartItem) => {
+  cartItems: [] as CartItemType[],
+  addCartItem: (item: CartItemType) => {
     console.log(item)
   },
   deleteCartItem: (id: string) => {
@@ -13,15 +13,16 @@ export const CartContext = createContext({
   toggleCart: () => {},
 })
 
-interface CartItem {
+export interface CartItemType {
   id: string
   name: string
   price: number
-  quantity: number
+  image: string
+  quantity?: number
 }
 
 interface CartState {
-  items: CartItem[]
+  items: CartItemType[]
 }
 
 enum CartActionType {
@@ -32,17 +33,33 @@ enum CartActionType {
 }
 
 type CartAction =
-  | { type: CartActionType.ADD_ITEM; payload: CartItem }
+  | { type: CartActionType.ADD_ITEM; payload: CartItemType }
   | { type: CartActionType.DELETE_ITEM; payload: string }
   | { type: CartActionType.RESET_ITEMS }
   | { type: CartActionType.TOGGLE_CART }
 
 function cartReducer(state: CartState, action: CartAction) {
+  console.log(state.items)
   const { type } = action
   if (type === CartActionType.ADD_ITEM) {
-    return {
-      ...state,
-      items: [...state.items, action.payload],
+    const item = action.payload
+    const indexOfItem = state.items.findIndex(
+      (itemInCopy) => itemInCopy.id === item.id
+    )
+
+    if (indexOfItem > -1) {
+      const copyOfItems = [...state.items]
+      copyOfItems[indexOfItem] = {
+        ...copyOfItems[indexOfItem],
+        quantity: (copyOfItems[indexOfItem].quantity || 0) + 1,
+      }
+      return { ...state, items: copyOfItems }
+    } else {
+      item.quantity = 1
+      return {
+        ...state,
+        items: [...state.items, item],
+      }
     }
   }
   if (type === CartActionType.DELETE_ITEM) {
@@ -71,7 +88,7 @@ interface CartProviderProps {
 export default function CartProvider({ children }: CartProviderProps) {
   const [state, dispatch] = useReducer(cartReducer, initialState)
   const [isOpened, setIsOpened] = useState(false)
-  function addCartItem(item: CartItem) {
+  function addCartItem(item: CartItemType) {
     dispatch({ type: CartActionType.ADD_ITEM, payload: item })
   }
   function deleteCartItem(id: string) {

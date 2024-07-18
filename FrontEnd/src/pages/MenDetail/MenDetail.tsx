@@ -1,6 +1,9 @@
 import ProductAPI from "../../api/Product/ProductAPI"
 import { json, LoaderFunctionArgs, useLoaderData } from "react-router-dom"
 import { ProductType } from "../../types/Product"
+import { CartContext } from "../../context/CartContext"
+import { useContext } from "react"
+import { CartItemType } from "../../context/CartContext"
 
 export async function loader({ params }: LoaderFunctionArgs) {
   if (!params.id) {
@@ -27,6 +30,10 @@ export async function loader({ params }: LoaderFunctionArgs) {
 const MenDetail = () => {
   const productDetailArr = useLoaderData() as ProductType[]
   const productDetail = productDetailArr[0]
+  const { addCartItem } = useContext(CartContext)
+  function handleClick(item: CartItemType) {
+    addCartItem(item)
+  }
   return (
     <div>
       <h2>{productDetail.name}</h2>
@@ -36,6 +43,18 @@ const MenDetail = () => {
         alt={productDetail.name}
         style={{ width: "90%", height: "80%" }}
       />
+      <button
+        onClick={() => {
+          handleClick({
+            id: `${productDetail.ProductID}`,
+            name: productDetail.name,
+            image: productDetail.image,
+            price: productDetail.price,
+          })
+        }}
+      >
+        <i> додати в кошик</i>
+      </button>
     </div>
   )
 }
