@@ -10,6 +10,9 @@ export const CartContext = createContext({
   },
   resetCartItems: () => {},
   isOpened: false,
+  setIsOpened: (isOpened: boolean) => {
+    console.log(isOpened)
+  },
   toggleCart: () => {},
 })
 
@@ -105,6 +108,7 @@ export default function CartProvider({ children }: CartProviderProps) {
     deleteCartItem,
     resetCartItems,
     isOpened,
+    setIsOpened,
     toggleCart,
   }
   return (
