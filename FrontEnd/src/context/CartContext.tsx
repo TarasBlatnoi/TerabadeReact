@@ -39,7 +39,6 @@ type CartAction =
   | { type: CartActionType.TOGGLE_CART }
 
 function cartReducer(state: CartState, action: CartAction) {
-  console.log(state.items)
   const { type } = action
   if (type === CartActionType.ADD_ITEM) {
     const item = action.payload
@@ -98,7 +97,6 @@ export default function CartProvider({ children }: CartProviderProps) {
     dispatch({ type: CartActionType.RESET_ITEMS })
   }
   function toggleCart() {
-    console.log("togglecart")
     setIsOpened((prev) => !prev)
   }
   const contextValue = {
