@@ -14,9 +14,8 @@ const Header = () => {
           <Navbar />
           <NavbarInteractive />
         </HeaderProvider>
-
-        <WhiteSpot />
       </header>
+      <WhiteSpot />
     </>
   )
 }
