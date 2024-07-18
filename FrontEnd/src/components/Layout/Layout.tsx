@@ -6,14 +6,16 @@ import Cart from "../Cart/Cart"
 
 export default function Layout() {
   return (
-    <div className={styles.siteWrapper}>
-      <Header />
+    <>
       <div id="modal"></div>
-      <main>
-        <Outlet />
-        <Cart />
-      </main>
-      <Footer />
-    </div>
+      <div className={styles.siteWrapper}>
+        <Header />
+        <main>
+          <Outlet />
+          <Cart />
+        </main>
+        <Footer />
+      </div>
+    </>
   )
 }
