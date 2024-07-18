@@ -1,21 +1,32 @@
 import ProductAPI from "../../api/Product/ProductAPI"
-import { LoaderFunctionArgs, useLoaderData } from "react-router-dom"
+import { json, LoaderFunctionArgs, useLoaderData } from "react-router-dom"
 import { ProductType } from "../../types/Product"
 
-export function loader({ params }: LoaderFunctionArgs) {
+export async function loader({ params }: LoaderFunctionArgs) {
   if (!params.id) {
-    throw new Error("Product ID is required")
+    throw json(
+      {
+        message: "Product id is required",
+      },
+      { status: 400 }
+    )
   }
   try {
-    const res = ProductAPI.getById(params.id)
+    const res = await ProductAPI.getById(params.id)
     return res
   } catch (err) {
-    throw { message: "Some problem while getting product from server" }
+    throw json(
+      {
+        message: "Could not fetch your product",
+      },
+      { status: 500 }
+    )
   }
 }
 
 const MenDetail = () => {
-  const productDetail = useLoaderData() as ProductType
+  const productDetailArr = useLoaderData() as ProductType[]
+  const productDetail = productDetailArr[0]
   return (
     <div>
       <h2>{productDetail.name}</h2>
