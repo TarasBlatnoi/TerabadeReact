@@ -17,9 +17,11 @@ import Favorites from "./pages/Favorites"
 import About from "./pages/About"
 import Sale from "./pages/Sale"
 import CartProvider from "./context/CartContext"
+import Error from "./pages/Error/Error"
+
 const router = createBrowserRouter(
   createRoutesFromElements(
-    <Route path="/" element={<Layout />}>
+    <Route path="/" element={<Layout />} errorElement={<Error />}>
       <Route index element={<Home />} />
       <Route path="men" element={<Men />} loader={menLoader} />
       <Route path="men/:id" element={<MenDetail />} loader={menDetailLoader} />
