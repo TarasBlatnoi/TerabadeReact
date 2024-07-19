@@ -1,10 +1,11 @@
-import { CartItemType } from "../../../context/CartContext"
+import { useContext } from "react"
+import { CartContext, CartItemType } from "../../../context/CartContext"
 
 interface CartItemProps {
   item: CartItemType
 }
 const CartItem = ({ item }: CartItemProps) => {
-  console.log(item.image)
+  const { deleteCartItem, addCartItem } = useContext(CartContext)
   return (
     <div style={{ display: "flex", justifyContent: "space-between" }}>
       <img
@@ -14,6 +15,20 @@ const CartItem = ({ item }: CartItemProps) => {
       />
       <h3>{item.name}</h3>
       <p>{item.quantity}</p>
+      <button
+        onClick={() => {
+          deleteCartItem(item.id)
+        }}
+      >
+        -
+      </button>
+      <button
+        onClick={() => {
+          addCartItem(item)
+        }}
+      >
+        +
+      </button>
     </div>
   )
 }

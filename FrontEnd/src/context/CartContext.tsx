@@ -65,9 +65,31 @@ function cartReducer(state: CartState, action: CartAction) {
     }
   }
   if (type === CartActionType.DELETE_ITEM) {
+    const idOfItem = action.payload
+    const indexOfItem = state.items.findIndex(
+      (itemInCart) => itemInCart.id === idOfItem
+    )
+    if (indexOfItem === -1) {
+      return state
+    }
+
+    const copyOfItems = [...state.items]
+
+    if (
+      copyOfItems[indexOfItem].quantity &&
+      copyOfItems[indexOfItem].quantity > 1
+    ) {
+      copyOfItems[indexOfItem] = {
+        ...copyOfItems[indexOfItem],
+        quantity: copyOfItems[indexOfItem].quantity - 1,
+      }
+    } else {
+      copyOfItems.splice(indexOfItem, 1)
+    }
+
     return {
       ...state,
-      items: state.items.filter((item) => item.id !== action.payload),
+      items: copyOfItems,
     }
   }
   if (type === CartActionType.RESET_ITEMS) {
