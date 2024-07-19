@@ -7,7 +7,7 @@ import { useContext } from "react"
 import { CartContext } from "../../../context/CartContext"
 
 const NavbarIcons = () => {
-  const { toggleCart } = useContext(CartContext)
+  const { openCart } = useContext(CartContext)
   return (
     <div className={styles.header__icons}>
       <p className="tooltip" data-tooltip="" id="tooltipElement">
@@ -18,7 +18,7 @@ const NavbarIcons = () => {
       <Link to="favorites">
         <img className={styles.icon} src={heartIcon} alt="heart" />
       </Link>
-      <div className={styles.cartBtn} onClick={toggleCart}>
+      <div className={styles.cartBtn} onClick={openCart}>
         <span className="nav-icon">
           <img className={styles.icon} src={baskerIcon} alt="basket" />
         </span>

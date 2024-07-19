@@ -9,7 +9,7 @@ interface ModalProps {
 }
 
 const Modal = ({ open, children, className = "" }: ModalProps) => {
-  const { setIsOpened } = useContext(CartContext)
+  const { closeCart } = useContext(CartContext)
   const dialog = useRef<HTMLDialogElement>(null)
   useEffect(() => {
     function closeDialog(e: Event) {
@@ -17,14 +17,14 @@ const Modal = ({ open, children, className = "" }: ModalProps) => {
       console.log(dialog.current?.contains(target))
       if (!dialog.current?.contains(target)) {
         console.log("outside click")
-        setIsOpened(false)
+        closeCart()
       }
     }
     document.addEventListener("click", closeDialog, true)
     return () => {
       document.removeEventListener("click", closeDialog, true)
     }
-  }, [setIsOpened])
+  }, [closeCart])
   const modalRoot = document.getElementById("modal")
   if (!modalRoot) {
     return null

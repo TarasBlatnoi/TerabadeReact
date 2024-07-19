@@ -30,7 +30,7 @@ export async function loader({ params }: LoaderFunctionArgs) {
 const MenDetail = () => {
   const productDetailArr = useLoaderData() as ProductType[]
   const productDetail = productDetailArr[0]
-  const { addCartItem, toggleCart } = useContext(CartContext)
+  const { addCartItem, openCart } = useContext(CartContext)
   function handleClick(item: CartItemType) {
     addCartItem(item)
   }
@@ -51,7 +51,7 @@ const MenDetail = () => {
             image: productDetail.image,
             price: productDetail.price,
           })
-          toggleCart()
+          openCart()
         }}
       >
         <i> додати в кошик</i>
