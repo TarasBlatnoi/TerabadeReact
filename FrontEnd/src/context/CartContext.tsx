@@ -10,10 +10,8 @@ export const CartContext = createContext({
   },
   resetCartItems: () => {},
   isOpened: false,
-  setIsOpened: (isOpened: boolean) => {
-    console.log(isOpened)
-  },
-  toggleCart: () => {},
+  openCart: () => {},
+  closeCart: () => {},
 })
 
 export interface CartItemType {
@@ -32,14 +30,12 @@ enum CartActionType {
   ADD_ITEM = "ADD_ITEM",
   DELETE_ITEM = "DELETE_ITEM",
   RESET_ITEMS = "RESET_ITEMS",
-  TOGGLE_CART = "TOGGLE_CART",
 }
 
 type CartAction =
   | { type: CartActionType.ADD_ITEM; payload: CartItemType }
   | { type: CartActionType.DELETE_ITEM; payload: string }
   | { type: CartActionType.RESET_ITEMS }
-  | { type: CartActionType.TOGGLE_CART }
 
 function cartReducer(state: CartState, action: CartAction) {
   const { type } = action
@@ -121,8 +117,11 @@ export default function CartProvider({ children }: CartProviderProps) {
   function resetCartItems() {
     dispatch({ type: CartActionType.RESET_ITEMS })
   }
-  function toggleCart() {
-    setIsOpened((prev) => !prev)
+  function openCart() {
+    setIsOpened(true)
+  }
+  function closeCart() {
+    setIsOpened(false)
   }
   const contextValue = {
     cartItems: state.items,
@@ -130,8 +129,8 @@ export default function CartProvider({ children }: CartProviderProps) {
     deleteCartItem,
     resetCartItems,
     isOpened,
-    setIsOpened,
-    toggleCart,
+    openCart,
+    closeCart,
   }
   return (
     <CartContext.Provider value={contextValue}>{children}</CartContext.Provider>
