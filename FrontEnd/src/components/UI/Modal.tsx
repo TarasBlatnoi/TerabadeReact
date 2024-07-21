@@ -26,7 +26,7 @@ const Modal = ({ open, children, className = "" }: ModalProps) => {
     >
       {children}
     </dialog>,
-    document.getElementById("modal") as HTMLDivElement
+    modalRoot
   )
 }
 

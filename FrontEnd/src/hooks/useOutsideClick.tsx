@@ -6,7 +6,6 @@ const useOutsideClick = (handler: () => void, listenCapturing = true) => {
     function handleClick(e: Event) {
       const target = e.target as HTMLElement
       if (!ref.current?.contains(target)) {
-        console.log("outside click")
         handler()
       }
     }
