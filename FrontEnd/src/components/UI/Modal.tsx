@@ -1,5 +1,7 @@
-import { ReactNode, useEffect, useRef } from "react"
+import { ReactNode, RefObject, useContext } from "react"
 import { createPortal } from "react-dom"
+import { CartContext } from "../../context/CartContext"
+import useOutsideClick from "../../hooks/useOutsideClick"
 
 interface ModalProps {
   open: boolean
@@ -8,23 +10,23 @@ interface ModalProps {
 }
 
 const Modal = ({ open, children, className = "" }: ModalProps) => {
-  const dialog = useRef<HTMLDialogElement>(null)
-  useEffect(() => {
-    if (open) {
-      dialog.current?.showModal()
-    } else {
-      dialog.current?.close()
-    }
-  }, [open])
+  const { closeCart } = useContext(CartContext)
+
+  const ref = useOutsideClick(closeCart) as RefObject<HTMLDialogElement>
   const modalRoot = document.getElementById("modal")
   if (!modalRoot) {
     return null
   }
   return createPortal(
-    <dialog ref={dialog} className={`${className}`}>
+    <dialog
+      ref={ref}
+      className={`${className}`}
+      open={open}
+      style={{ zIndex: "300" }}
+    >
       {children}
     </dialog>,
-    document.getElementById("modal") as HTMLDivElement
+    modalRoot
   )
 }
 

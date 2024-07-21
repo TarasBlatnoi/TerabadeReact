@@ -7,19 +7,24 @@ import {
 } from "react-router-dom"
 import Home from "./pages/Home/Home"
 import Men, { loader as menLoader } from "./pages/Men/Men"
+import MenDetail, {
+  loader as menDetailLoader,
+} from "./pages/MenDetail/MenDetail"
 import Woman from "./pages/Woman"
 import Children from "./pages/Children"
-import Login from "./pages/Login"
+import Login from "./pages/Login/Login"
 import Favorites from "./pages/Favorites"
 import About from "./pages/About"
 import Sale from "./pages/Sale"
 import CartProvider from "./context/CartContext"
+import Error from "./pages/Error/Error"
 
 const router = createBrowserRouter(
   createRoutesFromElements(
-    <Route path="/" element={<Layout />}>
+    <Route path="/" element={<Layout />} errorElement={<Error />}>
       <Route index element={<Home />} />
       <Route path="men" element={<Men />} loader={menLoader} />
+      <Route path="men/:id" element={<MenDetail />} loader={menDetailLoader} />
       <Route path="woman" element={<Woman />} />
       <Route path="children" element={<Children />} />
       <Route path="login" element={<Login />} />
