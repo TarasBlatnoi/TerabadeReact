@@ -1,6 +1,6 @@
 import ProductAPI from "../../api/Product/ProductAPI"
 import { json, LoaderFunctionArgs, useLoaderData } from "react-router-dom"
-import { ProductType } from "../../types/Product"
+import { ProductType } from "../../types"
 import { CartContext } from "../../context/CartContext"
 import { useContext } from "react"
 import { CartItemType } from "../../context/CartContext"

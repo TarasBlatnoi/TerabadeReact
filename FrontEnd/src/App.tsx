@@ -12,7 +12,7 @@ import MenDetail, {
 } from "./pages/MenDetail/MenDetail"
 import Woman from "./pages/Woman"
 import Children from "./pages/Children"
-import Login from "./pages/Login/Login"
+import Login, { action as loginAction } from "./pages/Login/Login"
 import Favorites from "./pages/Favorites"
 import About from "./pages/About"
 import Sale from "./pages/Sale"
@@ -27,7 +27,7 @@ const router = createBrowserRouter(
       <Route path="men/:id" element={<MenDetail />} loader={menDetailLoader} />
       <Route path="woman" element={<Woman />} />
       <Route path="children" element={<Children />} />
-      <Route path="login" element={<Login />} />
+      <Route path="login" element={<Login />} action={loginAction} />
       <Route path="favorites" element={<Favorites />} />
       <Route path="about" element={<About />} />
       <Route path="sale" element={<Sale />} />
