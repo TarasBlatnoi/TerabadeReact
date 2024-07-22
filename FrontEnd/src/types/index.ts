@@ -1,4 +1,4 @@
-export type ProductType = {
+export interface ProductType {
   ProductID: number
   color: string
   createdAt: string
@@ -10,4 +10,9 @@ export type ProductType = {
   size: number
   type: string
   updatedAt: string
+}
+
+export interface UserBodyType {
+  email: FormDataEntryValue | null
+  password: FormDataEntryValue | null
 }
