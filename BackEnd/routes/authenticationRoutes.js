@@ -5,23 +5,22 @@ const passport = require("passport")
 const userController = require("../controllers/userController")
 const { isAuth, isAdmin } = require("../auth/middleware")
 
-router.route("/login").post(
-  // (req, res, next) => {
-  //   // Access form data
-  //   const { email, password } = req.body
-
-  //   console.log("Email:", email)
-  //   console.log("Password:", password)
-
-  //   // ... rest of the code
-  //   next()
-  // },
-
-  passport.authenticate("local", {
-    failureRedirect: "/login.html",
-    successRedirect: "/",
-  }),
-)
+router.post("/login", (req, res, next) => {
+  passport.authenticate("local", (err, user, info) => {
+    if (err) {
+      return next(err)
+    }
+    if (!user) {
+      return res.status(401).json({ message: info.message })
+    }
+    req.logIn(user, (err) => {
+      if (err) {
+        return next(err)
+      }
+      return res.json({ message: "Login successful", user })
+    })
+  })(req, res, next)
+})
 
 router.get("/protected-route", isAuth, (req, res) => {
   res.send("You made it to the route.")
