@@ -3,7 +3,11 @@ import styles from "./LoginForm.module.css"
 
 import Input from "../UI/Input/Input"
 
-const LoginForm = () => {
+interface LoginFormProps {
+  isSubmitting: boolean
+}
+
+const LoginForm = ({ isSubmitting }: LoginFormProps) => {
   return (
     <Form method="post" className={styles.formBox}>
       <h2>Sign up</h2>
@@ -24,8 +28,13 @@ const LoginForm = () => {
         label=""
       />
       <div className={`${styles.buttonCase} ${styles.applyBtn}`}>
-        <button type="submit" id="applyBtn" className={styles.narrowBtn}>
-          Apply
+        <button
+          type="submit"
+          id="applyBtn"
+          className={styles.narrowBtn}
+          disabled={isSubmitting}
+        >
+          {isSubmitting ? "Logging in..." : "Login"}
         </button>
       </div>
     </Form>

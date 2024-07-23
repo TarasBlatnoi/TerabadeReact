@@ -1,7 +1,12 @@
 import LoginForm from "../../components/LoginForm/LoginForm"
 import AuthAPI from "../../api/Auth/AuthAPI"
 import { isAxiosError } from "axios"
-import { ActionFunctionArgs, json, redirect } from "react-router-dom"
+import {
+  ActionFunctionArgs,
+  json,
+  redirect,
+  useNavigation,
+} from "react-router-dom"
 
 export async function action({ request }: ActionFunctionArgs) {
   const data = await request.formData()
@@ -28,7 +33,9 @@ export async function action({ request }: ActionFunctionArgs) {
 }
 
 const Login = () => {
-  return <LoginForm />
+  const navigation = useNavigation()
+  const isSubmitting = navigation.state === "submitting"
+  return <LoginForm isSubmitting={isSubmitting} />
 }
 
 export default Login
