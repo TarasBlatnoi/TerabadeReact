@@ -27,7 +27,7 @@ export async function loader({ params }: LoaderFunctionArgs) {
   }
 }
 
-const MenDetail = () => {
+const DetailProduct = () => {
   const productDetailArr = useLoaderData() as ProductType[]
   const productDetail = productDetailArr[0]
   const { addCartItem, openCart } = useContext(CartContext)
@@ -60,4 +60,4 @@ const MenDetail = () => {
   )
 }
 
-export default MenDetail
+export default DetailProduct
