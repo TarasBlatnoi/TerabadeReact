@@ -1,4 +1,4 @@
-import { Form } from "react-router-dom"
+import { Form, useActionData } from "react-router-dom"
 import styles from "./LoginForm.module.css"
 
 import Input from "../UI/Input/Input"
@@ -7,7 +7,13 @@ interface LoginFormProps {
   isSubmitting: boolean
 }
 
+interface ActionData {
+  errors?: string[]
+}
+
 const LoginForm = ({ isSubmitting }: LoginFormProps) => {
+  const actionData = useActionData() as ActionData
+  const errors = actionData?.errors || []
   return (
     <Form method="post" className={styles.formBox}>
       <h2>Sign up</h2>
@@ -19,6 +25,7 @@ const LoginForm = ({ isSubmitting }: LoginFormProps) => {
         label=""
         required
       />
+      {errors[0] && <p style={{ color: "red" }}>{errors[0]}</p>}
       <Input
         divClassName={`${styles.inputbox} ${styles.fullWith}`}
         type="password"
@@ -27,6 +34,7 @@ const LoginForm = ({ isSubmitting }: LoginFormProps) => {
         required
         label=""
       />
+      {errors[1] && <p style={{ color: "red" }}>{errors[1]}</p>}
       <div className={`${styles.buttonCase} ${styles.applyBtn}`}>
         <button
           type="submit"
