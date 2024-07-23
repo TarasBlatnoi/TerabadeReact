@@ -4,9 +4,18 @@ const router = new express.Router()
 const passport = require("passport")
 const userController = require("../controllers/userController")
 const { isAuth, isAdmin } = require("../auth/middleware")
-const { check } = require("express-validator")
+const { check, validationResult } = require("express-validator")
 
-router.post("/login", (req, res, next) => {
+const loginValidationRules = [
+  check("email").isEmail().withMessage("Please provide a valid email address"),
+  check("password").exists().withMessage("Password is required"),
+]
+
+router.post("/login", loginValidationRules, (req, res, next) => {
+  const errors = validationResult(req)
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() })
+  }
   passport.authenticate("local", (err, user, info) => {
     if (err) {
       return next(err)
@@ -37,7 +46,7 @@ router.get("/logout", (req, res, next) => {
     if (err) {
       return next(err)
     }
-    res.redirect("/login.html")
+    res.send({ message: "Logout successfully" })
   })
 })
 
