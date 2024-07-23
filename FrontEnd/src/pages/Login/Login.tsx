@@ -8,6 +8,10 @@ import {
   useNavigation,
 } from "react-router-dom"
 
+interface Error {
+  msg: string
+}
+
 export async function action({ request }: ActionFunctionArgs) {
   const data = await request.formData()
   const userData = {
@@ -16,7 +20,10 @@ export async function action({ request }: ActionFunctionArgs) {
   }
 
   if (!userData.email || !userData.password) {
-    return json({ message: "Email and password are required" }, { status: 400 })
+    return json(
+      { errors: ["Email and password are required"] },
+      { status: 422 }
+    )
   }
 
   try {
@@ -25,10 +32,12 @@ export async function action({ request }: ActionFunctionArgs) {
   } catch (err) {
     if (isAxiosError(err)) {
       if (err?.response?.status === 422) {
-        return err.response
+        return json({
+          errors: err.response.data.errors.map((error: Error) => error.msg),
+        })
       }
     }
-    return json({ message: "Couldn't register" }, { status: 500 })
+    throw json({ errors: ["Couldn't register"] }, { status: 500 })
   }
 }
 
