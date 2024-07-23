@@ -26,7 +26,7 @@ class User {
       const [result] = await connection.execute(sql, arrData)
       return result
     } catch (err) {
-      console.error(err)
+      throw err
     } finally {
       if (connection) {
         await connection.release()
@@ -44,7 +44,7 @@ class User {
       const createdUser = await User.getById(createdUserId)
       return createdUser
     }
-    throw new Error("User with that mail exists")
+    throw { message: "User with that mail exists", status: 409 }
   }
   static async getById(id) {
     const dataForDB = []

@@ -4,6 +4,7 @@ const router = new express.Router()
 const passport = require("passport")
 const userController = require("../controllers/userController")
 const { isAuth, isAdmin } = require("../auth/middleware")
+const { check } = require("express-validator")
 
 router.post("/login", (req, res, next) => {
   passport.authenticate("local", (err, user, info) => {
@@ -62,5 +63,14 @@ router.get("/api/v1/checkUser", (req, res, next) => {
   next()
 })
 
-router.route("/register").post(userController.createNewUser)
+const registerValidationRules = [
+  check("email").isEmail().withMessage("Please provide a valid email address"),
+  check("password")
+    .isLength({ min: 6 })
+    .withMessage("Password must be at least 6 characters long"),
+]
+
+router
+  .route("/register")
+  .post(registerValidationRules, userController.createNewUser)
 module.exports = router
