@@ -5,15 +5,21 @@ import baskerIcon from "../../../assets/images/Basket.svg"
 import { Link } from "react-router-dom"
 import { useContext } from "react"
 import { CartContext } from "../../../context/CartContext"
+import { AuthContext } from "../../../context/AuthContext"
 
 const NavbarIcons = () => {
   const { openCart } = useContext(CartContext)
+  const { isLoggedIn } = useContext(AuthContext)
   return (
     <div className={styles.header__icons}>
       <p className="tooltip" data-tooltip="" id="tooltipElement">
-        <Link to="login">
-          <img className={styles.icon} src={userIcon} alt="user" />
-        </Link>
+        {!isLoggedIn ? (
+          <Link to="login">
+            <img className={styles.icon} src={userIcon} alt="user" />
+          </Link>
+        ) : (
+          <span>Logout</span>
+        )}
       </p>
       <Link to="favorites">
         <img className={styles.icon} src={heartIcon} alt="heart" />
