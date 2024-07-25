@@ -63,14 +63,23 @@ router.get("/login-failure", (req, res) => {
   res.send("You entered the wrong password.")
 })
 
-router.get("/api/v1/checkUser", (req, res, next) => {
-  if (req.user) {
+router.get("/check-auth", (req, res, next) => {
+  if (req.user && req.isAuthenticated()) {
     const user = {
-      UserID: req.user.UserID,
+      id: req.user.UserID,
       email: req.user.email,
       isAdmin: req.user.isAdmin,
     }
-    res.json(user)
+    res.json({
+      status: "success",
+      authenticated: true,
+      user,
+    })
+  } else {
+    res.json({
+      status: "success",
+      authenticated: false,
+    })
   }
   next()
 })
