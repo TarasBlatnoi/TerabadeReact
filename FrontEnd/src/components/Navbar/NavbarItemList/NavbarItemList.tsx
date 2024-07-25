@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react"
+import { useEffect, useRef, useState } from "react"
 import NavbarItem from "../NavbarItem/NavbarItem"
 import styles from "./NavbarItemList.module.css"
 import { useHeaderContext } from "../../../context/HeaderContext"
@@ -12,7 +12,7 @@ const NavbarItemList = () => {
     setLinkHovered,
   } = useHeaderContext()
   const ulRef = useRef<HTMLUListElement>(null)
-
+  const [linkClicked, setLinkClicked] = useState(false)
   const links = [
     { name: "Чоловіки", href: "/men" },
     { name: "Жінки", href: "/woman" },
@@ -20,6 +20,15 @@ const NavbarItemList = () => {
     { name: "Розпродаж", href: "/sale" },
     { name: "Про нас", href: "/about" },
   ]
+
+  function navListClickHandler(event: React.MouseEvent) {
+    const target = event.target as HTMLElement
+    if (target.tagName === "P") {
+      setUlHovered(false)
+      setNavInteractiveHovered(false)
+      setLinkClicked(true)
+    }
+  }
 
   useEffect(() => {
     function handleMouseLeave(event: MouseEvent) {
@@ -62,10 +71,15 @@ const NavbarItemList = () => {
         navInteractiveHovered ? styles.heightHovered : styles.heightDefault
       }`}
       onMouseEnter={() => {
-        setHasHovered(true)
-        setUlHovered(true)
+        if (!linkClicked) {
+          setHasHovered(true)
+          setUlHovered(true)
+        } else {
+          setLinkClicked(false)
+        }
       }}
       ref={ulRef}
+      onClick={navListClickHandler}
     >
       {links.map((link, index) => (
         <NavbarItem key={index} name={link.name} href={link.href} />
