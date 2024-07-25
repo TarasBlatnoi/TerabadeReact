@@ -18,6 +18,7 @@ import About from "./pages/About"
 import Sale from "./pages/Sale"
 import CartProvider from "./context/CartContext"
 import Error from "./pages/Error/Error"
+import AuthContextProvider from "./context/AuthContext"
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -38,7 +39,9 @@ const router = createBrowserRouter(
 function App() {
   return (
     <CartProvider>
-      <RouterProvider router={router} />
+      <AuthContextProvider>
+        <RouterProvider router={router} />
+      </AuthContextProvider>
     </CartProvider>
   )
 }
