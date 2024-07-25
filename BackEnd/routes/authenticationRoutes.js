@@ -24,13 +24,18 @@ router.post("/login", loginValidationRules, (req, res, next) => {
       return next(err)
     }
     if (!user) {
-      return res.status(401).json({ message: info.message })
+      return res.status(401).json({
+        errors: [{ msg: "Wrong email or password" }],
+      })
     }
     req.logIn(user, (err) => {
       if (err) {
         return next(err)
       }
-      return res.json({ message: "Login successful", user })
+      return res.json({
+        message: "Login successful",
+        user: { email: user[0].email, isAdmin: user[0].isAdmin },
+      })
     })
   })(req, res, next)
 })
