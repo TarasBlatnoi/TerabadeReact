@@ -16,6 +16,8 @@ type ValueType = {
   setHasHovered: Dispatch<SetStateAction<boolean>>
   linkHovered: string
   setLinkHovered: Dispatch<SetStateAction<string>>
+  linkClicked: string
+  setLinkClicked: Dispatch<SetStateAction<string>>
 }
 
 const HeaderContext = createContext<ValueType | null>(null)
@@ -37,6 +39,7 @@ export function HeaderProvider({ children }: HeaderProviderProps) {
   const [navInteractiveHovered, setNavInteractiveHovered] = useState(false)
   const [hasHovered, setHasHovered] = useState(false)
   const [linkHovered, setLinkHovered] = useState("")
+  const [linkClicked, setLinkClicked] = useState("")
   return (
     <HeaderContext.Provider
       value={{
@@ -48,6 +51,8 @@ export function HeaderProvider({ children }: HeaderProviderProps) {
         setHasHovered,
         linkHovered,
         setLinkHovered,
+        linkClicked,
+        setLinkClicked,
       }}
     >
       {children}

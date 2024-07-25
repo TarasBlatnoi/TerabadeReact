@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react"
+import { useEffect, useRef } from "react"
 import NavbarItem from "../NavbarItem/NavbarItem"
 import styles from "./NavbarItemList.module.css"
 import { useHeaderContext } from "../../../context/HeaderContext"
@@ -10,9 +10,10 @@ const NavbarItemList = () => {
     setHasHovered,
     setNavInteractiveHovered,
     setLinkHovered,
+    linkClicked,
+    setLinkClicked,
   } = useHeaderContext()
   const ulRef = useRef<HTMLUListElement>(null)
-  const [linkClicked, setLinkClicked] = useState(false)
   const links = [
     { name: "Чоловіки", href: "/men" },
     { name: "Жінки", href: "/woman" },
@@ -26,7 +27,7 @@ const NavbarItemList = () => {
     if (target.tagName === "P") {
       setUlHovered(false)
       setNavInteractiveHovered(false)
-      setLinkClicked(true)
+      setLinkClicked(target.innerText)
     }
   }
 
@@ -75,7 +76,7 @@ const NavbarItemList = () => {
           setHasHovered(true)
           setUlHovered(true)
         } else {
-          setLinkClicked(false)
+          setLinkClicked("")
         }
       }}
       ref={ulRef}
