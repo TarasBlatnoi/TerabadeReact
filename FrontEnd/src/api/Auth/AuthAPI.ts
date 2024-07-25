@@ -6,6 +6,11 @@ class AuthAPI {
     const { data } = await client.post(`/login`, body)
     return data
   }
+
+  async checkAuth() {
+    const { data } = await client.get(`/check-auth`)
+    return data
+  }
 }
 
 export default new AuthAPI()
