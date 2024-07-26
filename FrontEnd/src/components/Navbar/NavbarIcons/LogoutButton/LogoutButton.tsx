@@ -7,7 +7,7 @@ const LogoutButton = () => {
   const navigate = useNavigate()
   const [logoutButtonClicked, setLogoutButtonClicked] = useState(false)
   const { setIsLoggedIn } = useContext(AuthContext)
-  async function hadnleLogout() {
+  async function handleLogout() {
     setLogoutButtonClicked(true)
     try {
       await AuthAPI.logoutUser()
@@ -18,7 +18,7 @@ const LogoutButton = () => {
     }
   }
   return (
-    <button onClick={hadnleLogout} disabled={logoutButtonClicked}>
+    <button onClick={handleLogout} disabled={logoutButtonClicked}>
       {logoutButtonClicked ? "logging out..." : "logout"}
     </button>
   )
