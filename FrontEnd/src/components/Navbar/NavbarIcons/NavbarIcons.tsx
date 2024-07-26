@@ -6,21 +6,24 @@ import { Link } from "react-router-dom"
 import { useContext } from "react"
 import { CartContext } from "../../../context/CartContext"
 import { AuthContext } from "../../../context/AuthContext"
+import LogoutButton from "./LogoutButton/LogoutButton"
 
 const NavbarIcons = () => {
   const { openCart } = useContext(CartContext)
   const { isLoggedIn } = useContext(AuthContext)
+
   return (
     <div className={styles.header__icons}>
-      <p className="tooltip" data-tooltip="" id="tooltipElement">
-        {!isLoggedIn ? (
+      {!isLoggedIn ? (
+        <p className="tooltip" data-tooltip="" id="tooltipElement">
           <Link to="login">
             <img className={styles.icon} src={userIcon} alt="user" />
           </Link>
-        ) : (
-          <span>Logout</span>
-        )}
-      </p>
+        </p>
+      ) : (
+        <LogoutButton />
+      )}
+
       <Link to="favorites">
         <img className={styles.icon} src={heartIcon} alt="heart" />
       </Link>
