@@ -4,17 +4,15 @@ import manImage from "../../assets/images/ManHeader.svg"
 import womanImage from "../../assets/images/WomanHeader.svg"
 import boyImage from "../../assets/images/BoyHeader.svg"
 import girlImage from "../../assets/images/GirlHeader.svg"
-import { useHeaderContext } from "../../context/HeaderContext"
+import {
+  useHeaderContext,
+  actions,
+  hoverType,
+} from "../../context/HeaderContext"
 
 const NavbarInteractive = () => {
-  const {
-    ulHovered,
-    setNavInteractiveHovered,
-    setUlHovered,
-    hasHovered,
-    linkHovered,
-    setLinkHovered,
-  } = useHeaderContext()
+  const { hoverObj, dispatch } = useHeaderContext() as hoverType
+
   const listItems = [
     {
       mainLinkName: "Нові надходження",
@@ -67,13 +65,11 @@ const NavbarInteractive = () => {
   ]
 
   const handleMouseLeave = () => {
-    setNavInteractiveHovered(false)
-    setUlHovered(false)
-    setLinkHovered("")
+    dispatch({ type: actions.mouseLeave })
   }
 
   const handleMouseEnter = () => {
-    setNavInteractiveHovered(true)
+    dispatch({ type: actions.navInteractiveHovered, payload: true })
   }
 
   return (
@@ -83,14 +79,18 @@ const NavbarInteractive = () => {
       onMouseLeave={handleMouseLeave}
       onMouseEnter={handleMouseEnter}
       className={` ${styles.navbarInteractive} ${
-        ulHovered ? styles.animatedShow : hasHovered ? styles.animatedHide : ""
-      } ${hasHovered ? styles.navStyleFlex : styles.navStyleNone}`}
+        hoverObj.ulHovered
+          ? styles.animatedShow
+          : hoverObj.hasHovered
+          ? styles.animatedHide
+          : ""
+      } ${hoverObj.hasHovered ? styles.navStyleFlex : styles.navStyleNone}`}
     >
       <img
         src={womanImage}
         alt="Male"
         className={`${styles.womanImage} ${
-          linkHovered === "Жінки" ? styles.visible : ""
+          hoverObj.linkHovered === "Жінки" ? styles.visible : ""
         }`}
       />
 
@@ -98,7 +98,7 @@ const NavbarInteractive = () => {
         src={girlImage}
         alt="Male"
         className={`${styles.girlImage} ${
-          linkHovered === "Діти" ? styles.visible : ""
+          hoverObj.linkHovered === "Діти" ? styles.visible : ""
         }`}
       />
 
@@ -115,14 +115,14 @@ const NavbarInteractive = () => {
         src={manImage}
         alt="Male"
         className={`${styles.manImage} ${
-          linkHovered === "Чоловіки" ? styles.visible : ""
+          hoverObj.linkHovered === "Чоловіки" ? styles.visible : ""
         }`}
       />
       <img
         src={boyImage}
         alt="Male"
         className={`${styles.boyImage} ${
-          linkHovered === "Діти" ? styles.visible : ""
+          hoverObj.linkHovered === "Діти" ? styles.visible : ""
         }`}
       />
     </nav>
