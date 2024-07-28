@@ -28,7 +28,8 @@ const asyncWrapper = (callback) => {
 const getAllproducts = asyncWrapper(Product.findAllProducts)
 const getMenProducts = asyncWrapper(Product.findMenProducts)
 const getProductById = asyncWrapper(Product.findById)
-// const createProduct = asyncWrapper(Product.create)
+const getWomenProducts = asyncWrapper(Product.findWomenProducts)
+const getChildrenProducts = asyncWrapper(Product.findChildrenPoducts)
 // const updateProduct = asyncWrapper(Product.updateById)
 // const deleteProduct = asyncWrapper(Product.deleteById)
 
@@ -36,7 +37,8 @@ module.exports = {
   getAllproducts,
   getProductById,
   getMenProducts,
-  //   createProduct,
+  getWomenProducts,
+  getChildrenProducts,
   //   updateProduct,
   //   deleteProduct,
 }

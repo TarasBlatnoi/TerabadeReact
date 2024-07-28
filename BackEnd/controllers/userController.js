@@ -1,9 +1,14 @@
 "use strict"
 
+const { validationResult } = require("express-validator")
 const { User } = require("../models/User.js")
 
 const asyncWrapper = (callback) => {
   return async function (req, res) {
+    const errors = validationResult(req)
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() })
+    }
     const args = []
     try {
       if (req.params.id) {
@@ -12,11 +17,16 @@ const asyncWrapper = (callback) => {
       if (req.body) {
         args.push(req.body)
       }
-      await callback(...args)
-      res.redirect("/login.html")
+      const dbResult = await callback(...args)
+      res.status(201).json({
+        message: "User interaction with db successfull",
+        user: {
+          user: { email: dbResult[0].email, isAdmin: dbResult[0].isAdmin },
+        },
+      })
     } catch (err) {
       console.error(err)
-      res.status(404).json({ errorMessage: err.message })
+      res.status(err.status).json({ errorMessage: err.message })
     }
   }
 }

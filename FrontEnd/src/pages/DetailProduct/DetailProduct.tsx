@@ -1,6 +1,6 @@
 import ProductAPI from "../../api/Product/ProductAPI"
 import { json, LoaderFunctionArgs, useLoaderData } from "react-router-dom"
-import { ProductType } from "../../types/Product"
+import { ProductType } from "../../types"
 import { CartContext } from "../../context/CartContext"
 import { useContext } from "react"
 import { CartItemType } from "../../context/CartContext"
@@ -27,7 +27,7 @@ export async function loader({ params }: LoaderFunctionArgs) {
   }
 }
 
-const MenDetail = () => {
+const DetailProduct = () => {
   const productDetailArr = useLoaderData() as ProductType[]
   const productDetail = productDetailArr[0]
   const { addCartItem, openCart } = useContext(CartContext)
@@ -60,4 +60,4 @@ const MenDetail = () => {
   )
 }
 
-export default MenDetail
+export default DetailProduct

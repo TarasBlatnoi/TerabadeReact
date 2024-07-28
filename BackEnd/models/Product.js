@@ -11,6 +11,16 @@ class Product {
         FROM terabade.product
         WHERE sex = "male";
         `,
+    findWomenProducts: `
+        SELECT * 
+        FROM terabade.product
+        WHERE sex = "female";
+    `,
+    findChildrenPoducts: `
+        SELECT * 
+        FROM terabade.product
+        WHERE sex = "children";
+    `,
     findById: `
         SELECT * 
         FROM terabade.product 
@@ -43,6 +53,19 @@ class Product {
       Product.sqlQueries.findMenProducts,
     )
     return menProducts
+  }
+
+  static async findWomenProducts() {
+    const womenProducts = await Product.commitQuery(
+      Product.sqlQueries.findWomenProducts,
+    )
+    return womenProducts
+  }
+  static async findChildrenPoducts() {
+    const childrenProducts = await Product.commitQuery(
+      Product.sqlQueries.findChildrenPoducts,
+    )
+    return childrenProducts
   }
   static async findById(id) {
     const dataForDB = []

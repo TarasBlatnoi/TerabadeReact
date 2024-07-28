@@ -7,12 +7,12 @@ import {
 } from "react-router-dom"
 import Home from "./pages/Home/Home"
 import Men, { loader as menLoader } from "./pages/Men/Men"
-import MenDetail, {
-  loader as menDetailLoader,
-} from "./pages/MenDetail/MenDetail"
+import DetailProduct, {
+  loader as DetailProductLoader,
+} from "./pages/DetailProduct/DetailProduct"
 import Woman from "./pages/Woman"
 import Children from "./pages/Children"
-import Login from "./pages/Login/Login"
+import Login, { action as loginAction } from "./pages/Login/Login"
 import Favorites from "./pages/Favorites"
 import About from "./pages/About"
 import Sale from "./pages/Sale"
@@ -24,10 +24,24 @@ const router = createBrowserRouter(
     <Route path="/" element={<Layout />} errorElement={<Error />}>
       <Route index element={<Home />} />
       <Route path="men" element={<Men />} loader={menLoader} />
-      <Route path="men/:id" element={<MenDetail />} loader={menDetailLoader} />
+      <Route
+        path="men/:id"
+        element={<DetailProduct />}
+        loader={DetailProductLoader}
+      />
       <Route path="woman" element={<Woman />} />
+      <Route
+        path="woman/:id"
+        element={<DetailProduct />}
+        loader={DetailProductLoader}
+      />
       <Route path="children" element={<Children />} />
-      <Route path="login" element={<Login />} />
+      <Route
+        path="children/:id"
+        element={<DetailProduct />}
+        loader={DetailProductLoader}
+      />
+      <Route path="login" element={<Login />} action={loginAction} />
       <Route path="favorites" element={<Favorites />} />
       <Route path="about" element={<About />} />
       <Route path="sale" element={<Sale />} />
