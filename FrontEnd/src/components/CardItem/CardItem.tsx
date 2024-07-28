@@ -9,7 +9,7 @@ type CardItemProps = {
 const CardItem = ({ product }: CardItemProps) => {
   return (
     <div className={styles.item}>
-      <Link to={`${product.ProductID}`}>
+      <Link to={`/${product.ProductID}`}>
         <h3 style={{ margin: "auto", width: "80%", textAlign: "center" }}>
           {product.name}
         </h3>

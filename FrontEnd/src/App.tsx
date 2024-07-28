@@ -13,20 +13,22 @@ import MenDetail, {
 import Woman from "./pages/Woman"
 import Children from "./pages/Children"
 import Login, { action as loginAction } from "./pages/Login/Login"
-import Favorites from "./pages/Favorites"
+import Favorites from "./pages/Favorites/Favorites"
 import About from "./pages/About"
 import Sale from "./pages/Sale"
 import CartProvider from "./context/CartContext"
 import Error from "./pages/Error/Error"
 import AuthContextProvider from "./context/AuthContext"
 import checkAuthLoader from "./utils/checkAuthLoader"
+import { QueryClientProvider } from "@tanstack/react-query"
+import { queryClient } from "./api/queryClient"
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<Layout />} errorElement={<Error />}>
       <Route index element={<Home />} />
       <Route path="men" element={<Men />} loader={menLoader} />
-      <Route path="men/:id" element={<MenDetail />} loader={menDetailLoader} />
+      <Route path=":id" element={<MenDetail />} loader={menDetailLoader} />
       <Route path="woman" element={<Woman />} />
       <Route path="children" element={<Children />} />
       <Route path="login" element={<Login />} action={loginAction} />
@@ -43,11 +45,13 @@ const router = createBrowserRouter(
 
 function App() {
   return (
-    <CartProvider>
-      <AuthContextProvider>
-        <RouterProvider router={router} />
-      </AuthContextProvider>
-    </CartProvider>
+    <QueryClientProvider client={queryClient}>
+      <CartProvider>
+        <AuthContextProvider>
+          <RouterProvider router={router} />
+        </AuthContextProvider>
+      </CartProvider>
+    </QueryClientProvider>
   )
 }
 
