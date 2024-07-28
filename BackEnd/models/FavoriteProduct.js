@@ -80,7 +80,7 @@ class FavoriteProduct {
         FavoriteProduct.sqlQueries.addToFavorite,
       )
     } else {
-      throw new Error("such product already exist")
+      throw { message: "such product already exist", status: 409 }
     }
   }
 
