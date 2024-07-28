@@ -5,19 +5,32 @@ import {
   Dispatch,
   SetStateAction,
   ReactNode,
+  useReducer,
 } from "react"
 
-type ValueType = {
-  ulHovered: boolean
-  setUlHovered: Dispatch<SetStateAction<boolean>>
-  navInteractiveHovered: boolean
-  setNavInteractiveHovered: Dispatch<SetStateAction<boolean>>
-  hasHovered: boolean
-  setHasHovered: Dispatch<SetStateAction<boolean>>
-  linkHovered: string
-  setLinkHovered: Dispatch<SetStateAction<string>>
-  linkClicked: string
-  setLinkClicked: Dispatch<SetStateAction<string>>
+type ValueType = Dispatch<actionType>
+
+type HeaderProviderProps = {
+  children: ReactNode
+}
+
+type hoverObjType = {
+  ulHovered: false
+  navInteractiveHovered: false
+  hasHovered: false
+  linkHovered: ""
+}
+
+type actionType = {
+  type: actions
+  payload: string | boolean
+}
+
+enum actions {
+  ulHovered = "setUlHovered",
+  navInteractiveHovered = "setNavInteractiveHovered",
+  hasHovered = "setHasHovered",
+  linkHovered = "setLinkHovered",
 }
 
 const HeaderContext = createContext<ValueType | null>(null)
@@ -30,32 +43,29 @@ export function useHeaderContext() {
   return context
 }
 
-type HeaderProviderProps = {
-  children: ReactNode
+function reducer(state: hoverObjType, action: actionType) {
+  switch (action.type) {
+    case actions.ulHovered:
+      return state
+    default:
+      return state
+  }
 }
 
 export function HeaderProvider({ children }: HeaderProviderProps) {
-  const [ulHovered, setUlHovered] = useState(false)
+  /*const [ulHovered, setUlHovered] = useState(false)
   const [navInteractiveHovered, setNavInteractiveHovered] = useState(false)
   const [hasHovered, setHasHovered] = useState(false)
-  const [linkHovered, setLinkHovered] = useState("")
-  const [linkClicked, setLinkClicked] = useState("")
+  const [linkHovered, setLinkHovered] = useState("")*/
+
+  const [hoverObj, dispatch] = useReducer(reducer, {
+    ulHovered: false,
+    navInteractiveHovered: false,
+    hasHovered: false,
+    linkHovered: "",
+  }) as [hoverObjType, (action: actionType) => void]
+
   return (
-    <HeaderContext.Provider
-      value={{
-        ulHovered,
-        setUlHovered,
-        navInteractiveHovered,
-        setNavInteractiveHovered,
-        hasHovered,
-        setHasHovered,
-        linkHovered,
-        setLinkHovered,
-        linkClicked,
-        setLinkClicked,
-      }}
-    >
-      {children}
-    </HeaderContext.Provider>
+    <HeaderContext.Provider value={dispatch}>{children}</HeaderContext.Provider>
   )
 }
