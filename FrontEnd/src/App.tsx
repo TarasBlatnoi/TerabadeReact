@@ -29,7 +29,11 @@ const router = createBrowserRouter(
       <Route index element={<Home />} />
       <Route id="men" path="/men" loader={menLoader}>
         <Route index element={<Men />} />
-        <Route path=":id" element={<MenDetail />} loader={menDetailLoader} />
+        <Route
+          path=":id"
+          element={<DetailProduct />}
+          loader={DetailProductLoader}
+        />
       </Route>
       <Route path="woman" element={<Woman />} />
       <Route
