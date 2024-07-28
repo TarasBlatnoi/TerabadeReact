@@ -1,9 +1,20 @@
 import ProductAPI from "../../api/Product/ProductAPI"
-import { json, LoaderFunctionArgs, useLoaderData } from "react-router-dom"
+import {
+  Await,
+  json,
+  LoaderFunctionArgs,
+  useLoaderData,
+  useRouteLoaderData,
+} from "react-router-dom"
 import { ProductType } from "../../types"
 import { CartContext } from "../../context/CartContext"
-import { useContext } from "react"
+import { Suspense, useContext } from "react"
 import { CartItemType } from "../../context/CartContext"
+import CardItem from "../../components/CardItem/CardItem"
+
+interface ProductsPromiseType {
+  menProducts: Promise<ProductType[]>
+}
 
 export async function loader({ params }: LoaderFunctionArgs) {
   if (!params.id) {
@@ -29,34 +40,50 @@ export async function loader({ params }: LoaderFunctionArgs) {
 
 const DetailProduct = () => {
   const productDetailArr = useLoaderData() as ProductType[]
+  const menProductsPromise = useRouteLoaderData("men") as ProductsPromiseType
   const productDetail = productDetailArr[0]
   const { addCartItem, openCart } = useContext(CartContext)
   function handleClick(item: CartItemType) {
     addCartItem(item)
   }
   return (
-    <div>
-      <h2>{productDetail.name}</h2>
-      <p>{productDetail.productDetails}</p>
-      <img
-        src={`data:image/jpeg;base64,${productDetail.image}`}
-        alt={productDetail.name}
-        style={{ width: "90%", height: "80%" }}
-      />
-      <button
-        onClick={() => {
-          handleClick({
-            id: `${productDetail.ProductID}`,
-            name: productDetail.name,
-            image: productDetail.image,
-            price: productDetail.price,
-          })
-          openCart()
-        }}
-      >
-        <i> додати в кошик</i>
-      </button>
-    </div>
+    <>
+      <div>
+        <h2>{productDetail.name}</h2>
+        <p>{productDetail.productDetails}</p>
+        <img
+          src={`data:image/jpeg;base64,${productDetail.image}`}
+          alt={productDetail.name}
+          style={{ width: "90%", height: "80%" }}
+        />
+        <button
+          onClick={() => {
+            handleClick({
+              id: `${productDetail.ProductID}`,
+              name: productDetail.name,
+              image: productDetail.image,
+              price: productDetail.price,
+            })
+            openCart()
+          }}
+        >
+          <i> додати в кошик</i>
+        </button>
+      </div>
+      <Suspense fallback={<h1>Loading products...</h1>}>
+        <Await resolve={menProductsPromise.menProducts}>
+          {(menProducts) => {
+            return (
+              <div>
+                {menProducts.map((product: ProductType) => {
+                  return <CardItem key={product.ProductID} product={product} />
+                })}
+              </div>
+            )
+          }}
+        </Await>
+      </Suspense>
+    </>
   )
 }
 

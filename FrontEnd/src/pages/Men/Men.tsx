@@ -1,4 +1,4 @@
-import { Await, defer, useLoaderData } from "react-router-dom"
+import { Await, defer, useRouteLoaderData } from "react-router-dom"
 import ProductAPI from "../../api/Product/ProductAPI"
 import { ProductType } from "../../types"
 import CardItem from "../../components/CardItem/CardItem"
@@ -18,7 +18,7 @@ interface ProductsPromiseType {
 }
 
 const Men = () => {
-  const menProductsPromise = useLoaderData() as ProductsPromiseType
+  const menProductsPromise = useRouteLoaderData("men") as ProductsPromiseType
   return (
     <>
       <h1>filter</h1>
