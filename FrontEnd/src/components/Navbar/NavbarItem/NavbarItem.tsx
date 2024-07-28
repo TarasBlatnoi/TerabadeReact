@@ -8,7 +8,13 @@ type PropsType = {
 }
 
 const NavbarItem = ({ href, name }: PropsType) => {
-  const { setLinkHovered } = useHeaderContext()
+  const {
+    setLinkHovered,
+    setLinkClicked,
+    linkClicked,
+    setHasHovered,
+    setUlHovered,
+  } = useHeaderContext()
 
   return (
     <li
@@ -16,7 +22,18 @@ const NavbarItem = ({ href, name }: PropsType) => {
       onMouseEnter={() => setLinkHovered(name)}
     >
       <NavLink to={href}>
-        <p>{name}</p>
+        <p
+          onMouseEnter={(event: React.MouseEvent) => {
+            const target = event.target as HTMLElement
+            if (linkClicked !== target.innerText) {
+              setLinkClicked("")
+              setHasHovered(true)
+              setUlHovered(true)
+            }
+          }}
+        >
+          {name}
+        </p>
       </NavLink>
     </li>
   )

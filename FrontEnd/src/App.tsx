@@ -18,6 +18,8 @@ import About from "./pages/About"
 import Sale from "./pages/Sale"
 import CartProvider from "./context/CartContext"
 import Error from "./pages/Error/Error"
+import AuthContextProvider from "./context/AuthContext"
+import checkAuthLoader from "./utils/checkAuthLoader"
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -42,7 +44,11 @@ const router = createBrowserRouter(
         loader={DetailProductLoader}
       />
       <Route path="login" element={<Login />} action={loginAction} />
-      <Route path="favorites" element={<Favorites />} />
+      <Route
+        path="favorites"
+        element={<Favorites />}
+        loader={checkAuthLoader}
+      />
       <Route path="about" element={<About />} />
       <Route path="sale" element={<Sale />} />
     </Route>
@@ -52,7 +58,9 @@ const router = createBrowserRouter(
 function App() {
   return (
     <CartProvider>
-      <RouterProvider router={router} />
+      <AuthContextProvider>
+        <RouterProvider router={router} />
+      </AuthContextProvider>
     </CartProvider>
   )
 }

@@ -24,13 +24,18 @@ router.post("/login", loginValidationRules, (req, res, next) => {
       return next(err)
     }
     if (!user) {
-      return res.status(401).json({ message: info.message })
+      return res.status(401).json({
+        errors: [{ msg: "Wrong email or password" }],
+      })
     }
     req.logIn(user, (err) => {
       if (err) {
         return next(err)
       }
-      return res.json({ message: "Login successful", user })
+      return res.json({
+        message: "Login successful",
+        user: { email: user[0].email, isAdmin: user[0].isAdmin },
+      })
     })
   })(req, res, next)
 })
@@ -45,12 +50,16 @@ router.get("/admin-route", isAdmin, (req, res) => {
 
 // Visiting this route logs the user out
 router.get("/logout", (req, res, next) => {
-  req.logout(function (err) {
-    if (err) {
-      return next(err)
-    }
-    res.send({ message: "Logout successfully" })
-  })
+  setTimeout(() => {
+    req.logout(function (err) {
+      if (err) {
+        return res.json({
+          errors: [{ msg: "Couldn't logout" }],
+        })
+      }
+      res.send({ message: "Logout successfully" })
+    })
+  }, 2000)
 })
 
 router.get("/login-success", (req, res) => {
@@ -63,14 +72,23 @@ router.get("/login-failure", (req, res) => {
   res.send("You entered the wrong password.")
 })
 
-router.get("/api/v1/checkUser", (req, res, next) => {
-  if (req.user) {
+router.get("/check-auth", (req, res, next) => {
+  if (req.user && req.isAuthenticated()) {
     const user = {
-      UserID: req.user.UserID,
+      id: req.user.UserID,
       email: req.user.email,
       isAdmin: req.user.isAdmin,
     }
-    res.json(user)
+    res.json({
+      status: "success",
+      authenticated: true,
+      user,
+    })
+  } else {
+    res.json({
+      status: "success",
+      authenticated: false,
+    })
   }
   next()
 })
