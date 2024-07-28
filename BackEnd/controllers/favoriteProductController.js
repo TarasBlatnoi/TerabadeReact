@@ -13,8 +13,7 @@ const asyncWrapper = (callback) => {
       const result = await callback(...args)
       res.status(200).json({ result })
     } catch (err) {
-      console.error(err)
-      res.status(404).json({ errorMessage: err.message })
+      res.status(err.status).json({ errorMessage: err.message })
     }
   }
 }
