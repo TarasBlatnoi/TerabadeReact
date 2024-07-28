@@ -1,39 +1,42 @@
 import {
   createContext,
-  useState,
   useContext,
   Dispatch,
-  SetStateAction,
   ReactNode,
   useReducer,
 } from "react"
 
-type ValueType = Dispatch<actionType>
+export type hoverType = {
+  hoverObj: hoverObjType
+  dispatch: Dispatch<actionType>
+}
 
 type HeaderProviderProps = {
   children: ReactNode
 }
 
 type hoverObjType = {
-  ulHovered: false
-  navInteractiveHovered: false
-  hasHovered: false
-  linkHovered: ""
+  ulHovered: boolean
+  navInteractiveHovered: boolean
+  hasHovered: boolean
+  linkHovered: string
 }
 
 type actionType = {
   type: actions
-  payload: string | boolean
+  payload?: string | boolean
 }
 
-enum actions {
+export enum actions {
   ulHovered = "setUlHovered",
   navInteractiveHovered = "setNavInteractiveHovered",
   hasHovered = "setHasHovered",
   linkHovered = "setLinkHovered",
+  mouseLeave = "handleMouseLeave",
+  mouseEnterList = "handleMouseEnterList",
 }
 
-const HeaderContext = createContext<ValueType | null>(null)
+const HeaderContext = createContext<hoverType | null>(null)
 
 export function useHeaderContext() {
   const context = useContext(HeaderContext)
@@ -43,10 +46,21 @@ export function useHeaderContext() {
   return context
 }
 
-function reducer(state: hoverObjType, action: actionType) {
+function reducer(state: hoverObjType, action: actionType): hoverObjType {
   switch (action.type) {
-    case actions.ulHovered:
-      return state
+    case actions.linkHovered:
+      return { ...state, linkHovered: String(action.payload) }
+    case actions.navInteractiveHovered:
+      return { ...state, navInteractiveHovered: Boolean(action.payload) }
+    case actions.mouseLeave:
+      return {
+        ...state,
+        navInteractiveHovered: false,
+        ulHovered: false,
+        linkHovered: "",
+      }
+    case actions.mouseEnterList:
+      return { ...state, hasHovered: true, ulHovered: true }
     default:
       return state
   }
@@ -66,6 +80,8 @@ export function HeaderProvider({ children }: HeaderProviderProps) {
   }) as [hoverObjType, (action: actionType) => void]
 
   return (
-    <HeaderContext.Provider value={dispatch}>{children}</HeaderContext.Provider>
+    <HeaderContext.Provider value={{ hoverObj, dispatch }}>
+      {children}
+    </HeaderContext.Provider>
   )
 }

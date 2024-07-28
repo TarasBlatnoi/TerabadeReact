@@ -1,18 +1,15 @@
-import { useEffect, useRef } from "react"
+import { SyntheticEvent, act, useEffect, useRef } from "react"
 import NavbarItem from "../NavbarItem/NavbarItem"
 import styles from "./NavbarItemList.module.css"
-import { useHeaderContext } from "../../../context/HeaderContext"
+import {
+  useHeaderContext,
+  hoverType,
+  actions,
+} from "../../../context/HeaderContext"
 
 const NavbarItemList = () => {
-  const {
-    setUlHovered,
-    navInteractiveHovered,
-    setHasHovered,
-    setNavInteractiveHovered,
-    setLinkHovered,
-    linkClicked,
-    setLinkClicked,
-  } = useHeaderContext()
+  const { hoverObj, dispatch } = useHeaderContext() as hoverType
+
   const ulRef = useRef<HTMLUListElement>(null)
   const links = [
     { name: "Чоловіки", href: "/men" },
@@ -44,12 +41,10 @@ const NavbarItemList = () => {
           mouseXForLeft < bounds.left ||
           mouseXForRight > bounds.right
         ) {
-          setNavInteractiveHovered(false)
-          setUlHovered(false)
-          setLinkHovered("")
+          dispatch({ type: actions.mouseLeave })
         }
         if (mouseY > bounds.bottom) {
-          setNavInteractiveHovered(true)
+          dispatch({ type: actions.navInteractiveHovered, payload: true })
         }
       }
     }
@@ -64,21 +59,20 @@ const NavbarItemList = () => {
         ulElement.removeEventListener("mouseout", handleMouseLeave)
       }
     }
-  }, [setUlHovered, setNavInteractiveHovered, setLinkHovered])
+  }, [dispatch])
+
+  function handleMouseEnterList() {
+    dispatch({ type: actions.mouseEnterList })
+  }
 
   return (
     <ul
       className={`${styles.ulNavbarSmall} ${
-        navInteractiveHovered ? styles.heightHovered : styles.heightDefault
+        hoverObj.navInteractiveHovered
+          ? styles.heightHovered
+          : styles.heightDefault
       }`}
-      onMouseEnter={() => {
-        if (!linkClicked) {
-          setHasHovered(true)
-          setUlHovered(true)
-        } else {
-          setLinkClicked("")
-        }
-      }}
+      onMouseEnter={handleMouseEnterList}
       ref={ulRef}
       onClick={navListClickHandler}
     >
