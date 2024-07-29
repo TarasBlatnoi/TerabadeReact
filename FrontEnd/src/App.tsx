@@ -5,6 +5,7 @@ import {
   createRoutesFromElements,
   Route,
 } from "react-router-dom"
+import { lazy, Suspense } from "react"
 import Home from "./pages/Home/Home"
 import Men, { loader as menLoader } from "./pages/Men/Men"
 import DetailProduct, {
@@ -12,7 +13,8 @@ import DetailProduct, {
 } from "./pages/DetailProduct/DetailProduct"
 import Woman from "./pages/Woman"
 import Children from "./pages/Children"
-import Login, { action as loginAction } from "./pages/Login/Login"
+// import Login, { action as loginAction } from "./pages/Login/Login"
+const Login = lazy(() => import("./pages/Login/Login"))
 import Favorites from "./pages/Favorites/Favorites"
 import About from "./pages/About"
 import Sale from "./pages/Sale"
@@ -47,7 +49,17 @@ const router = createBrowserRouter(
         element={<DetailProduct />}
         loader={DetailProductLoader}
       />
-      <Route path="login" element={<Login />} action={loginAction} />
+      <Route
+        path="login"
+        element={
+          <Suspense fallback={<p>Loading login page</p>}>
+            <Login />
+          </Suspense>
+        }
+        action={(meta) =>
+          import("./pages/Login/Login").then((module) => module.action(meta))
+        }
+      />
       <Route
         path="favorites"
         element={<Favorites />}
