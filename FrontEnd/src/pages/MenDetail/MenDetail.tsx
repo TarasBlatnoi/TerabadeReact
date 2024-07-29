@@ -38,7 +38,7 @@ export async function loader({ params }: LoaderFunctionArgs) {
   }
 }
 
-const DetailProduct = () => {
+const MenDetail = () => {
   const productDetailArr = useLoaderData() as ProductType[]
   const menProductsPromise = useRouteLoaderData("men") as ProductsPromiseType
   const productDetail = productDetailArr[0]
@@ -73,13 +73,9 @@ const DetailProduct = () => {
       <Suspense fallback={<h1>Loading products...</h1>}>
         <Await resolve={menProductsPromise.menProducts}>
           {(menProducts) => {
-            const recommendedProducts = menProducts.filter(
-              (menProduct: ProductType) =>
-                menProduct.ProductID !== productDetail.ProductID
-            )
             return (
               <div>
-                {recommendedProducts.map((product: ProductType) => {
+                {menProducts.map((product: ProductType) => {
                   return <CardItem key={product.ProductID} product={product} />
                 })}
               </div>
@@ -91,4 +87,4 @@ const DetailProduct = () => {
   )
 }
 
-export default DetailProduct
+export default MenDetail

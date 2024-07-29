@@ -43,7 +43,7 @@ app.use(passport.session())
 
 app.use("/api/v1/users", userRoutes)
 app.use("/api/v1/products", productRoutes)
-app.use("/favorites", favoriteRoutes)
+app.use("/api/v1/favorites", favoriteRoutes)
 app.use("/api/v1", authenticationRoutes)
 
 const closeServer = (server) => {

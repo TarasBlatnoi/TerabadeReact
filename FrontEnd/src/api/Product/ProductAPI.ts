@@ -15,6 +15,11 @@ class ProductAPI {
     const { data } = await client.get(`/products/${id}`)
     return data
   }
+
+  async getFavoriteProducts() {
+    const { data } = await client.get(`/favorites`)
+    return data
+  }
 }
 
 export default new ProductAPI()
