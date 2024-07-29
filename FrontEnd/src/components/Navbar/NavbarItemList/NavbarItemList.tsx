@@ -22,9 +22,7 @@ const NavbarItemList = () => {
   function navListClickHandler(event: React.MouseEvent) {
     const target = event.target as HTMLElement
     if (target.tagName === "P") {
-      setUlHovered(false)
-      setNavInteractiveHovered(false)
-      setLinkClicked(target.innerText)
+      dispatch({ type: actions.navListClick, payload: target.innerText })
     }
   }
 
