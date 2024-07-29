@@ -73,9 +73,13 @@ const DetailProduct = () => {
       <Suspense fallback={<h1>Loading products...</h1>}>
         <Await resolve={menProductsPromise.menProducts}>
           {(menProducts) => {
+            const recommendedProducts = menProducts.filter(
+              (menProduct: ProductType) =>
+                menProduct.ProductID !== productDetail.ProductID
+            )
             return (
               <div>
-                {menProducts.map((product: ProductType) => {
+                {recommendedProducts.map((product: ProductType) => {
                   return <CardItem key={product.ProductID} product={product} />
                 })}
               </div>
