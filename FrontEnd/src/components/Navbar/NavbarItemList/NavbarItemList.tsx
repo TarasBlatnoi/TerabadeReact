@@ -60,7 +60,11 @@ const NavbarItemList = () => {
   }, [dispatch])
 
   function handleMouseEnterList() {
-    dispatch({ type: actions.mouseEnterList })
+    if (!hoverObj.linkClicked) {
+      dispatch({ type: actions.mouseEnterList })
+    } else {
+      dispatch({ type: actions.linkClicked, payload: "" })
+    }
   }
 
   return (

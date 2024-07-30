@@ -20,6 +20,7 @@ type hoverObjType = {
   navInteractiveHovered: boolean
   hasHovered: boolean
   linkHovered: string
+  linkClicked: string
 }
 
 type actionType = {
@@ -35,6 +36,7 @@ export enum actions {
   mouseLeave = "handleMouseLeave",
   mouseEnterList = "handleMouseEnterList",
   navListClick = "navListClickHandler",
+  linkClicked = "setLinkClicked",
 }
 
 const HeaderContext = createContext<hoverType | null>(null)
@@ -67,8 +69,10 @@ function reducer(state: hoverObjType, action: actionType): hoverObjType {
         ...state,
         navInteractiveHovered: false,
         ulHovered: false,
-        linkHovered: String(action.payload),
+        linkClicked: String(action.payload),
       }
+    case actions.linkClicked:
+      return { ...state, linkClicked: String(action.payload) }
     default:
       return state
   }
@@ -80,6 +84,7 @@ export function HeaderProvider({ children }: HeaderProviderProps) {
     navInteractiveHovered: false,
     hasHovered: false,
     linkHovered: "",
+    linkClicked: "",
   }) as [hoverObjType, (action: actionType) => void]
 
   return (
