@@ -1,26 +1,46 @@
 import {
   createContext,
-  useState,
   useContext,
   Dispatch,
-  SetStateAction,
   ReactNode,
+  useReducer,
 } from "react"
 
-type ValueType = {
-  ulHovered: boolean
-  setUlHovered: Dispatch<SetStateAction<boolean>>
-  navInteractiveHovered: boolean
-  setNavInteractiveHovered: Dispatch<SetStateAction<boolean>>
-  hasHovered: boolean
-  setHasHovered: Dispatch<SetStateAction<boolean>>
-  linkHovered: string
-  setLinkHovered: Dispatch<SetStateAction<string>>
-  linkClicked: string
-  setLinkClicked: Dispatch<SetStateAction<string>>
+export type hoverType = {
+  hoverObj: hoverObjType
+  dispatch: Dispatch<actionType>
 }
 
-const HeaderContext = createContext<ValueType | null>(null)
+type HeaderProviderProps = {
+  children: ReactNode
+}
+
+type hoverObjType = {
+  ulHovered: boolean
+  navInteractiveHovered: boolean
+  hasHovered: boolean
+  linkHovered: string
+  linkClicked: string
+}
+
+type actionType = {
+  type: actions
+  payload?: string | boolean
+}
+
+export enum actions {
+  ulHovered = "setUlHovered",
+  navInteractiveHovered = "setNavInteractiveHovered",
+  hasHovered = "setHasHovered",
+  linkHovered = "setLinkHovered",
+  mouseLeave = "handleMouseLeave",
+  mouseEnterList = "handleMouseEnterList",
+  navListClick = "navListClickHandler",
+  linkClicked = "setLinkClicked",
+  mouseEnterNavBarItem = "mouseEnterNavBarItem",
+}
+
+const HeaderContext = createContext<hoverType | null>(null)
 
 export function useHeaderContext() {
   const context = useContext(HeaderContext)
@@ -30,31 +50,48 @@ export function useHeaderContext() {
   return context
 }
 
-type HeaderProviderProps = {
-  children: ReactNode
+function reducer(state: hoverObjType, action: actionType): hoverObjType {
+  switch (action.type) {
+    case actions.linkHovered:
+      return { ...state, linkHovered: String(action.payload) }
+    case actions.navInteractiveHovered:
+      return { ...state, navInteractiveHovered: Boolean(action.payload) }
+    case actions.mouseLeave:
+      return {
+        ...state,
+        navInteractiveHovered: false,
+        ulHovered: false,
+        linkHovered: "",
+      }
+    case actions.mouseEnterList:
+      return { ...state, hasHovered: true, ulHovered: true }
+    case actions.navListClick:
+      return {
+        ...state,
+        navInteractiveHovered: false,
+        ulHovered: false,
+        linkClicked: String(action.payload),
+      }
+    case actions.mouseEnterNavBarItem:
+      return { ...state, linkClicked: "", hasHovered: true, ulHovered: true }
+    case actions.linkClicked:
+      return { ...state, linkClicked: String(action.payload) }
+    default:
+      return state
+  }
 }
 
 export function HeaderProvider({ children }: HeaderProviderProps) {
-  const [ulHovered, setUlHovered] = useState(false)
-  const [navInteractiveHovered, setNavInteractiveHovered] = useState(false)
-  const [hasHovered, setHasHovered] = useState(false)
-  const [linkHovered, setLinkHovered] = useState("")
-  const [linkClicked, setLinkClicked] = useState("")
+  const [hoverObj, dispatch] = useReducer(reducer, {
+    ulHovered: false,
+    navInteractiveHovered: false,
+    hasHovered: false,
+    linkHovered: "",
+    linkClicked: "",
+  }) as [hoverObjType, (action: actionType) => void]
+
   return (
-    <HeaderContext.Provider
-      value={{
-        ulHovered,
-        setUlHovered,
-        navInteractiveHovered,
-        setNavInteractiveHovered,
-        hasHovered,
-        setHasHovered,
-        linkHovered,
-        setLinkHovered,
-        linkClicked,
-        setLinkClicked,
-      }}
-    >
+    <HeaderContext.Provider value={{ hoverObj, dispatch }}>
       {children}
     </HeaderContext.Provider>
   )
