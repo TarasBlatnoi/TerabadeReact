@@ -37,6 +37,7 @@ export enum actions {
   mouseEnterList = "handleMouseEnterList",
   navListClick = "navListClickHandler",
   linkClicked = "setLinkClicked",
+  mouseEnterNavBarItem = "mouseEnterNavBarItem",
 }
 
 const HeaderContext = createContext<hoverType | null>(null)
@@ -71,6 +72,8 @@ function reducer(state: hoverObjType, action: actionType): hoverObjType {
         ulHovered: false,
         linkClicked: String(action.payload),
       }
+    case actions.mouseEnterNavBarItem:
+      return { ...state, linkClicked: "", hasHovered: true, ulHovered: true }
     case actions.linkClicked:
       return { ...state, linkClicked: String(action.payload) }
     default:
