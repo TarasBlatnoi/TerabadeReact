@@ -11,7 +11,6 @@ const NavbarItemList = () => {
   const { hoverObj, dispatch } = useHeaderContext() as hoverType
 
   const ulRef = useRef<HTMLUListElement>(null)
-
   const links = [
     { name: "Чоловіки", href: "/men" },
     { name: "Жінки", href: "/woman" },
@@ -19,6 +18,13 @@ const NavbarItemList = () => {
     { name: "Розпродаж", href: "/sale" },
     { name: "Про нас", href: "/about" },
   ]
+
+  function navListClickHandler(event: React.MouseEvent) {
+    const target = event.target as HTMLElement
+    if (target.tagName === "P") {
+      dispatch({ type: actions.navListClick, payload: target.innerText })
+    }
+  }
 
   useEffect(() => {
     function handleMouseLeave(event: MouseEvent) {
@@ -66,6 +72,7 @@ const NavbarItemList = () => {
       }`}
       onMouseEnter={handleMouseEnterList}
       ref={ulRef}
+      onClick={navListClickHandler}
     >
       {links.map((link, index) => (
         <NavbarItem key={index} name={link.name} href={link.href} />

@@ -22,7 +22,18 @@ const NavbarItem = ({ href, name }: PropsType) => {
       }
     >
       <NavLink to={href}>
-        <p>{name}</p>
+        <p
+          onMouseEnter={(event: React.MouseEvent) => {
+            const target = event.target as HTMLElement
+            if (linkClicked !== target.innerText) {
+              setLinkClicked("")
+              setHasHovered(true)
+              setUlHovered(true)
+            }
+          }}
+        >
+          {name}
+        </p>
       </NavLink>
     </li>
   )

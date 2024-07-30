@@ -34,6 +34,7 @@ export enum actions {
   linkHovered = "setLinkHovered",
   mouseLeave = "handleMouseLeave",
   mouseEnterList = "handleMouseEnterList",
+  navListClick = "navListClickHandler",
 }
 
 const HeaderContext = createContext<hoverType | null>(null)
@@ -61,17 +62,19 @@ function reducer(state: hoverObjType, action: actionType): hoverObjType {
       }
     case actions.mouseEnterList:
       return { ...state, hasHovered: true, ulHovered: true }
+    case actions.navListClick:
+      return {
+        ...state,
+        navInteractiveHovered: false,
+        ulHovered: false,
+        linkHovered: String(action.payload),
+      }
     default:
       return state
   }
 }
 
 export function HeaderProvider({ children }: HeaderProviderProps) {
-  /*const [ulHovered, setUlHovered] = useState(false)
-  const [navInteractiveHovered, setNavInteractiveHovered] = useState(false)
-  const [hasHovered, setHasHovered] = useState(false)
-  const [linkHovered, setLinkHovered] = useState("")*/
-
   const [hoverObj, dispatch] = useReducer(reducer, {
     ulHovered: false,
     navInteractiveHovered: false,

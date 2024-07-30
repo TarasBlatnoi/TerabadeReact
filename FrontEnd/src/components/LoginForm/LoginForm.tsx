@@ -1,18 +1,38 @@
-import { Form, useActionData } from "react-router-dom"
+import {
+  Form,
+  useActionData,
+  useNavigate,
+  useNavigation,
+} from "react-router-dom"
 import styles from "./LoginForm.module.css"
 
 import Input from "../UI/Input/Input"
-
-interface LoginFormProps {
-  isSubmitting: boolean
-}
+import { useContext, useEffect } from "react"
+import { AuthContext } from "../../context/AuthContext"
 
 interface ActionData {
   errors?: string[]
+  message?: string
+  user?: {
+    email: string
+    isAdmin: boolean
+  }
 }
 
-const LoginForm = ({ isSubmitting }: LoginFormProps) => {
+const LoginForm = () => {
+  const navigation = useNavigation()
+  const isSubmitting = navigation.state === "submitting"
   const actionData = useActionData() as ActionData
+  const navigate = useNavigate()
+  const { setIsLoggedIn } = useContext(AuthContext)
+
+  useEffect(() => {
+    if (actionData?.user) {
+      setIsLoggedIn(true)
+      navigate("/")
+    }
+  }, [actionData, navigate, setIsLoggedIn])
+
   const errors = actionData?.errors || []
   return (
     <Form method="post" className={styles.formBox}>
