@@ -1,0 +1,12 @@
+.button {
+  width: 7.2rem;
+  height: 3.6rem;
+}
+
+.primary {
+  background-color: orange;
+}
+
+.secondary {
+  background-color: antiquewhite;
+}
