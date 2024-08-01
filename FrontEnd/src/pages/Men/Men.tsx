@@ -1,4 +1,4 @@
-import { Await, defer, useLoaderData } from "react-router-dom"
+import { Await, Outlet, defer, useLoaderData } from "react-router-dom"
 import ProductAPI from "../../api/Product/ProductAPI"
 import { ProductType } from "../../types"
 import CardItem from "../../components/CardItem/CardItem"

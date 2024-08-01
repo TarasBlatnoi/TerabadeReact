@@ -29,22 +29,27 @@ const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<Layout />} errorElement={<Error />}>
       <Route index element={<Home />} />
-      <Route path="men" loader={menLoader} element={<Men />} />
+      <Route id="men" path="men" loader={menLoader} element={<Men />} />
       <Route
         path="men/:id"
-        element={<DetailProduct />}
+        element={<DetailProduct parentRouteId="men" />}
         loader={DetailProductLoader}
       />
-      <Route path="women" element={<Women />} loader={womenLoader} />
+      <Route id="women" path="women" element={<Women />} loader={womenLoader} />
       <Route
         path="women/:id"
-        element={<DetailProduct />}
+        element={<DetailProduct parentRouteId="women" />}
         loader={DetailProductLoader}
       />
-      <Route path="children" element={<Children />} loader={childrenLoader} />
+      <Route
+        id="children"
+        path="children"
+        element={<Children />}
+        loader={childrenLoader}
+      />
       <Route
         path="children/:id"
-        element={<DetailProduct />}
+        element={<DetailProduct parentRouteId="children" />}
         loader={DetailProductLoader}
       />
       <Route

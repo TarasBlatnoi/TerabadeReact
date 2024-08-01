@@ -1,6 +1,7 @@
 import ProductAPI from "../../api/Product/ProductAPI"
 import {
   Await,
+  defer,
   json,
   LoaderFunctionArgs,
   useLoaderData,
@@ -11,83 +12,86 @@ import { CartContext } from "../../context/CartContext"
 import { Suspense, useContext } from "react"
 import { CartItemType } from "../../context/CartContext"
 import CardItem from "../../components/CardItem/CardItem"
+import { AxiosResponse } from "axios"
 
 interface ProductsPromiseType {
   menProducts: Promise<ProductType[]>
 }
-
-export async function loader({ params }: LoaderFunctionArgs) {
-  if (!params.id) {
-    throw json(
-      {
-        message: "Product id is required",
-      },
-      { status: 400 }
-    )
-  }
-  try {
-    const res = await ProductAPI.getById(params.id)
-    return res
-  } catch (err) {
-    throw json(
-      {
-        message: "Could not fetch your product",
-      },
-      { status: 500 }
-    )
-  }
+type loaderParams = {
+  params: { id: string }
 }
 
-const DetailProduct = () => {
-  const productDetailArr = useLoaderData() as ProductType[]
-  const menProductsPromise = useRouteLoaderData("men") as ProductsPromiseType
-  const productDetail = productDetailArr[0]
+export function loader({ params }: loaderParams) {
+  return defer({ data: ProductAPI.getById(params.id) })
+}
+type DetailProductProps = {
+  parentRouteId: string
+}
+
+function DetailProduct({ parentRouteId }: DetailProductProps) {
+  const { data } = useLoaderData() as { data: AxiosResponse<ProductType[]> }
+  /*const da2 = useRouteLoaderData(parentRouteId) as {
+    data: AxiosResponse<ProductType[]>
+  }*/
+  // console.log(da2)
   const { addCartItem, openCart } = useContext(CartContext)
   function handleClick(item: CartItemType) {
     addCartItem(item)
   }
   return (
-    <>
-      <div>
-        <h2>{productDetail.name}</h2>
-        <p>{productDetail.productDetails}</p>
-        <img
-          src={`data:image/jpeg;base64,${productDetail.image}`}
-          alt={productDetail.name}
-          style={{ width: "90%", height: "80%" }}
-        />
-        <button
-          onClick={() => {
-            handleClick({
-              id: `${productDetail.ProductID}`,
-              name: productDetail.name,
-              image: productDetail.image,
-              price: productDetail.price,
-            })
-            openCart()
-          }}
-        >
-          <i> додати в кошик</i>
-        </button>
-      </div>
-      <Suspense fallback={<h1>Loading products...</h1>}>
-        <Await resolve={menProductsPromise.menProducts}>
-          {(menProducts) => {
-            const recommendedProducts = menProducts.filter(
-              (menProduct: ProductType) =>
-                menProduct.ProductID !== productDetail.ProductID
-            )
-            return (
-              <div>
-                {recommendedProducts.map((product: ProductType) => {
-                  return <CardItem key={product.ProductID} product={product} />
-                })}
-              </div>
-            )
-          }}
-        </Await>
-      </Suspense>
-    </>
+    <Suspense fallback={<h1>loading...</h1>}>
+      <Await resolve={data}>
+        {(data) => {
+          const product = data[0]
+          return (
+            <>
+              <h2>{product.name}</h2>
+              <p>{product.productDetails}</p>
+              <img
+                src={`data:image/jpeg;base64,${product.image}`}
+                alt={product.name}
+                style={{ width: "90%", height: "80%" }}
+              />
+              <button
+                onClick={() => {
+                  handleClick({
+                    id: `${product.ProductID}`,
+                    name: product.name,
+                    image: product.image,
+                    price: product.price,
+                  })
+                  openCart()
+                }}
+              >
+                <i> додати в кошик</i>
+              </button>
+              {/*<Suspense fallback={<h1>Loading products...</h1>}>
+                <Await resolve={parentData}>
+                  {(menProducts) => {
+                    const recommendedProducts = menProducts.filter(
+                      (menProduct: ProductType) =>
+                        menProduct.ProductID !== product.ProductID
+                    )
+                    return (
+                      <div>
+                        {recommendedProducts.map((product: ProductType) => {
+                          return (
+                            <CardItem
+                              key={product.ProductID}
+                              product={product}
+                            />
+                          )
+                        })}
+                      </div>
+                    )
+                  }}
+                </Await>
+              </Suspense>*/}
+            </>
+          )
+        }}
+      </Await>
+    </Suspense>
   )
 }
 
