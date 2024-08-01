@@ -20,7 +20,7 @@ import AuthContextProvider from "./context/AuthContext"
 import checkAuthLoader from "./utils/checkAuthLoader"
 import { QueryClientProvider } from "@tanstack/react-query"
 import { queryClient } from "./api/queryClient"
-import ProductsLayout from "./pages/ProductsLayout/Products"
+import ProductsLayout from "./pages/ProductsLayout/ProductsLayout"
 import Products from "./pages/Products/Products"
 import {
   womenLoader,

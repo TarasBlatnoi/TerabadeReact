@@ -30,10 +30,6 @@ type DetailProductProps = {
 
 function DetailProduct({ parentRouteId }: DetailProductProps) {
   const { data } = useLoaderData() as { data: AxiosResponse<ProductType[]> }
-  /*const da2 = useRouteLoaderData(parentRouteId) as {
-    data: AxiosResponse<ProductType[]>
-  }*/
-  // console.log(da2)
   const { addCartItem, openCart } = useContext(CartContext)
   function handleClick(item: CartItemType) {
     addCartItem(item)
@@ -65,28 +61,6 @@ function DetailProduct({ parentRouteId }: DetailProductProps) {
               >
                 <i> додати в кошик</i>
               </button>
-              {/*<Suspense fallback={<h1>Loading products...</h1>}>
-                <Await resolve={parentData}>
-                  {(menProducts) => {
-                    const recommendedProducts = menProducts.filter(
-                      (menProduct: ProductType) =>
-                        menProduct.ProductID !== product.ProductID
-                    )
-                    return (
-                      <div>
-                        {recommendedProducts.map((product: ProductType) => {
-                          return (
-                            <CardItem
-                              key={product.ProductID}
-                              product={product}
-                            />
-                          )
-                        })}
-                      </div>
-                    )
-                  }}
-                </Await>
-              </Suspense>*/}
             </>
           )
         }}

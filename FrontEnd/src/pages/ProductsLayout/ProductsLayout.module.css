@@ -1,0 +1,10 @@
+.container {
+  display: flex;
+  flex-direction: row;
+}
+
+.sectionFilters {
+  width: 20%;
+  height: 100%;
+  background-color: bisque;
+}
