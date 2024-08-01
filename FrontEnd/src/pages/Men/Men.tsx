@@ -1,16 +1,13 @@
-import { Await, defer, useRouteLoaderData } from "react-router-dom"
+import { Await, defer, useLoaderData } from "react-router-dom"
 import ProductAPI from "../../api/Product/ProductAPI"
 import { ProductType } from "../../types"
 import CardItem from "../../components/CardItem/CardItem"
 import styles from "./Men.module.css"
 import { Suspense } from "react"
-
-async function loadMenProducts() {
-  return ProductAPI.getMenProducts()
-}
+import { AxiosResponse } from "axios"
 
 export function loader() {
-  return defer({ menProducts: loadMenProducts() })
+  return defer({ data: ProductAPI.getMenProducts() })
 }
 
 interface ProductsPromiseType {
@@ -18,13 +15,14 @@ interface ProductsPromiseType {
 }
 
 const Men = () => {
-  const menProductsPromise = useRouteLoaderData("men") as ProductsPromiseType
+  const { data } = useLoaderData() as { data: AxiosResponse<ProductType> }
+
   return (
     <>
       <h1>filter</h1>
       <p>toggle filter</p>
       <Suspense fallback={<h1>Loading products...</h1>}>
-        <Await resolve={menProductsPromise.menProducts}>
+        <Await resolve={data}>
           {(menProducts) => {
             return (
               <div className={styles.products}>

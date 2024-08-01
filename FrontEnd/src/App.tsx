@@ -11,7 +11,7 @@ import Men, { loader as menLoader } from "./pages/Men/Men"
 import DetailProduct, {
   loader as DetailProductLoader,
 } from "./pages/DetailProduct/DetailProduct"
-import Woman from "./pages/Woman"
+import Women, { loader as womenLoader } from "./pages/Women"
 import Children from "./pages/Children"
 // import Login, { action as loginAction } from "./pages/Login/Login"
 const Login = lazy(() => import("./pages/Login/Login"))
@@ -29,17 +29,15 @@ const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<Layout />} errorElement={<Error />}>
       <Route index element={<Home />} />
-      <Route id="men" path="/men" loader={menLoader}>
-        <Route index element={<Men />} />
-        <Route
-          path=":id"
-          element={<DetailProduct />}
-          loader={DetailProductLoader}
-        />
-      </Route>
-      <Route path="woman" element={<Woman />} />
+      <Route path="men" loader={menLoader} element={<Men />} />
       <Route
-        path="woman/:id"
+        path="men/:id"
+        element={<DetailProduct />}
+        loader={DetailProductLoader}
+      />
+      <Route path="women" element={<Women />} loader={womenLoader} />
+      <Route
+        path="women/:id"
         element={<DetailProduct />}
         loader={DetailProductLoader}
       />
