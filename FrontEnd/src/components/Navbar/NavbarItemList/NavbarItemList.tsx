@@ -12,11 +12,11 @@ const NavbarItemList = () => {
 
   const ulRef = useRef<HTMLUListElement>(null)
   const links = [
-    { name: "Чоловіки", href: "/men" },
-    { name: "Жінки", href: "/women" },
-    { name: "Діти", href: "/children" },
-    { name: "Розпродаж", href: "/sale" },
-    { name: "Про нас", href: "/about" },
+    { name: "Чоловіки", href: "/products/men" },
+    { name: "Жінки", href: "/products/women" },
+    { name: "Діти", href: "/products/children" },
+    { name: "Розпродаж", href: "/products/sale" },
+    { name: "Про нас", href: "/products/about" },
   ]
 
   function navListClickHandler(event: React.MouseEvent) {

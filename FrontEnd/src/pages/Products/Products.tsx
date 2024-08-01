@@ -1,15 +1,10 @@
-import { Await, defer, useLoaderData } from "react-router-dom"
-import ProductAPI from "../api/Product/ProductAPI"
+import { Await, useLoaderData } from "react-router-dom"
 import { AxiosResponse } from "axios"
 import React from "react"
-import CardItem from "../components/CardItem/CardItem"
-import { ProductType } from "../types"
+import CardItem from "../../components/CardItem/CardItem"
+import { ProductType } from "../../types"
 
-export function loader() {
-  return defer({ data: ProductAPI.getWomenProducts() })
-}
-
-function Women() {
+function Products() {
   const { data } = useLoaderData() as { data: AxiosResponse<ProductType[]> }
 
   return (
@@ -26,4 +21,4 @@ function Women() {
   )
 }
 
-export default Women
+export default Products
