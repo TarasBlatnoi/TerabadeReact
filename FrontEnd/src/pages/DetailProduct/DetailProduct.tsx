@@ -3,6 +3,7 @@ import {
   Await,
   defer,
   json,
+  Link,
   LoaderFunctionArgs,
   useLoaderData,
   useRouteLoaderData,
@@ -41,6 +42,11 @@ function DetailProduct({ parentRouteId }: DetailProductProps) {
           const product = data[0]
           return (
             <>
+              <Link to="../men">
+                <h3 style={{ color: "red" }}>
+                  <span>&larr;</span>
+                </h3>
+              </Link>
               <h2>{product.name}</h2>
               <p>{product.productDetails}</p>
               <img
