@@ -1,5 +1,5 @@
 import styles from "./Offer.module.css"
-
+import Button from "../UI/Button/Button"
 function Offer() {
   return (
     <div className={styles.offer}>
@@ -8,7 +8,7 @@ function Offer() {
         <br />
         ПРОДАЖУ
       </h1>
-      <button className={styles.orderButton}>ЗАМОВИТИ</button>
+      <Button variant="primary">Замовити</Button>
     </div>
   )
 }

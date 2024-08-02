@@ -7,6 +7,20 @@
   src: url(./assets/fonts/Arista-Pro-Light.ttf);
 }
 
+html {
+  scroll-behavior: smooth;
+  font-size: var(--FS);
+  font-family: var(--FF);
+  color: #fbfaff;
+  background-color: var(--BG-COLOR);
+  font-size: 62.5%;
+  height: 300%;
+}
+body {
+  background-color: #1c1c1c;
+  height: 100%;
+}
+
 /* Reset */
 *,
 *::after,
@@ -72,18 +86,6 @@ a:focus {
 }
 .nowrap {
   white-space: nowrap;
-}
-html {
-  scroll-behavior: smooth;
-  font-size: var(--FS);
-  font-family: var(--FF);
-  color: #fbfaff;
-  background-color: var(--BG-COLOR);
-  height: 300%;
-}
-body {
-  background-color: #1c1c1c;
-  height: 100%;
 }
 
 main {

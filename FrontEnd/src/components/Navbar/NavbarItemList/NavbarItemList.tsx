@@ -6,11 +6,13 @@ import {
   hoverType,
   actions,
 } from "../../../context/HeaderContext"
+import useWindowSize from "../../../hooks/useWindowSize"
 
 const NavbarItemList = () => {
   const { hoverObj, dispatch } = useHeaderContext() as hoverType
 
   const ulRef = useRef<HTMLUListElement>(null)
+  const windowSize = useWindowSize()
   const links = [
     { name: "Чоловіки", href: "/men" },
     { name: "Жінки", href: "/women" },
@@ -78,9 +80,17 @@ const NavbarItemList = () => {
       ref={ulRef}
       onClick={navListClickHandler}
     >
-      {links.map((link, index) => (
-        <NavbarItem key={index} name={link.name} href={link.href} />
-      ))}
+      {links.map((link, index) => {
+        if (windowSize < 1400 && link.name === "Про нас") {
+          return null
+        }
+        if (windowSize < 1200) {
+          if (link.name === "Розпродаж" || link.name === "Про нас") {
+            return null
+          }
+        }
+        return <NavbarItem key={index} name={link.name} href={link.href} />
+      })}
     </ul>
   )
 }
