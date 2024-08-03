@@ -2,6 +2,7 @@ import { json, useNavigate } from "react-router-dom"
 import AuthAPI from "../../../../api/Auth/AuthAPI"
 import { useContext, useState } from "react"
 import { AuthContext } from "../../../../context/AuthContext"
+import styles from "./LogoutButton.module.css"
 
 const LogoutButton = () => {
   const navigate = useNavigate()
@@ -18,7 +19,11 @@ const LogoutButton = () => {
     }
   }
   return (
-    <button onClick={handleLogout} disabled={logoutButtonClicked}>
+    <button
+      onClick={handleLogout}
+      disabled={logoutButtonClicked}
+      className={styles.logoutButton}
+    >
       {logoutButtonClicked ? "logging out..." : "logout"}
     </button>
   )

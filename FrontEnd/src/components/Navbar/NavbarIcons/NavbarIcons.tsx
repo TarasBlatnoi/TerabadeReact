@@ -15,11 +15,11 @@ const NavbarIcons = () => {
   return (
     <div className={styles.header__icons}>
       {!isLoggedIn ? (
-        <p className="tooltip" data-tooltip="" id="tooltipElement">
+        <div className={styles.userIcon}>
           <Link to="login">
             <img className={styles.icon} src={userIcon} alt="user" />
           </Link>
-        </p>
+        </div>
       ) : (
         <LogoutButton />
       )}

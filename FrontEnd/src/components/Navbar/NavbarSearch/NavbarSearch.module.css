@@ -6,11 +6,10 @@
   /* background-image: url("../images/search.png"); */
   background-repeat: no-repeat;
   background-position: right center;
-  height: 2rem;
-  width: 15rem;
-  padding: 0 0.6em;
+  height: 3rem;
+  width: 25rem;
+  padding: 0 0.8rem;
   background-color: #fbfaff;
   border-radius: 7px;
   border: 1px #fbfaff solid;
-  margin-top: 0.4em;
 }
