@@ -31,15 +31,19 @@ type DetailProductProps = {
 
 function DetailProduct({ parentRouteId }: DetailProductProps) {
   const { data } = useLoaderData() as { data: AxiosResponse<ProductType[]> }
+  const { data: parentData } = useRouteLoaderData(parentRouteId) as {
+    data: AxiosResponse<ProductType[]>
+  }
   const { addCartItem, openCart } = useContext(CartContext)
   function handleClick(item: CartItemType) {
     addCartItem(item)
   }
+
   return (
     <Suspense fallback={<h1>loading...</h1>}>
       <Await resolve={data}>
         {(data) => {
-          const product = data[0]
+          const detailProduct = data[0] as ProductType
           return (
             <>
               <Link to="../men">
@@ -47,26 +51,49 @@ function DetailProduct({ parentRouteId }: DetailProductProps) {
                   <span>&larr;</span>
                 </h3>
               </Link>
-              <h2>{product.name}</h2>
-              <p>{product.productDetails}</p>
+              <h2>{detailProduct.name}</h2>
+              <p>{detailProduct.productDetails}</p>
               <img
-                src={`data:image/jpeg;base64,${product.image}`}
-                alt={product.name}
+                src={`data:image/jpeg;base64,${detailProduct.image}`}
+                alt={detailProduct.name}
                 style={{ width: "90%", height: "80%" }}
               />
               <button
                 onClick={() => {
                   handleClick({
-                    id: `${product.ProductID}`,
-                    name: product.name,
-                    image: product.image,
-                    price: product.price,
+                    id: `${detailProduct.ProductID}`,
+                    name: detailProduct.name,
+                    image: detailProduct.image,
+                    price: detailProduct.price,
                   })
                   openCart()
                 }}
               >
                 <i> додати в кошик</i>
               </button>
+              <Suspense fallback={<h1>loading parent data</h1>}>
+                <Await resolve={parentData}>
+                  {(products: ProductType[]) => {
+                    return (
+                      <ul>
+                        {products
+                          .filter(
+                            (product) =>
+                              product.ProductID !== detailProduct.ProductID
+                          )
+                          .map((product) => {
+                            return (
+                              <CardItem
+                                product={product}
+                                key={product.ProductID}
+                              />
+                            )
+                          })}
+                      </ul>
+                    )
+                  }}
+                </Await>
+              </Suspense>
             </>
           )
         }}

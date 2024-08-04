@@ -34,34 +34,33 @@ const router = createBrowserRouter(
       <Route index element={<Home />} />
 
       <Route element={<ProductsLayout />}>
-        <Route id="men" path="men" loader={menLoader} element={<Products />} />
-        <Route
-          path="men/:id"
-          element={<DetailProduct parentRouteId="men" />}
-          loader={DetailProductLoader}
-        />
-        <Route
-          id="women"
-          path="women"
-          element={<Products />}
-          loader={womenLoader}
-        />
-        <Route
-          path="women/:id"
-          element={<DetailProduct parentRouteId="women" />}
-          loader={DetailProductLoader}
-        />
-        <Route
-          id="children"
-          path="children"
-          element={<Products />}
-          loader={childrenLoader}
-        />
-        <Route
-          path="children/:id"
-          element={<DetailProduct parentRouteId="children" />}
-          loader={DetailProductLoader}
-        />
+        <Route id="men" loader={menLoader}>
+          <Route path="men" element={<Products parentRouteId="men" />} />
+          <Route
+            path="men/:id"
+            element={<DetailProduct parentRouteId="men" />}
+            loader={DetailProductLoader}
+          />
+        </Route>
+        <Route id="women" loader={womenLoader}>
+          <Route path="women" element={<Products parentRouteId="women" />} />
+          <Route
+            path="women/:id"
+            element={<DetailProduct parentRouteId="women" />}
+            loader={DetailProductLoader}
+          />
+        </Route>
+        <Route id="children" loader={childrenLoader}>
+          <Route
+            path="children"
+            element={<Products parentRouteId="children" />}
+          />
+          <Route
+            path="children/:id"
+            element={<DetailProduct parentRouteId="children" />}
+            loader={DetailProductLoader}
+          />
+        </Route>
       </Route>
 
       <Route

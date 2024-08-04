@@ -1,11 +1,17 @@
-import { Await, useLoaderData } from "react-router-dom"
+import { Await, useLoaderData, useRouteLoaderData } from "react-router-dom"
 import { AxiosResponse } from "axios"
 import React from "react"
 import CardItem from "../../components/CardItem/CardItem"
 import { ProductType } from "../../types"
 
-function Products() {
-  const { data } = useLoaderData() as { data: AxiosResponse<ProductType[]> }
+type ProductsPropsType = {
+  parentRouteId: string
+}
+
+function Products({ parentRouteId }: ProductsPropsType) {
+  const { data } = useRouteLoaderData(parentRouteId) as {
+    data: AxiosResponse<ProductType[]>
+  }
 
   return (
     <React.Suspense fallback={<h1>loading...</h1>}>
