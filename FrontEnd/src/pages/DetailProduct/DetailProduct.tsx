@@ -18,12 +18,9 @@ import { AxiosResponse } from "axios"
 interface ProductsPromiseType {
   menProducts: Promise<ProductType[]>
 }
-type loaderParams = {
-  params: { id: string }
-}
 
-export function loader({ params }: loaderParams) {
-  return defer({ data: ProductAPI.getById(params.id) })
+export function loader({ params }: LoaderFunctionArgs) {
+  return defer({ data: ProductAPI.getById(params.id!) })
 }
 type DetailProductProps = {
   parentRouteId: string
