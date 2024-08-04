@@ -1,7 +1,9 @@
 import LoginForm from "../../components/LoginForm/LoginForm"
 import AuthAPI from "../../api/Auth/AuthAPI"
 import { isAxiosError } from "axios"
-import { ActionFunctionArgs, json } from "react-router-dom"
+import { ActionFunctionArgs, json, useSearchParams } from "react-router-dom"
+import { useContext } from "react"
+import { AuthContext } from "../../context/AuthContext"
 
 interface Error {
   msg: string
@@ -42,6 +44,11 @@ export async function action({ request }: ActionFunctionArgs) {
 }
 
 const Login = () => {
+  const [searchParams] = useSearchParams()
+  const { setIsLoggedIn } = useContext(AuthContext)
+  if (searchParams.get("loggedIn")) {
+    setIsLoggedIn(false)
+  }
   return <LoginForm />
 }
 
