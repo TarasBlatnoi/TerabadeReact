@@ -8,8 +8,8 @@ import { HeaderProvider } from "../context/HeaderContext"
 const Header = () => {
   return (
     <>
-      <HeaderOffer />
       <header className={styles.header}>
+        <HeaderOffer />
         <HeaderProvider>
           <Navbar />
           <NavbarInteractive />

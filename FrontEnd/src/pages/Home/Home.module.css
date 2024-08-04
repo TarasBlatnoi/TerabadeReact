@@ -3,10 +3,6 @@
   flex-direction: column;
 }
 
-.layout {
-  z-index: 100;
-}
-
 .layout * {
   position: absolute;
 }

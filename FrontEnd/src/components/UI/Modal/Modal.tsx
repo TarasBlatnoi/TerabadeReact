@@ -1,7 +1,7 @@
 import { ReactNode, RefObject, useContext } from "react"
 import { createPortal } from "react-dom"
-import { CartContext } from "../../context/CartContext"
-import useOutsideClick from "../../hooks/useOutsideClick"
+import { CartContext } from "../../../context/CartContext"
+import useOutsideClick from "../../../hooks/useOutsideClick"
 
 interface ModalProps {
   open: boolean

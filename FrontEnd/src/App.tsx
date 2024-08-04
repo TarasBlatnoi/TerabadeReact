@@ -34,29 +34,26 @@ const router = createBrowserRouter(
       <Route index element={<Home />} />
 
       <Route element={<ProductsLayout />}>
-        <Route id="men" loader={menLoader}>
-          <Route path="men" element={<Products parentRouteId="men" />} />
+        <Route path="men" id="men" loader={menLoader}>
+          <Route index element={<Products parentRouteId="men" />} />
           <Route
-            path="men/:id"
+            path=":id"
             element={<DetailProduct parentRouteId="men" />}
             loader={DetailProductLoader}
           />
         </Route>
-        <Route id="women" loader={womenLoader}>
-          <Route path="women" element={<Products parentRouteId="women" />} />
+        <Route path="women" id="women" loader={womenLoader}>
+          <Route index element={<Products parentRouteId="women" />} />
           <Route
-            path="women/:id"
+            path=":id"
             element={<DetailProduct parentRouteId="women" />}
             loader={DetailProductLoader}
           />
         </Route>
-        <Route id="children" loader={childrenLoader}>
+        <Route path="children" id="children" loader={childrenLoader}>
+          <Route index element={<Products parentRouteId="children" />} />
           <Route
-            path="children"
-            element={<Products parentRouteId="children" />}
-          />
-          <Route
-            path="children/:id"
+            path=":id"
             element={<DetailProduct parentRouteId="children" />}
             loader={DetailProductLoader}
           />
@@ -66,7 +63,7 @@ const router = createBrowserRouter(
       <Route
         path="login"
         element={
-          <Suspense fallback={<p>Loading login page</p>}>
+          <Suspense fallback={<p>Loading login page...</p>}>
             <Login />
           </Suspense>
         }

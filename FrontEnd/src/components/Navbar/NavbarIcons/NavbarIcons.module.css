@@ -1,12 +1,13 @@
 .header__icons {
-  width: 10%;
+  margin-left: 2.4rem;
+  width: 15rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
 .icon {
-  width: 1.8em;
+  width: 2.5rem;
 }
 
 .cartBtn {
@@ -18,6 +19,12 @@
 
 .cartItems {
   position: absolute;
-  font-size: 0.8em;
-  top: 0.65em;
+  font-size: 1.2rem;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -35%);
+}
+
+.userIcon {
+  margin-left: 0.8rem;
 }
