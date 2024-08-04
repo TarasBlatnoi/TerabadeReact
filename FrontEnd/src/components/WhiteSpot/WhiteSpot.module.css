@@ -1,5 +1,6 @@
 .whiteSpotImg {
   position: absolute;
+  z-index: -1;
   right: 0px;
   top: -1.5vh;
   width: 62.5%;

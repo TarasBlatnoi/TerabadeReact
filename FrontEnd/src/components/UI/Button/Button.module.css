@@ -1,10 +1,24 @@
 .button {
   width: 7.2rem;
   height: 3.6rem;
+  font-size: 2.4rem;
 }
 
 .primary {
-  background-color: orange;
+  background: linear-gradient(
+    180deg,
+    #f9d423 0%,
+    #f9a91a 31.01%,
+    #f83600 91.58%
+  );
+
+  border: 1px solid black;
+  height: 6rem;
+  width: 24rem;
+  padding: 1.5rem 4rem;
+  border-radius: 3em;
+  box-shadow: 0px 0px 13px 3px #994300;
+  color: white;
 }
 
 .secondary {

@@ -1,22 +1,13 @@
-.home {
-  display: flex;
-  flex-direction: column;
+.heroSection {
+  display: grid;
+  grid-template-columns: 20fr 80fr;
 }
 
-.layout * {
-  position: absolute;
-}
 .sneakers {
-  right: 2.5em;
-  top: 10em;
-}
-.skater {
-  top: 35em;
-  left: 3em;
-  transform: scaleX(1.2);
+  object-fit: cover;
 }
 
-.whiteArea {
+/* .whiteArea {
   top: 109.1%;
   right: 10.6%;
   transform: scaleX(1.32) scaleY(1.1);
@@ -30,4 +21,4 @@
   top: 78em;
   right: 43em;
   transform: rotate(25deg);
-}
+} */
