@@ -7,13 +7,9 @@ import {
 } from "react-router-dom"
 import { lazy, Suspense } from "react"
 import Home from "./pages/Home/Home"
-import Men, { loader as menLoader } from "./pages/Men/Men"
 import DetailProduct, {
   loader as DetailProductLoader,
 } from "./pages/DetailProduct/DetailProduct"
-import Woman from "./pages/Woman"
-import Children from "./pages/Children"
-// import Login, { action as loginAction } from "./pages/Login/Login"
 const Login = lazy(() => import("./pages/Login/Login"))
 import Favorites from "./pages/Favorites/Favorites"
 import About from "./pages/About"
@@ -24,31 +20,49 @@ import AuthContextProvider from "./context/AuthContext"
 import checkAuthLoader from "./utils/checkAuthLoader"
 import { QueryClientProvider } from "@tanstack/react-query"
 import { queryClient } from "./api/queryClient"
+import ProductsLayout from "./pages/ProductsLayout/ProductsLayout"
+import Products from "./pages/Products/Products"
+import {
+  womenLoader,
+  menLoader,
+  childrenLoader,
+} from "./pages/Products/loaders"
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<Layout />} errorElement={<Error />}>
       <Route index element={<Home />} />
-      <Route id="men" path="/men" loader={menLoader}>
-        <Route index element={<Men />} />
-        <Route
-          path=":id"
-          element={<DetailProduct />}
-          loader={DetailProductLoader}
-        />
+
+      <Route element={<ProductsLayout />}>
+        <Route id="men" loader={menLoader}>
+          <Route path="men" element={<Products parentRouteId="men" />} />
+          <Route
+            path="men/:id"
+            element={<DetailProduct parentRouteId="men" />}
+            loader={DetailProductLoader}
+          />
+        </Route>
+        <Route id="women" loader={womenLoader}>
+          <Route path="women" element={<Products parentRouteId="women" />} />
+          <Route
+            path="women/:id"
+            element={<DetailProduct parentRouteId="women" />}
+            loader={DetailProductLoader}
+          />
+        </Route>
+        <Route id="children" loader={childrenLoader}>
+          <Route
+            path="children"
+            element={<Products parentRouteId="children" />}
+          />
+          <Route
+            path="children/:id"
+            element={<DetailProduct parentRouteId="children" />}
+            loader={DetailProductLoader}
+          />
+        </Route>
       </Route>
-      <Route path="woman" element={<Woman />} />
-      <Route
-        path="woman/:id"
-        element={<DetailProduct />}
-        loader={DetailProductLoader}
-      />
-      <Route path="children" element={<Children />} />
-      <Route
-        path="children/:id"
-        element={<DetailProduct />}
-        loader={DetailProductLoader}
-      />
+
       <Route
         path="login"
         element={

@@ -13,7 +13,7 @@ const NavbarItemList = () => {
   const ulRef = useRef<HTMLUListElement>(null)
   const links = [
     { name: "Чоловіки", href: "/men" },
-    { name: "Жінки", href: "/woman" },
+    { name: "Жінки", href: "/women" },
     { name: "Діти", href: "/children" },
     { name: "Розпродаж", href: "/sale" },
     { name: "Про нас", href: "/about" },

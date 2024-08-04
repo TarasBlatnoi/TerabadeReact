@@ -1,0 +1,16 @@
+.container {
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+  width: 100%;
+}
+
+.sectionFilters {
+  width: 20%;
+  height: 100%;
+  background-color: bisque;
+  transition: transform 1s ease-in-out;
+}
+.hidden {
+  transform: translateX(-100%);
+}
