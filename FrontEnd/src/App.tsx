@@ -63,7 +63,7 @@ const router = createBrowserRouter(
       <Route
         path="login"
         element={
-          <Suspense fallback={<p>Loading login page</p>}>
+          <Suspense fallback={<p>Loading login page...</p>}>
             <Login />
           </Suspense>
         }

@@ -43,7 +43,7 @@ function DetailProduct({ parentRouteId }: DetailProductProps) {
           const detailProduct = data[0] as ProductType
           return (
             <>
-              <Link to="../men">
+              <Link to="../">
                 <h3 style={{ color: "red" }}>
                   <span>&larr;</span>
                 </h3>
