@@ -46,3 +46,12 @@
   width: 45%;
   right: 31%;
 }
+
+.sneakersText {
+  width: 78%;
+  font-family: Arista-Pro-Light;
+  font-size: 3.6rem;
+  text-align: center;
+  margin: 0 auto;
+  font-weight: 400;
+}
