@@ -8,6 +8,7 @@ import footStepsSmall from "../../assets/images/Foot2.svg"
 import PreviewImgList from "../../components/PreviewImgList/PreviewImgList"
 import Carousel from "../../components/Carousel/Carousel"
 import ThreePoints from "../../components/ThreePoints/ThreePoints"
+import Partners from "../../components/Partnerns/Partners"
 
 const Home = () => {
   return (
@@ -45,6 +46,7 @@ const Home = () => {
         вперед з комфортом та впевненістю
       </h2>
       <ThreePoints />
+      <Partners />
     </>
   )
 }
