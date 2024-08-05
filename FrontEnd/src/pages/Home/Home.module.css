@@ -7,18 +7,42 @@
   object-fit: cover;
 }
 
-/* .whiteArea {
-  top: 109.1%;
-  right: 10.6%;
+.whiteArea {
+  width: 117vw;
+  height: 100vh;
+  top: 109.5%;
+  right: -14%;
+  position: absolute;
+  z-index: -20;
   transform: scaleX(1.32) scaleY(1.1);
+  overflow: hidden;
+}
+
+.rectangle {
+  text-align: center;
+  border-radius: 2rem;
+  padding: 5rem 3rem;
+  align-items: center;
+  background-color: #fbfaff;
+  font-size: 2rem;
+  color: #1c1c1c;
+  width: 25%;
+  z-index: -19;
+  left: 6%;
+  top: 200%;
+  position: absolute;
 }
 .footSteps {
-  top: 66em;
-  right: 8em;
-  transform: rotate(25deg);
+  width: 40%;
+  top: 100%;
+  right: 3%;
+  position: absolute;
+  z-index: -1;
 }
-.footStepsRotated {
-  top: 78em;
-  right: 43em;
-  transform: rotate(25deg);
-} */
+.footStepsSmall {
+  top: 146%;
+  position: absolute;
+  z-index: -1;
+  width: 45%;
+  right: 31%;
+}

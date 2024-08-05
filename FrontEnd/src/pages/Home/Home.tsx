@@ -2,9 +2,11 @@ import Offer from "../../components/Offer/Offer"
 import styles from "./Home.module.css"
 import sneakersPhoto from "../../assets/images/Sneakers1.png"
 
-import whiteArea from "../../assets/images/whiteArea1.png"
-import footSteps1 from "../../assets/images/Foot1.svg"
+import middleWhiteSpot from "../../assets/images/middleWhiteSpot.svg"
+import footSteps from "../../assets/images/Foot1.svg"
+import footStepsSmall from "../../assets/images/Foot2.svg"
 import PreviewImgList from "../../components/PreviewImgList/PreviewImgList"
+import Carousel from "../../components/Carousel/Carousel"
 
 const Home = () => {
   return (
@@ -13,13 +15,30 @@ const Home = () => {
         <Offer />
         <div>
           <img src={sneakersPhoto} alt="sneakers" className={styles.sneakers} />
-
-          {/* <img src={whiteArea} alt="area-steps" className={styles.whiteArea} />
-        <img src={footSteps1} alt="steps" className={styles.footSteps} />
-        <img src={footSteps1} alt="steps" className={styles.footStepsRotated} /> */}
         </div>
       </section>
       <PreviewImgList />
+      <div>
+        <img
+          src={middleWhiteSpot}
+          alt="area-steps"
+          className={styles.whiteArea}
+        />
+      </div>
+      <div className={styles.rectangle}>
+        <h2 className={styles.bestHeading}>Найкращі</h2>
+      </div>
+      <div>
+        <img src={footSteps} alt="steps" className={styles.footSteps} />
+      </div>
+      <div>
+        <img
+          src={footStepsSmall}
+          alt="steps"
+          className={styles.footStepsSmall}
+        />
+      </div>
+      <Carousel />
     </>
   )
 }

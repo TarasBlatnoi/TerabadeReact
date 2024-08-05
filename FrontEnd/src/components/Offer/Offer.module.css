@@ -2,6 +2,7 @@
   width: 78%;
   margin-right: auto;
   transform: translateY(-10%);
+  z-index: -10;
 }
 
 .offerText {
@@ -20,10 +21,14 @@
   flex-direction: column;
   align-items: center;
   margin-top: 4.8rem;
+  z-index: 10;
 }
 
 .orderButton {
-  transform: translateX(9%);
+  height: 6rem;
+  width: 24rem;
+  border-radius: 4rem;
+  margin-left: 3.2rem;
 }
 
 .orderButton:active {
