@@ -17,7 +17,6 @@ function Products({ parentRouteId }: ProductsPropsType) {
     <React.Suspense fallback={<h1>loading...</h1>}>
       <Await resolve={data}>
         {(data: ProductType[]) => {
-          console.log(data)
           return data.map((product: ProductType) => {
             return <CardItem key={product.ProductID} product={product} />
           })

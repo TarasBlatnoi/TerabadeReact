@@ -2,7 +2,6 @@ import ProductAPI from "../../api/Product/ProductAPI"
 import {
   Await,
   defer,
-  json,
   Link,
   LoaderFunctionArgs,
   useLoaderData,
@@ -14,10 +13,7 @@ import { Suspense, useContext } from "react"
 import { CartItemType } from "../../context/CartContext"
 import CardItem from "../../components/CardItem/CardItem"
 import { AxiosResponse } from "axios"
-
-interface ProductsPromiseType {
-  menProducts: Promise<ProductType[]>
-}
+import goBackImg from "../../assets/images/back-svgrepo-com 1.svg"
 
 export function loader({ params }: LoaderFunctionArgs) {
   return defer({ data: ProductAPI.getById(params.id!) })
@@ -44,9 +40,7 @@ function DetailProduct({ parentRouteId }: DetailProductProps) {
           return (
             <>
               <Link to="../">
-                <h3 style={{ color: "red" }}>
-                  <span>&larr;</span>
-                </h3>
+                <img src={goBackImg} alt="go back" />
               </Link>
               <h2>{detailProduct.name}</h2>
               <p>{detailProduct.productDetails}</p>
