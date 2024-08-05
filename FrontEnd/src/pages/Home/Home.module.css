@@ -10,7 +10,7 @@
 .whiteArea {
   width: 117vw;
   height: 100vh;
-  top: 109.5%;
+  top: 20%;
   right: -14%;
   position: absolute;
   z-index: -20;
@@ -29,18 +29,18 @@
   width: 25%;
   z-index: -19;
   left: 6%;
-  top: 200%;
+  top: 37.3%;
   position: absolute;
 }
 .footSteps {
   width: 40%;
-  top: 100%;
+  top: 18%;
   right: 3%;
   position: absolute;
   z-index: -1;
 }
 .footStepsSmall {
-  top: 146%;
+  top: 27%;
   position: absolute;
   z-index: -1;
   width: 45%;

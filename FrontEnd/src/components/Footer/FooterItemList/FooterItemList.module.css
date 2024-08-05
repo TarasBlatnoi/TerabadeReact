@@ -1,6 +1,20 @@
 .list {
   display: flex;
-  flex-direction: row;
-  column-gap: 1.5rem;
+  flex-direction: column;
+  gap: 0.4rem;
   list-style-type: none;
+}
+
+.list a {
+  font-family: Arista-Pro-Light;
+  color: #686868;
+}
+
+.title {
+  color: black;
+}
+
+.container {
+  margin-left: 8rem;
+  margin-bottom: 8rem;
 }

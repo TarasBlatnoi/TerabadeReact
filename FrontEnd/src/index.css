@@ -40,6 +40,7 @@ body {
   font-family: var(--FF);
   color: #fbfaff;
   line-height: 1;
+  position: relative;
   font-weight: 400;
 }
 

@@ -20,26 +20,21 @@ const Home = () => {
         </div>
       </section>
       <PreviewImgList />
-      <div>
-        <img
-          src={middleWhiteSpot}
-          alt="area-steps"
-          className={styles.whiteArea}
-        />
-      </div>
+
+      <img
+        src={middleWhiteSpot}
+        alt="area-steps"
+        className={styles.whiteArea}
+      />
+
       <div className={styles.rectangle}>
         <h2 className={styles.bestHeading}>Найкращі</h2>
       </div>
-      <div>
-        <img src={footSteps} alt="steps" className={styles.footSteps} />
-      </div>
-      <div>
-        <img
-          src={footStepsSmall}
-          alt="steps"
-          className={styles.footStepsSmall}
-        />
-      </div>
+
+      <img src={footSteps} alt="steps" className={styles.footSteps} />
+
+      <img src={footStepsSmall} alt="steps" className={styles.footStepsSmall} />
+
       <Carousel />
       <h2 className={styles.sneakersText}>
         Кросівки - це не просто взуття, це стиль життя, що дозволяє крокувати
