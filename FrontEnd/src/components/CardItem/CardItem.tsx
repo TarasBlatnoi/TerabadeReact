@@ -1,25 +1,40 @@
 import styles from "./CardItem.module.css"
 import { ProductType } from "../../types"
-import { Link } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 
 type CardItemProps = {
   product: ProductType
 }
 
 const CardItem = ({ product }: CardItemProps) => {
+  const navigate = useNavigate()
+
   return (
-    <div className={styles.item}>
-      <Link to={`${product.ProductID}`}>
-        <h3 style={{ margin: "auto", width: "80%", textAlign: "center" }}>
-          {product.name}
-        </h3>
+    <li
+      className={styles.item}
+      onClick={() => {
+        navigate(`${product.ProductID}`)
+      }}
+    >
+      <div className={styles.imageContainer}>
         <img
           src={`data:image/jpeg;base64,${product.image}`}
           alt={product.name}
-          style={{ width: "90%", height: "80%" }}
         />
-      </Link>
-    </div>
+      </div>
+      <div className={styles.detailsContainer}>
+        <h2>{product.name}</h2>
+        <h3>{product.productDetails}</h3>
+        <p>
+          <span>&#x2661;</span>
+          додати до улюбленого
+        </p>
+        <span className={styles.price}>{product.price} $</span>
+      </div>
+      <div className={styles.buttonContainer}>
+        <button>Додати в кошик</button>
+      </div>
+    </li>
   )
 }
 

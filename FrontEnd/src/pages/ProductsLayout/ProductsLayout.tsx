@@ -11,19 +11,23 @@ function ProductsLayout() {
 
   return (
     <div className={styles.container}>
-      <section
-        className={`${styles.sectionFilters} ${
-          !isOpenFilters ? styles.hidden : ""
-        }`}
-      >
-        <h1>Filters</h1>
-      </section>
-      <section className={styles.sectionProducts}>
+      <div className={styles.topContainer}>
         <HideFiltersButton
           onClick={() => setIsOpenFilters((currState) => !currState)}
         />
-        <Outlet />
-      </section>
+      </div>
+      <div className={styles.mainContainer}>
+        <section
+          className={`${styles.sectionFilters} ${
+            !isOpenFilters ? styles.hidden : ""
+          }`}
+        >
+          <h1>Filters</h1>
+        </section>
+        <section className={styles.sectionProducts}>
+          <Outlet />
+        </section>
+      </div>
     </div>
   )
 }
