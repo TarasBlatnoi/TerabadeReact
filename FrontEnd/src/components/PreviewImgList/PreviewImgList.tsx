@@ -33,7 +33,7 @@ const info = [
 
 function PreviewImgList() {
   return (
-    <div className={styles.imgList}>
+    <section className={styles.imgList}>
       {info.map(({ imgSrc, linkTo, genderName, id }: PreviewImgPropsType) => (
         <PreviewImg
           imgSrc={imgSrc}
@@ -42,7 +42,7 @@ function PreviewImgList() {
           key={id}
         />
       ))}
-    </div>
+    </section>
   )
 }
 

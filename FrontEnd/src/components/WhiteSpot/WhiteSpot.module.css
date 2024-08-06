@@ -1,7 +1,24 @@
 .whiteSpotImg {
   position: absolute;
+  z-index: -30;
   right: 0px;
   top: -1.5vh;
-  width: 62.5%;
+  width: 62.5vw;
   height: 112vh;
+  transition: all 0.2;
+}
+
+.hidden {
+  opacity: 0;
+}
+
+.whiteRect {
+  position: absolute;
+  z-index: -30;
+  top: -5vh;
+  right: -4.8%;
+  width: 68%;
+  height: 15rem;
+  background-color: #fbfaff;
+  border-radius: 4rem;
 }

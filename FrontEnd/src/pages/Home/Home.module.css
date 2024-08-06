@@ -1,33 +1,57 @@
-.home {
-  display: flex;
-  flex-direction: column;
+.heroSection {
+  display: grid;
+  grid-template-columns: 20fr 80fr;
 }
 
-.layout * {
-  position: absolute;
-}
 .sneakers {
-  right: 2.5em;
-  top: 10em;
-}
-.skater {
-  top: 35em;
-  left: 3em;
-  transform: scaleX(1.2);
+  object-fit: cover;
 }
 
 .whiteArea {
-  top: 109.1%;
-  right: 10.6%;
+  width: 117vw;
+  height: 100vh;
+  top: 20%;
+  right: -14%;
+  position: absolute;
+  z-index: -20;
   transform: scaleX(1.32) scaleY(1.1);
+  overflow: hidden;
+}
+
+.rectangle {
+  text-align: center;
+  border-radius: 2rem;
+  padding: 5rem 3rem;
+  align-items: center;
+  background-color: #fbfaff;
+  font-size: 2rem;
+  color: #1c1c1c;
+  width: 25%;
+  z-index: -19;
+  left: 6%;
+  top: 37.3%;
+  position: absolute;
 }
 .footSteps {
-  top: 66em;
-  right: 8em;
-  transform: rotate(25deg);
+  width: 40%;
+  top: 18%;
+  right: 3%;
+  position: absolute;
+  z-index: -1;
 }
-.footStepsRotated {
-  top: 78em;
-  right: 43em;
-  transform: rotate(25deg);
+.footStepsSmall {
+  top: 27%;
+  position: absolute;
+  z-index: -1;
+  width: 45%;
+  right: 31%;
+}
+
+.sneakersText {
+  width: 78%;
+  font-family: Arista-Pro-Light;
+  font-size: 3.6rem;
+  text-align: center;
+  margin: 0 auto;
+  font-weight: 400;
 }
