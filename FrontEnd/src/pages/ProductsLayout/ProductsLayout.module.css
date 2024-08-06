@@ -3,13 +3,16 @@
   flex-direction: column;
   height: 80rem;
   width: 100%;
+  row-gap: 2rem;
 }
 
 .sectionFilters {
   width: 20%;
   height: 100%;
-  background-color: bisque;
+  background: transparent;
+  border-right: 0.2rem solid white;
   transition: transform 1s ease-in-out;
+  font-size: 1.4rem;
 }
 .hidden {
   transform: translateX(-100%);
