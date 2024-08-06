@@ -24,7 +24,7 @@ const CardItem = ({ product }: CardItemProps) => {
       </div>
       <div className={styles.detailsContainer}>
         <h2>{product.name}</h2>
-        <h3>{product.productDetails}</h3>
+        <h3>{product.type}</h3>
         <p>
           <span>&#x2661;</span>
           додати до улюбленого

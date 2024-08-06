@@ -1,34 +1,49 @@
-import { Outlet, useParams } from "react-router-dom"
+import { Outlet, useLocation, useParams } from "react-router-dom"
 import styles from "./ProductsLayout.module.css"
 import { useState } from "react"
 import HideFiltersButton from "../../components/HideFiltersButton/HideFiltersButton"
+import { SortProvider } from "../../context/SortContext"
+import SortSelection from "../../components/SortSelection/SortSelection"
 
 function ProductsLayout() {
   const params = useParams()
+  const location = useLocation()
   const [isOpenFilters, setIsOpenFilters] = useState(true)
 
   if (Object.keys(params).length > 0) return <Outlet />
 
+  const pathname = location.pathname.replace("/", "")
+  const gender =
+    pathname === "men" ? "Чоловіче" : pathname === "women" ? "Жіноче" : "Дитяче"
+
   return (
-    <div className={styles.container}>
-      <div className={styles.topContainer}>
-        <HideFiltersButton
-          onClick={() => setIsOpenFilters((currState) => !currState)}
-        />
+    <SortProvider>
+      <div className={styles.container}>
+        <div className={styles.topContainer}>
+          <div className={styles.genderNameContainer}>
+            <h2>{gender} взуття</h2>
+          </div>
+          <div className={styles.hideFiltersContainer}>
+            <HideFiltersButton
+              onClick={() => setIsOpenFilters((currState) => !currState)}
+            />
+            <SortSelection />
+          </div>
+        </div>
+        <div className={styles.mainContainer}>
+          <section
+            className={`${styles.sectionFilters} ${
+              !isOpenFilters ? styles.hidden : ""
+            }`}
+          >
+            <h1>Filters</h1>
+          </section>
+          <section className={styles.sectionProducts}>
+            <Outlet />
+          </section>
+        </div>
       </div>
-      <div className={styles.mainContainer}>
-        <section
-          className={`${styles.sectionFilters} ${
-            !isOpenFilters ? styles.hidden : ""
-          }`}
-        >
-          <h1>Filters</h1>
-        </section>
-        <section className={styles.sectionProducts}>
-          <Outlet />
-        </section>
-      </div>
-    </div>
+    </SortProvider>
   )
 }
 
