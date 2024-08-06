@@ -1,7 +1,7 @@
 .container {
   display: flex;
-  flex-direction: row;
-  height: 100%;
+  flex-direction: column;
+  height: 80rem;
   width: 100%;
 }
 
@@ -13,4 +13,24 @@
 }
 .hidden {
   transform: translateX(-100%);
+}
+
+.sectionProducts {
+  display: flex;
+  flex-direction: column;
+  min-width: 80%;
+  max-width: 100%;
+  width: 80%;
+}
+.topContainer {
+  display: flex;
+  flex-direction: row;
+  height: 5%;
+  width: 100%;
+}
+.mainContainer {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 95%;
 }

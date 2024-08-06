@@ -1,5 +1,5 @@
 import { defer } from "react-router-dom"
-import ProductAPI from "../../api/Product/ProductAPI"
+import ProductAPI from "../api/Product/ProductAPI"
 
 export function womenLoader() {
   return defer({ data: ProductAPI.getWomenProducts() })

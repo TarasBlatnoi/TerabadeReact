@@ -1,6 +1,38 @@
 .item {
-  width: 27vw;
-  height: 40vh;
-  background-color: aquamarine;
+  font-size: 1.4rem;
+  width: 25rem;
+  height: 30rem;
+  background-color: white;
   z-index: 100;
+  list-style: none;
+  color: black;
+  border-radius: 1rem;
+}
+
+.imageContainer {
+  height: 60%;
+}
+
+.imageContainer img {
+  height: 100%;
+  object-fit: contain;
+}
+
+.detailsContainer {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+
+.price {
+  align-self: flex-end;
+}
+
+.buttonContainer {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
