@@ -38,6 +38,10 @@ section {
   overflow-y: auto;
 }
 
+.productGrid::-webkit-scrollbar {
+  display: none;
+}
+
 .recommendedProductsUl {
   display: flex;
 }
