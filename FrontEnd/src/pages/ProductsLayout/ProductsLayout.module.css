@@ -4,6 +4,7 @@
   height: 80rem;
   width: 100%;
   row-gap: 2rem;
+  font-size: 1.2rem;
 }
 
 .sectionFilters {
@@ -15,7 +16,7 @@
   background: transparent;
   border-right: 0.2rem solid white;
   transition: transform 1s ease-in-out;
-  font-size: 1.4rem;
+  font-size: 1.6rem;
 }
 .hidden {
   transform: translateX(-100%);
@@ -57,4 +58,15 @@
   flex-direction: row;
   width: 100%;
   justify-content: space-between;
+  padding: 0 3rem;
+}
+
+@media screen and (width <= 1250px) {
+  .sectionFilters {
+    visibility: hidden;
+    width: 0;
+  }
+  .sectionProducts {
+    width: 100%;
+  }
 }
