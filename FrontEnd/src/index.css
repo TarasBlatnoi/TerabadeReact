@@ -7,6 +7,11 @@
   src: url(./assets/fonts/Arista-Pro-Light.ttf);
 }
 
+@font-face {
+  font-family: Arista-Pro-Trial;
+  src: url(./assets/fonts/Arista-Pro-Light-trial.ttf);
+}
+
 /* Variables */
 :root {
   /* COLORS */
@@ -33,6 +38,7 @@
 html {
   scroll-behavior: smooth;
   font-size: 62.5%;
+  width: 100vw;
 }
 body {
   background-color: var(--BG-COLOR);

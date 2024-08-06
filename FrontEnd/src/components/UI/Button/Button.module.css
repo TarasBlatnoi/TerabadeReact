@@ -16,5 +16,12 @@
 }
 
 .secondary {
-  background-color: antiquewhite;
+  font-family: Arista-Pro-Light;
+  background-color: #f9c31f;
+}
+
+.secondaryDark {
+  font-family: Arista-Pro-Light;
+  border: 1px solid #f9c31f;
+  background-color: #1e1e1e;
 }
