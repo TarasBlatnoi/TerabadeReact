@@ -1,0 +1,28 @@
+.selection {
+  background: transparent;
+  border: 0;
+}
+
+.selection:focus {
+  outline: none;
+  width: fit-content;
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  column-gap: 2rem;
+}
+
+.container * {
+  color: white;
+}
+
+.imageContainer {
+  height: 20%;
+}
+
+.imageContainer img {
+  height: 100%;
+  object-fit: contain;
+}

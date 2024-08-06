@@ -34,3 +34,21 @@
   width: 100%;
   height: 95%;
 }
+.genderNameContainer {
+  display: flex;
+  align-items: center;
+}
+
+.hideFiltersContainer {
+  display: flex;
+  flex-direction: row;
+  align-self: flex-end;
+  justify-content: space-between;
+}
+
+.topContainer {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: space-between;
+}
