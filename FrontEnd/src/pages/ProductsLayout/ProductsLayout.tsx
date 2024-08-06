@@ -4,6 +4,7 @@ import { useState } from "react"
 import HideFiltersButton from "../../components/HideFiltersButton/HideFiltersButton"
 import { SortProvider } from "../../context/SortContext"
 import SortSelection from "../../components/SortSelection/SortSelection"
+import Filters from "../../components/Filters/Filters"
 
 function ProductsLayout() {
   const params = useParams()
@@ -36,7 +37,7 @@ function ProductsLayout() {
               !isOpenFilters ? styles.hidden : ""
             }`}
           >
-            <h1>Filters</h1>
+            <Filters />
           </section>
           <section className={styles.sectionProducts}>
             <Outlet />
