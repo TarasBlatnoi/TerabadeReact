@@ -1,4 +1,4 @@
-import { SyntheticEvent, act, useEffect, useRef } from "react"
+import { useEffect, useRef } from "react"
 import NavbarItem from "../NavbarItem/NavbarItem"
 import styles from "./NavbarItemList.module.css"
 import {
@@ -36,15 +36,15 @@ const NavbarItemList = () => {
         const mouseXForRight = mouseX + 0.2
         const mouseXForLeft = mouseX
         const mouseY = event.clientY
+        if (mouseY > bounds.bottom) {
+          dispatch({ type: actions.navInteractiveHovered, payload: true })
+        }
         if (
           mouseY < bounds.top ||
           mouseXForLeft < bounds.left ||
-          mouseXForRight > bounds.right
+          mouseXForRight > bounds.right - 1
         ) {
           dispatch({ type: actions.mouseLeave })
-        }
-        if (mouseY > bounds.bottom) {
-          dispatch({ type: actions.navInteractiveHovered, payload: true })
         }
       }
     }
@@ -68,13 +68,11 @@ const NavbarItemList = () => {
       dispatch({ type: actions.linkClicked, payload: "" })
     }
   }
-
+  console.log(hoverObj.navInteractiveHovered)
   return (
     <ul
       className={`${styles.ulNavbarSmall} ${
-        hoverObj.navInteractiveHovered
-          ? styles.heightHovered
-          : styles.heightDefault
+        hoverObj.navInteractiveHovered ? styles.heightHovered : ""
       }`}
       onMouseEnter={handleMouseEnterList}
       ref={ulRef}
