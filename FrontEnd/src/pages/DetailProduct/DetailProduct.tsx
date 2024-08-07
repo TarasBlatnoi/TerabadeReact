@@ -199,10 +199,20 @@ function DetailProduct({ parentRouteId }: DetailProductProps) {
                     </p>
                     <p className={styles.showAll}>Показати всі</p>
                     <Form action="">
-                      <textarea
-                        name="Напишіть відгук ..."
-                        id="responseTextArea"
-                      ></textarea>
+                      <div className={styles.reviewContainer}>
+                        <textarea
+                          name="Напишіть відгук ..."
+                          id="responseTextArea"
+                          placeholder="Напишіть відгук..."
+                        ></textarea>
+                        <Button
+                          variant="secondaryDark"
+                          type="submit"
+                          className={styles.buttonSubmitReview}
+                        >
+                          Надіслати
+                        </Button>
+                      </div>
                     </Form>
                   </div>
                 </div>

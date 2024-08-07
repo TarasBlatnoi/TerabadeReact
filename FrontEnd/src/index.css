@@ -56,8 +56,7 @@ img {
 }
 
 input,
-button,
-textarea {
+button {
   font: inherit;
 }
 .span-courier {
