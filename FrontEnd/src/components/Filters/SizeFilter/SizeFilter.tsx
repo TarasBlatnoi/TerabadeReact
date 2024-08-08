@@ -4,7 +4,7 @@ import stylesFilter from "../GenderFilter/GenderFilter.module.css"
 
 function SizeFilter() {
   const sizes = useMemo(() => {
-    const arr = Array.from({ length: 25 }).fill(3) as number[]
+    const arr = Array.from({ length: 24 }).fill(3.5) as number[]
     const results = arr.reduce(
       (prev: number[], v, i) => {
         return i === 0

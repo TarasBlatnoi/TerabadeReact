@@ -26,7 +26,8 @@ function ProductsLayout() {
           </div>
           <div className={styles.hideFiltersContainer}>
             <HideFiltersButton
-              onClick={() => setIsOpenFilters((currState) => !currState)}
+              isOpenFilters={isOpenFilters}
+              setIsOpenFilters={setIsOpenFilters}
             />
             <SortSelection />
           </div>

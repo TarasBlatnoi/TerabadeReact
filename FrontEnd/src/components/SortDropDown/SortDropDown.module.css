@@ -1,0 +1,27 @@
+.dropDownContainer {
+  display: flex;
+  flex-direction: column;
+  padding: 1.4rem;
+  row-gap: 1.2rem;
+  z-index: 1010;
+  background-color: antiquewhite;
+  border-radius: 1rem;
+  justify-content: flex-end;
+  position: absolute;
+  top: 100%;
+  background-color: var(--BG-COLOR);
+  font-family: Arista Pro Trial;
+  font-weight: 300;
+  color: var(--yellow-color);
+}
+
+.dropDownContainer button {
+  color: inherit;
+  background-color: transparent;
+  border: 0;
+  line-height: 1.4rem;
+  font-size: 1.4rem;
+}
+.dropDownContainer button:hover {
+  color: #f6e79d;
+}
