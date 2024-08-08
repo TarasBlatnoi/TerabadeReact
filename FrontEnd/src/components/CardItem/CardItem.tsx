@@ -1,6 +1,7 @@
 import styles from "./CardItem.module.css"
 import { ProductType } from "../../types"
 import { useNavigate } from "react-router-dom"
+import Button from "../UI/Button/Button"
 
 type CardItemProps = {
   product: ProductType
@@ -23,16 +24,20 @@ const CardItem = ({ product }: CardItemProps) => {
         />
       </div>
       <div className={styles.detailsContainer}>
-        <h2>{product.name}</h2>
-        <h3>{product.type}</h3>
-        <p>
-          <span>&#x2661;</span>
+        <h1 className={styles.productName}>{product.name}</h1>
+        <p className={styles.productType}>{product.type}</p>
+        <p className={styles.favoriteText}>
+          <span className={styles.heart}>&#x2661;</span>
           додати до улюбленого
         </p>
-        <span className={styles.price}>{product.price} $</span>
+        <p className={styles.price}>
+          {product.price} <span>UAH</span>{" "}
+        </p>
       </div>
       <div className={styles.buttonContainer}>
-        <button>Додати в кошик</button>
+        <Button variant="secondary" className={styles.addButton}>
+          Додати в кошик
+        </Button>
       </div>
     </li>
   )
