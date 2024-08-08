@@ -7,7 +7,6 @@ function SizeFilter() {
     const arr = Array.from({ length: 25 }).fill(3) as number[]
     const results = arr.reduce(
       (prev: number[], v, i) => {
-        console.log(prev, i)
         return i === 0
           ? [v]
           : [...prev, prev[i - 1] + (prev[i - 1] < 13 ? 0.5 : 1)]

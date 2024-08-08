@@ -28,8 +28,13 @@
 
 .price {
   align-self: flex-end;
+  font-size: 1.8rem;
+  font-family: Exo;
+  font-weight: 400;
 }
-
+.price span {
+  font-size: 1.4rem;
+}
 .buttonContainer {
   width: 100%;
   display: flex;
@@ -44,6 +49,7 @@
   font-weight: 300;
   line-height: 1.2rem;
   border-radius: 1rem;
+  border: 0.1rem solid black;
 }
 .productName {
   font-family: Ermilov;
