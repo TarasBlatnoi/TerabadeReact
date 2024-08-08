@@ -1,5 +1,4 @@
 .item {
-  font-size: 1.4rem;
   width: 100%;
   height: 46rem;
   background-color: white;
@@ -24,6 +23,7 @@
   flex-direction: column;
   align-items: flex-start;
   justify-content: flex-start;
+  line-height: 2rem;
 }
 
 .price {
@@ -35,4 +35,32 @@
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.addButton {
+  padding: 1rem 2.5rem;
+  font-size: 1.8rem;
+  font-family: Arista Pro Trial;
+  font-weight: 300;
+  line-height: 1.2rem;
+  border-radius: 1rem;
+}
+.productName {
+  font-family: Ermilov;
+  font-size: 2.2rem;
+  font-weight: 700;
+  line-height: 1.2rem;
+}
+.productType,
+.favoriteText {
+  font-family: Arista Pro Trial;
+  font-size: 2rem;
+  font-weight: 300;
+  line-height: 2.4rem;
+}
+.productType {
+  font-size: 2rem;
+}
+.favoriteText {
+  font-size: 1.6rem;
 }
