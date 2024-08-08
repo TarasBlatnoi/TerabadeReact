@@ -14,9 +14,7 @@ const asyncWrapper = (callback) => {
       }
       const data = await callback(...args)
       if (data.length) {
-        setTimeout(() => {
-          res.status(200).json(data)
-        }, 2000)
+        res.status(200).json(data)
       } else {
         res.status(404).json({ errorMessage: "No such product" })
       }

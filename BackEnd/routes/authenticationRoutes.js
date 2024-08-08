@@ -50,16 +50,14 @@ router.get("/admin-route", isAdmin, (req, res) => {
 
 // Visiting this route logs the user out
 router.get("/logout", (req, res, next) => {
-  setTimeout(() => {
-    req.logout(function (err) {
-      if (err) {
-        return res.json({
-          errors: [{ msg: "Couldn't logout" }],
-        })
-      }
-      res.send({ message: "Logout successfully" })
-    })
-  }, 2000)
+  req.logout(function (err) {
+    if (err) {
+      return res.json({
+        errors: [{ msg: "Couldn't logout" }],
+      })
+    }
+    res.send({ message: "Logout successfully" })
+  })
 })
 
 router.get("/login-success", (req, res) => {
