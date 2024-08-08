@@ -4,7 +4,7 @@ import HideFiltersButton from "../../components/HideFiltersButton/HideFiltersBut
 import { SortProvider } from "../../context/SortContext"
 import SortSelection from "../../components/SortSelection/SortSelection"
 import Filters from "../../components/Filters/Filters"
-import { FiltersProvider, useFilters } from "../../context/FiltersContext"
+import { useFilters } from "../../context/FiltersContext"
 
 function ProductsLayout() {
   const params = useParams()
@@ -22,7 +22,9 @@ function ProductsLayout() {
       <div className={styles.container}>
         <div className={styles.topContainer}>
           <div className={styles.genderNameContainer}>
-            <h2>{gender} взуття</h2>
+            <h2>
+              {gender} взуття <span>(67)</span>
+            </h2>
           </div>
           <div className={styles.hideFiltersContainer}>
             <HideFiltersButton />

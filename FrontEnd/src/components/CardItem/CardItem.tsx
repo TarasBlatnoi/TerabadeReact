@@ -2,7 +2,6 @@ import styles from "./CardItem.module.css"
 import { ProductType } from "../../types"
 import { useNavigate } from "react-router-dom"
 import Button from "../UI/Button/Button"
-import { useFilters } from "../../context/FiltersContext"
 
 type CardItemProps = {
   product: ProductType
