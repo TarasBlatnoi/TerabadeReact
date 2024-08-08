@@ -24,6 +24,7 @@
   align-items: flex-start;
   justify-content: flex-start;
   line-height: 2rem;
+  padding-left: 3rem;
 }
 
 .price {
@@ -55,7 +56,7 @@
   font-family: Ermilov;
   font-size: 2.2rem;
   font-weight: 700;
-  line-height: 1.2rem;
+  line-height: 2rem;
 }
 .productType,
 .favoriteText {
@@ -69,4 +70,6 @@
 }
 .favoriteText {
   font-size: 1.6rem;
+  display: flex;
+  column-gap: 1rem;
 }
