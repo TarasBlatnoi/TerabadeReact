@@ -37,12 +37,7 @@ section {
   max-width: 100%;
   width: 80%;
 }
-.topContainer {
-  display: flex;
-  flex-direction: row;
-  height: 5%;
-  width: 100%;
-}
+
 .mainContainer {
   display: flex;
   flex-direction: row;
@@ -59,14 +54,19 @@ section {
   flex-direction: row;
   align-self: flex-end;
   justify-content: space-between;
+  color: #f9d423;
 }
 
+.hideFiltersContainer * {
+  color: inherit;
+}
 .topContainer {
   display: flex;
   flex-direction: row;
   width: 100%;
   justify-content: space-between;
-  padding: 0 3rem;
+  padding-right: 10rem;
+  padding-left: 8rem;
 }
 
 @media screen and (width <= 1250px) {
