@@ -7,6 +7,10 @@ type CardItemProps = {
   product: ProductType
 }
 
+const formaterCurrency = Intl.NumberFormat("fr-FR", {
+  maximumFractionDigits: 0,
+})
+
 const CardItem = ({ product }: CardItemProps) => {
   const navigate = useNavigate()
 
@@ -31,7 +35,7 @@ const CardItem = ({ product }: CardItemProps) => {
           додати до улюбленого
         </p>
         <p className={styles.price}>
-          {product.price} <span>UAH</span>{" "}
+          {formaterCurrency.format(5000 + product.price)} <span>UAH</span>{" "}
         </p>
       </div>
       <div className={styles.buttonContainer}>
