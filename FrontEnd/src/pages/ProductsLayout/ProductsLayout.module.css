@@ -18,7 +18,7 @@ section {
   top: 5%;
   background: transparent;
   border-right: 0.2rem solid white;
-  transition: transform 1s ease-in-out;
+  transition: all 1s ease-in-out;
   font-size: 1.6rem;
   height: fit-content;
   font-family: Exo;
@@ -27,6 +27,7 @@ section {
 }
 
 .hidden {
+  margin-right: -20rem;
   transform: translateX(-100%);
 }
 

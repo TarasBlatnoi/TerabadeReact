@@ -1,22 +1,22 @@
 import { Outlet, useLocation, useParams } from "react-router-dom"
 import styles from "./ProductsLayout.module.css"
-import { useState } from "react"
 import HideFiltersButton from "../../components/HideFiltersButton/HideFiltersButton"
 import { SortProvider } from "../../context/SortContext"
 import SortSelection from "../../components/SortSelection/SortSelection"
 import Filters from "../../components/Filters/Filters"
+import { FiltersProvider, useFilters } from "../../context/FiltersContext"
 
 function ProductsLayout() {
   const params = useParams()
   const location = useLocation()
-  const [isOpenFilters, setIsOpenFilters] = useState(true)
+  const { isOpenFilters } = useFilters()
 
   if (Object.keys(params).length > 0) return <Outlet />
 
   const pathname = location.pathname.replace("/", "")
   const gender =
     pathname === "men" ? "Чоловіче" : pathname === "women" ? "Жіноче" : "Дитяче"
-
+  console.log(isOpenFilters)
   return (
     <SortProvider>
       <div className={styles.container}>
@@ -25,10 +25,7 @@ function ProductsLayout() {
             <h2>{gender} взуття</h2>
           </div>
           <div className={styles.hideFiltersContainer}>
-            <HideFiltersButton
-              isOpenFilters={isOpenFilters}
-              setIsOpenFilters={setIsOpenFilters}
-            />
+            <HideFiltersButton />
             <SortSelection />
           </div>
         </div>
