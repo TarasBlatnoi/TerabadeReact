@@ -14,7 +14,7 @@ const CardItem = ({ product }: CardItemProps) => {
           {product.name}
         </h3>
         <img
-          src={`data:image/jpeg;base64,${product.image}`}
+          src={`${product.image}?random=${Math.random() * 10000}`}
           alt={product.name}
           style={{ width: "90%", height: "80%" }}
         />

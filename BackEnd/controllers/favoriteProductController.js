@@ -11,9 +11,8 @@ const asyncWrapper = (callback) => {
         args.push(req.body.ProductID)
       }
       const result = await callback(...args)
-      setTimeout(() => {
-        res.status(200).json({ result })
-      }, 2000)
+
+      res.status(200).json({ result })
     } catch (err) {
       res.status(err.status).json({ errorMessage: err.message })
     }

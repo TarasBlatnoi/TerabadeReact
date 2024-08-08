@@ -59,38 +59,38 @@ function DetailProduct({ parentRouteId }: DetailProductProps) {
                   <div className={styles.productImagesContainer}>
                     <div className={styles.smallImages}>
                       <img
-                        src={`data:image/jpeg;base64,${detailProduct.image}`}
+                        src={`${detailProduct.image}`}
                         alt={detailProduct.name}
                         className={styles.smallImage}
                       />
                       <img
-                        src={`data:image/jpeg;base64,${detailProduct.image}`}
+                        src={`${detailProduct.image}`}
                         alt={detailProduct.name}
                         className={styles.smallImage}
                       />
                       <img
-                        src={`data:image/jpeg;base64,${detailProduct.image}`}
+                        src={`${detailProduct.image}`}
                         alt={detailProduct.name}
                         className={styles.smallImage}
                       />
                       <img
-                        src={`data:image/jpeg;base64,${detailProduct.image}`}
+                        src={`${detailProduct.image}`}
                         alt={detailProduct.name}
                         className={styles.smallImage}
                       />
                       <img
-                        src={`data:image/jpeg;base64,${detailProduct.image}`}
+                        src={`${detailProduct.image}`}
                         alt={detailProduct.name}
                         className={styles.smallImage}
                       />
                       <img
-                        src={`data:image/jpeg;base64,${detailProduct.image}`}
+                        src={`${detailProduct.image}`}
                         alt={detailProduct.name}
                         className={styles.smallImage}
                       />
                     </div>
                     <img
-                      src={`data:image/jpeg;base64,${detailProduct.image}`}
+                      src={`${detailProduct.image}`}
                       alt={detailProduct.name}
                       className={styles.mainImage}
                     />

@@ -68,7 +68,6 @@ const NavbarItemList = () => {
       dispatch({ type: actions.linkClicked, payload: "" })
     }
   }
-  console.log(hoverObj.navInteractiveHovered)
   return (
     <ul
       className={`${styles.ulNavbarSmall} ${
