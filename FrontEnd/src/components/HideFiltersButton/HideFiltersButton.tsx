@@ -1,15 +1,10 @@
 import styles from "./HideFiltersButton.module.css"
 import filterSVG from "../../assets/images/Filter.svg"
+import { useFilters } from "../../context/FiltersContext"
 
-type HideFiltersButtonProps = {
-  isOpenFilters: boolean
-  setIsOpenFilters: Function
-}
+function HideFiltersButton() {
+  const { isOpenFilters, setIsOpenFilters } = useFilters()
 
-function HideFiltersButton({
-  isOpenFilters,
-  setIsOpenFilters,
-}: HideFiltersButtonProps) {
   return (
     <div
       className={styles.container}

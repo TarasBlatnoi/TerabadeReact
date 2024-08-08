@@ -1,4 +1,3 @@
-import { useSort } from "../../context/SortContext"
 import styles from "./SortSelection.module.css"
 import sortSVG from "../../assets/images/Caret-Sort.svg"
 import { useState } from "react"
