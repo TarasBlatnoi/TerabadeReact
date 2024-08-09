@@ -12,13 +12,6 @@ function ProductsLayout() {
   const location = useLocation()
   const { isOpenFilters } = useFilters()
 
-  if (Object.keys(params).length > 0)
-    return (
-      <Suspense fallback={<h1>Loading....</h1>}>
-        <Outlet />
-      </Suspense>
-    )
-
   const pathname = location.pathname.replace("/", "")
   const gender =
     pathname === "men" ? "Чоловіче" : pathname === "women" ? "Жіноче" : "Дитяче"

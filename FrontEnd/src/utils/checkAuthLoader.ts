@@ -4,7 +4,6 @@ import AuthAPI from "../api/Auth/AuthAPI"
 async function loader() {
   try {
     const res = await AuthAPI.checkAuth()
-    console.log(res)
     if (!res.authenticated) {
       return redirect("/login?loggedIn=false")
     }

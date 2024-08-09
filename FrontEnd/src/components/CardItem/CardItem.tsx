@@ -26,7 +26,7 @@ const CardItem = ({ product }: CardItemProps) => {
     >
       <div className={styles.imageContainer}>
         <img
-          src={`data:image/jpeg;base64,${product.image}`}
+          src={`${product.image}?random=${Math.random() * 10000}`}
           alt={product.name}
         />
       </div>

@@ -30,7 +30,6 @@ const router = createBrowserRouter(
       <Route element={<ProductsLayout />}>
         <Route path="men" id="men">
           <Route index element={<Products parentRouteId="men" />} />
-          <Route path=":id" element={<DetailProduct parentRouteId="men" />} />
         </Route>
         <Route path="women" id="women">
           <Route index element={<Products parentRouteId="women" />} />
@@ -44,6 +43,7 @@ const router = createBrowserRouter(
           />
         </Route>
       </Route>
+      <Route path="product/:id" element={<DetailProduct />} />
 
       <Route
         path="login"

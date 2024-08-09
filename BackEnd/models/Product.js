@@ -33,7 +33,7 @@ class Product {
     try {
       connection = await db.promisePool.getConnection()
       const result = await connection.execute(sql, data)
-      imageToBase64(result[0])
+      //imageToBase64(result[0])
       return result[0]
     } catch (err) {
       console.error(err)
