@@ -24,7 +24,7 @@
 }
 
 .hidden {
-  margin-right: -20rem;
+  margin-right: -28rem;
   transform: translateX(-100%);
 }
 
@@ -38,7 +38,6 @@
 
 .sectionProductsExpanded {
   width: 100%;
-  margin-right: 20rem;
 }
 
 .mainContainer {

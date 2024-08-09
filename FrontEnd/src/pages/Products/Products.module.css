@@ -9,9 +9,14 @@
   gap: 3rem;
   padding-left: 3rem;
   padding-right: 1rem;
+  transition: padding 1s ease-in-out;
 }
 
 .expandedList {
+  padding-left: 0;
+  padding-right: 0;
+  padding-left: 3rem;
+  padding-right: 4rem;
 }
 
 @media screen and (width <= 800px) {
