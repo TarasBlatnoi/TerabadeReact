@@ -3,7 +3,7 @@
   z-index: -30;
   right: 0px;
   top: -1.5vh;
-  width: 62.5%;
+  width: 65%;
   height: 76.7rem;
   transition: all 0.2;
 }
@@ -21,4 +21,10 @@
   height: 16.4rem;
   background-color: #fbfaff;
   border-radius: 4rem;
+}
+
+@media (max-width: 75em) {
+  .whiteSpotImg {
+    width: 59%;
+  }
 }

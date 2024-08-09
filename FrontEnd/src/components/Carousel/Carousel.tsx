@@ -19,14 +19,18 @@ const Carousel = () => {
         </div>
         <p className={styles.carouselTextP}></p>
         <div className={styles.orderContainer}>
-          <h3 className={styles.priceHeading}>Ціна: 3780 грн</h3>
+          <h3 className={`${styles.priceHeading} nowrap`}>Ціна: 3780 грн</h3>
           <Button className={styles.orderButton} variant="primary">
             Замовити
           </Button>
         </div>
       </div>
       <div className={styles.carouselPhoto}>
-        <img src={AdventureCarousel} alt="Shoes with nice background" />
+        <img
+          src={AdventureCarousel}
+          alt="Shoes with nice background"
+          className={styles.carouselImg}
+        />
         <div className={styles.dots}>
           <button className={`${styles.dot} ${styles.dotFilled}`}>
             &nbsp;

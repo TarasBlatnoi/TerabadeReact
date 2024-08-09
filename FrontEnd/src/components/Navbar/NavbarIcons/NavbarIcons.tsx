@@ -11,7 +11,6 @@ import LogoutButton from "./LogoutButton/LogoutButton"
 const NavbarIcons = () => {
   const { openCart } = useContext(CartContext)
   const { isLoggedIn } = useContext(AuthContext)
-
   return (
     <div className={styles.header__icons}>
       {!isLoggedIn ? (

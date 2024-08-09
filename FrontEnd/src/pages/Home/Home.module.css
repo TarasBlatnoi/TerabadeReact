@@ -19,7 +19,7 @@
   width: 22%;
   z-index: 1;
   left: 0;
-  bottom: -12%;
+  bottom: -3%;
   position: absolute;
 }
 
@@ -38,7 +38,6 @@
   z-index: -20;
   top: 16%;
   right: -2%;
-  height: 80rem;
 }
 
 .rectangleBgCover {
@@ -55,33 +54,92 @@
 
 /* Large Screens */
 /* 2560*/
-/* @media (max-width: 160em) {
+@media (max-width: 160em) {
   html {
-    font-size: 110% !important;
+    font-size: 102% !important;
+  }
+  .rectangleBgCover {
+    right: 29.8%;
+    top: -4%;
+  }
+}
+
+/* 2272*/
+@media (max-width: 142em) {
+  html {
+    font-size: 91% !important;
+  }
+
+  .rectangleBgCover {
+    background-color: #1e1e1e;
+    right: 29%;
+    top: -2%;
+  }
+}
+
+/* 1968 */
+
+@media (max-width: 123em) {
+  html {
+    font-size: 75% !important;
+  }
+  .rectangleBgCover {
+    right: 28.5%;
+    top: -4%;
   }
   .rectangle {
-    bottom: 5%;
+    padding: 5rem 3rem;
+    border-radius: 2rem;
   }
-  .bgImage {
-    top: 16%;
-  }
-} */
+}
 
-/* 2272*/
-/* @media (max-width: 142em) {
+/* 1500 */
+
+@media (max-width: 94em) {
   html {
-    font-size: 100% !important;
+    font-size: 62.5% !important;
   }
-
-  .bgImage {
-    top: 16%;
+  .rectangleBgCover {
+    width: 25%;
+    right: 28.5%;
+    top: -5%;
   }
-} */
+  .rectangle {
+    padding: 4rem 3rem;
+    border-radius: 2rem;
+  }
+}
 
-/* 2272*/
+/* Mobile devices */
+/* 1200 */
 
-/* @media (max-width: 123em) {
+@media (max-width: 75em) {
   html {
-    font-size: 85% !important;
+    font-size: 55% !important;
   }
-} */
+  .rectangleBgCover {
+    right: 29%;
+    top: -2%;
+  }
+  .rectangle {
+    padding: 4rem 3rem;
+    border-radius: 2rem;
+  }
+}
+
+/* Mobile devices */
+/* 1024 */
+
+@media (max-width: 64em) {
+  /* html {
+    font-size: 62.5% !important;
+  }
+  .rectangleBgCover {
+    right: 29%;
+    top: -2%;
+  }
+  .rectangle {
+    padding: 4rem 3rem;
+    border-radius: 2rem;
+  } */
+}
