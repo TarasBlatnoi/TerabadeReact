@@ -12,7 +12,7 @@
   row-gap: 2rem;
   width: 28rem;
   position: sticky;
-  top: 5%;
+  top: 10%;
   background: transparent;
   border-right: 0.2rem solid white;
   transition: all 1s ease-in-out;
@@ -26,6 +26,7 @@
 .hidden {
   margin-right: -28rem;
   transform: translateX(-100%);
+  visibility: hidden;
 }
 
 .sectionProducts {
@@ -83,6 +84,12 @@
   justify-content: space-between;
   padding-right: 10rem;
   padding-left: 8rem;
+  position: sticky;
+  top: 0;
+  background-color: var(--BG-COLOR);
+  z-index: 999;
+  padding-top: 2rem;
+  padding-bottom: 1rem;
 }
 
 @media screen and (width <= 1250px) {
