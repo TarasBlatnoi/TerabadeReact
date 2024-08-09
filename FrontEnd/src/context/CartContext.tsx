@@ -44,21 +44,19 @@ function cartReducer(state: CartState, action: CartAction) {
     const indexOfItem = state.items.findIndex(
       (itemInCopy) => itemInCopy.id === item.id
     )
-
+    const copyOfItems = [...state.items]
     if (indexOfItem > -1) {
-      const copyOfItems = [...state.items]
       copyOfItems[indexOfItem] = {
         ...copyOfItems[indexOfItem],
         quantity: (copyOfItems[indexOfItem].quantity || 0) + 1,
       }
-      return { ...state, items: copyOfItems }
     } else {
       item.quantity = 1
-      return {
-        ...state,
-        items: [...state.items, item],
-      }
+      copyOfItems.push(item)
     }
+    const itemsStringified = JSON.stringify(copyOfItems)
+    localStorage.setItem("cart", itemsStringified)
+    return { ...state, items: copyOfItems }
   }
   if (type === CartActionType.DELETE_ITEM) {
     const idOfItem = action.payload
@@ -82,23 +80,36 @@ function cartReducer(state: CartState, action: CartAction) {
     } else {
       copyOfItems.splice(indexOfItem, 1)
     }
-
+    const itemsStringified = JSON.stringify(copyOfItems)
+    localStorage.setItem("cart", itemsStringified)
     return {
       ...state,
       items: copyOfItems,
     }
   }
   if (type === CartActionType.RESET_ITEMS) {
-    return {
+    const emptyCart = {
       ...state,
       items: [],
     }
+    const itemsStringified = JSON.stringify(emptyCart.items)
+    localStorage.setItem("cart", itemsStringified)
+    return emptyCart
   }
   return state
 }
 
-const initialState: CartState = {
-  items: [],
+let initialState: CartState
+
+const storedCart = localStorage.getItem("cart")
+
+if (storedCart) {
+  const parsedCart = JSON.parse(storedCart)
+  initialState = { items: parsedCart }
+} else {
+  initialState = {
+    items: [],
+  }
 }
 
 interface CartProviderProps {

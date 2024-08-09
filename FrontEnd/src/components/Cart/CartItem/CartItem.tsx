@@ -9,7 +9,7 @@ const CartItem = ({ item }: CartItemProps) => {
   return (
     <div style={{ display: "flex", justifyContent: "space-between" }}>
       <img
-        src={`data:image/jpeg;base64,${item.image}`}
+        src={`${item.image}`}
         alt={item.name}
         style={{ width: "10vw", height: "10vh" }}
       />
