@@ -2,8 +2,8 @@
   height: 100%;
   padding: 0 6rem;
   display: grid;
-  grid-template-columns: repeat(3, minmax(30rem, 1fr));
-  grid-auto-rows: 46rem;
+  grid-template-columns: repeat(3, 1fr);
+  grid-auto-rows: auto;
   width: 100%;
   justify-content: center;
   gap: 3rem;
@@ -11,8 +11,6 @@
 }
 
 .expandedList {
-  grid-template-columns: repeat(3, minmax(60rem, 1fr));
-  grid-auto-rows: 60rem;
 }
 @media screen and (width <= 1250px) {
   .cardList {
