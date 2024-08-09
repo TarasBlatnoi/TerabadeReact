@@ -5,15 +5,12 @@
   row-gap: 2rem;
   font-size: 1.2rem;
 }
-section {
-  align-items: normal;
-  justify-content: unset;
-}
+
 .sectionFilters {
   display: flex;
   flex-direction: column;
   row-gap: 2rem;
-  width: 20%;
+  width: 28rem;
   position: sticky;
   top: 5%;
   background: transparent;
@@ -49,6 +46,9 @@ section {
   flex-direction: row;
   width: 100%;
   height: 95%;
+  justify-content: space-around;
+  padding-right: 4rem;
+  padding-left: 3rem;
 }
 .genderNameContainer {
   display: flex;
