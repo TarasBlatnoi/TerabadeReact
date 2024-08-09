@@ -1,15 +1,18 @@
 .item {
   width: 100%;
-  height: 46rem;
+  height: calc(35rem + 10vw);
   background-color: white;
   z-index: 10;
   list-style: none;
   color: black;
   border-radius: 1rem;
   transition: all 1s ease-in-out;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 .itemExpanded {
-  height: 50rem;
+  height: calc(45rem + 10vw);
 }
 .imageContainer {
   height: 60%;
@@ -18,6 +21,9 @@
 .imageContainer img {
   height: 100%;
   object-fit: contain;
+}
+.infoDetailsContainer {
+  padding-bottom: 5rem;
 }
 
 .detailsContainer {
@@ -32,7 +38,7 @@
 
 .price {
   align-self: flex-end;
-  font-size: 1.8rem;
+  font-size: 2rem;
   font-family: Exo;
   font-weight: 400;
 }
