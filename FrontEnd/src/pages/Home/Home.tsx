@@ -2,9 +2,7 @@ import Offer from "../../components/Offer/Offer"
 import styles from "./Home.module.css"
 import sneakersPhoto from "../../assets/images/Sneakers1.png"
 
-import middleWhiteSpot from "../../assets/images/middleWhiteSpot.svg"
-import footSteps from "../../assets/images/Foot1.svg"
-import footStepsSmall from "../../assets/images/Foot2.svg"
+import middleWhiteSpot from "../../assets/images/HomePageFixed.png"
 import PreviewImgList from "../../components/PreviewImgList/PreviewImgList"
 import Carousel from "../../components/Carousel/Carousel"
 import ThreePoints from "../../components/ThreePoints/ThreePoints"
@@ -21,19 +19,17 @@ const Home = () => {
       </section>
       <PreviewImgList />
 
-      <img
-        src={middleWhiteSpot}
-        alt="area-steps"
-        className={styles.whiteArea}
-      />
-
-      <div className={styles.rectangle}>
-        <h2 className={styles.bestHeading}>Найкращі</h2>
+      <div className={styles.bgImage}>
+        <img
+          src={middleWhiteSpot}
+          alt="area-steps"
+          className={styles.whiteArea}
+        />
+        <div className={styles.rectangleBgCover}></div>
+        <div className={styles.rectangle}>
+          <h2 className={styles.bestHeading}>Найкращі</h2>
+        </div>
       </div>
-
-      <img src={footSteps} alt="steps" className={styles.footSteps} />
-
-      <img src={footStepsSmall} alt="steps" className={styles.footStepsSmall} />
 
       <Carousel />
       <h2 className={styles.sneakersText}>
