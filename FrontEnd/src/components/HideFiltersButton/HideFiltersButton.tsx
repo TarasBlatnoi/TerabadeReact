@@ -1,16 +1,22 @@
 import styles from "./HideFiltersButton.module.css"
 import filterSVG from "../../assets/images/Filter.svg"
-import { MouseEventHandler } from "react"
-type HideFiltersButtonProps = {
-  onClick: MouseEventHandler<HTMLDivElement>
-}
+import { useFilters } from "../../context/FiltersContext"
 
-function HideFiltersButton({ onClick }: HideFiltersButtonProps) {
+function HideFiltersButton() {
+  const { isOpenFilters, setIsOpenFilters } = useFilters()
+
   return (
-    <div className={styles.container} onClick={onClick}>
+    <div
+      className={styles.container}
+      onClick={() => setIsOpenFilters((curr: boolean) => !curr)}
+    >
       <h2>Приховати фільтр</h2>
       <div className={styles.svgContainer}>
-        <img src={filterSVG} alt="sort" />
+        <img
+          src={filterSVG}
+          alt="sort"
+          className={`${styles.image} ${isOpenFilters ? styles.open : ""} `}
+        />
       </div>
     </div>
   )

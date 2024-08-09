@@ -2,8 +2,8 @@ import { createContext, useContext, useState } from "react"
 
 enum sortingOptions {
   standard = "Новинки",
-  priceAscending = "Від дешевих до дорогих ",
-  priceDescending = "Від дорогих до дешевих",
+  priceAscending = "Ціна: Висока-Низька",
+  priceDescending = "Ціна: Низька-Висока",
 }
 
 type ContextValueType = {

@@ -1,30 +1,25 @@
-import { useSort, sortingOptions } from "../../context/SortContext"
 import styles from "./SortSelection.module.css"
 import sortSVG from "../../assets/images/Caret-Sort.svg"
+import { useState } from "react"
+import SortDropDown from "../SortDropDown/SortDropDown"
 
 function SortSelection() {
-  const { setProductsSortMethod, productsSortMethod } = useSort()
+  const [isOpen, setIsOpen] = useState(false)
+
   return (
-    <div className={styles.container}>
+    <div
+      className={styles.container}
+      onClick={() => setIsOpen((curr) => !curr)}
+    >
       <h2>Сортування</h2>
       <div className={styles.imageContainer}>
-        <img src={sortSVG} alt="sort" />
+        <img
+          src={sortSVG}
+          alt="sort"
+          className={`${styles.image} ${isOpen ? styles.open : ""}`}
+        />
       </div>
-      <select
-        value={productsSortMethod}
-        onChange={(ev) => setProductsSortMethod(ev.target.value)}
-        className={styles.selection}
-      >
-        <option value={sortingOptions.standard}>
-          {sortingOptions.standard}
-        </option>
-        <option value={sortingOptions.priceAscending}>
-          {sortingOptions.priceAscending}
-        </option>
-        <option value={sortingOptions.priceDescending}>
-          {sortingOptions.priceDescending}
-        </option>
-      </select>
+      {isOpen && <SortDropDown />}
     </div>
   )
 }

@@ -1,14 +1,25 @@
 .cardList {
   height: 100%;
-  padding: 0 2rem;
+
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: repeat(3, 1fr);
+  grid-auto-rows: auto;
   width: 100%;
   justify-content: center;
   gap: 3rem;
+  padding-left: 3rem;
+  padding-right: 1rem;
+  transition: padding 1s ease-in-out;
 }
 
-@media screen and (width <= 1250px) {
+.expandedList {
+  padding-left: 0;
+  padding-right: 0;
+  padding-left: 3rem;
+  padding-right: 4rem;
+}
+
+@media screen and (width <= 800px) {
   .cardList {
     grid-template-columns: 1fr 1fr;
   }

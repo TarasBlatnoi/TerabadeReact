@@ -11,8 +11,9 @@
   font-size: inherit;
 }
 .list {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  gap: 1rem;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(2rem, 3rem));
+  grid-auto-rows: 2rem;
+  row-gap: 1rem;
+  column-gap: 2rem;
 }

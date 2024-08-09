@@ -7,6 +7,11 @@
   src: url(./assets/fonts/Arista-Pro-Light.ttf);
 }
 
+@font-face {
+  font-family: Arista-Pro-Trial;
+  src: url(./assets/fonts/Arista-Pro-Light-trial.ttf);
+}
+
 /* Variables */
 :root {
   /* COLORS */
@@ -33,7 +38,27 @@
 html {
   scroll-behavior: smooth;
   font-size: 62.5%;
+  width: 100vw;
 }
+
+@media screen and (width > 1440px) {
+  html {
+    font-size: 66.5%;
+  }
+}
+
+@media screen and (width < 1440px) {
+  html {
+    font-size: 56.5%;
+  }
+}
+
+@media screen and (width < 1080px) {
+  html {
+    font-size: 46.5%;
+  }
+}
+
 body {
   background-color: var(--BG-COLOR);
   overflow-x: hidden;
@@ -50,8 +75,7 @@ img {
 }
 
 input,
-button,
-textarea {
+button {
   font: inherit;
 }
 .span-courier {

@@ -1,7 +1,6 @@
 .container {
   display: flex;
   flex-direction: column;
-  height: 80rem;
   width: 100%;
   row-gap: 2rem;
   font-size: 1.2rem;
@@ -11,39 +10,60 @@
   display: flex;
   flex-direction: column;
   row-gap: 2rem;
-  width: 20%;
-  height: 100%;
+  width: 28rem;
+  position: sticky;
+  top: 10%;
   background: transparent;
   border-right: 0.2rem solid white;
-  transition: transform 1s ease-in-out;
+  transition: all 1s ease-in-out;
   font-size: 1.6rem;
+  height: fit-content;
+  font-family: Exo;
+  font-weight: 400;
+  line-height: 1.2rem;
 }
+
 .hidden {
+  margin-right: -28rem;
   transform: translateX(-100%);
+  visibility: hidden;
 }
 
 .sectionProducts {
   display: flex;
   flex-direction: column;
   min-width: 80%;
-  max-width: 100%;
   width: 80%;
+  transition: all 1s ease-in-out;
 }
-.topContainer {
-  display: flex;
-  flex-direction: row;
-  height: 5%;
+
+.sectionProductsExpanded {
   width: 100%;
 }
+
 .mainContainer {
   display: flex;
   flex-direction: row;
   width: 100%;
   height: 95%;
+  justify-content: space-around;
+  padding-right: 4rem;
+  padding-left: 3rem;
 }
 .genderNameContainer {
   display: flex;
   align-items: center;
+  font-family: Arista Pro Trial;
+
+  font-weight: 300;
+  font-size: 2.2rem;
+  line-height: 2.2rem;
+}
+.genderNameContainer span {
+  font-family: Exo;
+  font-size: 2.4rem;
+  font-weight: 300;
+  line-height: 2.6rem;
 }
 
 .hideFiltersContainer {
@@ -51,14 +71,25 @@
   flex-direction: row;
   align-self: flex-end;
   justify-content: space-between;
+  color: #f9d423;
 }
 
+.hideFiltersContainer * {
+  color: inherit;
+}
 .topContainer {
   display: flex;
   flex-direction: row;
   width: 100%;
   justify-content: space-between;
-  padding: 0 3rem;
+  padding-right: 10rem;
+  padding-left: 8rem;
+  position: sticky;
+  top: 0;
+  background-color: var(--BG-COLOR);
+  z-index: 999;
+  padding-top: 2rem;
+  padding-bottom: 1rem;
 }
 
 @media screen and (width <= 1250px) {
