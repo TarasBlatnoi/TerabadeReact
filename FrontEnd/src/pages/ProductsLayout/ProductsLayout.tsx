@@ -39,7 +39,11 @@ function ProductsLayout() {
           >
             <Filters />
           </section>
-          <section className={styles.sectionProducts}>
+          <section
+            className={`${styles.sectionProducts} ${
+              !isOpenFilters ? styles.sectionProductsExpanded : ""
+            }`}
+          >
             <Outlet />
           </section>
         </div>

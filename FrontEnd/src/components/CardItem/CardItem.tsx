@@ -2,6 +2,7 @@ import styles from "./CardItem.module.css"
 import { ProductType } from "../../types"
 import { useNavigate } from "react-router-dom"
 import Button from "../UI/Button/Button"
+import { useFilters } from "../../context/FiltersContext"
 
 type CardItemProps = {
   product: ProductType
@@ -14,9 +15,11 @@ const formaterCurrency = Intl.NumberFormat("fr-FR", {
 const CardItem = ({ product }: CardItemProps) => {
   const navigate = useNavigate()
 
+  const { isOpenFilters } = useFilters()
+
   return (
     <li
-      className={styles.item}
+      className={`${styles.item} ${!isOpenFilters ? styles.itemExpanded : ""}`}
       onClick={() => {
         navigate(`${product.ProductID}`)
       }}
