@@ -22,11 +22,8 @@ import { QueryClientProvider } from "@tanstack/react-query"
 import { queryClient } from "./api/queryClient"
 import ProductsLayout from "./pages/ProductsLayout/ProductsLayout"
 import Products from "./pages/Products/Products"
-import {
-  womenLoader,
-  menLoader,
-  childrenLoader,
-} from "./pages/Products/loaders"
+import { womenLoader, menLoader, childrenLoader } from "./utils/loaders"
+import { FiltersProvider } from "./context/FiltersContext"
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -87,7 +84,9 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <CartProvider>
         <AuthContextProvider>
-          <RouterProvider router={router} />
+          <FiltersProvider>
+            <RouterProvider router={router} />
+          </FiltersProvider>
         </AuthContextProvider>
       </CartProvider>
     </QueryClientProvider>
