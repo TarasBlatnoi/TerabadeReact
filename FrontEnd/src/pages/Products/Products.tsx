@@ -1,39 +1,34 @@
-import { Await, useRouteLoaderData } from "react-router-dom"
-import { AxiosResponse } from "axios"
-import React from "react"
 import CardItem from "../../components/CardItem/CardItem"
 import { ProductType } from "../../types"
 import styles from "./Products.module.css"
 import { useFilters } from "../../context/FiltersContext"
+import { useQuery } from "react-query"
+import ProductAPI from "../../api/Product/ProductAPI"
 
 type ProductsPropsType = {
-  parentRouteId: string
+  parentRouteId: "men" | "women" | "children"
 }
 
 function Products({ parentRouteId }: ProductsPropsType) {
-  const { data } = useRouteLoaderData(parentRouteId) as {
-    data: AxiosResponse<ProductType[]>
-  }
+  const { data } = useQuery({
+    queryFn: () => ProductAPI.getProducts(parentRouteId),
+    queryKey: [parentRouteId],
+    suspense: true,
+    staleTime: Infinity,
+  })
+
   const { isOpenFilters } = useFilters()
 
   return (
-    <React.Suspense fallback={<h1>loading...</h1>}>
-      <Await resolve={data}>
-        {(data: ProductType[]) => {
-          return (
-            <ul
-              className={`${styles.cardList} ${
-                !isOpenFilters ? styles.expandedList : ""
-              }`}
-            >
-              {data.map((product: ProductType) => {
-                return <CardItem key={product.ProductID} product={product} />
-              })}
-            </ul>
-          )
-        }}
-      </Await>
-    </React.Suspense>
+    <ul
+      className={`${styles.cardList} ${
+        !isOpenFilters ? styles.expandedList : ""
+      }`}
+    >
+      {data.map((product: ProductType) => {
+        return <CardItem key={product.ProductID} product={product} />
+      })}
+    </ul>
   )
 }
 

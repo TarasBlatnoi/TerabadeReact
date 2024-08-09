@@ -5,13 +5,19 @@ import { SortProvider } from "../../context/SortContext"
 import SortSelection from "../../components/SortSelection/SortSelection"
 import Filters from "../../components/Filters/Filters"
 import { useFilters } from "../../context/FiltersContext"
+import { Suspense } from "react"
 
 function ProductsLayout() {
   const params = useParams()
   const location = useLocation()
   const { isOpenFilters } = useFilters()
 
-  if (Object.keys(params).length > 0) return <Outlet />
+  if (Object.keys(params).length > 0)
+    return (
+      <Suspense fallback={<h1>Loading....</h1>}>
+        <Outlet />
+      </Suspense>
+    )
 
   const pathname = location.pathname.replace("/", "")
   const gender =
@@ -44,7 +50,9 @@ function ProductsLayout() {
               !isOpenFilters ? styles.sectionProductsExpanded : ""
             }`}
           >
-            <Outlet />
+            <Suspense fallback={<h1>Loading...Suspense</h1>}>
+              <Outlet />
+            </Suspense>
           </section>
         </div>
       </div>
