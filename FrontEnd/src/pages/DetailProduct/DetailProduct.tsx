@@ -1,5 +1,5 @@
 import ProductAPI from "../../api/Product/ProductAPI"
-import { Form, Link, useParams } from "react-router-dom"
+import { Form, Link, useLocation, useParams } from "react-router-dom"
 import { ProductType } from "../../types"
 import { CartContext } from "../../context/CartContext"
 import { useContext } from "react"
@@ -13,11 +13,7 @@ import Star from "../../assets/images/star-fall-minimalistic-svgrepo-com 1.svg"
 import CharacteristicsImg from "../../assets/images/list-minus-svgrepo-com 1.svg"
 import { useQuery } from "react-query"
 
-type DetailProductProps = {
-  parentRouteId: "men" | "women" | "children"
-}
-
-function DetailProduct({ parentRouteId }: DetailProductProps) {
+function DetailProduct() {
   const params = useParams()
   const {
     data: [detailProduct],
@@ -27,9 +23,10 @@ function DetailProduct({ parentRouteId }: DetailProductProps) {
     staleTime: Infinity,
     suspense: true,
   })
+
   const { data: parentData } = useQuery({
-    queryFn: () => ProductAPI.getProducts(parentRouteId),
-    queryKey: [parentRouteId],
+    queryFn: () => ProductAPI.getProducts(detailProduct.sex),
+    queryKey: [detailProduct.sex],
     staleTime: Infinity,
     suspense: true,
   })
@@ -42,7 +39,7 @@ function DetailProduct({ parentRouteId }: DetailProductProps) {
   return (
     <>
       <div className={styles.goBack}>
-        <Link to="../" className={styles.goBackLink}>
+        <Link to={`../${detailProduct.sex}`} className={styles.goBackLink}>
           <img src={goBackImg} alt="go back" className={styles.goBackImg} />
           <p className={styles.goBackText}>Повернутись</p>
         </Link>

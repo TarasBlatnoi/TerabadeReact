@@ -21,7 +21,7 @@ const CardItem = ({ product }: CardItemProps) => {
     <li
       className={`${styles.item} ${!isOpenFilters ? styles.itemExpanded : ""}`}
       onClick={() => {
-        navigate(`${product.ProductID}`)
+        navigate(`/product/${product.ProductID}`)
       }}
     >
       <div className={styles.imageContainer}>

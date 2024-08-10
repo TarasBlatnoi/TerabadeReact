@@ -4,6 +4,7 @@ import {
   createBrowserRouter,
   createRoutesFromElements,
   Route,
+  Navigate,
 } from "react-router-dom"
 import { lazy, Suspense } from "react"
 import Home from "./pages/Home/Home"
@@ -28,21 +29,16 @@ const router = createBrowserRouter(
       <Route index element={<Home />} />
 
       <Route element={<ProductsLayout />}>
-        <Route path="men" id="men">
-          <Route index element={<Products parentRouteId="men" />} />
-        </Route>
-        <Route path="women" id="women">
-          <Route index element={<Products parentRouteId="women" />} />
-          <Route path=":id" element={<DetailProduct parentRouteId="women" />} />
-        </Route>
-        <Route path="children" id="children">
-          <Route index element={<Products parentRouteId="children" />} />
-          <Route
-            path=":id"
-            element={<DetailProduct parentRouteId="children" />}
-          />
-        </Route>
+        <Route path="men" element={<Products parentRouteId="men" />} />
+
+        <Route path="women" element={<Products parentRouteId="women" />} />
+
+        <Route
+          path="children"
+          element={<Products parentRouteId="children" />}
+        />
       </Route>
+      <Route path="product" element={<Navigate to={"/"} />} />
       <Route path="product/:id" element={<DetailProduct />} />
 
       <Route
