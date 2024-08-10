@@ -5,46 +5,22 @@
 
 .sneakers {
   object-fit: cover;
-}
-
-.whiteArea {
-  width: 117vw;
-  height: 100vh;
-  top: 20%;
-  right: -14%;
-  position: absolute;
-  z-index: -20;
-  transform: scaleX(1.32) scaleY(1.1);
-  overflow: hidden;
+  margin-bottom: 29rem;
 }
 
 .rectangle {
   text-align: center;
-  border-radius: 2rem;
-  padding: 5rem 3rem;
+  border-radius: 3rem;
+  padding: 6rem 3rem;
   align-items: center;
   background-color: #fbfaff;
   font-size: 2rem;
   color: #1c1c1c;
-  width: 25%;
-  z-index: -19;
-  left: 6%;
-  top: 37.3%;
+  width: 22%;
+  z-index: 1;
+  left: 0;
+  bottom: -3%;
   position: absolute;
-}
-.footSteps {
-  width: 40%;
-  top: 18%;
-  right: 3%;
-  position: absolute;
-  z-index: -1;
-}
-.footStepsSmall {
-  top: 27%;
-  position: absolute;
-  z-index: -1;
-  width: 45%;
-  right: 31%;
 }
 
 .sneakersText {
@@ -54,4 +30,116 @@
   text-align: center;
   margin: 0 auto;
   font-weight: 400;
+}
+
+.bgImage {
+  width: 93%;
+  position: absolute;
+  z-index: -20;
+  top: 16%;
+  right: -2%;
+}
+
+.rectangleBgCover {
+  background-color: #1e1e1e;
+  width: 20%;
+  height: 12rem;
+  z-index: 20;
+  right: 28.5%;
+  top: -7%;
+  border-radius: 3.4rem;
+  transform: rotate(44deg);
+  position: absolute;
+}
+
+/* Large Screens */
+/* 2560*/
+@media (max-width: 160em) {
+  html {
+    font-size: 102% !important;
+  }
+  .rectangleBgCover {
+    right: 29.8%;
+    top: -4%;
+  }
+}
+
+/* 2272*/
+@media (max-width: 142em) {
+  html {
+    font-size: 91% !important;
+  }
+
+  .rectangleBgCover {
+    background-color: #1e1e1e;
+    right: 29%;
+    top: -2%;
+  }
+}
+
+/* 1968 */
+
+@media (max-width: 123em) {
+  html {
+    font-size: 75% !important;
+  }
+  .rectangleBgCover {
+    right: 28.5%;
+    top: -4%;
+  }
+  .rectangle {
+    padding: 5rem 3rem;
+    border-radius: 2rem;
+  }
+}
+
+/* 1500 */
+
+@media (max-width: 94em) {
+  html {
+    font-size: 62.5% !important;
+  }
+  .rectangleBgCover {
+    width: 25%;
+    right: 28.5%;
+    top: -5%;
+  }
+  .rectangle {
+    padding: 4rem 3rem;
+    border-radius: 2rem;
+  }
+}
+
+/* Mobile devices */
+/* 1200 */
+
+@media (max-width: 75em) {
+  html {
+    font-size: 55% !important;
+  }
+  .rectangleBgCover {
+    right: 29%;
+    top: -2%;
+  }
+  .rectangle {
+    padding: 4rem 3rem;
+    border-radius: 2rem;
+  }
+}
+
+/* Mobile devices */
+/* 1024 */
+
+@media (max-width: 64em) {
+  /* html {
+    font-size: 62.5% !important;
+  }
+  .rectangleBgCover {
+    right: 29%;
+    top: -2%;
+  }
+  .rectangle {
+    padding: 4rem 3rem;
+    border-radius: 2rem;
+  } */
 }
