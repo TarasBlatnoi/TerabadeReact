@@ -15,8 +15,9 @@
 .whiteRect {
   position: absolute;
   z-index: -30;
-  top: -5%;
-  right: -4.8%;
+  top: 0;
+  right: -4.9%;
+  transform: translateY(-30%);
   width: 68%;
   height: 16.4rem;
   background-color: #fbfaff;
@@ -28,7 +29,7 @@
     width: 59%;
   }
   .whiteRect {
-    background-color: blue;
+    background-color: #fbfaff;
     width: 65% !important;
   }
 }
