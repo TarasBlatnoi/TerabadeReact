@@ -33,9 +33,6 @@ section {
   max-width: 120rem;
   column-gap: 3.2rem;
   grid-template-columns: 1fr 1fr;
-  height: 100vh;
-  position: relative;
-  overflow-y: auto;
 }
 
 .productGrid::-webkit-scrollbar {
@@ -49,7 +46,7 @@ section {
 .productImagesContainer {
   display: flex;
   position: sticky;
-  top: 0;
+  top: 5%;
   justify-content: space-between;
   height: 50rem;
 }
