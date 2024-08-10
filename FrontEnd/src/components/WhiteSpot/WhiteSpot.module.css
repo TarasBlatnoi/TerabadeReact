@@ -27,4 +27,14 @@
   .whiteSpotImg {
     width: 59%;
   }
+  .whiteRect {
+    background-color: blue;
+    width: 65% !important;
+  }
+}
+
+@media (max-width: 123em) {
+  .whiteRect {
+    width: 70%;
+  }
 }
