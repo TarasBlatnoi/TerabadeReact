@@ -26,54 +26,63 @@ function DetailProduct({ parentRouteId }: DetailProductProps) {
   }, [cartItems])
 
   return (
-    <>
-      <div className={styles.goBack}>
-        <Link to={`../${detailProduct.sex}`} className={styles.goBackLink}>
-          <img src={goBackImg} alt="go back" className={styles.goBackImg} />
-          <p className={styles.goBackText}>Повернутись</p>
-        </Link>
-      </div>
-      <section>
-        <div className={styles.productGrid}>
-          <div className={styles.productImagesContainer}>
-            <div className={styles.smallImages}>
-              <img
-                src={`${detailProduct.image}`}
-                alt={detailProduct.name}
-                className={styles.smallImage}
-              />
-              <img
-                src={`${detailProduct.image}`}
-                alt={detailProduct.name}
-                className={styles.smallImage}
-              />
-              <img
-                src={`${detailProduct.image}`}
-                alt={detailProduct.name}
-                className={styles.smallImage}
-              />
-              <img
-                src={`${detailProduct.image}`}
-                alt={detailProduct.name}
-                className={styles.smallImage}
-              />
-              <img
-                src={`${detailProduct.image}`}
-                alt={detailProduct.name}
-                className={styles.smallImage}
-              />
-              <img
-                src={`${detailProduct.image}`}
-                alt={detailProduct.name}
-                className={styles.smallImage}
-              />
-            </div>
-            <img
-              src={`${detailProduct.image}`}
-              alt={detailProduct.name}
-              className={styles.mainImage}
-            />
-          </div>
+    <Suspense fallback={<h1>loading...</h1>}>
+      <Await resolve={data}>
+        {(data) => {
+          const detailProduct = data[0] as ProductType
+          return (
+            <>
+              <div className={styles.goBack}>
+                <Link to="../" className={styles.goBackLink}>
+                  <img
+                    src={goBackImg}
+                    alt="go back"
+                    className={styles.goBackImg}
+                  />
+                  <p className={styles.goBackText}>Повернутись</p>
+                </Link>
+              </div>
+              <section>
+                <div className={styles.productGrid}>
+                  <div className={styles.productImagesContainer}>
+                    <div className={styles.smallImages}>
+                      <img
+                        src={`${detailProduct.image}`}
+                        alt={detailProduct.name}
+                        className={styles.smallImage}
+                      />
+                      <img
+                        src={`${detailProduct.image}`}
+                        alt={detailProduct.name}
+                        className={styles.smallImage}
+                      />
+                      <img
+                        src={`${detailProduct.image}`}
+                        alt={detailProduct.name}
+                        className={styles.smallImage}
+                      />
+                      <img
+                        src={`${detailProduct.image}`}
+                        alt={detailProduct.name}
+                        className={styles.smallImage}
+                      />
+                      <img
+                        src={`${detailProduct.image}`}
+                        alt={detailProduct.name}
+                        className={styles.smallImage}
+                      />
+                      <img
+                        src={`${detailProduct.image}`}
+                        alt={detailProduct.name}
+                        className={styles.smallImage}
+                      />
+                    </div>
+                    <img
+                      src={`${detailProduct.image}`}
+                      alt={detailProduct.name}
+                      className={styles.mainImage}
+                    />
+                  </div>
 
           <div className={styles.productText}>
             <h2 className={styles.productName}>{detailProduct.name}</h2>
