@@ -11,17 +11,22 @@
   flex-direction: column;
   justify-content: space-between;
   cursor: pointer;
+  row-gap: 2rem;
 }
 .itemExpanded {
   height: calc(45rem + 10vw);
 }
 .imageContainer {
-  height: 60%;
+  height: 70%;
+  padding: 1%;
+  background-color: #f7f7f7;
+  border-top-left-radius: 1rem;
+  border-top-right-radius: 1rem;
 }
 
 .imageContainer img {
   height: 100%;
-  object-fit: contain;
+  object-fit: cover;
 }
 .infoDetailsContainer {
   padding-bottom: 5rem;
