@@ -1,7 +1,7 @@
 import ProductAPI from "../../api/Product/ProductAPI"
 import { Form, Link, useParams } from "react-router-dom"
 import { CartContext } from "../../context/CartContext"
-import { useContext } from "react"
+import { Suspense, useContext, useEffect } from "react"
 import { CartItemType } from "../../context/CartContext"
 import goBackImg from "../../assets/images/back-svgrepo-com 1.svg"
 import styles from "./DetailProducts.module.css"
@@ -11,28 +11,19 @@ import CharacteristicsImg from "../../assets/images/list-minus-svgrepo-com 1.svg
 import { useQuery } from "react-query"
 import YouMightAlsoLike from "../../components/YouMightAlsoLike/YouMightAlsoLike"
 
-function DetailProduct() {
-  const params = useParams()
-  const {
-    data: [detailProduct],
-  } = useQuery({
-    queryFn: () => ProductAPI.getById(params.id!),
-    queryKey: [params.id],
-    staleTime: Infinity,
-    suspense: true,
-  })
-
-  const { data: parentData } = useQuery({
-    queryFn: () => ProductAPI.getProducts(detailProduct.sex),
-    queryKey: [detailProduct.sex],
-    staleTime: Infinity,
-    suspense: true,
-  })
-
-  const { addCartItem, openCart } = useContext(CartContext)
+function DetailProduct({ parentRouteId }: DetailProductProps) {
+  const { data } = useLoaderData() as { data: AxiosResponse<ProductType[]> }
+  const { data: parentData } = useRouteLoaderData(parentRouteId) as {
+    data: AxiosResponse<ProductType[]>
+  }
+  const { addCartItem, openCart, cartItems } = useContext(CartContext)
   function handleClick(item: CartItemType) {
     addCartItem(item)
   }
+
+  useEffect(() => {
+    localStorage.setItem("cart", JSON.stringify(cartItems))
+  }, [cartItems])
 
   return (
     <>

@@ -54,8 +54,6 @@ function cartReducer(state: CartState, action: CartAction) {
       item.quantity = 1
       copyOfItems.push(item)
     }
-    const itemsStringified = JSON.stringify(copyOfItems)
-    localStorage.setItem("cart", itemsStringified)
     return { ...state, items: copyOfItems }
   }
   if (type === CartActionType.DELETE_ITEM) {
@@ -80,8 +78,6 @@ function cartReducer(state: CartState, action: CartAction) {
     } else {
       copyOfItems.splice(indexOfItem, 1)
     }
-    const itemsStringified = JSON.stringify(copyOfItems)
-    localStorage.setItem("cart", itemsStringified)
     return {
       ...state,
       items: copyOfItems,
@@ -92,8 +88,6 @@ function cartReducer(state: CartState, action: CartAction) {
       ...state,
       items: [],
     }
-    const itemsStringified = JSON.stringify(emptyCart.items)
-    localStorage.setItem("cart", itemsStringified)
     return emptyCart
   }
   return state
