@@ -9,12 +9,12 @@ class Product {
     findMenProducts: `
         SELECT * 
         FROM terabade.product
-        WHERE sex = "male";
+        WHERE sex = "men";
         `,
     findWomenProducts: `
         SELECT * 
         FROM terabade.product
-        WHERE sex = "female";
+        WHERE sex = "women";
     `,
     findChildrenPoducts: `
         SELECT * 
