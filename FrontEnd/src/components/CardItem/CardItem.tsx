@@ -5,20 +5,25 @@ import { useFilters } from "../../context/FiltersContext"
 
 type CardItemProps = {
   product: ProductType
+  className?: string
+  style?: any
 }
 
 const formaterCurrency = Intl.NumberFormat("fr-FR", {
   maximumFractionDigits: 0,
 })
 
-const CardItem = ({ product }: CardItemProps) => {
+const CardItem = ({ product, className, style }: CardItemProps) => {
   const navigate = useNavigate()
 
   const { isOpenFilters } = useFilters()
 
   return (
     <li
-      className={`${styles.item} ${!isOpenFilters ? styles.itemExpanded : ""}`}
+      className={`${styles.item} ${className} ${
+        !isOpenFilters ? styles.itemExpanded : ""
+      }`}
+      style={style}
       onClick={() => {
         navigate(`/product/${product.ProductID}`)
       }}

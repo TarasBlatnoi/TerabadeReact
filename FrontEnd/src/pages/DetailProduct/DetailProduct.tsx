@@ -12,6 +12,7 @@ import Button from "../../components/UI/Button/Button"
 import Star from "../../assets/images/star-fall-minimalistic-svgrepo-com 1.svg"
 import CharacteristicsImg from "../../assets/images/list-minus-svgrepo-com 1.svg"
 import { useQuery } from "react-query"
+import YouMightAlsoLike from "../../components/YouMightAlsoLike/YouMightAlsoLike"
 
 function DetailProduct() {
   const params = useParams()
@@ -198,18 +199,7 @@ function DetailProduct() {
           </div>
         </div>
       </section>
-      <div className={styles.recommendedProducts}>
-        <ul className={styles.recommendedProductsUl}>
-          {parentData
-            .filter(
-              (product: ProductType) =>
-                product.ProductID !== detailProduct.ProductID
-            )
-            .map((product: ProductType) => {
-              return <CardItem product={product} key={product.ProductID} />
-            })}
-        </ul>
-      </div>
+      <YouMightAlsoLike products={parentData} />
     </>
   )
 }
