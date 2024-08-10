@@ -6,10 +6,11 @@
   list-style: none;
   color: black;
   border-radius: 1rem;
-  transition: all 1s ease-in-out;
+  transition: all 200ms ease-in-out;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  cursor: pointer;
 }
 .itemExpanded {
   height: calc(45rem + 10vw);
@@ -37,10 +38,11 @@
 }
 
 .price {
-  align-self: flex-end;
+  align-self: flex-start;
   font-size: 2rem;
   font-family: Exo;
   font-weight: 400;
+  padding-top: 1rem;
 }
 .price span {
   font-size: 1.4rem;

@@ -39,6 +39,7 @@ html {
   scroll-behavior: smooth;
   font-size: 62.5%;
   width: 100vw;
+  -webkit-font-smoothing: antialiased;
 }
 
 @media screen and (width > 1440px) {

@@ -15,10 +15,12 @@
   top: 10%;
   background: transparent;
   border-right: 0.2rem solid white;
-  transition: all 1s ease-in-out;
+  transition-duration: 200ms;
+  transition-timing-function: ease-in-out;
+  transition-property: opacity, transform, margin-right;
   font-size: 1.6rem;
   height: fit-content;
-  font-family: Exo;
+  font-family: Ermilov;
   font-weight: 400;
   line-height: 1.2rem;
 }
@@ -26,7 +28,7 @@
 .hidden {
   margin-right: -28rem;
   transform: translateX(-100%);
-  visibility: hidden;
+  opacity: 0;
 }
 
 .sectionProducts {
@@ -34,7 +36,7 @@
   flex-direction: column;
   min-width: 80%;
   width: 80%;
-  transition: all 1s ease-in-out;
+  transition: all 200ms ease-in-out;
 }
 
 .sectionProductsExpanded {
@@ -71,7 +73,8 @@
   flex-direction: row;
   align-self: flex-end;
   justify-content: space-between;
-  color: #f9d423;
+  --main-yellow: #f9d423;
+  color: var(--main-yellow);
 }
 
 .hideFiltersContainer * {
@@ -87,7 +90,7 @@
   position: sticky;
   top: 0;
   background-color: var(--BG-COLOR);
-  z-index: 999;
+  z-index: 98;
   padding-top: 2rem;
   padding-bottom: 1rem;
 }

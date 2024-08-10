@@ -1,5 +1,5 @@
 import ProductAPI from "../../api/Product/ProductAPI"
-import { Form, Link, useLocation, useParams } from "react-router-dom"
+import { Form, Link, useParams } from "react-router-dom"
 import { ProductType } from "../../types"
 import { CartContext } from "../../context/CartContext"
 import { useContext } from "react"

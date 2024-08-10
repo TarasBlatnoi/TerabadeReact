@@ -10,7 +10,7 @@ function HideFiltersButton() {
       className={styles.container}
       onClick={() => setIsOpenFilters((curr: boolean) => !curr)}
     >
-      <h2>Приховати фільтр</h2>
+      <h2>{`${isOpenFilters ? "Приховати" : "Показати"} фільтр`}</h2>
       <div className={styles.svgContainer}>
         <img
           src={filterSVG}
