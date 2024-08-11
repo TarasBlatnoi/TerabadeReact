@@ -15,20 +15,21 @@
 .whiteRect {
   position: absolute;
   z-index: -30;
-  top: -5%;
-  right: -4.8%;
+  top: 0;
+  right: -4.9%;
+  transform: translateY(-30%);
   width: 68%;
-  height: 16.4rem;
+  height: 18rem;
   background-color: #fbfaff;
-  border-radius: 4rem;
+  border-radius: 5rem;
 }
 
 @media (max-width: 75em) {
   .whiteSpotImg {
-    width: 59%;
+    width: 60%;
   }
   .whiteRect {
-    background-color: blue;
+    background-color: #fbfaff;
     width: 65% !important;
   }
 }

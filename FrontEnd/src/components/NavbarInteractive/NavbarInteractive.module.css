@@ -113,3 +113,24 @@
     transform: scaleY(0);
   }
 }
+
+@media (max-width: 75em) {
+  .girlImage {
+    margin-left: 4.8rem;
+  }
+  .boyImage {
+    margin-right: 0;
+  }
+  .manImage {
+    margin-left: 0;
+    margin-right: 3.2rem;
+    width: 28rem;
+    object-fit: cover;
+  }
+  .womanImage {
+    margin-left: 1.6rem;
+    margin-right: 0;
+    width: 28rem;
+    object-fit: cover;
+  }
+}

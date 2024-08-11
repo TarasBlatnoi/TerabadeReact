@@ -11,8 +11,6 @@ import Home from "./pages/Home/Home"
 import DetailProduct from "./pages/DetailProduct/DetailProduct"
 const Login = lazy(() => import("./pages/Login/Login"))
 import Favorites from "./pages/Favorites/Favorites"
-import About from "./pages/About"
-import Sale from "./pages/Sale"
 import CartProvider from "./context/CartContext"
 import Error from "./pages/Error/Error"
 import AuthContextProvider from "./context/AuthContext"
@@ -25,7 +23,6 @@ import { FiltersProvider } from "./context/FiltersContext"
 
 const router = createBrowserRouter(
   createRoutesFromElements(
-
     <Route path="/" element={<Layout />} errorElement={<Error />}>
       <Route index element={<Home />} />
 
@@ -39,7 +36,14 @@ const router = createBrowserRouter(
           element={<Products parentRouteId="children" />}
         />
       </Route>
+      <Route path="cart" element={<h1>Cart motherfucka</h1>} />
+      <Route path="payment" element={<h1>Payment motherfucka</h1>} />
       <Route path="product" element={<Navigate to={"/"} />} />
+      <Route
+        path="favorites"
+        element={<Favorites />}
+        loader={checkAuthLoader}
+      />
       <Route path="product/:id" element={<DetailProduct />} />
       <Route
         path="login"

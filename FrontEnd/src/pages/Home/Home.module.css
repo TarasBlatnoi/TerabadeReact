@@ -53,10 +53,10 @@
 }
 
 /* Large Screens */
-/* 2560*/
-@media (max-width: 160em) {
+/* 3200 */
+@media (max-width: 250em) {
   html {
-    font-size: 102% !important;
+    font-size: 110% !important;
   }
   .rectangleBgCover {
     right: 29.8%;
@@ -81,7 +81,7 @@
 
 @media (max-width: 123em) {
   html {
-    font-size: 75% !important;
+    font-size: 70% !important;
   }
   .rectangleBgCover {
     right: 28.5%;

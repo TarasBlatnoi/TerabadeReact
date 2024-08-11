@@ -19,7 +19,7 @@
 
 .cartItems {
   position: absolute;
-  font-size: 1.2rem;
+  font-size: 1rem;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -35%);
