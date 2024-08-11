@@ -1,25 +1,49 @@
 import styles from "./CardItem.module.css"
 import { ProductType } from "../../types"
-import { Link } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
+import { useFilters } from "../../context/FiltersContext"
 
 type CardItemProps = {
   product: ProductType
+  className?: string
+  style?: any
 }
 
-const CardItem = ({ product }: CardItemProps) => {
+const formaterCurrency = Intl.NumberFormat("fr-FR", {
+  maximumFractionDigits: 0,
+})
+
+const CardItem = ({ product, className, style }: CardItemProps) => {
+  const navigate = useNavigate()
+
+  const { isOpenFilters } = useFilters()
+
   return (
-    <div className={styles.item}>
-      <Link to={`${product.ProductID}`}>
-        <h3 style={{ margin: "auto", width: "80%", textAlign: "center" }}>
-          {product.name}
-        </h3>
+    <li
+      className={`${styles.item} ${className} ${
+        !isOpenFilters ? styles.itemExpanded : ""
+      }`}
+      style={style}
+      onClick={() => {
+        navigate(`/product/${product.ProductID}`)
+      }}
+    >
+      <div className={styles.imageContainer}>
         <img
           src={product.image}
           alt={product.name}
-          style={{ width: "90%", height: "80%" }}
         />
-      </Link>
-    </div>
+      </div>
+      <div className={styles.infoDetailsContainer}>
+        <div className={styles.detailsContainer}>
+          <h1 className={styles.productName}>{product.name}</h1>
+          <p className={styles.productType}>{product.type}</p>
+          <p className={styles.price}>
+            {formaterCurrency.format(5000 + product.price)} <span>UAH</span>{" "}
+          </p>
+        </div>
+      </div>
+    </li>
   )
 }
 

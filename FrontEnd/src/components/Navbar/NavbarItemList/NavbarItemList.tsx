@@ -68,6 +68,7 @@ const NavbarItemList = () => {
       dispatch({ type: actions.linkClicked, payload: "" })
     }
   }
+
   return (
     <ul
       className={`${styles.ulNavbarSmall} ${

@@ -1,0 +1,20 @@
+.item {
+  background: #f9c31f;
+  display: flex;
+  justify-content: center;
+  color: black;
+  width: 4rem;
+  padding: 0.4rem;
+  border-radius: 0.4rem;
+  cursor: pointer;
+}
+.item * {
+  font-size: inherit;
+}
+.list {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(2rem, 4rem));
+  grid-auto-rows: 2rem;
+  row-gap: 1rem;
+  column-gap: 2rem;
+}

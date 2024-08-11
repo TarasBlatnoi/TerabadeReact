@@ -1,0 +1,47 @@
+.list li {
+  display: flex;
+  column-gap: 1.4rem;
+  align-items: center;
+}
+.list li label {
+  cursor: pointer;
+}
+.list {
+  display: flex;
+  flex-direction: column;
+  row-gap: 1.2rem;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  row-gap: 2rem;
+  padding: 0 2rem 2rem 2rem;
+  border-bottom: 0.06rem solid white;
+  width: 95%;
+}
+
+.inputContainer {
+  background-color: white;
+  border-radius: 0.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.inputContainer::before {
+  position: absolute;
+  font-size: 0.6rem;
+  z-index: 10;
+}
+
+.inputContainer input {
+  border: 0;
+  z-index: 100;
+  opacity: 0;
+}
+.priceLabel {
+  display: flex;
+  flex: row;
+  column-gap: 0.6rem;
+}
