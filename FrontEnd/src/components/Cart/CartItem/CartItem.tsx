@@ -7,26 +7,25 @@ interface CartItemProps {
 }
 
 const CartItem = ({ item }: CartItemProps) => {
-  const { deleteCartItem, addCartItem } = useContext(CartContext)
+  const { deleteCartItem } = useContext(CartContext)
   return (
     <div className={styles.cartItem}>
       <img src={`${item.image}`} alt={item.name} className={styles.img} />
-      <h3>{item.name}</h3>
-      <p>{item.quantity}</p>
-      <button
-        onClick={() => {
-          deleteCartItem(item.id)
-        }}
+      <div className={styles.textWrapper}>
+        <h3>{item.name}</h3>
+        <p>
+          Кількість: <span className={styles.priceNumber}>{item.quantity}</span>
+        </p>
+        <p>
+          Ціна: <span className={styles.priceNumber}>{item.price}</span>
+        </p>
+      </div>
+      <div
+        className={styles.deleteItemCrossWrapper}
+        onClick={() => deleteCartItem(item.id)}
       >
-        -
-      </button>
-      <button
-        onClick={() => {
-          addCartItem(item)
-        }}
-      >
-        +
-      </button>
+        <div className={styles.deleteItemCross}></div>
+      </div>
     </div>
   )
 }

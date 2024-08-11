@@ -17,36 +17,13 @@ const Modal = ({ open, children, className = "" }: ModalProps) => {
   const wrapperRef = useRef<HTMLDivElement>(null)
   const modalRoot = document.getElementById("modal")
 
-  useEffect(() => {
-    const handleTransitionEnd = () => {
-      if (!open && wrapperRef.current) {
-        wrapperRef.current.classList.add(styles.hidden)
-      }
-    }
-
-    const wrapperElement = wrapperRef.current
-    if (wrapperElement) {
-      wrapperElement.addEventListener("transitionend", handleTransitionEnd, {
-        once: true,
-      })
-    }
-
-    return () => {
-      if (wrapperElement) {
-        wrapperElement.removeEventListener("transitionend", handleTransitionEnd)
-      }
-    }
-  }, [open])
-
   if (!modalRoot) {
     return null
   }
 
   return createPortal(
     <div
-      className={`${styles.dialogWrapper} ${
-        open ? styles.opened : styles.closed
-      }`}
+      className={`${styles.dialogWrapper} ${open ? styles.opened : ""}`}
       ref={wrapperRef}
     >
       <dialog

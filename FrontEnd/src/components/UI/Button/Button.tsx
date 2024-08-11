@@ -2,7 +2,7 @@ import React from "react"
 import styles from "./Button.module.css"
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: "primary" | "secondary" | "secondaryDark"
+  variant?: "primary" | "primaryWhite" | "secondary" | "secondaryDark"
   disabled?: boolean
   className?: string
 }
