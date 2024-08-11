@@ -8,8 +8,8 @@ import { Suspense } from "react"
 export default function Layout() {
   return (
     <>
-      <div id="modal"></div>
       <Header />
+      <div id="modal" className={styles.modalDiv}></div>
       <main className={styles.main}>
         <Suspense fallback={<h1>Loading.....</h1>}>
           <Outlet />

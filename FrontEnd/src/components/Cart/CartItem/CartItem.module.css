@@ -1,0 +1,11 @@
+.img {
+  width: 12rem;
+  height: 6rem;
+  border-radius: 1rem;
+  border: 1px solid #1c1c1c;
+}
+
+.cartItem {
+  display: flex;
+  justify-content: space-between;
+}

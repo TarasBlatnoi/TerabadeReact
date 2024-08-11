@@ -1,0 +1,22 @@
+.dialogWrapper {
+  width: 100%;
+  height: 115vh;
+  position: absolute;
+  top: -20vh;
+  transition: all 0.5s ease-in-out;
+  background: none;
+}
+
+.opened {
+  display: block;
+  background: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(8px);
+}
+
+.closed {
+  background: none;
+}
+
+.hidden {
+  display: none;
+}

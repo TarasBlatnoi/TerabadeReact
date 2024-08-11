@@ -1,18 +1,16 @@
 import { useContext } from "react"
 import { CartContext, CartItemType } from "../../../context/CartContext"
+import styles from "./CartItem.module.css"
 
 interface CartItemProps {
   item: CartItemType
 }
+
 const CartItem = ({ item }: CartItemProps) => {
   const { deleteCartItem, addCartItem } = useContext(CartContext)
   return (
-    <div style={{ display: "flex", justifyContent: "space-between" }}>
-      <img
-        src={`${item.image}`}
-        alt={item.name}
-        style={{ width: "10vw", height: "10vh" }}
-      />
+    <div className={styles.cartItem}>
+      <img src={`${item.image}`} alt={item.name} className={styles.img} />
       <h3>{item.name}</h3>
       <p>{item.quantity}</p>
       <button
