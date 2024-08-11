@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react"
+import { useRef } from "react"
 import { ProductType } from "../../types"
 import CardItem from "../CardItem/CardItem"
 import styles from "./YouMightAlsoLike.module.css"
@@ -9,26 +9,42 @@ type YouMightAlsoLikeProps = {
 }
 
 function YouMightAlsoLike({ products }: YouMightAlsoLikeProps) {
-  const [scrollPos, setScrollPos] = useState(0)
-  const slider = useRef(null) as { current: null | HTMLUListElement }
+  const ulListRef = useRef(null) as { current: null | HTMLUListElement }
 
-  console.log(scrollPos)
+  function handleScroll(forward: boolean) {
+    const ulListEl = ulListRef.current
+    if (ulListEl) {
+      const widthOfItem =
+        ulListEl.firstElementChild?.getBoundingClientRect().width
+
+      const itemsGap = Number.parseFloat(
+        document.defaultView?.getComputedStyle(ulListEl).columnGap || ""
+      )
+
+      ulListEl.scrollBy({
+        left: forward ? widthOfItem! + itemsGap : -widthOfItem! - itemsGap,
+        behavior: "smooth",
+      })
+    }
+  }
+
   return (
     <section className={styles.section}>
       <div className={styles.controlButtons}>
         <Arrow
           inverted={true}
           className={styles.arrow}
-          onClick={() => setScrollPos((curr) => curr + 100)}
+          onClick={() => handleScroll(false)}
         />
-        <Arrow
-          className={styles.arrow}
-          onClick={() => setScrollPos((curr) => curr - 100)}
-        />
+        <Arrow className={styles.arrow} onClick={() => handleScroll(true)} />
       </div>
-      <ul className={styles.list} ref={slider}>
+      <ul className={styles.list} ref={ulListRef}>
         {products.map((product) => (
-          <CardItem product={product} className={styles.recommendedProduct} />
+          <CardItem
+            product={product}
+            className={styles.recommendedProduct}
+            key={product.ProductID}
+          />
         ))}
       </ul>
     </section>
