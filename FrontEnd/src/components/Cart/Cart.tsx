@@ -4,9 +4,19 @@ import { CartContext } from "../../context/CartContext"
 import styles from "./Cart.module.css"
 import CartItem from "./CartItem/CartItem"
 import Button from "../UI/Button/Button"
+import { useNavigate } from "react-router-dom"
 const Cart = () => {
-  const { isOpened, closeCart, cartItems, resetCartItems } =
+  const { isOpened, cartItems, resetCartItems, closeCart } =
     useContext(CartContext)
+  const navigate = useNavigate()
+  function handleToCart() {
+    closeCart()
+    navigate("/cart")
+  }
+  function handleToPayment() {
+    closeCart()
+    navigate("/payment")
+  }
   return (
     <Modal open={isOpened} className={styles.cart}>
       <div className={styles.classItemsWrapper}>
@@ -14,19 +24,31 @@ const Cart = () => {
           return <CartItem item={cartItem} key={cartItem.id} />
         })}
       </div>
-
-      <div className={styles.buttonsWrapper}>
-        <Button
-          variant="primaryWhite"
-          onClick={closeCart}
-          className={styles.addButton}
+      {cartItems.length ? (
+        <div className={styles.buttonsWrapper}>
+          <Button
+            variant="primaryWhite"
+            onClick={handleToCart}
+            className={styles.addButton}
+          >
+            До кошика
+          </Button>
+          <Button onClick={handleToPayment} className={styles.payButton}>
+            Сплатити
+          </Button>
+        </div>
+      ) : (
+        <h1
+          style={{
+            textAlign: "center",
+            position: "absolute",
+            top: "10%",
+            right: "2%",
+          }}
         >
-          До кошика
-        </Button>
-        <Button onClick={resetCartItems} className={styles.payButton}>
-          Сплатити
-        </Button>
-      </div>
+          У вашому кошику немає товарів
+        </h1>
+      )}
     </Modal>
   )
 }

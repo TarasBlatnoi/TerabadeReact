@@ -25,7 +25,6 @@ import { FiltersProvider } from "./context/FiltersContext"
 
 const router = createBrowserRouter(
   createRoutesFromElements(
-
     <Route path="/" element={<Layout />} errorElement={<Error />}>
       <Route index element={<Home />} />
 
@@ -35,9 +34,40 @@ const router = createBrowserRouter(
         <Route path="women" element={<Products parentRouteId="women" />} />
 
         <Route
-          path="children"
-          element={<Products parentRouteId="children" />}
+          path="favorites"
+          element={<Favorites />}
+          loader={checkAuthLoader}
         />
+        <Route path="about" element={<About />} />
+        <Route path="sale" element={<Sale />} />
+        <Route element={<ProductsLayout />}>
+          <Route path="men" id="men" loader={menLoader}>
+            <Route index element={<Products parentRouteId="men" />} />
+            <Route
+              path=":id"
+              element={<DetailProduct parentRouteId="men" />}
+              loader={DetailProductLoader}
+            />
+          </Route>
+          <Route path="women" id="women" loader={womenLoader}>
+            <Route index element={<Products parentRouteId="women" />} />
+            <Route
+              path=":id"
+              element={<DetailProduct parentRouteId="women" />}
+              loader={DetailProductLoader}
+            />
+          </Route>
+          <Route path="children" id="children" loader={childrenLoader}>
+            <Route index element={<Products parentRouteId="children" />} />
+            <Route
+              path=":id"
+              element={<DetailProduct parentRouteId="children" />}
+              loader={DetailProductLoader}
+            />
+          </Route>
+        </Route>
+        <Route path="cart" element={<h1>Cart motherfucka</h1>} />
+        <Route path="payment" element={<h1>Payment motherfucka</h1>} />
       </Route>
       <Route path="product" element={<Navigate to={"/"} />} />
       <Route path="product/:id" element={<DetailProduct />} />
