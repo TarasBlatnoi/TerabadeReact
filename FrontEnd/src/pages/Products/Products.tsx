@@ -1,9 +1,10 @@
 import CardItem from "../../components/CardItem/CardItem"
 import { ProductType } from "../../types"
 import styles from "./Products.module.css"
-import { useFilters } from "../../context/FiltersContext"
 import { useQuery } from "react-query"
 import ProductAPI from "../../api/Product/ProductAPI"
+import { useSelector } from "react-redux"
+import { storeType } from "../../store/store"
 
 type ProductsPropsType = {
   parentRouteId: "men" | "women" | "children"
@@ -17,7 +18,9 @@ function Products({ parentRouteId }: ProductsPropsType) {
     staleTime: Infinity,
   })
 
-  const { isOpenFilters } = useFilters()
+  const isOpenFilters = useSelector(
+    (store: storeType) => store.filters.visibility
+  )
 
   return (
     <ul

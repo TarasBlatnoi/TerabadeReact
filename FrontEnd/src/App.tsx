@@ -19,7 +19,8 @@ import { QueryClientProvider } from "react-query"
 import { queryClient } from "./api/queryClient"
 import ProductsLayout from "./pages/ProductsLayout/ProductsLayout"
 import Products from "./pages/Products/Products"
-import { FiltersProvider } from "./context/FiltersContext"
+import { Provider } from "react-redux"
+import { store } from "./store/store"
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -63,13 +64,13 @@ const router = createBrowserRouter(
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
-      <CartProvider>
-        <AuthContextProvider>
-          <FiltersProvider>
+      <Provider store={store}>
+        <CartProvider>
+          <AuthContextProvider>
             <RouterProvider router={router} />
-          </FiltersProvider>
-        </AuthContextProvider>
-      </CartProvider>
+          </AuthContextProvider>
+        </CartProvider>
+      </Provider>
     </QueryClientProvider>
   )
 }

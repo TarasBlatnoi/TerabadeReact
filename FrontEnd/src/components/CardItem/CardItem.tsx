@@ -1,7 +1,8 @@
 import styles from "./CardItem.module.css"
 import { ProductType } from "../../types"
 import { useNavigate } from "react-router-dom"
-import { useFilters } from "../../context/FiltersContext"
+import { useSelector } from "react-redux"
+import { storeType } from "../../store/store"
 
 type CardItemProps = {
   product: ProductType
@@ -16,7 +17,10 @@ const formaterCurrency = Intl.NumberFormat("fr-FR", {
 const CardItem = ({ product, className, style }: CardItemProps) => {
   const navigate = useNavigate()
 
-  const { isOpenFilters } = useFilters()
+  const isOpenFilters = useSelector(
+    (store: storeType) => store.filters.visibility
+  )
+
   return (
     <li
       className={`${styles.item} ${className} ${
