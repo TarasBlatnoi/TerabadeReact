@@ -25,6 +25,7 @@ import { FiltersProvider } from "./context/FiltersContext"
 
 const router = createBrowserRouter(
   createRoutesFromElements(
+
     <Route path="/" element={<Layout />} errorElement={<Error />}>
       <Route index element={<Home />} />
 
@@ -40,7 +41,6 @@ const router = createBrowserRouter(
       </Route>
       <Route path="product" element={<Navigate to={"/"} />} />
       <Route path="product/:id" element={<DetailProduct />} />
-
       <Route
         path="login"
         element={
@@ -52,13 +52,6 @@ const router = createBrowserRouter(
           import("./pages/Login/Login").then((module) => module.action(meta))
         }
       />
-      <Route
-        path="favorites"
-        element={<Favorites />}
-        loader={checkAuthLoader}
-      />
-      <Route path="about" element={<About />} />
-      <Route path="sale" element={<Sale />} />
     </Route>
   )
 )

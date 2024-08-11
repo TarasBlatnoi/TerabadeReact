@@ -1,6 +1,7 @@
 .imageContainer {
   display: flex;
   flex-direction: column;
+  width: 29%;
   justify-content: space-between;
   align-items: center;
   color: white;
