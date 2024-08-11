@@ -1,7 +1,7 @@
 import ProductAPI from "../../api/Product/ProductAPI"
 import { Form, Link, useParams } from "react-router-dom"
 import { CartContext } from "../../context/CartContext"
-import { Suspense, useContext, useEffect } from "react"
+import { useContext } from "react"
 import { CartItemType } from "../../context/CartContext"
 import goBackImg from "../../assets/images/back-svgrepo-com 1.svg"
 import styles from "./DetailProducts.module.css"
@@ -11,78 +11,78 @@ import CharacteristicsImg from "../../assets/images/list-minus-svgrepo-com 1.svg
 import { useQuery } from "react-query"
 import YouMightAlsoLike from "../../components/YouMightAlsoLike/YouMightAlsoLike"
 
-function DetailProduct({ parentRouteId }: DetailProductProps) {
-  const { data } = useLoaderData() as { data: AxiosResponse<ProductType[]> }
-  const { data: parentData } = useRouteLoaderData(parentRouteId) as {
-    data: AxiosResponse<ProductType[]>
-  }
-  const { addCartItem, openCart, cartItems } = useContext(CartContext)
+function DetailProduct() {
+  const params = useParams()
+  const {
+    data: [detailProduct],
+  } = useQuery({
+    queryFn: () => ProductAPI.getById(params.id!),
+    queryKey: [params.id],
+    staleTime: Infinity,
+    suspense: true,
+  })
+
+  const { data: parentData } = useQuery({
+    queryFn: () => ProductAPI.getProducts(detailProduct.sex),
+    queryKey: [detailProduct.sex],
+    staleTime: Infinity,
+    suspense: true,
+  })
+
+  const { addCartItem, openCart } = useContext(CartContext)
   function handleClick(item: CartItemType) {
     addCartItem(item)
   }
 
-  useEffect(() => {
-    localStorage.setItem("cart", JSON.stringify(cartItems))
-  }, [cartItems])
-
   return (
-    <Suspense fallback={<h1>loading...</h1>}>
-      <Await resolve={data}>
-        {(data) => {
-          const detailProduct = data[0] as ProductType
-          return (
-            <>
-              <div className={styles.goBack}>
-                <Link to="../" className={styles.goBackLink}>
-                  <img
-                    src={goBackImg}
-                    alt="go back"
-                    className={styles.goBackImg}
-                  />
-                  <p className={styles.goBackText}>Повернутись</p>
-                </Link>
-              </div>
-              <section>
-                <div className={styles.productGrid}>
-                  <div className={styles.productImagesContainer}>
-                    <div className={styles.smallImages}>
-                      <img
-                        src={`${detailProduct.image}`}
-                        alt={detailProduct.name}
-                        className={styles.smallImage}
-                      />
-                      <img
-                        src={`${detailProduct.image}`}
-                        alt={detailProduct.name}
-                        className={styles.smallImage}
-                      />
-                      <img
-                        src={`${detailProduct.image}`}
-                        alt={detailProduct.name}
-                        className={styles.smallImage}
-                      />
-                      <img
-                        src={`${detailProduct.image}`}
-                        alt={detailProduct.name}
-                        className={styles.smallImage}
-                      />
-                      <img
-                        src={`${detailProduct.image}`}
-                        alt={detailProduct.name}
-                        className={styles.smallImage}
-                      />
-                      <img
-                        src={`${detailProduct.image}`}
-                        alt={detailProduct.name}
-                        className={styles.smallImage}
-                      />
-                    </div>
-                    <img
-                      src={`${detailProduct.image}`}
-                      alt={detailProduct.name}
-                      className={styles.mainImage}
-                    />
-                  </div>
+    <>
+      <div className={styles.goBack}>
+        <Link to={`../${detailProduct.sex}`} className={styles.goBackLink}>
+          <img src={goBackImg} alt="go back" className={styles.goBackImg} />
+          <p className={styles.goBackText}>Повернутись</p>
+        </Link>
+      </div>
+      <section>
+        <div className={styles.productGrid}>
+          <div className={styles.productImagesContainer}>
+            <div className={styles.smallImages}>
+              <img
+                src={`${detailProduct.image}`}
+                alt={detailProduct.name}
+                className={styles.smallImage}
+              />
+              <img
+                src={`${detailProduct.image}`}
+                alt={detailProduct.name}
+                className={styles.smallImage}
+              />
+              <img
+                src={`${detailProduct.image}`}
+                alt={detailProduct.name}
+                className={styles.smallImage}
+              />
+              <img
+                src={`${detailProduct.image}`}
+                alt={detailProduct.name}
+                className={styles.smallImage}
+              />
+              <img
+                src={`${detailProduct.image}`}
+                alt={detailProduct.name}
+                className={styles.smallImage}
+              />
+              <img
+                src={`${detailProduct.image}`}
+                alt={detailProduct.name}
+                className={styles.smallImage}
+              />
+            </div>
+            <img
+              src={`${detailProduct.image}`}
+              alt={detailProduct.name}
+              className={styles.mainImage}
+            />
+          </div>
 
           <div className={styles.productText}>
             <h2 className={styles.productName}>{detailProduct.name}</h2>

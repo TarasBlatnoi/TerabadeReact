@@ -6,11 +6,9 @@
   transition: all 0.4s ease-in-out;
   background: rgba(255, 255, 255, 0.5);
   backdrop-filter: blur(7px);
-  opacity: 0;
-  visibility: hidden;
 }
 
-.opened {
+/* .opened {
   opacity: 1;
   visibility: visible;
-}
+} */

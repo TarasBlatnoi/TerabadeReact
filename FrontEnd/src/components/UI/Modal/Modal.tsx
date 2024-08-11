@@ -21,11 +21,12 @@ const Modal = ({ open, children, className = "" }: ModalProps) => {
     return null
   }
 
+  if (!open) {
+    return null
+  }
+
   return createPortal(
-    <div
-      className={`${styles.dialogWrapper} ${open ? styles.opened : ""}`}
-      ref={wrapperRef}
-    >
+    <div className={styles.dialogWrapper} ref={wrapperRef}>
       <dialog
         ref={ref}
         className={`${className}`}
