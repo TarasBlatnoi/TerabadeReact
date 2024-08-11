@@ -1,11 +1,8 @@
 import ProductAPI from "../../api/Product/ProductAPI"
 import { Form, Link, useParams } from "react-router-dom"
-import { ProductType } from "../../types"
 import { CartContext } from "../../context/CartContext"
 import { useContext } from "react"
 import { CartItemType } from "../../context/CartContext"
-import CardItem from "../../components/CardItem/CardItem"
-
 import goBackImg from "../../assets/images/back-svgrepo-com 1.svg"
 import styles from "./DetailProducts.module.css"
 import Button from "../../components/UI/Button/Button"

@@ -44,19 +44,7 @@ html {
 
 @media screen and (width > 1440px) {
   html {
-    font-size: 66.5%;
-  }
-}
-
-@media screen and (width < 1440px) {
-  html {
-    font-size: 56.5%;
-  }
-}
-
-@media screen and (width < 1080px) {
-  html {
-    font-size: 46.5%;
+    font-size: 91%;
   }
 }
 
