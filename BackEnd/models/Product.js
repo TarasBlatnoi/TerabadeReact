@@ -2,32 +2,22 @@ const db = require("../database")
 const { imageToBase64 } = require("../utils/imageToBase64")
 class Product {
   static sql = {
-    createPlaceholders(quantity) {
-      let placeHoldersString = "?"
-      for (let i = 0; i < quantity; i++) {
-        if (i === quantity - 1) {
-          placeHoldersString + "?"
-          return placeHoldersString
-        }
-        placeHoldersString += ", ?"
-      }
-    },
-    findImagesForProducts: `
+    findImagesForProduct: `
         SELECT ImageURL, ImageOrder, Images.ProductID 
         FROM 
         product JOIN Images 
         ON product.ProductID = Images.ProductID
-        WHERE product.ProductID IN (PLACE_HOLDER)
-        ORDER BY Images.ProductID, ImageOrder;
+        WHERE product.ProductID = ?
+        ORDER BY  ImageOrder;
     `,
     findAll: `
         SELECT * 
         FROM terabade.product;
         `,
     findMenProducts: `
-        SELECT  *
-        FROM terabade.product
-        WHERE sex = "men"
+        SELECT  product.ProductID, name, sex, type, color, price, size, productDetails, ImageURL
+        FROM terabade.product JOIN terabade.Images ON product.ProductID = Images.ProductID
+        WHERE sex = "men" AND ImageOrder = 0
         LIMIT 9;
         `,
     findWomenProducts: `
@@ -45,16 +35,6 @@ class Product {
         FROM terabade.product 
         WHERE ProductID = ?;
     `,
-  }
-
-  static bindImagesToProducts(products, images) {
-    const ProductsWithImages = products.map((product) => {
-      product.images = images.filter(
-        (image) => product.ProductID === image.ProductID,
-      )
-      return product
-    })
-    return ProductsWithImages
   }
 
   static async commitQuery(sql, data) {
@@ -79,12 +59,8 @@ class Product {
   }
   static async findMenProducts() {
     const menProducts = await Product.commitQuery(Product.sql.findMenProducts)
-    const images = await Product.findImagesForProducts(menProducts)
-    const menProductsWithImages = Product.bindImagesToProducts(
-      menProducts,
-      images,
-    )
-    return menProductsWithImages
+    console.log(menProducts)
+    return menProducts
   }
 
   static async findWomenProducts() {
