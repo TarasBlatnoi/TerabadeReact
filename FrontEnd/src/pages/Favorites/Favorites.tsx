@@ -18,7 +18,7 @@ const Favorites = () => {
     console.log(error)
     content = <p>Error</p>
   }
-  const favProducts = data.result
+  const favProducts = data?.result
   if (data) {
     content = (
       <div className={styles.products}>
@@ -30,7 +30,7 @@ const Favorites = () => {
   }
   return (
     <>
-      {favProducts.length ? (
+      {favProducts?.length ? (
         content
       ) : (
         <h1 className={styles.favProductsFallback}>
