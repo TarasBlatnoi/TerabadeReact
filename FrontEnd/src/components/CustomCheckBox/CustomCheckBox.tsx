@@ -5,14 +5,23 @@ interface CustomCheckBoxProps
   extends React.InputHTMLAttributes<HTMLInputElement> {
   callBack?: (checked: boolean) => any
   className?: string
+  children?: React.ReactElement
 }
 
-function CustomCheckBox({ callBack, ...props }: CustomCheckBoxProps) {
+function CustomCheckBox({ callBack, children, ...props }: CustomCheckBoxProps) {
   const [checked, setChecked] = useState(false)
 
   return (
     <div
-      className={`${styles.inputContainer} ${checked ? styles.checked : ""}`}
+      className={`${styles.inputContainer} ${
+        !children
+          ? checked
+            ? styles.checked
+            : checked && children
+            ? styles.checkedSize
+            : ""
+          : styles.sizeContainer
+      }`}
     >
       <input
         {...props}
@@ -23,6 +32,7 @@ function CustomCheckBox({ callBack, ...props }: CustomCheckBoxProps) {
         }}
         checked={checked}
       />
+      {children}
     </div>
   )
 }

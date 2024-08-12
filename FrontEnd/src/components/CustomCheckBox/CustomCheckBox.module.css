@@ -28,3 +28,15 @@
 .checked::before {
   content: "⚫️";
 }
+
+.sizeContainer {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  background-color: #f9c31f;
+}
+
+.checkedSize {
+  border-radius: 2px solid white;
+}
