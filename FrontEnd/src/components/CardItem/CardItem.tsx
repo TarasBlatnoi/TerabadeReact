@@ -39,7 +39,7 @@ const CardItem = ({ product, className, style }: CardItemProps) => {
           <h1 className={styles.productName}>{product.name}</h1>
           <p className={styles.productType}>{product.type}</p>
           <p className={styles.price}>
-            {formaterCurrency.format(5000 + product.price)} <span>UAH</span>{" "}
+            {formaterCurrency.format(product.price)} <span>UAH</span>{" "}
           </p>
         </div>
       </div>
