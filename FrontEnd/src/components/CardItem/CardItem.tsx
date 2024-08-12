@@ -17,7 +17,6 @@ const CardItem = ({ product, className, style }: CardItemProps) => {
   const navigate = useNavigate()
 
   const { isOpenFilters } = useFilters()
-
   return (
     <li
       className={`${styles.item} ${className} ${
@@ -29,10 +28,7 @@ const CardItem = ({ product, className, style }: CardItemProps) => {
       }}
     >
       <div className={styles.imageContainer}>
-        <img
-          src={product.image}
-          alt={product.name}
-        />
+        <img src={product.ImageURL} alt={product.name} />
       </div>
       <div className={styles.infoDetailsContainer}>
         <div className={styles.detailsContainer}>

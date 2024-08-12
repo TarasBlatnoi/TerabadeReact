@@ -1,25 +1,25 @@
-import { useQuery } from "@tanstack/react-query"
+import { useQuery } from "react-query"
 import ProductAPI from "../../api/Product/ProductAPI"
 import { ProductType } from "../../types"
 import CardItem from "../../components/CardItem/CardItem"
 import styles from "./Favorites.module.css"
 
 const Favorites = () => {
-  const { data, isPending, isError, error } = useQuery({
+  const { data, isLoading, isError, error } = useQuery({
     queryFn: ProductAPI.getFavoriteProducts,
     queryKey: ["products", "favorites"],
   })
 
   let content
-  if (isPending) {
+  if (isLoading) {
     content = <h2>Fetching your favorite products...</h2>
   }
   if (isError) {
     console.log(error)
     content = <p>Error</p>
   }
+  const favProducts = data?.result
   if (data) {
-    const favProducts = data.result
     content = (
       <div className={styles.products}>
         {favProducts.map((product: ProductType) => {
@@ -29,11 +29,15 @@ const Favorites = () => {
     )
   }
   return (
-    <div>
-      <h1>filter</h1>
-      <p>toggle filter</p>
-      {content}
-    </div>
+    <>
+      {favProducts?.length ? (
+        content
+      ) : (
+        <h1 className={styles.favProductsFallback}>
+          You didn't add any products yet
+        </h1>
+      )}
+    </>
   )
 }
 

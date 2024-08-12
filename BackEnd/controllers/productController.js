@@ -30,6 +30,7 @@ const getMenProducts = asyncWrapper(Product.findMenProducts)
 const getProductById = asyncWrapper(Product.findById)
 const getWomenProducts = asyncWrapper(Product.findWomenProducts)
 const getChildrenProducts = asyncWrapper(Product.findChildrenPoducts)
+const getImagesForProduct = asyncWrapper(Product.findImagesForProduct)
 // const updateProduct = asyncWrapper(Product.updateById)
 // const deleteProduct = asyncWrapper(Product.deleteById)
 
@@ -39,6 +40,7 @@ module.exports = {
   getMenProducts,
   getWomenProducts,
   getChildrenProducts,
+  getImagesForProduct,
   //   updateProduct,
   //   deleteProduct,
 }

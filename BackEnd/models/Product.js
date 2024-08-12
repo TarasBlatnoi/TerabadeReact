@@ -1,15 +1,24 @@
 const db = require("../database")
 const { imageToBase64 } = require("../utils/imageToBase64")
 class Product {
-  static sqlQueries = {
+  static sql = {
+    findImagesForProduct: `
+        SELECT ImageURL, ImageOrder, Images.ProductID 
+        FROM 
+        product JOIN Images 
+        ON product.ProductID = Images.ProductID
+        WHERE product.ProductID = ?
+        ORDER BY  ImageOrder;
+    `,
     findAll: `
         SELECT * 
-        FROM product;
+        FROM terabade.product;
         `,
     findMenProducts: `
-        SELECT * 
-        FROM terabade.product
-        WHERE sex = "men";
+        SELECT  product.ProductID, name, sex, type, color, price, size, productDetails, ImageURL
+        FROM terabade.product JOIN terabade.Images ON product.ProductID = Images.ProductID
+        WHERE sex = "men" AND ImageOrder = 0
+        LIMIT 9;
         `,
     findWomenProducts: `
         SELECT * 
@@ -45,36 +54,38 @@ class Product {
   }
 
   static async findAllProducts() {
-    const products = await Product.commitQuery(Product.sqlQueries.findAll)
+    const products = await Product.commitQuery(Product.sql.findAll)
     return products
   }
   static async findMenProducts() {
-    const menProducts = await Product.commitQuery(
-      Product.sqlQueries.findMenProducts,
-    )
+    const menProducts = await Product.commitQuery(Product.sql.findMenProducts)
     return menProducts
   }
 
   static async findWomenProducts() {
     const womenProducts = await Product.commitQuery(
-      Product.sqlQueries.findWomenProducts,
+      Product.sql.findWomenProducts,
     )
     return womenProducts
   }
   static async findChildrenPoducts() {
     const childrenProducts = await Product.commitQuery(
-      Product.sqlQueries.findChildrenPoducts,
+      Product.sql.findChildrenPoducts,
     )
     return childrenProducts
   }
   static async findById(id) {
-    const dataForDB = []
-    dataForDB.push(id)
-    const product = await Product.commitQuery(
-      Product.sqlQueries.findById,
-      dataForDB,
-    )
-    return product
+    const [product] = await Product.commitQuery(Product.sql.findById, [id])
+    const images = await Product.findImagesForProduct(id)
+    product.images = images
+    return [product]
+  }
+
+  static async findImagesForProduct(id) {
+    const images = await Product.commitQuery(Product.sql.findImagesForProduct, [
+      id,
+    ])
+    return images
   }
 }
 
