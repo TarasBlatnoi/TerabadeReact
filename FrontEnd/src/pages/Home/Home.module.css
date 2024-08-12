@@ -42,8 +42,8 @@
 
 .rectangleBgCover {
   background-color: #1e1e1e;
-  width: 20%;
-  height: 12rem;
+  width: 30rem;
+  height: 16rem;
   z-index: 20;
   right: 28.5%;
   top: -7%;
@@ -56,7 +56,7 @@
 /* 3200 */
 @media (max-width: 250em) {
   html {
-    font-size: 110% !important;
+    font-size: 90% !important;
   }
   .rectangleBgCover {
     right: 29.8%;
@@ -67,7 +67,7 @@
 /* 2272*/
 @media (max-width: 142em) {
   html {
-    font-size: 91% !important;
+    font-size: 80% !important;
   }
 
   .rectangleBgCover {
@@ -85,7 +85,7 @@
   }
   .rectangleBgCover {
     right: 28.5%;
-    top: -4%;
+    top: -7%;
   }
   .rectangle {
     padding: 5rem 3rem;
@@ -100,7 +100,6 @@
     font-size: 62.5% !important;
   }
   .rectangleBgCover {
-    width: 25%;
     right: 28.5%;
     top: -5%;
   }
@@ -118,8 +117,7 @@
     font-size: 55% !important;
   }
   .rectangleBgCover {
-    right: 29%;
-    top: -2%;
+    background: transparent;
   }
   .rectangle {
     padding: 4rem 3rem;
