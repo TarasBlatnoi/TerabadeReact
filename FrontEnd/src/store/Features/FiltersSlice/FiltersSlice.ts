@@ -7,7 +7,7 @@ export type initialStateType = {
     women: boolean
     children: boolean
   }
-  price: { min: number; max: number }
+  price: Array<{ min: number; max: number }>
   style: Array<string>
   size: Array<number>
 }
@@ -19,7 +19,7 @@ const initialState = {
     women: false,
     children: false,
   },
-  price: { min: 0, max: Infinity },
+  price: [],
   style: [],
   size: [],
 } as initialStateType
@@ -48,8 +48,26 @@ const filtersSlice = createSlice({
         state.size = [...set]
       }
     },
-    updatePrice(state, action: { payload: { min: number; max: number } }) {
-      state.price = action.payload
+    updatePrice(
+      state,
+      action: { payload: { min: number; max: number; checked: boolean } }
+    ) {
+      if (action.payload.checked) {
+        state.price.push({ min: action.payload.min, max: action.payload.max })
+      } else {
+        const index = state.price.findIndex(
+          (priceTag) =>
+            priceTag.min === action.payload.min &&
+            priceTag.max === action.payload.max
+        )
+
+        state.price.splice(index, 1)
+      }
+      state.price.sort(({ min }, { min: nextMin }) => {
+        if (min > nextMin) return 1
+        else if (min < nextMin) return -1
+        else return 0
+      })
     },
     updateStyle(
       state,
