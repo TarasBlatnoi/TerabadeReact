@@ -10,6 +10,7 @@ import Star from "../../assets/images/star-fall-minimalistic-svgrepo-com 1.svg"
 import CharacteristicsImg from "../../assets/images/list-minus-svgrepo-com 1.svg"
 import { useQuery } from "react-query"
 import YouMightAlsoLike from "../../components/YouMightAlsoLike/YouMightAlsoLike"
+import { ImageObject } from "../../types"
 
 function DetailProduct() {
   const params = useParams()
@@ -21,14 +22,12 @@ function DetailProduct() {
     staleTime: Infinity,
     suspense: true,
   })
-
   const { data: parentData } = useQuery({
     queryFn: () => ProductAPI.getProducts(detailProduct.sex),
     queryKey: [detailProduct.sex],
     staleTime: Infinity,
     suspense: true,
   })
-
   const { addCartItem, openCart } = useContext(CartContext)
   function handleClick(item: CartItemType) {
     addCartItem(item)
@@ -46,39 +45,18 @@ function DetailProduct() {
         <div className={styles.productGrid}>
           <div className={styles.productImagesContainer}>
             <div className={styles.smallImages}>
-              <img
-                src={`${detailProduct.image}`}
-                alt={detailProduct.name}
-                className={styles.smallImage}
-              />
-              <img
-                src={`${detailProduct.image}`}
-                alt={detailProduct.name}
-                className={styles.smallImage}
-              />
-              <img
-                src={`${detailProduct.image}`}
-                alt={detailProduct.name}
-                className={styles.smallImage}
-              />
-              <img
-                src={`${detailProduct.image}`}
-                alt={detailProduct.name}
-                className={styles.smallImage}
-              />
-              <img
-                src={`${detailProduct.image}`}
-                alt={detailProduct.name}
-                className={styles.smallImage}
-              />
-              <img
-                src={`${detailProduct.image}`}
-                alt={detailProduct.name}
-                className={styles.smallImage}
-              />
+              {detailProduct.images.map((image: ImageObject) => {
+                return (
+                  <img
+                    src={`${image.ImageURL}`}
+                    alt={detailProduct.name}
+                    className={styles.smallImage}
+                  />
+                )
+              })}
             </div>
             <img
-              src={`${detailProduct.image}`}
+              src={`${detailProduct.images[0].ImageURL}`}
               alt={detailProduct.name}
               className={styles.mainImage}
             />

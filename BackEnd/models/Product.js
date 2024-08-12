@@ -75,20 +75,16 @@ class Product {
     return childrenProducts
   }
   static async findById(id) {
-    const dataForDB = []
-    dataForDB.push(id)
-    const product = await Product.commitQuery(Product.sql.findById, dataForDB)
-    return product
+    const [product] = await Product.commitQuery(Product.sql.findById, [id])
+    const images = await Product.findImagesForProduct(id)
+    product.images = images
+    return [product]
   }
 
-  static async findImagesForProducts(products) {
-    const productIds = products.map((product) => product.ProductID)
-    const placeHolders = Product.sql.createPlaceholders(products.length)
-    const queryWithPlaceholders = Product.sql.findImagesForProducts.replace(
-      "PLACE_HOLDER",
-      placeHolders,
-    )
-    const images = await Product.commitQuery(queryWithPlaceholders, productIds)
+  static async findImagesForProduct(id) {
+    const images = await Product.commitQuery(Product.sql.findImagesForProduct, [
+      id,
+    ])
     return images
   }
 }

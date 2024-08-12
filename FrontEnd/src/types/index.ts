@@ -16,3 +16,9 @@ export interface UserBodyType {
   email: FormDataEntryValue | null
   password: FormDataEntryValue | null
 }
+
+export interface ImageObject {
+  ImageURL: string
+  ImageOrder: number
+  ProducID: number
+}
