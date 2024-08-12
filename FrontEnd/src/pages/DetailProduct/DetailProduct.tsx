@@ -48,6 +48,7 @@ function DetailProduct() {
               {detailProduct.images.map((image: ImageObject) => {
                 return (
                   <img
+                    key={image.ImageOrder}
                     src={`${image.ImageURL}`}
                     alt={detailProduct.name}
                     className={styles.smallImage}
