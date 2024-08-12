@@ -59,7 +59,6 @@ class Product {
   }
   static async findMenProducts() {
     const menProducts = await Product.commitQuery(Product.sql.findMenProducts)
-    console.log(menProducts)
     return menProducts
   }
 

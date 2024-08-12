@@ -2,7 +2,7 @@ export interface ProductType {
   ProductID: number
   color: string
   createdAt: string
-  image: string
+  ImageURL: string
   name: string
   price: number
   productDetails: string
