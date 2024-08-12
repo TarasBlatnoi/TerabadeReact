@@ -1,9 +1,10 @@
 import CardItem from "../../components/CardItem/CardItem"
 import { ProductType } from "../../types"
 import styles from "./Products.module.css"
-import { useFilters } from "../../context/FiltersContext"
 import { useQuery } from "react-query"
 import ProductAPI from "../../api/Product/ProductAPI"
+import { useSelector } from "react-redux"
+import { storeType } from "../../store/store"
 
 type ProductsPropsType = {
   parentRouteId: "men" | "women" | "children"
@@ -15,9 +16,40 @@ function Products({ parentRouteId }: ProductsPropsType) {
     queryKey: [parentRouteId],
     suspense: true,
     staleTime: Infinity,
-  })
+  }) as { data: ProductType[] }
 
-  const { isOpenFilters } = useFilters()
+  const { visibility: isOpenFilters, states } = useSelector(
+    (store: storeType) => store.filters
+  )
+
+  const filteredData = data
+    .filter((product) => {
+      console.log(product.price)
+      if (states.price.length) {
+        if (
+          product.price >= states.price[0].min &&
+          product.price <= states.price.at(-1)!.max!
+        )
+          return true
+        else return false
+      }
+      return true
+    })
+    .filter((product) => {
+      if (!Object.values(states.gender).includes(true)) return true
+      const enabledGenderFilters = Object.entries(states.gender)
+        .filter(([_, checked]) => checked)
+        .map(([gender]) => gender)
+      return enabledGenderFilters.includes(product.sex)
+    })
+    .filter((product) => {
+      if (!states.style.length) return true
+      return states.style.includes(product.type)
+    })
+    .filter((product) => {
+      if (!states.size.length) return true
+      return states.size.includes(product.size)
+    })
 
   return (
     <ul
@@ -25,7 +57,7 @@ function Products({ parentRouteId }: ProductsPropsType) {
         !isOpenFilters ? styles.expandedList : ""
       }`}
     >
-      {data.map((product: ProductType) => {
+      {filteredData.map((product: ProductType) => {
         return <CardItem key={product.ProductID} product={product} />
       })}
     </ul>

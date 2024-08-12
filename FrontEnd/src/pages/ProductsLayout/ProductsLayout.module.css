@@ -96,7 +96,7 @@
   height: fit-content;
 }
 
-@media screen and (width <= 1250px) {
+@media screen and (width <= 800px) {
   .sectionFilters {
     visibility: hidden;
     width: 0;

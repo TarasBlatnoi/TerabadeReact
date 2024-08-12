@@ -4,12 +4,15 @@ import HideFiltersButton from "../../components/HideFiltersButton/HideFiltersBut
 import { SortProvider } from "../../context/SortContext"
 import SortSelection from "../../components/SortSelection/SortSelection"
 import Filters from "../../components/Filters/Filters"
-import { useFilters } from "../../context/FiltersContext"
 import { Suspense } from "react"
+import { useSelector } from "react-redux"
+import { storeType } from "../../store/store"
 
 function ProductsLayout() {
   const location = useLocation()
-  const { isOpenFilters } = useFilters()
+  const isOpenFilters = useSelector(
+    (store: storeType) => store.filters.visibility
+  )
 
   const pathname = location.pathname.replace("/", "")
   const gender =
