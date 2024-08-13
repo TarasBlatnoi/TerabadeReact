@@ -75,10 +75,12 @@ class Product {
     return childrenProducts
   }
   static async findById(id) {
-    const [product] = await Product.commitQuery(Product.sql.findById, [id])
-    const images = await Product.findImagesForProduct(id)
-    product.images = images
-    return [product]
+    const [product, images] = await Promise.all([
+      Product.commitQuery(Product.sql.findById, [id]),
+      Product.findImagesForProduct(id),
+    ])
+    product[0].images = images
+    return product
   }
 
   static async findImagesForProduct(id) {
