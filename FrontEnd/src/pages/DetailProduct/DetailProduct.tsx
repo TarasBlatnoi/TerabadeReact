@@ -32,7 +32,6 @@ function DetailProduct() {
   function handleClick(item: CartItemType) {
     addCartItem(item)
   }
-  console.log(detailProduct)
   return (
     <>
       <div className={styles.goBack}>

@@ -2,7 +2,9 @@ module.exports.isAuth = (req, res, next) => {
   if (req.isAuthenticated()) {
     next()
   } else {
-    res.redirect("/login.html")
+    res.status(300).json({
+      msg: "You have to log in first",
+    })
   }
 }
 

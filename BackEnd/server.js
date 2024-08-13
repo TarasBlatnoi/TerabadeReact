@@ -9,6 +9,7 @@ const productRoutes = require("./routes/productRoutes")
 const passport = require("passport")
 const authenticationRoutes = require("./routes/authenticationRoutes")
 const favoriteRoutes = require("./routes/favoriteRoutes")
+const reviewRoutes = require("./routes/reviewRoutes")
 const cors = require("cors")
 require("./auth/passport")
 const session = db.session
@@ -45,6 +46,7 @@ app.use("/api/v1/users", userRoutes)
 app.use("/api/v1/products", productRoutes)
 app.use("/api/v1/favorites", favoriteRoutes)
 app.use("/api/v1", authenticationRoutes)
+app.use("/api/v1/reviews", reviewRoutes)
 
 const closeServer = (server) => {
   return new Promise((resolve, reject) => {
