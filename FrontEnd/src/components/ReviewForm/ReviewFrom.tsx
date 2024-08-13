@@ -1,18 +1,21 @@
 import { FormEvent, ReactNode } from "react"
-
 interface ReviewFormProps {
   children: ReactNode
-  onSubmit: (data: object) => object
+  handleSubmit: (reviewInfo: string) => void
 }
 
-const ReviewForm = ({ children, onSubmit }: ReviewFormProps) => {
-  function handleSubmit(event: FormEvent<HTMLFormElement>) {
+interface FormDataType {
+  text: string
+}
+
+const ReviewForm = ({ children, handleSubmit }: ReviewFormProps) => {
+  function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
     const formData = new FormData(event.currentTarget)
-    const data = Object.fromEntries(formData)
-    onSubmit(data)
+    const data = Object.fromEntries(formData) as unknown as FormDataType
+    handleSubmit(data.text)
   }
-  return <form onSubmit={handleSubmit}>{children}</form>
+  return <form onSubmit={onSubmit}>{children}</form>
 }
 
 export default ReviewForm

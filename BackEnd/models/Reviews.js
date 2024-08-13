@@ -39,10 +39,10 @@ class Review {
   // }
 
   static async addReview(userId, body) {
-    const { text, productId } = body
+    const { text, ProductID } = body
     const res = await Review.commitQuery(Review.sqlQueries.addReview, [
       text,
-      productId,
+      ProductID,
       userId,
     ])
     return res

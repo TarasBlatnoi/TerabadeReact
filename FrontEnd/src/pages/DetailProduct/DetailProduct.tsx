@@ -1,7 +1,7 @@
 import ProductAPI from "../../api/Product/ProductAPI"
-import { Link, useParams } from "react-router-dom"
+import { Link, useNavigate, useParams } from "react-router-dom"
 import { CartContext } from "../../context/CartContext"
-import { useContext } from "react"
+import { useContext, useState } from "react"
 import { CartItemType } from "../../context/CartContext"
 import goBackImg from "../../assets/images/back-svgrepo-com 1.svg"
 import styles from "./DetailProducts.module.css"
@@ -11,10 +11,15 @@ import CharacteristicsImg from "../../assets/images/list-minus-svgrepo-com 1.svg
 import { useQuery } from "react-query"
 import YouMightAlsoLike from "../../components/YouMightAlsoLike/YouMightAlsoLike"
 import { ImageObject } from "../../types"
+import { useMutation } from "react-query"
+import ReviewAPI from "../../api/Review/ReviewAPI"
 import ReviewForm from "../../components/ReviewForm/ReviewFrom"
+import { isAxiosError } from "axios"
 
 function DetailProduct() {
   const params = useParams()
+  const navigate = useNavigate()
+  const [reviewSent, setReviewSent] = useState(false)
   const {
     data: [detailProduct],
   } = useQuery({
@@ -29,6 +34,22 @@ function DetailProduct() {
     staleTime: Infinity,
     suspense: true,
   })
+  const { mutate, isLoading, isError } = useMutation({
+    mutationFn: ReviewAPI.addReview,
+    onSuccess: () => {
+      setReviewSent(true)
+    },
+    onError: (err) => {
+      if (isAxiosError(err)) {
+        if (err?.response?.status === 300) {
+          navigate("/login")
+        }
+      }
+    },
+  })
+  function handleSubmit(reviewText: string) {
+    mutate({ text: reviewText, ProductID: detailProduct.ProductID })
+  }
   const { addCartItem, openCart } = useContext(CartContext)
   function handleClick(item: CartItemType) {
     addCartItem(item)
@@ -156,20 +177,25 @@ function DetailProduct() {
               ab, ullam consectetur nobis quae neque odio dolores et dolor.
             </p>
             <p className={styles.showAll}>Показати всі</p>
-            <ReviewForm>
+            <ReviewForm handleSubmit={handleSubmit}>
               <div className={styles.reviewContainer}>
                 <textarea
                   name="text"
                   id="responseTextArea"
                   placeholder="Напишіть відгук..."
                 ></textarea>
-                <Button
-                  variant="secondaryDark"
-                  type="submit"
-                  className={styles.buttonSubmitReview}
-                >
-                  Надіслати
-                </Button>
+                {isLoading && <p>Відгук надсилається</p>}
+                {!isLoading && (
+                  <Button
+                    variant="secondaryDark"
+                    type="submit"
+                    className={styles.buttonSubmitReview}
+                  >
+                    Надіслати
+                  </Button>
+                )}
+                {isError && <p>Щось пішло не так</p>}
+                {reviewSent && <p>Ваш відгук надіслано</p>}
               </div>
             </ReviewForm>
           </div>
