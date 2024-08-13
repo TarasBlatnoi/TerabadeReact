@@ -10,12 +10,21 @@ class Product {
         WHERE product.ProductID = ?
         ORDER BY  ImageOrder;
     `,
+    findSizesForProduct: `
+        SELECT SizeLabel, InStock
+        FROM 
+        product JOIN ProductSizes 
+        ON product.ProductID = ProductSizes.ProductID
+        JOIN Sizes ON Sizes.SizeID = ProductSizes.SizeID
+        WHERE product.ProductID = ?
+        ORDER BY  StockQuantity;
+    `,
     findAll: `
         SELECT * 
         FROM terabade.product;
         `,
     findMenProducts: `
-        SELECT  product.ProductID, name, sex, type, color, price, size, productDetails, ImageURL
+        SELECT  product.ProductID, name, sex, type, color, price, productDetails, ImageURL
         FROM terabade.product JOIN terabade.Images ON product.ProductID = Images.ProductID
         WHERE sex = "men" AND ImageOrder = 0
         LIMIT 9;
@@ -75,11 +84,13 @@ class Product {
     return childrenProducts
   }
   static async findById(id) {
-    const [product, images] = await Promise.all([
+    const [product, images, sizes] = await Promise.all([
       Product.commitQuery(Product.sql.findById, [id]),
       Product.findImagesForProduct(id),
+      Product.findSizesForProduct(id),
     ])
     product[0].images = images
+    product[0].sizes = sizes
     return product
   }
 
@@ -88,6 +99,13 @@ class Product {
       id,
     ])
     return images
+  }
+
+  static async findSizesForProduct(id) {
+    const sizes = await Product.commitQuery(Product.sql.findSizesForProduct, [
+      id,
+    ])
+    return sizes
   }
 }
 
