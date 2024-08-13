@@ -1,5 +1,5 @@
 import ProductAPI from "../../api/Product/ProductAPI"
-import { Form, Link, useParams } from "react-router-dom"
+import { Link, useParams } from "react-router-dom"
 import { CartContext } from "../../context/CartContext"
 import { useContext } from "react"
 import { CartItemType } from "../../context/CartContext"
@@ -11,6 +11,7 @@ import CharacteristicsImg from "../../assets/images/list-minus-svgrepo-com 1.svg
 import { useQuery } from "react-query"
 import YouMightAlsoLike from "../../components/YouMightAlsoLike/YouMightAlsoLike"
 import { ImageObject } from "../../types"
+import ReviewForm from "../../components/ReviewForm/ReviewFrom"
 
 function DetailProduct() {
   const params = useParams()
@@ -155,10 +156,10 @@ function DetailProduct() {
               ab, ullam consectetur nobis quae neque odio dolores et dolor.
             </p>
             <p className={styles.showAll}>Показати всі</p>
-            <Form action="">
+            <ReviewForm>
               <div className={styles.reviewContainer}>
                 <textarea
-                  name="Напишіть відгук ..."
+                  name="text"
                   id="responseTextArea"
                   placeholder="Напишіть відгук..."
                 ></textarea>
@@ -170,7 +171,7 @@ function DetailProduct() {
                   Надіслати
                 </Button>
               </div>
-            </Form>
+            </ReviewForm>
           </div>
         </div>
       </section>
