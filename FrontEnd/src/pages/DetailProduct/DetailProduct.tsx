@@ -1,7 +1,7 @@
 import ProductAPI from "../../api/Product/ProductAPI"
 import { Link, useNavigate, useParams } from "react-router-dom"
 import { CartContext } from "../../context/CartContext"
-import { useContext, useState } from "react"
+import { useContext, useRef, useState } from "react"
 import { CartItemType } from "../../context/CartContext"
 import goBackImg from "../../assets/images/back-svgrepo-com 1.svg"
 import styles from "./DetailProducts.module.css"
@@ -20,6 +20,7 @@ import Sizes from "./Sizes/Sizes"
 function DetailProduct() {
   const params = useParams()
   const navigate = useNavigate()
+  const textAreaRef = useRef<HTMLTextAreaElement>(null)
   const [reviewSent, setReviewSent] = useState(false)
   const {
     data: [detailProduct],
@@ -38,6 +39,9 @@ function DetailProduct() {
   const { mutate, isLoading, isError } = useMutation({
     mutationFn: ReviewAPI.addReview,
     onSuccess: () => {
+      if (textAreaRef.current) {
+        textAreaRef.current.value = ""
+      }
       setReviewSent(true)
     },
     onError: (err) => {
@@ -156,6 +160,7 @@ function DetailProduct() {
               <div className={styles.reviewContainer}>
                 <textarea
                   name="text"
+                  ref={textAreaRef}
                   id="responseTextArea"
                   placeholder="Напишіть відгук..."
                 ></textarea>

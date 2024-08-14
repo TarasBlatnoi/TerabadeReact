@@ -9,7 +9,7 @@ interface FormDataType {
 }
 
 const ReviewForm = ({ children, handleSubmit }: ReviewFormProps) => {
-  function onSubmit(event: FormEvent<HTMLFormElement>) {
+  async function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
     const formData = new FormData(event.currentTarget)
     const data = Object.fromEntries(formData) as unknown as FormDataType
