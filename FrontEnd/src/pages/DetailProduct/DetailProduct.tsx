@@ -15,6 +15,7 @@ import { useMutation } from "react-query"
 import ReviewAPI from "../../api/Review/ReviewAPI"
 import ReviewForm from "../../components/ReviewForm/ReviewFrom"
 import { isAxiosError } from "axios"
+import Sizes from "./Sizes/Sizes"
 
 function DetailProduct() {
   const params = useParams()
@@ -93,33 +94,7 @@ function DetailProduct() {
               </span>{" "}
               UAH
             </p>
-            <div className={styles.sizesContainer}>
-              <div className={styles.sizesTextConteiner}>
-                <p>Обрати розмір</p>
-                <p>Довідник розмірів</p>
-              </div>
-              <div className={styles.sizeRectContainer}>
-                <div className={styles.sizeRect}>6</div>
-                <div className={styles.sizeRect}>6.5</div>
-                <div className={styles.sizeRect}>7</div>
-                <div className={styles.sizeRect}>7.5</div>
-                <div className={`${styles.sizeRect} ${styles.sizeRectFilled}`}>
-                  8
-                </div>
-                <div className={styles.sizeRect}>8.5</div>
-                <div className={styles.sizeRect}>9</div>
-                <div className={styles.sizeRect}>9.5</div>
-                <div className={styles.sizeRect}>10</div>
-                <div className={styles.sizeRect}>10.5</div>
-                <div className={styles.sizeRect}>11</div>
-                <div className={styles.sizeRect}>11.5</div>
-                <div className={styles.sizeRect}>12</div>
-                <div className={styles.sizeRect}>12.5</div>
-                <div className={styles.sizeRect}>13</div>
-                <div className={styles.sizeRect}>13.5</div>
-                <div className={styles.sizeRect}>14</div>
-              </div>
-            </div>
+            <Sizes begin={6} end={14} step={0.5} />
             <div className={styles.actionButtons}>
               <Button
                 className={styles.addToCartButton}

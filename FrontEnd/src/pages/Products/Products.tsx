@@ -24,7 +24,6 @@ function Products({ parentRouteId }: ProductsPropsType) {
 
   const filteredData = data
     .filter((product) => {
-      console.log(product.price)
       if (states.price.length) {
         if (
           product.price >= states.price[0].min &&
