@@ -8,7 +8,6 @@ interface ImagesContainerProps {
 
 const ImagesContainer = ({ detailProduct }: ImagesContainerProps) => {
   const { activeImage, setActiveImage } = useImages()
-  console.log(activeImage)
   return (
     <div className={styles.productImagesContainer}>
       <div className={styles.smallImages}>

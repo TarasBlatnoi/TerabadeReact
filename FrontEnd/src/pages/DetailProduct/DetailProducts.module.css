@@ -32,7 +32,9 @@ section {
   display: grid;
   max-width: 120rem;
   column-gap: 3.2rem;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 47fr 53fr;
+  padding-left: 2.4rem;
+  padding-right: 2.4rem;
 }
 
 .productGrid::-webkit-scrollbar {

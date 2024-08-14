@@ -44,7 +44,6 @@
   background-color: #1e1e1e;
   width: 30rem;
   height: 16rem;
-  z-index: 20;
   right: 28.5%;
   top: -7%;
   border-radius: 3.4rem;
@@ -88,8 +87,9 @@
     font-size: 70% !important;
   }
   .rectangleBgCover {
-    right: 28.5%;
-    top: -7%;
+    height: 17rem;
+    right: 30%;
+    top: -2%;
   }
   .rectangle {
     padding: 5rem 3rem;
@@ -104,8 +104,9 @@
     font-size: 62.5% !important;
   }
   .rectangleBgCover {
-    right: 28.5%;
-    top: -5%;
+    height: 18rem;
+    right: 30%;
+    top: -6%;
   }
   .rectangle {
     padding: 4rem 3rem;
@@ -121,7 +122,9 @@
     font-size: 55% !important;
   }
   .rectangleBgCover {
-    background: transparent;
+    height: 18rem;
+    right: 29%;
+    top: -10%;
   }
   .rectangle {
     padding: 4rem 3rem;

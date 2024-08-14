@@ -25,7 +25,8 @@
 }
 @media (max-width: 250em) {
   .whiteRect {
-    width: 74%;
+    width: 78%;
+    right: -9%;
     height: 20rem;
   }
   .whiteSpotImg {
@@ -33,16 +34,29 @@
   }
 }
 
+@media (max-width: 142em) {
+  .whiteRect {
+    right: -11%;
+  }
+  .whiteSpotImg {
+    height: 80rem;
+  }
+}
+
 @media (max-width: 123em) {
   .whiteRect {
-    width: 71.5%;
-    height: 20rem;
+    height: 19rem;
   }
 }
 
 @media (max-width: 94em) {
   .whiteRect {
-    width: 70%;
+    width: 69.5%;
+    right: -4%;
+    height: 16.5rem;
+  }
+  .whiteSpotImg {
+    height: 70rem;
   }
 }
 
@@ -53,6 +67,6 @@
   .whiteRect {
     background-color: #fbfaff;
     width: 64%;
-    height: 18rem;
+    height: 16rem;
   }
 }
