@@ -16,20 +16,28 @@ import ReviewForm from "../../components/ReviewForm/ReviewFrom"
 import { isAxiosError } from "axios"
 import Sizes from "./Sizes/Sizes"
 import ImagesContainer from "./ImagesContainer/ImagesContainer"
+import { useImages } from "../../context/ImageContext"
 
 function DetailProduct() {
   const params = useParams()
   const navigate = useNavigate()
   const textAreaRef = useRef<HTMLTextAreaElement>(null)
   const [reviewSent, setReviewSent] = useState(false)
+  const { setActiveImage } = useImages()
+
   const {
     data: [detailProduct],
+    isLoading: isLoadingDetailProduct,
+    isError: isErrorDetailProduct,
   } = useQuery({
     queryFn: () => ProductAPI.getById(params.id!),
     queryKey: [params.id],
     staleTime: Infinity,
     suspense: true,
   })
+  if (!isLoadingDetailProduct && !isErrorDetailProduct) {
+    setActiveImage(detailProduct?.images[0].ImageURL)
+  }
   const { data: parentData } = useQuery({
     queryFn: () => ProductAPI.getProducts(detailProduct.sex),
     queryKey: [detailProduct.sex],

@@ -1,15 +1,13 @@
-import { useState } from "react"
 import { ImageObject, DetailProductType } from "../../../types"
 import styles from "./ImagesContainer.module.css"
+import { useImages } from "../../../context/ImageContext"
 
 interface ImagesContainerProps {
   detailProduct: DetailProductType
 }
 
 const ImagesContainer = ({ detailProduct }: ImagesContainerProps) => {
-  const [activeImage, setActiveImage] = useState<string>(
-    detailProduct.images[0].ImageURL
-  )
+  const { activeImage, setActiveImage } = useImages()
 
   return (
     <div className={styles.productImagesContainer}>

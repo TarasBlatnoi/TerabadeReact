@@ -21,6 +21,7 @@ import ProductsLayout from "./pages/ProductsLayout/ProductsLayout"
 import Products from "./pages/Products/Products"
 import { Provider } from "react-redux"
 import { store } from "./store/store"
+import { ImagesProvider } from "./context/ImageContext"
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -63,15 +64,17 @@ const router = createBrowserRouter(
 
 function App() {
   return (
-    <QueryClientProvider client={queryClient}>
-      <Provider store={store}>
-        <CartProvider>
-          <AuthContextProvider>
-            <RouterProvider router={router} />
-          </AuthContextProvider>
-        </CartProvider>
-      </Provider>
-    </QueryClientProvider>
+    <ImagesProvider>
+      <QueryClientProvider client={queryClient}>
+        <Provider store={store}>
+          <CartProvider>
+            <AuthContextProvider>
+              <RouterProvider router={router} />
+            </AuthContextProvider>
+          </CartProvider>
+        </Provider>
+      </QueryClientProvider>
+    </ImagesProvider>
   )
 }
 
