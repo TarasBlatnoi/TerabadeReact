@@ -13,19 +13,19 @@ type PreviewImgPropsType = {
 const info = [
   {
     imgSrc: girl,
-    linkTo: "/",
+    linkTo: "/women",
     genderName: "Жінки",
     id: 2312,
   },
   {
     imgSrc: children,
-    linkTo: "/",
+    linkTo: "/children",
     genderName: "Діти",
     id: 5412,
   },
   {
     imgSrc: man,
-    linkTo: "/",
+    linkTo: "/men",
     genderName: "Чоловіки",
     id: 8912,
   },
