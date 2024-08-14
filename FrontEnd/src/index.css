@@ -43,13 +43,6 @@ html {
   -webkit-font-smoothing: antialiased;
 
   overflow-x: hidden;
-
-}
-
-@media screen and (width > 1440px) {
-  html {
-    font-size: 91%;
-  }
 }
 
 body {

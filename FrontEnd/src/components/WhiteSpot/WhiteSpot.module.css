@@ -23,6 +23,24 @@
   background-color: #fbfaff;
   border-radius: 5rem;
 }
+@media (max-width: 250em) {
+  .whiteRect {
+    width: 74%;
+  }
+}
+
+@media (max-width: 123em) {
+  .whiteRect {
+    width: 71.5%;
+    height: 20rem;
+  }
+}
+
+@media (max-width: 94em) {
+  .whiteRect {
+    width: 70%;
+  }
+}
 
 @media (max-width: 75em) {
   .whiteSpotImg {
@@ -30,12 +48,7 @@
   }
   .whiteRect {
     background-color: #fbfaff;
-    width: 65% !important;
-  }
-}
-
-@media (max-width: 123em) {
-  .whiteRect {
-    width: 70%;
+    width: 64%;
+    height: 18rem;
   }
 }

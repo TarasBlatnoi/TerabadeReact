@@ -1,7 +1,7 @@
 import ProductAPI from "../../api/Product/ProductAPI"
-import { Form, Link, useParams } from "react-router-dom"
+import { Link, useNavigate, useParams } from "react-router-dom"
 import { CartContext } from "../../context/CartContext"
-import { useContext } from "react"
+import { useContext, useRef, useState } from "react"
 import { CartItemType } from "../../context/CartContext"
 import goBackImg from "../../assets/images/back-svgrepo-com 1.svg"
 import styles from "./DetailProducts.module.css"
@@ -11,9 +11,17 @@ import CharacteristicsImg from "../../assets/images/list-minus-svgrepo-com 1.svg
 import { useQuery } from "react-query"
 import YouMightAlsoLike from "../../components/YouMightAlsoLike/YouMightAlsoLike"
 import { ImageObject } from "../../types"
+import { useMutation } from "react-query"
+import ReviewAPI from "../../api/Review/ReviewAPI"
+import ReviewForm from "../../components/ReviewForm/ReviewFrom"
+import { isAxiosError } from "axios"
+import Sizes from "./Sizes/Sizes"
 
 function DetailProduct() {
   const params = useParams()
+  const navigate = useNavigate()
+  const textAreaRef = useRef<HTMLTextAreaElement>(null)
+  const [reviewSent, setReviewSent] = useState(false)
   const {
     data: [detailProduct],
   } = useQuery({
@@ -28,11 +36,29 @@ function DetailProduct() {
     staleTime: Infinity,
     suspense: true,
   })
+  const { mutate, isLoading, isError } = useMutation({
+    mutationFn: ReviewAPI.addReview,
+    onSuccess: () => {
+      if (textAreaRef.current) {
+        textAreaRef.current.value = ""
+      }
+      setReviewSent(true)
+    },
+    onError: (err) => {
+      if (isAxiosError(err)) {
+        if (err?.response?.status === 300) {
+          navigate("/login")
+        }
+      }
+    },
+  })
+  function handleSubmit(reviewText: string) {
+    mutate({ text: reviewText, ProductID: detailProduct.ProductID })
+  }
   const { addCartItem, openCart } = useContext(CartContext)
   function handleClick(item: CartItemType) {
     addCartItem(item)
   }
-
   return (
     <>
       <div className={styles.goBack}>
@@ -72,33 +98,7 @@ function DetailProduct() {
               </span>{" "}
               UAH
             </p>
-            <div className={styles.sizesContainer}>
-              <div className={styles.sizesTextConteiner}>
-                <p>Обрати розмір</p>
-                <p>Довідник розмірів</p>
-              </div>
-              <div className={styles.sizeRectContainer}>
-                <div className={styles.sizeRect}>6</div>
-                <div className={styles.sizeRect}>6.5</div>
-                <div className={styles.sizeRect}>7</div>
-                <div className={styles.sizeRect}>7.5</div>
-                <div className={`${styles.sizeRect} ${styles.sizeRectFilled}`}>
-                  8
-                </div>
-                <div className={styles.sizeRect}>8.5</div>
-                <div className={styles.sizeRect}>9</div>
-                <div className={styles.sizeRect}>9.5</div>
-                <div className={styles.sizeRect}>10</div>
-                <div className={styles.sizeRect}>10.5</div>
-                <div className={styles.sizeRect}>11</div>
-                <div className={styles.sizeRect}>11.5</div>
-                <div className={styles.sizeRect}>12</div>
-                <div className={styles.sizeRect}>12.5</div>
-                <div className={styles.sizeRect}>13</div>
-                <div className={styles.sizeRect}>13.5</div>
-                <div className={styles.sizeRect}>14</div>
-              </div>
-            </div>
+            <Sizes begin={6} end={14} step={0.5} />
             <div className={styles.actionButtons}>
               <Button
                 className={styles.addToCartButton}
@@ -156,22 +156,28 @@ function DetailProduct() {
               ab, ullam consectetur nobis quae neque odio dolores et dolor.
             </p>
             <p className={styles.showAll}>Показати всі</p>
-            <Form action="">
+            <ReviewForm handleSubmit={handleSubmit}>
               <div className={styles.reviewContainer}>
                 <textarea
-                  name="Напишіть відгук ..."
+                  name="text"
+                  ref={textAreaRef}
                   id="responseTextArea"
                   placeholder="Напишіть відгук..."
                 ></textarea>
-                <Button
-                  variant="secondaryDark"
-                  type="submit"
-                  className={styles.buttonSubmitReview}
-                >
-                  Надіслати
-                </Button>
+                {isLoading && <p>Відгук надсилається</p>}
+                {!isLoading && (
+                  <Button
+                    variant="secondaryDark"
+                    type="submit"
+                    className={styles.buttonSubmitReview}
+                  >
+                    Надіслати
+                  </Button>
+                )}
+                {isError && <p>Щось пішло не так</p>}
+                {reviewSent && <p>Ваш відгук надіслано</p>}
               </div>
-            </Form>
+            </ReviewForm>
           </div>
         </div>
       </section>

@@ -20,5 +20,10 @@ export interface UserBodyType {
 export interface ImageObject {
   ImageURL: string
   ImageOrder: number
-  ProducID: number
+  ProductID: number
+}
+
+export interface Review {
+  text: string
+  ProductID: number
 }
