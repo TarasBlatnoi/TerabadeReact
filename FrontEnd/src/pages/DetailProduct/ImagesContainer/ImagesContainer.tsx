@@ -8,7 +8,7 @@ interface ImagesContainerProps {
 
 const ImagesContainer = ({ detailProduct }: ImagesContainerProps) => {
   const { activeImage, setActiveImage } = useImages()
-
+  console.log(activeImage)
   return (
     <div className={styles.productImagesContainer}>
       <div className={styles.smallImages}>
@@ -29,9 +29,6 @@ const ImagesContainer = ({ detailProduct }: ImagesContainerProps) => {
           key={image.ImageOrder}
           src={image.ImageURL}
           alt={detailProduct.name}
-          onMouseEnter={() => {
-            setActiveImage(image.ImageURL)
-          }}
           className={`${
             activeImage === image.ImageURL ? styles.mainImage : styles.hidden
           }`}

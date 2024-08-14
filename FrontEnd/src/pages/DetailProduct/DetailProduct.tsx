@@ -1,7 +1,7 @@
 import ProductAPI from "../../api/Product/ProductAPI"
 import { Link, useNavigate, useParams } from "react-router-dom"
 import { CartContext } from "../../context/CartContext"
-import { useContext, useRef, useState } from "react"
+import { useContext, useEffect, useRef, useState } from "react"
 import { CartItemType } from "../../context/CartContext"
 import goBackImg from "../../assets/images/back-svgrepo-com 1.svg"
 import styles from "./DetailProducts.module.css"
@@ -27,17 +27,15 @@ function DetailProduct() {
 
   const {
     data: [detailProduct],
-    isLoading: isLoadingDetailProduct,
-    isError: isErrorDetailProduct,
   } = useQuery({
     queryFn: () => ProductAPI.getById(params.id!),
     queryKey: [params.id],
     staleTime: Infinity,
     suspense: true,
   })
-  if (!isLoadingDetailProduct && !isErrorDetailProduct) {
+  useEffect(() => {
     setActiveImage(detailProduct?.images[0].ImageURL)
-  }
+  }, [setActiveImage, detailProduct])
   const { data: parentData } = useQuery({
     queryFn: () => ProductAPI.getProducts(detailProduct.sex),
     queryKey: [detailProduct.sex],
