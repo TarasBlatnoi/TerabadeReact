@@ -1,7 +1,7 @@
 import ProductAPI from "../../api/Product/ProductAPI"
 import { Link, useNavigate, useParams } from "react-router-dom"
 import { CartContext } from "../../context/CartContext"
-import { useContext, useRef, useState } from "react"
+import { useContext, useEffect, useRef, useState } from "react"
 import { CartItemType } from "../../context/CartContext"
 import goBackImg from "../../assets/images/back-svgrepo-com 1.svg"
 import styles from "./DetailProducts.module.css"
@@ -16,12 +16,15 @@ import ReviewForm from "../../components/ReviewForm/ReviewFrom"
 import { isAxiosError } from "axios"
 import Sizes from "./Sizes/Sizes"
 import ImagesContainer from "./ImagesContainer/ImagesContainer"
+import { useImages } from "../../context/ImageContext"
 
 function DetailProduct() {
   const params = useParams()
   const navigate = useNavigate()
   const textAreaRef = useRef<HTMLTextAreaElement>(null)
   const [reviewSent, setReviewSent] = useState(false)
+  const { setActiveImage } = useImages()
+
   const {
     data: [detailProduct],
   } = useQuery({
@@ -30,6 +33,9 @@ function DetailProduct() {
     staleTime: Infinity,
     suspense: true,
   })
+  useEffect(() => {
+    setActiveImage(detailProduct?.images[0].ImageURL)
+  }, [setActiveImage, detailProduct])
   const { data: parentData } = useQuery({
     queryFn: () => ProductAPI.getProducts(detailProduct.sex),
     queryKey: [detailProduct.sex],

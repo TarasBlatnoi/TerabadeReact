@@ -3,6 +3,7 @@ import { ProductType } from "../../types"
 import { useNavigate } from "react-router-dom"
 import { useSelector } from "react-redux"
 import { storeType } from "../../store/store"
+import { useImages } from "../../context/ImageContext"
 
 type CardItemProps = {
   product: ProductType
@@ -16,7 +17,7 @@ const formaterCurrency = Intl.NumberFormat("fr-FR", {
 
 const CardItem = ({ product, className, style }: CardItemProps) => {
   const navigate = useNavigate()
-
+  const { setActiveImage } = useImages()
   const isOpenFilters = useSelector(
     (store: storeType) => store.filters.visibility
   )
@@ -28,6 +29,8 @@ const CardItem = ({ product, className, style }: CardItemProps) => {
       }`}
       style={style}
       onClick={() => {
+        setActiveImage(product.ImageURL)
+        window.scrollTo(0, 0)
         navigate(`/product/${product.ProductID}`)
       }}
     >
