@@ -26,6 +26,10 @@
 @media (max-width: 250em) {
   .whiteRect {
     width: 74%;
+    height: 20rem;
+  }
+  .whiteSpotImg {
+    height: 82rem;
   }
 }
 

@@ -59,8 +59,12 @@
     font-size: 90% !important;
   }
   .rectangleBgCover {
-    right: 29.8%;
+    right: 29%;
     top: -4%;
+  }
+
+  .bgImage {
+    top: 15%;
   }
 }
 
