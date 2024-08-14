@@ -10,12 +10,12 @@ import Star from "../../assets/images/star-fall-minimalistic-svgrepo-com 1.svg"
 import CharacteristicsImg from "../../assets/images/list-minus-svgrepo-com 1.svg"
 import { useQuery } from "react-query"
 import YouMightAlsoLike from "../../components/YouMightAlsoLike/YouMightAlsoLike"
-import { ImageObject } from "../../types"
 import { useMutation } from "react-query"
 import ReviewAPI from "../../api/Review/ReviewAPI"
 import ReviewForm from "../../components/ReviewForm/ReviewFrom"
 import { isAxiosError } from "axios"
 import Sizes from "./Sizes/Sizes"
+import ImagesContainer from "./ImagesContainer/ImagesContainer"
 
 function DetailProduct() {
   const params = useParams()
@@ -69,26 +69,7 @@ function DetailProduct() {
       </div>
       <section>
         <div className={styles.productGrid}>
-          <div className={styles.productImagesContainer}>
-            <div className={styles.smallImages}>
-              {detailProduct.images.map((image: ImageObject) => {
-                return (
-                  <img
-                    key={image.ImageOrder}
-                    src={`${image.ImageURL}`}
-                    alt={detailProduct.name}
-                    className={styles.smallImage}
-                  />
-                )
-              })}
-            </div>
-            <img
-              src={`${detailProduct.images[0].ImageURL}`}
-              alt={detailProduct.name}
-              className={styles.mainImage}
-            />
-          </div>
-
+          <ImagesContainer detailProduct={detailProduct} />
           <div className={styles.productText}>
             <h2 className={styles.productName}>{detailProduct.name}</h2>
             <h3 className={styles.productType}>{detailProduct.type}</h3>

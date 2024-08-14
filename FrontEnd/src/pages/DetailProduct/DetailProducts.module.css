@@ -43,35 +43,6 @@ section {
   display: flex;
 }
 
-.productImagesContainer {
-  display: flex;
-  position: sticky;
-  z-index: 10;
-  top: 5%;
-  justify-content: space-between;
-  height: 50rem;
-}
-
-.smallImages {
-  display: flex;
-  gap: 0.7rem;
-  border-radius: 0.4rem;
-  flex-direction: column;
-}
-
-.smallImage {
-  width: 7rem;
-  height: 7rem;
-  border-radius: 0.5rem;
-  background-color: #fbfaff;
-}
-
-.mainImage {
-  width: 50rem;
-  border-radius: 1rem;
-  background-color: #fbfaff;
-}
-
 .actionButtons {
   display: flex;
   gap: 1.6rem;
