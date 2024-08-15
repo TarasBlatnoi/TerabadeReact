@@ -36,7 +36,7 @@ const corsOptions = {
   },
 }
 app.use(cors(corsOptions))
-const path = require("path")
+app.use(express.static(path.join(__dirname, "FrontEnd/dist")))
 if (process.env.NODE_ENV === "production") {
   // Serve any static files
   app.use(express.static(path.join(__dirname, "FrontEnd/dist")))
