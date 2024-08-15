@@ -36,7 +36,7 @@ const LoginForm = () => {
   const errors = actionData?.errors || []
   return (
     <Form method="post" className={styles.formBox}>
-      <h2>Sign up</h2>
+      <h2 className={styles.actionTitle}>Sign up</h2>
       <Input
         divClassName={`${styles.inputbox} ${styles.fullWith}`}
         type="text"
