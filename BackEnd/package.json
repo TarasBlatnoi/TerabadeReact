@@ -2,7 +2,7 @@
   "scripts": {
     "start": "node app.js",
     "dev": "nodemon app.js",
-    "heroku-postbuild": "cd FronEnd && npm install && npm install --only=dev --no-shrinkwrap && npm run build",
+    "heroku-postbuild": "cd FrontEnd && npm install && npm install --only=dev --no-shrinkwrap && npm build",
     "test": "cross-env NODE_ENV=test jest --testTimeout=15000 --forceExit"
   },
   "jest": {
@@ -38,10 +38,10 @@
     "prettier": "^3.1.1",
     "supertest": "^7.0.0"
   },
-  "name": "kursova-1",
+  "name": "terabade",
   "version": "1.0.0",
   "description": "our first website",
-  "main": "server.js",
+  "main": "app.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/TarasBlatnoi/kursova-1.git"
