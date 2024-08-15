@@ -24,6 +24,7 @@
 
 .mainImage {
   width: 44rem;
+  margin-left: 1.2rem;
   border-radius: 1rem;
   background-color: #fbfaff;
 }
