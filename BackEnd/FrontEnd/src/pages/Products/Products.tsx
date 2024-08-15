@@ -37,17 +37,13 @@ function Products({ parentRouteId }: ProductsPropsType) {
     .filter((product) => {
       if (!Object.values(states.gender).includes(true)) return true
       const enabledGenderFilters = Object.entries(states.gender)
-        .filter(([_, checked]) => checked)
+        .filter(([, checked]) => checked)
         .map(([gender]) => gender)
       return enabledGenderFilters.includes(product.sex)
     })
     .filter((product) => {
       if (!states.style.length) return true
       return states.style.includes(product.type)
-    })
-    .filter((product) => {
-      if (!states.size.length) return true
-      return states.size.includes(product.size)
     })
 
   return (

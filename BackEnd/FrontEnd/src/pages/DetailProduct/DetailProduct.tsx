@@ -34,7 +34,9 @@ function DetailProduct() {
     suspense: true,
   })
   useEffect(() => {
-    setActiveImage(detailProduct?.images[0].ImageURL)
+    setActiveImage(
+      detailProduct?.images[0]?.ImageURL || "https://picsum.photos/200"
+    )
   }, [setActiveImage, detailProduct])
   const { data: parentData } = useQuery({
     queryFn: () => ProductAPI.getProducts(detailProduct.sex),

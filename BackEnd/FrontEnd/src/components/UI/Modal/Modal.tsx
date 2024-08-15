@@ -1,4 +1,4 @@
-import { ReactNode, RefObject, useContext, useEffect, useRef } from "react"
+import { ReactNode, RefObject, useContext, useRef } from "react"
 import { createPortal } from "react-dom"
 import { CartContext } from "../../../context/CartContext"
 import useOutsideClick from "../../../hooks/useOutsideClick"
