@@ -1,0 +1,54 @@
+.selection {
+  background: transparent;
+  border: 0;
+}
+
+.selection:focus {
+  outline: none;
+  width: fit-content;
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  column-gap: 2rem;
+  position: relative;
+  user-select: none;
+  cursor: pointer;
+}
+
+.imageContainer {
+  width: 2rem;
+  position: relative;
+  top: -5%;
+}
+.imageContainer::before,
+.imageContainer::after {
+  content: "";
+  position: absolute;
+  width: 60%;
+  height: 0.4rem;
+  top: 0;
+  left: 0;
+  background-color: var(--main-yellow);
+  transform: rotateZ(45deg);
+  transition: all 200ms ease-in-out;
+}
+
+.imageContainer::after {
+  transform: rotateZ(-45deg);
+  left: 28%;
+}
+
+.imageContainer img {
+  height: 100%;
+  object-fit: contain;
+}
+
+.open::before {
+  transform: rotateZ(-45deg);
+}
+
+.open::after {
+  transform: rotateZ(45deg);
+}

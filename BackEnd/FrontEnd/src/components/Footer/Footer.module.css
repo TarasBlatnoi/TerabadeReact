@@ -1,0 +1,19 @@
+.footer {
+  margin-top: 30rem;
+  z-index: 1000;
+}
+
+.footer h2 {
+  font-size: 2.4rem;
+  margin: 2.4rem 0;
+}
+
+.footerImg {
+  position: absolute;
+  height: 50rem;
+  width: 100%;
+  object-fit: cover;
+  z-index: -20;
+  bottom: 0;
+  left: 0;
+}

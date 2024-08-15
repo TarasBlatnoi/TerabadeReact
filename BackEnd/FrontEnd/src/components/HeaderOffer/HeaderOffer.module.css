@@ -1,0 +1,12 @@
+.header__offer {
+  color: var(--FONT-COLOR-BLACK);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  z-index: 101;
+  font-size: var(--FS-HEADER);
+  font-family: var(--FF-OFFER);
+  background-color: #fbfaff;
+  padding: 0.4rem 0;
+}

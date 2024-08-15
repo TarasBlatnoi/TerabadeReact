@@ -21,7 +21,7 @@ app.use(
     credentials: true,
   }),
 )
-app.use(express.static(path.join(__dirname, "../FrontEnd/dist")))
+app.use(express.static(path.join(__dirname, "./FrontEnd/dist")))
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
@@ -37,8 +37,6 @@ app.use(
     },
   }),
 )
-
-app.use(express.static(path.join(__dirname, "../public")))
 
 app.use(passport.initialize())
 app.use(passport.session())

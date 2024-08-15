@@ -1,0 +1,17 @@
+.navbarSmall {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  padding-right: 1.6rem;
+  align-items: center;
+  position: relative;
+  z-index: 100;
+}
+
+.language {
+  font-size: 1.4rem;
+  padding-top: 0.2rem;
+  margin-right: 0.6rem;
+  margin-left: 1.6rem;
+}

@@ -1,0 +1,13 @@
+.products {
+  display: grid;
+  height: 100%;
+  width: 91%;
+  grid-column-gap: 2em;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-auto-flow: dense;
+  grid-row-gap: 5em;
+  margin: 0 auto;
+  margin-top: 11rem;
+  padding-right: 2rem;
+  order: 999;
+}

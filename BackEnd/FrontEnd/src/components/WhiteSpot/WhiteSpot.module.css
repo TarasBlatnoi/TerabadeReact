@@ -1,0 +1,72 @@
+.whiteSpotImg {
+  position: absolute;
+  z-index: -30;
+  right: 0px;
+  top: -1.5vh;
+  width: 65%;
+  height: 76.7rem;
+  transition: all 0.2;
+}
+
+.hidden {
+  opacity: 0;
+}
+
+.whiteRect {
+  position: absolute;
+  z-index: -30;
+  top: 0;
+  right: -4.9%;
+  transform: translateY(-30%);
+  width: 68%;
+  height: 18rem;
+  background-color: #fbfaff;
+  border-radius: 5rem;
+}
+@media (max-width: 250em) {
+  .whiteRect {
+    width: 78%;
+    right: -9%;
+    height: 20rem;
+  }
+  .whiteSpotImg {
+    height: 82rem;
+  }
+}
+
+@media (max-width: 142em) {
+  .whiteRect {
+    right: -11%;
+  }
+  .whiteSpotImg {
+    height: 80rem;
+  }
+}
+
+@media (max-width: 123em) {
+  .whiteRect {
+    height: 19rem;
+  }
+}
+
+@media (max-width: 94em) {
+  .whiteRect {
+    width: 69.5%;
+    right: -4%;
+    height: 16.5rem;
+  }
+  .whiteSpotImg {
+    height: 70rem;
+  }
+}
+
+@media (max-width: 75em) {
+  .whiteSpotImg {
+    width: 60%;
+  }
+  .whiteRect {
+    background-color: #fbfaff;
+    width: 64%;
+    height: 16rem;
+  }
+}

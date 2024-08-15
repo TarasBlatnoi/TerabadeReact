@@ -1,0 +1,36 @@
+.button {
+  cursor: pointer;
+}
+
+.primary {
+  background: linear-gradient(
+    180deg,
+    #f9d423 0%,
+    #f9a91a 31.01%,
+    #f83600 91.58%
+  );
+  border: 1px solid #f9a91a;
+  box-shadow: 0px 0px 13px 3px #994300;
+  color: white;
+}
+
+.primaryWhite {
+  font-family: Arista-Pro-Light;
+  background-color: #eeeeee;
+  border: none;
+  color: #1c1c1c;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  font-size: 1.6rem;
+}
+
+.secondary {
+  font-family: Arista-Pro-Light;
+  background-color: #f9c31f;
+}
+
+.secondaryDark {
+  font-family: Arista-Pro-Light;
+  border: 1px solid #f9c31f;
+  color: #f9c31f;
+  background-color: #1e1e1e;
+}

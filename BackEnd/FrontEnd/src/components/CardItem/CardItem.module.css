@@ -1,0 +1,100 @@
+.item {
+  width: 100%;
+  height: calc(35rem + 10vw);
+  background-color: white;
+  z-index: 10;
+  list-style: none;
+  color: black;
+  border-radius: 1rem;
+  transition: all 200ms ease-in-out;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  cursor: pointer;
+  row-gap: 2rem;
+}
+.itemExpanded {
+  height: calc(45rem + 10vw);
+}
+.imageContainer {
+  height: 70%;
+  padding: 1%;
+  background-color: #f7f7f7;
+  border-top-left-radius: 1rem;
+  border-top-right-radius: 1rem;
+}
+
+.imageContainer img {
+  height: 100%;
+  object-fit: cover;
+}
+.infoDetailsContainer {
+  padding-bottom: 5rem;
+}
+
+.detailsContainer {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  line-height: 2rem;
+  padding-left: 3rem;
+}
+
+.price {
+  align-self: flex-start;
+  font-size: 2rem;
+  font-family: Exo;
+  font-weight: 400;
+  padding-top: 1rem;
+}
+.price span {
+  font-size: 1.4rem;
+}
+.buttonContainer {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.addButton {
+  padding: 1rem 2.5rem;
+  font-size: 1.8rem;
+  font-family: Arista Pro Trial;
+  font-weight: 300;
+  line-height: 1.2rem;
+  border-radius: 1rem;
+  border: 0.1rem solid black;
+}
+.productName {
+  font-family: Ermilov;
+  font-size: 2.2rem;
+  font-weight: 700;
+  line-height: 2rem;
+}
+.productType,
+.favoriteText {
+  font-family: Arista Pro Trial;
+  font-size: 2rem;
+  font-weight: 300;
+  line-height: 2.4rem;
+}
+.productType {
+  font-size: 2rem;
+}
+.favoriteText {
+  font-size: 1.6rem;
+  display: flex;
+  column-gap: 1rem;
+}
+
+/* Mobile devices */
+/* 1200 */
+
+@media (max-width: 75em) {
+  .imageContainer {
+    height: 60%;
+  }
+}

@@ -1,0 +1,136 @@
+.navbarInteractive {
+  font-size: 1.6rem;
+  display: none;
+  position: relative;
+  z-index: 200;
+  background-color: #fbfaff;
+  transform-origin: top center;
+  height: 38rem;
+  justify-content: center;
+}
+
+.navStyleFlex {
+  display: flex;
+}
+
+.navStyleNone {
+  display: none;
+}
+
+.ulNavbarInteractive {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  list-style: none;
+  width: 60rem;
+  margin: 3.2rem;
+}
+
+.manImage {
+  margin-left: 3.2rem;
+  margin-right: 4.8rem;
+  margin-top: 1.6rem;
+  position: absolute;
+  width: auto;
+  height: 36.4rem;
+  right: 0;
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+}
+
+.womanImage {
+  margin-left: 3.2rem;
+  margin-right: 4.8rem;
+  margin-top: 1.6rem;
+  position: absolute;
+  height: 36.4rem;
+  width: auto;
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+  left: 0;
+}
+
+.boyImage {
+  margin-left: 3.2rem;
+  margin-right: 4.8rem;
+  margin-top: 1.6rem;
+  position: absolute;
+  height: 36.4rem;
+  width: auto;
+  right: 0;
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+}
+
+.girlImage {
+  margin-left: 12.8rem;
+  margin-top: 1.6rem;
+  position: absolute;
+  height: 36.4rem;
+  width: auto;
+  left: 0;
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+}
+
+.visible {
+  opacity: 1;
+}
+
+.spanCourier {
+  font-family: "Courier New", Courier, monospace;
+}
+
+.animatedShow {
+  animation: showMenu 0.45s ease-in-out forwards;
+}
+
+.animatedHide {
+  animation: hideMenu 0.45s ease-in-out forwards;
+}
+
+@keyframes showMenu {
+  0% {
+    transform: scaleY(0);
+  }
+
+  80% {
+    transform: scaleY(1.1);
+  }
+
+  100% {
+    transform: scaleY(1);
+  }
+}
+
+@keyframes hideMenu {
+  0% {
+    transform: scaleY(1);
+  }
+
+  100% {
+    transform: scaleY(0);
+  }
+}
+
+@media (max-width: 75em) {
+  .girlImage {
+    margin-left: 4.8rem;
+  }
+  .boyImage {
+    margin-right: 0;
+  }
+  .manImage {
+    margin-left: 0;
+    margin-right: 3.2rem;
+    width: 28rem;
+    object-fit: cover;
+  }
+  .womanImage {
+    margin-left: 1.6rem;
+    margin-right: 0;
+    width: 28rem;
+    object-fit: cover;
+  }
+}
