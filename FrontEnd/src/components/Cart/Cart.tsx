@@ -6,8 +6,7 @@ import CartItem from "./CartItem/CartItem"
 import Button from "../UI/Button/Button"
 import { useNavigate } from "react-router-dom"
 const Cart = () => {
-  const { isOpened, cartItems, resetCartItems, closeCart } =
-    useContext(CartContext)
+  const { isOpened, cartItems, closeCart } = useContext(CartContext)
   const navigate = useNavigate()
   function handleToCart() {
     closeCart()

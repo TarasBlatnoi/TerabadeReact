@@ -67,13 +67,16 @@ function cartReducer(state: CartState, action: CartAction) {
 
     const copyOfItems = [...state.items]
 
+    const item = copyOfItems[indexOfItem]
+
     if (
-      copyOfItems[indexOfItem].quantity &&
-      copyOfItems[indexOfItem].quantity > 1
+      item !== undefined &&
+      item.quantity !== undefined &&
+      item.quantity > 1
     ) {
       copyOfItems[indexOfItem] = {
-        ...copyOfItems[indexOfItem],
-        quantity: copyOfItems[indexOfItem].quantity - 1,
+        ...item,
+        quantity: item.quantity - 1,
       }
     } else {
       copyOfItems.splice(indexOfItem, 1)
