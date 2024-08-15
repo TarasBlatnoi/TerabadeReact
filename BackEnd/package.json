@@ -2,7 +2,7 @@
   "scripts": {
     "start": "node app.js",
     "dev": "nodemon app.js",
-    "heroku-postbuild": "cd FrontEnd && npm install && npm install --only=dev --no-shrinkwrap && npm build",
+    "heroku-postbuild": "cd FrontEnd && npm install && npm install --only=dev --no-shrinkwrap && npm run build",
     "test": "cross-env NODE_ENV=test jest --testTimeout=15000 --forceExit"
   },
   "jest": {
@@ -40,6 +40,9 @@
   },
   "name": "terabade",
   "version": "1.0.0",
+  "engines": {
+    "node": "22.x"
+  },
   "description": "our first website",
   "main": "app.js",
   "repository": {
