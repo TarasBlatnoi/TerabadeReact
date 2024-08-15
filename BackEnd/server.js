@@ -21,7 +21,7 @@ const whitelist = [
   "http://localhost:3000",
   "http://localhost:8080",
   "http://localhost:5173",
-  "https://terabade.heroku.com",
+  "https://terabade-dfdc3e3cb126.herokuapp.com",
 ]
 const corsOptions = {
   origin: function (origin, callback) {
@@ -36,14 +36,9 @@ const corsOptions = {
   },
 }
 app.use(cors(corsOptions))
-app.use(express.static(path.join(__dirname, "FrontEnd/dist")))
 if (process.env.NODE_ENV === "production") {
   // Serve any static files
   app.use(express.static(path.join(__dirname, "FrontEnd/dist")))
-  // Handle React routing, return all requests to React app
-  app.get("*", function (req, res) {
-    res.sendFile(path.join(__dirname, "FrontEnd/dist", "index.html"))
-  })
 }
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
@@ -70,6 +65,13 @@ app.use("/api/v1/favorites", favoriteRoutes)
 app.use("/api/v1", authenticationRoutes)
 app.use("/api/v1/reviews", reviewRoutes)
 
+app.get("*", function (req, res) {
+  res.sendFile(path.join(__dirname, "FrontEnd/dist", "index.html"))
+})
+app.use((err, req, res, next) => {
+  console.error(err.stack)
+  res.status(500).json({ message: "Internal Server Error", error: err.message })
+})
 const closeServer = (server) => {
   return new Promise((resolve, reject) => {
     console.log("\nStarting the process of closing the app...")
