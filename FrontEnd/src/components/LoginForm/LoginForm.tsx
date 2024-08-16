@@ -29,14 +29,14 @@ const LoginForm = () => {
   useEffect(() => {
     if (actionData?.user) {
       setIsLoggedIn(true)
-      navigate("/")
+      navigate(-1)
     }
   }, [actionData, navigate, setIsLoggedIn])
 
   const errors = actionData?.errors || []
   return (
     <Form method="post" className={styles.formBox}>
-      <h2 className={styles.actionTitle}>Sign up</h2>
+      <h2 className={styles.actionTitle}>ВХІД</h2>
       <div className={styles.inputsContainer}>
         <Input
           divClassName={`${styles.inputbox} ${styles.fullWith}`}
@@ -68,7 +68,7 @@ const LoginForm = () => {
           className={styles.narrowBtn}
           disabled={isSubmitting}
         >
-          {isSubmitting ? "Вхід..." : "Увійти"}
+          {isSubmitting ? "Вхід..." : "Продовжити"}
         </button>
       </div>
       <div>
