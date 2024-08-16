@@ -2,7 +2,7 @@ import LoginForm from "../../components/LoginForm/LoginForm"
 import AuthAPI from "../../api/Auth/AuthAPI"
 import { isAxiosError } from "axios"
 import { ActionFunctionArgs, json, useSearchParams } from "react-router-dom"
-import { useContext } from "react"
+import { useContext, useEffect } from "react"
 import { AuthContext } from "../../context/AuthContext"
 
 interface Error {
@@ -19,7 +19,7 @@ export async function action({ request }: ActionFunctionArgs) {
   if (!userData.email || !userData.password) {
     return json(
       { errors: ["Email and password are required"] },
-      { status: 422 }
+      { status: 422 },
     )
   }
 
@@ -46,9 +46,13 @@ export async function action({ request }: ActionFunctionArgs) {
 const Login = () => {
   const [searchParams] = useSearchParams()
   const { setIsLoggedIn } = useContext(AuthContext)
-  if (searchParams.get("loggedIn")) {
-    setIsLoggedIn(false)
-  }
+  const queryParam = searchParams.get("loggedIn")
+  useEffect(() => {
+    if (queryParam) {
+      setIsLoggedIn(false)
+    }
+  }, [setIsLoggedIn, queryParam])
+
   return <LoginForm />
 }
 
