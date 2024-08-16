@@ -3,7 +3,6 @@ import AuthAPI from "../../api/Auth/AuthAPI"
 import { isAxiosError } from "axios"
 import { ActionFunctionArgs, json, useSearchParams } from "react-router-dom"
 import { useContext, useEffect } from "react"
-import { useContext, useEffect } from "react"
 import { AuthContext } from "../../context/AuthContext"
 import styles from "./Login.module.css"
 
@@ -21,7 +20,6 @@ export async function action({ request }: ActionFunctionArgs) {
   if (!userData.email || !userData.password) {
     return json(
       { errors: ["Email and password are required"] },
-      { status: 422 },
       { status: 422 },
     )
   }
