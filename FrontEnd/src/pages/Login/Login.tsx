@@ -4,6 +4,7 @@ import { isAxiosError } from "axios"
 import { ActionFunctionArgs, json, useSearchParams } from "react-router-dom"
 import { useContext, useEffect } from "react"
 import { AuthContext } from "../../context/AuthContext"
+import styles from "./Login.module.css"
 
 interface Error {
   msg: string
@@ -19,6 +20,7 @@ export async function action({ request }: ActionFunctionArgs) {
   if (!userData.email || !userData.password) {
     return json(
       { errors: ["Email and password are required"] },
+      { status: 422 },
       { status: 422 },
     )
   }
@@ -53,7 +55,11 @@ const Login = () => {
     }
   }, [setIsLoggedIn, queryParam])
 
-  return <LoginForm />
+  return (
+    <div className={styles.loginContainer}>
+      <LoginForm />
+    </div>
+  )
 }
 
 export default Login

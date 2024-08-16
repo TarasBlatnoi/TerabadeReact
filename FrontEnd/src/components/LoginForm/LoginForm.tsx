@@ -37,23 +37,29 @@ const LoginForm = () => {
   return (
     <Form method="post" className={styles.formBox}>
       <h2 className={styles.actionTitle}>Sign up</h2>
-      <Input
-        divClassName={`${styles.inputbox} ${styles.fullWith}`}
-        type="text"
-        id="email"
-        name="email"
-        label=""
-        required
-      />
-      {errors[0] && <p style={{ color: "red" }}>{errors[0]}</p>}
-      <Input
-        divClassName={`${styles.inputbox} ${styles.fullWith}`}
-        type="password"
-        id="password"
-        name="password"
-        required
-        label=""
-      />
+      <div className={styles.inputsContainer}>
+        <Input
+          divClassName={`${styles.inputbox} ${styles.fullWith}`}
+          placeholder="email"
+          type="text"
+          id="email"
+          name="email"
+          label=""
+          required
+          disabled={isSubmitting}
+        />
+        {errors[0] && <p style={{ color: "red" }}>{errors[0]}</p>}
+        <Input
+          divClassName={`${styles.inputbox} ${styles.fullWith}`}
+          placeholder="password"
+          type="password"
+          id="password"
+          name="password"
+          required
+          label=""
+          disabled={isSubmitting}
+        />
+      </div>
       {errors[1] && <p style={{ color: "red" }}>{errors[1]}</p>}
       <div className={`${styles.buttonCase} ${styles.applyBtn}`}>
         <button
@@ -62,8 +68,11 @@ const LoginForm = () => {
           className={styles.narrowBtn}
           disabled={isSubmitting}
         >
-          {isSubmitting ? "Logging in..." : "Login"}
+          {isSubmitting ? "Вхід..." : "Увійти"}
         </button>
+      </div>
+      <div>
+        <p>r</p>
       </div>
     </Form>
   )

@@ -22,31 +22,35 @@ import Products from "./pages/Products/Products"
 import { Provider } from "react-redux"
 import { store } from "./store/store"
 import { ImagesProvider } from "./context/ImageContext"
+import MainLayout from "./pages/MainLayout/MainLayout"
 
 const router = createBrowserRouter(
   createRoutesFromElements(
-    <Route path="/" element={<Layout />} errorElement={<Error />}>
-      <Route index element={<Home />} />
+    <Route path="/" element={<MainLayout />}>
+      <Route element={<Layout />} errorElement={<Error />}>
+        <Route index element={<Home />} />
 
-      <Route element={<ProductsLayout />}>
-        <Route path="men" element={<Products parentRouteId="men" />} />
+        <Route element={<ProductsLayout />}>
+          <Route path="men" element={<Products parentRouteId="men" />} />
 
-        <Route path="women" element={<Products parentRouteId="women" />} />
+          <Route path="women" element={<Products parentRouteId="women" />} />
 
+          <Route
+            path="children"
+            element={<Products parentRouteId="children" />}
+          />
+        </Route>
+        <Route path="cart" element={<h1>Cart motherfucka</h1>} />
+        <Route path="payment" element={<h1>Payment motherfucka</h1>} />
+        <Route path="product" element={<Navigate to={"/"} />} />
         <Route
-          path="children"
-          element={<Products parentRouteId="children" />}
+          path="favorites"
+          element={<Favorites />}
+          loader={checkAuthLoader}
         />
+        <Route path="product/:id" element={<DetailProduct />} />
       </Route>
-      <Route path="cart" element={<h1>Cart motherfucka</h1>} />
-      <Route path="payment" element={<h1>Payment motherfucka</h1>} />
-      <Route path="product" element={<Navigate to={"/"} />} />
-      <Route
-        path="favorites"
-        element={<Favorites />}
-        loader={checkAuthLoader}
-      />
-      <Route path="product/:id" element={<DetailProduct />} />
+
       <Route
         path="login"
         element={
@@ -58,8 +62,8 @@ const router = createBrowserRouter(
           import("./pages/Login/Login").then((module) => module.action(meta))
         }
       />
-    </Route>
-  )
+    </Route>,
+  ),
 )
 
 function App() {

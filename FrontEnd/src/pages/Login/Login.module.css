@@ -1,0 +1,10 @@
+.loginContainer {
+  display: flex;
+  height: 100vh;
+  align-items: center;
+  justify-content: center;
+  background-image: url("../../assets/images/bg-login.png");
+  background-position: 50%;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
