@@ -2,6 +2,7 @@
   "scripts": {
     "start": "node app.js",
     "dev": "nodemon app.js",
+    "front": "cd FrontEnd && npm run dev",
     "build": "cd FrontEnd && npm install && npm run build",
     "test": "cross-env NODE_ENV=test jest --testTimeout=15000 --forceExit"
   },
