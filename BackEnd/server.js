@@ -36,6 +36,7 @@ const corsOptions = {
   },
 }
 app.use(cors(corsOptions))
+app.use(express.static(path.join(__dirname, "FrontEnd/dist")))
 if (process.env.NODE_ENV === "production") {
   // Serve any static files
   app.use(express.static(path.join(__dirname, "FrontEnd/dist")))
@@ -69,8 +70,12 @@ app.get("*", function (req, res) {
   res.sendFile(path.join(__dirname, "FrontEnd/dist", "index.html"))
 })
 app.use((err, req, res, next) => {
-  console.error(err.stack)
-  res.status(500).json({ message: "Internal Server Error", error: err.message })
+  console.error(err)
+  if (err) {
+    res
+      .status(500)
+      .json({ message: "Internal Server Error", error: err.message })
+  }
 })
 const closeServer = (server) => {
   return new Promise((resolve, reject) => {

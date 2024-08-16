@@ -3,7 +3,6 @@ const path = require("path")
 const router = new express.Router()
 const passport = require("passport")
 const userController = require("../controllers/userController")
-const { isAuth, isAdmin } = require("../auth/middleware")
 const { check, validationResult } = require("express-validator")
 
 const loginValidationRules = [
@@ -40,14 +39,6 @@ router.post("/login", loginValidationRules, (req, res, next) => {
   })(req, res, next)
 })
 
-router.get("/protected-route", isAuth, (req, res) => {
-  res.send("You made it to the route.")
-})
-
-router.get("/admin-route", isAdmin, (req, res) => {
-  res.send("You made it to the admin route.")
-})
-
 // Visiting this route logs the user out
 router.get("/logout", (req, res, next) => {
   req.logout(function (err) {
@@ -58,16 +49,6 @@ router.get("/logout", (req, res, next) => {
     }
     res.send({ message: "Logout successfully" })
   })
-})
-
-router.get("/login-success", (req, res) => {
-  res.send(
-    '<p>You successfully logged in. --> <a href="/protected-route">Go to protected route</a></p>',
-  )
-})
-
-router.get("/login-failure", (req, res) => {
-  res.send("You entered the wrong password.")
 })
 
 router.get("/check-auth", (req, res, next) => {
@@ -88,7 +69,6 @@ router.get("/check-auth", (req, res, next) => {
       authenticated: false,
     })
   }
-  next()
 })
 
 const registerValidationRules = [
