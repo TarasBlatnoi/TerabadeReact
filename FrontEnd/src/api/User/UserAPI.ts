@@ -11,6 +11,10 @@ class UserAPI {
     const { data } = await client.post(`/users/${id}`, body)
     return data
   }
+  async registerUser(body: UserBodyType) {
+    const { data } = await client.post("register", body)
+    return data
+  }
 }
 
 export default new UserAPI()

@@ -37,7 +37,7 @@ const LoginForm = () => {
   const errors = actionData?.errors || []
   return (
     <Form method="post" className={styles.formBox}>
-      <h2 className={styles.actionTitle}>ВХІД</h2>
+      <h2 className={styles.actionTitle}>Вхід</h2>
       <div className={styles.inputsContainer}>
         <Input
           divClassName={`${styles.inputbox} ${styles.fullWith}`}
@@ -76,7 +76,6 @@ const LoginForm = () => {
         <Link to={"/register"}>
           <p>Зареєструватися</p>
         </Link>
-
         <p>Забули пароль?</p>
       </div>
     </Form>
