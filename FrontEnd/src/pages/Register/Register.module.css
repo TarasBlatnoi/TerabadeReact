@@ -89,3 +89,15 @@
 .refContainer {
   font-size: 1.25rem;
 }
+
+.refContainer p {
+  cursor: pointer;
+  transition: all 50ms ease-in-out;
+
+  font-weight: 200;
+}
+
+.refContainer p:hover {
+  transform: scale(0.99);
+  color: #555;
+}
