@@ -105,7 +105,7 @@ function DetailProduct() {
               >
                 Додати в кошик
               </Button>
-              <FavoriteButtons />
+              <FavoriteButtons ProductID={detailProduct.ProductID} />
             </div>
             <div className={styles.descriptionTitleContainer}>
               <img src={Star} alt="star" className={styles.star} />

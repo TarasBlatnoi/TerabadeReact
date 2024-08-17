@@ -1,3 +1,4 @@
+import { FavProductBodyType } from "../../types"
 import { client } from "../instance"
 
 class ProductAPI {
@@ -22,6 +23,7 @@ class ProductAPI {
     const { data } = await client.get("/products/children")
     return data
   }
+
   async getById(id: string) {
     const { data } = await client.get(`/products/${id}`)
     return data
@@ -30,6 +32,15 @@ class ProductAPI {
   async getFavoriteProducts() {
     const { data } = await client.get(`/favorites`)
     return data
+  }
+
+  async addProductToFavorite(body: FavProductBodyType) {
+    const res = await client.post(`/favorites`, body, {
+      validateStatus: function (status) {
+        return status >= 200 && status < 400
+      },
+    })
+    return res
   }
 }
 
