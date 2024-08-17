@@ -1,5 +1,6 @@
 import {
   Form,
+  Link,
   useActionData,
   useNavigate,
   useNavigation,
@@ -29,31 +30,37 @@ const LoginForm = () => {
   useEffect(() => {
     if (actionData?.user) {
       setIsLoggedIn(true)
-      navigate("/")
+      navigate(-1)
     }
   }, [actionData, navigate, setIsLoggedIn])
 
   const errors = actionData?.errors || []
   return (
     <Form method="post" className={styles.formBox}>
-      <h2 className={styles.actionTitle}>Sign up</h2>
-      <Input
-        divClassName={`${styles.inputbox} ${styles.fullWith}`}
-        type="text"
-        id="email"
-        name="email"
-        label=""
-        required
-      />
-      {errors[0] && <p style={{ color: "red" }}>{errors[0]}</p>}
-      <Input
-        divClassName={`${styles.inputbox} ${styles.fullWith}`}
-        type="password"
-        id="password"
-        name="password"
-        required
-        label=""
-      />
+      <h2 className={styles.actionTitle}>ВХІД</h2>
+      <div className={styles.inputsContainer}>
+        <Input
+          divClassName={`${styles.inputbox} ${styles.fullWith}`}
+          placeholder="email"
+          type="text"
+          id="email"
+          name="email"
+          label=""
+          required
+          disabled={isSubmitting}
+        />
+        {errors[0] && <p style={{ color: "red" }}>{errors[0]}</p>}
+        <Input
+          divClassName={`${styles.inputbox} ${styles.fullWith}`}
+          placeholder="password"
+          type="password"
+          id="password"
+          name="password"
+          required
+          label=""
+          disabled={isSubmitting}
+        />
+      </div>
       {errors[1] && <p style={{ color: "red" }}>{errors[1]}</p>}
       <div className={`${styles.buttonCase} ${styles.applyBtn}`}>
         <button
@@ -62,8 +69,15 @@ const LoginForm = () => {
           className={styles.narrowBtn}
           disabled={isSubmitting}
         >
-          {isSubmitting ? "Logging in..." : "Login"}
+          {isSubmitting ? "Вхід..." : "Продовжити"}
         </button>
+      </div>
+      <div className={styles.detailContainer}>
+        <Link to={"/register"}>
+          <p>Зареєструватися</p>
+        </Link>
+
+        <p>Забули пароль?</p>
       </div>
     </Form>
   )

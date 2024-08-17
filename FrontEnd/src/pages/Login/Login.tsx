@@ -4,6 +4,7 @@ import { isAxiosError } from "axios"
 import { ActionFunctionArgs, json, useSearchParams } from "react-router-dom"
 import { useContext, useEffect } from "react"
 import { AuthContext } from "../../context/AuthContext"
+import styles from "./Login.module.css"
 
 interface Error {
   msg: string
@@ -25,6 +26,7 @@ export async function action({ request }: ActionFunctionArgs) {
 
   try {
     const res = await AuthAPI.loginUser(userData)
+    console.log(res)
     return res
   } catch (err) {
     if (isAxiosError(err)) {
@@ -46,14 +48,19 @@ export async function action({ request }: ActionFunctionArgs) {
 const Login = () => {
   const [searchParams] = useSearchParams()
   const { setIsLoggedIn } = useContext(AuthContext)
-  const queryParam = searchParams.get("loggedIn")
+  const loggedIn = searchParams.get("loggedIn")
+
   useEffect(() => {
-    if (queryParam) {
+    if (loggedIn) {
       setIsLoggedIn(false)
     }
-  }, [setIsLoggedIn, queryParam])
+  }, [loggedIn, setIsLoggedIn])
 
-  return <LoginForm />
+  return (
+    <div className={styles.loginContainer}>
+      <LoginForm />
+    </div>
+  )
 }
 
 export default Login
