@@ -35,11 +35,10 @@ export async function action({ request }: registerAction) {
                       `,
     }
   try {
-    const res = await UserAPI.registerUser({
+    await UserAPI.registerUser({
       email: userData.email,
       password: userData.password,
     })
-    console.log(res)
   } catch (error) {
     if (isAxiosError(error)) {
       const errorMessage = error?.response?.data.errors?.[0].msg as string
