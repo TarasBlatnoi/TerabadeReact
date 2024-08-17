@@ -10,6 +10,8 @@ import Input from "../../components/UI/Input/Input"
 import styles from "./Register.module.css"
 import * as EmailValidator from "email-validator"
 import UserAPI from "../../api/User/UserAPI"
+import { isAxiosError } from "axios"
+import { validatePassword } from "../../utils/passwordValidator"
 
 interface registerAction {
   request: Request
@@ -25,11 +27,13 @@ export async function action({ request }: registerAction) {
     password: data.get("password") as string,
   }
 
-  console.log(userData)
-
   if (!EmailValidator.validate(userData.email))
     return { error: "Невірна адреса електронної пошти" }
-
+  if (!validatePassword(userData.password))
+    return {
+      error: `Пароль повинен бути щонайменше 6 літер *
+                      `,
+    }
   try {
     const res = await UserAPI.registerUser({
       email: userData.email,
@@ -37,7 +41,12 @@ export async function action({ request }: registerAction) {
     })
     console.log(res)
   } catch (error) {
-    return { error }
+    if (isAxiosError(error)) {
+      const errorMessage = error?.response?.data.errors?.[0].msg as string
+      return { error: errorMessage }
+    }
+
+    return error
   }
 
   return redirect("/")
@@ -48,6 +57,8 @@ function Register() {
   const errObj = useActionData() as { error: string } | undefined
 
   const isSubmitting = state === "submitting"
+
+  console.log(errObj)
 
   return (
     <Form method="POST" className={styles.form}>
@@ -83,7 +94,7 @@ function Register() {
           disabled={isSubmitting}
           required
         />
-        <p style={{ textAlign: "center" }}>{errObj?.error || null}</p>
+
         <Input
           placeholder="password"
           type="password"
@@ -93,10 +104,17 @@ function Register() {
           disabled={isSubmitting}
           label=""
         />
+        {errObj?.error && !isSubmitting ? (
+          <p className={styles.errorMessage}>{errObj.error}</p>
+        ) : null}
       </div>
       <div>
-        <button type="submit" className={styles.subButtn}>
-          {!isSubmitting ? "Зареєструватись" : "Створюємо ваш акаунт..."}
+        <button
+          type="submit"
+          className={styles.subButtn}
+          disabled={isSubmitting}
+        >
+          {!isSubmitting ? "Зареєструватись" : "Створюємо ваш аккаунт..."}
         </button>
       </div>
       <div>

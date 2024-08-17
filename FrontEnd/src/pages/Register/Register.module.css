@@ -56,6 +56,11 @@
   border-radius: 0.5rem;
 }
 
+.subButtn:disabled {
+  background: gainsboro;
+  color: #555;
+}
+
 .detailsContainer {
   display: flex;
   flex-direction: row;
@@ -72,4 +77,10 @@
 .detailsContainer input {
   width: 90%;
   font-size: 1.2rem;
+}
+
+.errorMessage {
+  text-align: center;
+  color: red;
+  font-size: 1rem;
 }
