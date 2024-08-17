@@ -109,7 +109,7 @@ input:valid + .email-label {
 .forget label a:hover {
   text-decoration: underline;
 }
-button {
+.subBttn {
   font-size: 1.6rem;
   padding: 1rem 3rem;
   background: black;

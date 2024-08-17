@@ -24,6 +24,7 @@ import { store } from "./store/store"
 import { ImagesProvider } from "./context/ImageContext"
 import MainLayout from "./pages/MainLayout/MainLayout"
 import LoginLayout from "./pages/LoginLayout/LoginLayout"
+import Register from "./pages/Register/Register"
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -64,7 +65,7 @@ const router = createBrowserRouter(
             import("./pages/Login/Login").then((module) => module.action(meta))
           }
         />
-        <Route path="register" element={<h1>Register page</h1>} />
+        <Route path="register" element={<Register />} />
       </Route>
     </Route>,
   ),

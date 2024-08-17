@@ -66,7 +66,7 @@ const LoginForm = () => {
         <button
           type="submit"
           id="applyBtn"
-          className={styles.narrowBtn}
+          className={styles.subBttn}
           disabled={isSubmitting}
         >
           {isSubmitting ? "Вхід..." : "Продовжити"}
