@@ -4,7 +4,6 @@ import { isAxiosError } from "axios"
 import { ActionFunctionArgs, json, useSearchParams } from "react-router-dom"
 import { useContext, useEffect } from "react"
 import { AuthContext } from "../../context/AuthContext"
-import styles from "./Login.module.css"
 
 interface Error {
   msg: string
@@ -56,11 +55,7 @@ const Login = () => {
     }
   }, [loggedIn, setIsLoggedIn])
 
-  return (
-    <div className={styles.loginContainer}>
-      <LoginForm />
-    </div>
-  )
+  return <LoginForm />
 }
 
 export default Login
