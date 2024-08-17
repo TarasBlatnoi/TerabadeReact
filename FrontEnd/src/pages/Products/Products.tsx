@@ -11,13 +11,13 @@ type ProductsPropsType = {
 }
 
 function Products({ parentRouteId }: ProductsPropsType) {
-  const { data, error } = useQuery({
+  const { data } = useQuery({
     queryFn: () => ProductAPI.getProducts(parentRouteId),
     queryKey: [parentRouteId],
     suspense: true,
     staleTime: Infinity,
   }) as { data: ProductType[] }
-  console.log(data, error)
+
   const { visibility: isOpenFilters, states } = useSelector(
     (store: storeType) => store.filters,
   )

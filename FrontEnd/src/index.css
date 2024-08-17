@@ -68,14 +68,7 @@ button {
 
 a {
   text-decoration: none;
-  display: inline-block;
   color: var(--FONT-COLOR-BLACK);
-}
-
-a:hover,
-a:focus {
-  transform: scale(1.08);
-  transition: all 0.3s ease-in-out;
 }
 
 /* UTILITY CLASSES */

@@ -2,14 +2,14 @@
   position: relative;
   width: 38rem;
   height: 54rem;
-  background-color: rgb(255, 255, 255);
+  background-color: rgb(255 255 255);
   border: 0.2rem solid rgb(255, 163, 4);
   border-radius: 1rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  row-gap: 2rem;
+  row-gap: 3rem;
 }
 
 .actionTitle {
@@ -160,4 +160,26 @@ button {
   width: 90%;
   align-items: center;
   justify-content: center;
+}
+
+.detailContainer {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: space-around;
+  align-items: center;
+  font-size: 1.25rem;
+  color: #000;
+}
+
+.detailContainer p {
+  cursor: pointer;
+  transition: all 50ms ease-in-out;
+
+  font-weight: 200;
+}
+
+.detailContainer p:hover {
+  transform: scale(0.99);
+  color: #555;
 }

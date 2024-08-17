@@ -1,5 +1,6 @@
 import {
   Form,
+  Link,
   useActionData,
   useNavigate,
   useNavigation,
@@ -71,8 +72,12 @@ const LoginForm = () => {
           {isSubmitting ? "Вхід..." : "Продовжити"}
         </button>
       </div>
-      <div>
-        <p>r</p>
+      <div className={styles.detailContainer}>
+        <Link to={"/register"}>
+          <p>Зареєструватися</p>
+        </Link>
+
+        <p>Забули пароль?</p>
       </div>
     </Form>
   )
