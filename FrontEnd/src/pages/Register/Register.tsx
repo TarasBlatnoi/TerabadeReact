@@ -12,6 +12,7 @@ import * as EmailValidator from "email-validator"
 import UserAPI from "../../api/User/UserAPI"
 import { isAxiosError } from "axios"
 import { validatePassword } from "../../utils/passwordValidator"
+import GoBackLogin from "../../components/GoBackLogin/GoBackLogin"
 
 interface registerAction {
   request: Request
@@ -61,10 +62,11 @@ function Register() {
 
   return (
     <Form method="POST" className={styles.form}>
+      <GoBackLogin />
       <h2 className={styles.title}>Реєстрація</h2>
       <div className={styles.detailsContainer}>
         <Input
-          placeholder="First name"
+          placeholder="Імʼя"
           type="text"
           id="firstName"
           name="firstName"
@@ -73,7 +75,7 @@ function Register() {
           disabled={isSubmitting}
         />
         <Input
-          placeholder="Last name"
+          placeholder="Прізвище"
           type="text"
           name="lastName"
           id="lastName"
@@ -85,7 +87,7 @@ function Register() {
 
       <div className={styles.inputsContainer}>
         <Input
-          placeholder="email"
+          placeholder="електронна пошта"
           type="text"
           id="email"
           name="email"
@@ -95,7 +97,7 @@ function Register() {
         />
 
         <Input
-          placeholder="password"
+          placeholder="пароль"
           type="password"
           id="password"
           name="password"
@@ -116,7 +118,7 @@ function Register() {
           {!isSubmitting ? "Зареєструватись" : "Створюємо ваш аккаунт..."}
         </button>
       </div>
-      <div>
+      <div className={styles.refContainer}>
         <Link to={"/login"}>
           <p>Вже маєте аккаунт?</p>
         </Link>
