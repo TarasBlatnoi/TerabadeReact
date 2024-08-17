@@ -42,6 +42,11 @@ class ProductAPI {
     })
     return res
   }
+
+  async deleteFavoriteProduct(id: number) {
+    const res = await client.delete(`/favorites/${id}`)
+    return res
+  }
 }
 
 export default new ProductAPI()

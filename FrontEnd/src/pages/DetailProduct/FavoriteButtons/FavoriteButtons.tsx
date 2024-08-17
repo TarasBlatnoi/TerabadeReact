@@ -4,6 +4,7 @@ import styles from "./FavoriteButtons.module.css"
 import ProductAPI from "../../../api/Product/ProductAPI"
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
+import { queryClient } from "../../../api/queryClient"
 
 interface FavoriteButtonsPropsType {
   ProductID: number
@@ -11,11 +12,12 @@ interface FavoriteButtonsPropsType {
 
 const FavoriteButtons = ({ ProductID }: FavoriteButtonsPropsType) => {
   const [isAddedToFavorite, setIsAddedToFavorite] = useState(false)
+  console.log({ ProductID })
   const navigate = useNavigate()
   const { mutate, isLoading, isError } = useMutation({
     mutationFn: ProductAPI.addProductToFavorite,
     onSuccess: (data) => {
-      console.log(data)
+      queryClient.invalidateQueries(["favorites"])
       if (data.status === 300) {
         return navigate("/login")
       }
@@ -23,8 +25,27 @@ const FavoriteButtons = ({ ProductID }: FavoriteButtonsPropsType) => {
     },
   })
 
-  function handleClick() {
+  const {
+    mutate: deleteMutate,
+    isLoading: deleteIsLoading,
+    isError: deleteIsError,
+  } = useMutation({
+    mutationFn: ProductAPI.deleteFavoriteProduct,
+    onSuccess: (data) => {
+      queryClient.invalidateQueries(["favorites"])
+      if (data.status === 300) {
+        return navigate("/login")
+      }
+      setIsAddedToFavorite(false)
+    },
+  })
+
+  function handleAddClick() {
     mutate({ ProductID })
+  }
+
+  function handleDeleteClick() {
+    deleteMutate(ProductID)
   }
   return (
     <>
@@ -32,7 +53,8 @@ const FavoriteButtons = ({ ProductID }: FavoriteButtonsPropsType) => {
         <Button
           className={styles.addToFavButton}
           variant="secondaryDark"
-          onClick={handleClick}
+          onClick={handleAddClick}
+          disabled={isLoading}
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -48,7 +70,12 @@ const FavoriteButtons = ({ ProductID }: FavoriteButtonsPropsType) => {
       {isLoading && <p>adding...</p>}
       {isError && <p>error occured</p>}
       {isAddedToFavorite && (
-        <Button className={styles.addToFavButton} variant="secondary">
+        <Button
+          className={styles.addToFavButton}
+          variant="secondary"
+          onClick={handleDeleteClick}
+          disabled={deleteIsLoading}
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             height="40px"
@@ -60,6 +87,8 @@ const FavoriteButtons = ({ ProductID }: FavoriteButtonsPropsType) => {
           </svg>
         </Button>
       )}
+      {deleteIsLoading && <p>deleting...</p>}
+      {deleteIsError && <p>couldn't delete</p>}
     </>
   )
 }
