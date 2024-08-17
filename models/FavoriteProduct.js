@@ -51,7 +51,10 @@ class FavoriteProduct {
       if (result.affectedRows > 0) {
         return true
       }
-      throw new Error("No rows changed")
+      return {
+        status: 204,
+        message: "Product was not in favorites, nothing to delete.",
+      }
     }
   }
 
