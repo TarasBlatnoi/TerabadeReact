@@ -20,11 +20,10 @@
 .cartItems {
   position: absolute;
   font-size: 1rem;
-  top: 50%;
+  top: 52%;
   left: 50%;
   transform: translate(-50%, -35%);
 }
 
 .userIcon {
-  margin-left: 0.8rem;
 }
