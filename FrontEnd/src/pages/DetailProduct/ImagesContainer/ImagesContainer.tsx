@@ -19,7 +19,7 @@ const ImagesContainer = ({ detailProduct }: ImagesContainerProps) => {
             onMouseEnter={() => {
               setActiveImage(image.ImageURL)
             }}
-            className={styles.smallImage}
+            className={`${styles.smallImage} ${activeImage === image.ImageURL ? styles.activeSmallImage : ""}`}
           />
         ))}
       </div>

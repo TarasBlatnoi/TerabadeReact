@@ -8,6 +8,10 @@
   height: 50rem;
 }
 
+.activeSmallImage {
+  filter: brightness(0.5);
+}
+
 .smallImages {
   display: flex;
   gap: 0.7rem;
