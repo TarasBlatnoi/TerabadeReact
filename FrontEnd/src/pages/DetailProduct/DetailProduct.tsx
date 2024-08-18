@@ -97,7 +97,7 @@ function DetailProduct() {
                   handleClick({
                     id: `${detailProduct.ProductID}`,
                     name: detailProduct.name,
-                    image: detailProduct.image,
+                    image: detailProduct.images[0].ImageURL,
                     price: detailProduct.price,
                   })
                   openCart()

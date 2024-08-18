@@ -1,8 +1,10 @@
-.img {
-  width: 9rem;
-  height: 6rem;
-  border-radius: 1rem;
-  border: 1px solid #1c1c1c;
+.imageContainer {
+  height: 100%;
+}
+
+.imageContainer img {
+  height: 100%;
+  object-fit: contain;
 }
 
 .cartItem {
@@ -10,9 +12,10 @@
   grid-template-columns: 1fr 2fr;
   position: relative;
   gap: 1.2rem;
-  padding-bottom: 1.4rem;
+  padding-bottom: 1rem;
   margin-bottom: 2.4rem;
   border-bottom: 1px solid black;
+  height: fit-content;
 }
 
 .textWrapper {
