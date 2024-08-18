@@ -1,0 +1,14 @@
+.spinner {
+  height: 5rem;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  border: 0.4rem solid white;
+  border-right-color: rgb(255, 115, 0);
+  animation: rotate 1s infinite linear;
+}
+
+@keyframes rotate {
+  to {
+    transform: rotate(1turn);
+  }
+}

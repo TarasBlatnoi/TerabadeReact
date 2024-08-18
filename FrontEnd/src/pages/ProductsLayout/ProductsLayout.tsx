@@ -7,11 +7,12 @@ import Filters from "../../components/Filters/Filters"
 import { Suspense } from "react"
 import { useSelector } from "react-redux"
 import { storeType } from "../../store/store"
+import Spinner from "../../components/LoadingSpinner/Spinner"
 
 function ProductsLayout() {
   const location = useLocation()
   const isOpenFilters = useSelector(
-    (store: storeType) => store.filters.visibility
+    (store: storeType) => store.filters.visibility,
   )
 
   const pathname = location.pathname.replace("/", "")
@@ -45,7 +46,7 @@ function ProductsLayout() {
               !isOpenFilters ? styles.sectionProductsExpanded : ""
             }`}
           >
-            <Suspense fallback={<h1>Loading...Suspense</h1>}>
+            <Suspense fallback={<Spinner />}>
               <Outlet />
             </Suspense>
           </section>
