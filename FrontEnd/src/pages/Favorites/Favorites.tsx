@@ -20,11 +20,11 @@ const Favorites = () => {
   const favProducts = data?.result
   if (data) {
     content = (
-      <div className={styles.products}>
+      <ul className={styles.cardList}>
         {favProducts.map((product: ProductType) => {
           return <CardItem key={product.ProductID} product={product} />
         })}
-      </div>
+      </ul>
     )
   }
   return (
