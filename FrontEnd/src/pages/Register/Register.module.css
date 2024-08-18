@@ -10,7 +10,7 @@
   align-items: center;
   row-gap: 2rem;
   color: black;
-  border: 0.2rem solid rgb(255, 163, 4);
+  border: 0.1rem solid rgb(255, 163, 4);
 }
 
 .form input {
@@ -41,7 +41,7 @@
   color: #000;
   text-align: center;
   margin-bottom: 4rem;
-  font-family: Arista Pro Trial;
+  font-family: Ermilov;
   font-weight: 300;
 }
 

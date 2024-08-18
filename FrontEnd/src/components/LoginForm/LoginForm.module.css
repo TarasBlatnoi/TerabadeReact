@@ -3,7 +3,7 @@
   width: 38rem;
   height: 54rem;
   background-color: rgb(255 255 255);
-  border: 0.2rem solid rgb(255, 163, 4);
+  border: 0.1rem solid rgb(255, 163, 4);
   border-radius: 1rem;
   display: flex;
   flex-direction: column;
@@ -17,7 +17,7 @@
   color: #000;
   text-align: center;
   margin-bottom: 4rem;
-  font-family: Arista Pro Trial;
+  font-family: Ermilov;
   font-weight: 300;
 }
 .inputbox {
