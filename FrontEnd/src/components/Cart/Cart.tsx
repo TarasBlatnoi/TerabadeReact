@@ -16,6 +16,7 @@ const Cart = () => {
     closeCart()
     navigate("/payment")
   }
+
   return (
     <Modal open={isOpened} className={styles.cart}>
       <div className={styles.classItemsWrapper}>
