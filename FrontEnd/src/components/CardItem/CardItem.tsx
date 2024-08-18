@@ -19,7 +19,7 @@ const CardItem = ({ product, className, style }: CardItemProps) => {
   const navigate = useNavigate()
   const { setActiveImage } = useImages()
   const isOpenFilters = useSelector(
-    (store: storeType) => store.filters.visibility
+    (store: storeType) => store.filters.visibility,
   )
 
   return (
