@@ -3,6 +3,7 @@ import AuthAPI from "../../../../api/Auth/AuthAPI"
 import { useContext, useState } from "react"
 import { AuthContext } from "../../../../context/AuthContext"
 import styles from "./LogoutButton.module.css"
+import logout from "../../../../assets/images/logout.png"
 
 const LogoutButton = () => {
   const navigate = useNavigate()
@@ -19,13 +20,14 @@ const LogoutButton = () => {
     }
   }
   return (
-    <button
-      onClick={handleLogout}
-      disabled={logoutButtonClicked}
-      className={styles.logoutButton}
+    <div
+      className={`${styles.container} ${logoutButtonClicked ? styles.clicked : ""}`}
+      onClick={() => {
+        if (!logoutButtonClicked) handleLogout()
+      }}
     >
-      {logoutButtonClicked ? "logging out..." : "logout"}
-    </button>
+      <img src={logout} alt="logout" />
+    </div>
   )
 }
 

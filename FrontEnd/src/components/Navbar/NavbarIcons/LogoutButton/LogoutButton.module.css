@@ -1,10 +1,13 @@
-.logoutButton {
-  color: #8f8f8f;
-  font-size: 1rem;
-  width: 5rem;
-  height: 3rem;
-  border: 2px solid var(--FONT-COLOR-BLACK);
-  border-radius: 1.5rem;
-  background-color: #fbfaff;
+.container {
+  height: 2.4rem;
   cursor: pointer;
+}
+
+.container img {
+  height: 87%;
+  object-fit: cover;
+}
+
+.clicked img {
+  filter: opacity(0.5);
 }

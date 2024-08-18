@@ -125,6 +125,8 @@ export default function CartProvider({ children }: CartProviderProps) {
 
   useEffect(() => {
     localStorage.setItem("cart", JSON.stringify(state.items))
+    const id = setTimeout(() => setIsOpened(false), 3000)
+    return () => clearTimeout(id)
   }, [state.items])
 
   function addCartItem(item: CartItemType) {
