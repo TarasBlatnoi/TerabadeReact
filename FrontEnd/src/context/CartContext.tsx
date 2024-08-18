@@ -1,4 +1,10 @@
-import { createContext, ReactNode, useReducer, useState } from "react"
+import {
+  createContext,
+  ReactNode,
+  useEffect,
+  useReducer,
+  useState,
+} from "react"
 
 export const CartContext = createContext({
   cartItems: [] as CartItemType[],
@@ -42,7 +48,7 @@ function cartReducer(state: CartState, action: CartAction) {
   if (type === CartActionType.ADD_ITEM) {
     const item = action.payload
     const indexOfItem = state.items.findIndex(
-      (itemInCopy) => itemInCopy.id === item.id
+      (itemInCopy) => itemInCopy.id === item.id,
     )
     const copyOfItems = [...state.items]
     if (indexOfItem > -1) {
@@ -59,7 +65,7 @@ function cartReducer(state: CartState, action: CartAction) {
   if (type === CartActionType.DELETE_ITEM) {
     const idOfItem = action.payload
     const indexOfItem = state.items.findIndex(
-      (itemInCart) => itemInCart.id === idOfItem
+      (itemInCart) => itemInCart.id === idOfItem,
     )
     if (indexOfItem === -1) {
       return state
@@ -116,6 +122,11 @@ interface CartProviderProps {
 export default function CartProvider({ children }: CartProviderProps) {
   const [state, dispatch] = useReducer(cartReducer, initialState)
   const [isOpened, setIsOpened] = useState(false)
+
+  useEffect(() => {
+    localStorage.setItem("cart", JSON.stringify(state.items))
+  }, [state.items])
+
   function addCartItem(item: CartItemType) {
     dispatch({ type: CartActionType.ADD_ITEM, payload: item })
   }
