@@ -9,10 +9,20 @@ import { AuthContext } from "../../../context/AuthContext"
 import LogoutButton from "./LogoutButton/LogoutButton"
 
 const NavbarIcons = () => {
-  const { openCart } = useContext(CartContext)
+  const { openCart, cartItems } = useContext(CartContext)
   const { isLoggedIn } = useContext(AuthContext)
+
   return (
     <div className={styles.header__icons}>
+      <Link to="favorites">
+        <img className={styles.icon} src={heartIcon} alt="heart" />
+      </Link>
+      <div className={styles.cartBtn} onClick={openCart}>
+        <span className="nav-icon">
+          <img className={styles.icon} src={baskerIcon} alt="basket" />
+        </span>
+        <div className={styles.cartItems}>{cartItems.length}</div>
+      </div>
       {!isLoggedIn ? (
         <div className={styles.userIcon}>
           <Link to="login">
@@ -22,16 +32,6 @@ const NavbarIcons = () => {
       ) : (
         <LogoutButton />
       )}
-
-      <Link to="favorites">
-        <img className={styles.icon} src={heartIcon} alt="heart" />
-      </Link>
-      <div className={styles.cartBtn} onClick={openCart}>
-        <span className="nav-icon">
-          <img className={styles.icon} src={baskerIcon} alt="basket" />
-        </span>
-        <div className={styles.cartItems}>0</div>
-      </div>
     </div>
   )
 }
