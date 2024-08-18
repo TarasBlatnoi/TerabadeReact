@@ -37,11 +37,11 @@ const LoginForm = () => {
   const errors = actionData?.errors || []
   return (
     <Form method="post" className={styles.formBox}>
-      <h2 className={styles.actionTitle}>ВХІД</h2>
+      <h2 className={styles.actionTitle}>Вхід</h2>
       <div className={styles.inputsContainer}>
         <Input
           divClassName={`${styles.inputbox} ${styles.fullWith}`}
-          placeholder="email"
+          placeholder="електронна пошта"
           type="text"
           id="email"
           name="email"
@@ -52,7 +52,7 @@ const LoginForm = () => {
         {errors[0] && <p style={{ color: "red" }}>{errors[0]}</p>}
         <Input
           divClassName={`${styles.inputbox} ${styles.fullWith}`}
-          placeholder="password"
+          placeholder="пароль"
           type="password"
           id="password"
           name="password"
@@ -66,7 +66,7 @@ const LoginForm = () => {
         <button
           type="submit"
           id="applyBtn"
-          className={styles.narrowBtn}
+          className={styles.subBttn}
           disabled={isSubmitting}
         >
           {isSubmitting ? "Вхід..." : "Продовжити"}
@@ -76,7 +76,6 @@ const LoginForm = () => {
         <Link to={"/register"}>
           <p>Зареєструватися</p>
         </Link>
-
         <p>Забули пароль?</p>
       </div>
     </Form>

@@ -1,0 +1,103 @@
+.form {
+  position: relative;
+  width: 38rem;
+  height: 54rem;
+  background-color: white;
+  border-radius: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  row-gap: 2rem;
+  color: black;
+  border: 0.1rem solid rgb(255, 163, 4);
+}
+
+.form input {
+  outline: none;
+  border: 0;
+  padding: 1.2rem 2rem;
+  font-size: 1.2rem;
+  border-bottom: 0.1rem solid black;
+  background-color: #e8f0fe;
+  width: 70%;
+}
+
+.inputsContainer {
+  display: flex;
+  flex-direction: column;
+  row-gap: 2rem;
+  width: 90%;
+  justify-content: center;
+}
+
+.inputsContainer div {
+  display: flex;
+  justify-content: center;
+}
+
+.title {
+  font-size: 2.4rem;
+  color: #000;
+  text-align: center;
+  margin-bottom: 4rem;
+  font-family: Ermilov;
+  font-weight: 300;
+}
+
+.subButtn {
+  font-size: 1.2rem;
+  padding: 1rem 3rem;
+  background: black;
+  color: white;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  font-weight: 600;
+  border-radius: 0.5rem;
+}
+
+.subButtn:disabled {
+  background: gainsboro;
+  color: #555;
+}
+
+.detailsContainer {
+  display: flex;
+  flex-direction: row;
+  width: 90%;
+  justify-content: space-around;
+}
+
+.detailsContainer div {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.detailsContainer input {
+  width: 90%;
+  font-size: 1.2rem;
+}
+
+.errorMessage {
+  text-align: center;
+  color: red;
+  font-size: 1rem;
+}
+
+.refContainer {
+  font-size: 1.25rem;
+}
+
+.refContainer p {
+  cursor: pointer;
+  transition: all 50ms ease-in-out;
+
+  font-weight: 200;
+}
+
+.refContainer p:hover {
+  transform: scale(0.99);
+  color: #555;
+}

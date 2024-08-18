@@ -23,6 +23,8 @@ import { Provider } from "react-redux"
 import { store } from "./store/store"
 import { ImagesProvider } from "./context/ImageContext"
 import MainLayout from "./pages/MainLayout/MainLayout"
+import LoginLayout from "./pages/LoginLayout/LoginLayout"
+import Register, { action as RegisterAction } from "./pages/Register/Register"
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -51,17 +53,20 @@ const router = createBrowserRouter(
         <Route path="product/:id" element={<DetailProduct />} />
       </Route>
 
-      <Route
-        path="login"
-        element={
-          <Suspense fallback={<p>Loading login page...</p>}>
-            <Login />
-          </Suspense>
-        }
-        action={(meta) =>
-          import("./pages/Login/Login").then((module) => module.action(meta))
-        }
-      />
+      <Route element={<LoginLayout />}>
+        <Route
+          path="login"
+          element={
+            <Suspense fallback={<p>Loading login page...</p>}>
+              <Login />
+            </Suspense>
+          }
+          action={(meta) =>
+            import("./pages/Login/Login").then((module) => module.action(meta))
+          }
+        />
+        <Route path="register" element={<Register />} action={RegisterAction} />
+      </Route>
     </Route>,
   ),
 )
