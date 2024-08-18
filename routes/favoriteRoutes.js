@@ -8,5 +8,5 @@ const router = new express.Router()
 router.use(isAuth)
 router.get("/", favoriteProductController.getAllFavoriteproducts)
 router.post("/", favoriteProductController.addToFavorite)
-router.delete("/", favoriteProductController.deleteFavoriteProduct)
+router.delete("/:id", favoriteProductController.deleteFavoriteProduct)
 module.exports = router

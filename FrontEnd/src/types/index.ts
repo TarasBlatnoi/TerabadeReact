@@ -36,6 +36,10 @@ export interface UserBodyType {
   password: FormDataEntryValue | null
 }
 
+export interface FavProductBodyType {
+  ProductID: number
+}
+
 export interface Review {
   text: string
   ProductID: number

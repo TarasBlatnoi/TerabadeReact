@@ -24,6 +24,7 @@
 }
 
 .secondary {
+  border: none;
   font-family: Arista-Pro-Light;
   background-color: #f9c31f;
 }
