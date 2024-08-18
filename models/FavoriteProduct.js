@@ -3,13 +3,26 @@ const { imageToBase64 } = require("../utils/imageToBase64")
 class FavoriteProduct {
   static sqlQueries = {
     getAll: `
-        SELECT *
-        FROM product
-        WHERE ProductID IN (
-        SELECT Product_ProductID
-        FROM favoriteproduct
-        WHERE User_UserID = ?
-        );
+    SELECT 
+    product.ProductID, 
+    name, 
+    sex, 
+    type, 
+    color, 
+    price, 
+    productDetails, 
+    ImageURL
+    FROM 
+    product 
+    JOIN 
+    favoriteproduct 
+    ON product.ProductID = favoriteproduct.Product_ProductID
+    JOIN 
+    Images 
+    ON product.ProductID = Images.ProductID 
+    WHERE 
+    ImageOrder = 0 
+    AND favoriteproduct.User_UserID = 57;
         `,
     addToFavorite: `
         INSERT INTO  favoriteproduct(User_UserID, Product_ProductID) VALUES(?,?);
