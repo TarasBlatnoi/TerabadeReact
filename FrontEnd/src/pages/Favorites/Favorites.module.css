@@ -1,15 +1,26 @@
-.products {
-  display: grid;
+.cardList {
   height: 100%;
-  width: 91%;
-  grid-column-gap: 2em;
-  grid-template-columns: 1fr 1fr 1fr;
-  grid-auto-flow: dense;
-  grid-row-gap: 5em;
-  margin: 0 auto;
-  margin-top: 11rem;
-  padding-right: 2rem;
-  order: 999;
+
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-auto-rows: auto;
+  width: 100%;
+  justify-content: center;
+  gap: 3rem;
+  padding-left: 3rem;
+  padding-right: 1rem;
+  padding: 2rem 8rem;
+  margin-top: 4rem;
+}
+
+@media screen and (width <= 1000px) {
+  .cardList {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.cardList li {
+  height: calc(35rem + 19vh);
 }
 
 .favProductsFallback {
