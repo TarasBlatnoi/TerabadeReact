@@ -10,7 +10,7 @@ import Partners from "../../components/Partnerns/Partners"
 
 const Home = () => {
   return (
-    <>
+    <div>
       <section className={styles.heroSection}>
         <Offer />
         <div>
@@ -38,7 +38,7 @@ const Home = () => {
       </h2>
       <ThreePoints />
       <Partners />
-    </>
+    </div>
   )
 }
 
