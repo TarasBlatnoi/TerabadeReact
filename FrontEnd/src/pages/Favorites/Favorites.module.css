@@ -11,3 +11,27 @@
   padding-right: 2rem;
   order: 999;
 }
+
+.favProductsFallback {
+  text-align: center;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  row-gap: 4rem;
+}
+
+.container h1 {
+  font-size: 2.2rem;
+}
+.button {
+  padding: 1rem 2rem;
+  font-size: 1.6rem;
+  border-radius: 1rem;
+}
+
+.button:hover {
+  filter: brightness(1.1);
+}

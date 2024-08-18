@@ -3,3 +3,10 @@
   top: 10%;
   z-index: 200;
 }
+
+.main {
+  min-height: 70vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

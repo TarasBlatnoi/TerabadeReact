@@ -3,21 +3,20 @@ import ProductAPI from "../../api/Product/ProductAPI"
 import { ProductType } from "../../types"
 import CardItem from "../../components/CardItem/CardItem"
 import styles from "./Favorites.module.css"
+import Button from "../../components/UI/Button/Button"
+import { useNavigate } from "react-router-dom"
 
 const Favorites = () => {
-  const { data, isLoading, isError, error } = useQuery({
+  const navigate = useNavigate()
+  const { data } = useQuery({
     queryFn: ProductAPI.getFavoriteProducts,
     queryKey: ["products", "favorites"],
+    staleTime: Infinity,
+    suspense: true,
   })
 
   let content
-  if (isLoading) {
-    content = <h2>Fetching your favorite products...</h2>
-  }
-  if (isError) {
-    console.log(error)
-    content = <p>Error</p>
-  }
+
   const favProducts = data?.result
   if (data) {
     content = (
@@ -33,9 +32,18 @@ const Favorites = () => {
       {favProducts?.length ? (
         content
       ) : (
-        <h1 className={styles.favProductsFallback}>
-          You didn't add any products yet
-        </h1>
+        <div className={styles.container}>
+          <h1 className={styles.favProductsFallback}>
+            Ще нічого не додано до улюблених. Переглянь наші новинки!
+          </h1>
+          <Button
+            variant="primary"
+            className={styles.button}
+            onClick={() => navigate("/sale")}
+          >
+            Переглянути новинки
+          </Button>
+        </div>
       )}
     </>
   )
