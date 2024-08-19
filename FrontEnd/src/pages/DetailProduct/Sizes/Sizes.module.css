@@ -12,10 +12,12 @@
 }
 
 .sizeRectContainer {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(8, 5rem);
   margin: 2.4rem 0;
   gap: 1.6rem;
+  padding: 0.4rem;
+  align-self: flex-start;
 }
 
 .sizeRect {
@@ -35,5 +37,13 @@
 .sizeRectFilled {
   background-color: #f9c31f;
   color: black;
-  border: none;
+}
+
+.warning {
+  border-radius: 0.5rem;
+  border: 0.2rem solid rgb(255, 30, 0);
+}
+
+.warningText {
+  font-size: 1.4rem;
 }

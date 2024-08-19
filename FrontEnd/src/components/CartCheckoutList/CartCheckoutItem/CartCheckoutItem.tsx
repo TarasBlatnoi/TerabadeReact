@@ -1,9 +1,9 @@
+import { CartItemType } from "../../../context/CartContext"
 import FavoriteButtons from "../../../pages/DetailProduct/FavoriteButtons/FavoriteButtons"
-import { CartCheckoutItemType } from "../../../types"
 import styles from "./CartCheckoutItem.module.css"
 
 interface CartCheckoutItemProps {
-  item: CartCheckoutItemType
+  item: CartItemType
 }
 
 function CartCheckoutItem({ item }: CartCheckoutItemProps) {
@@ -15,7 +15,7 @@ function CartCheckoutItem({ item }: CartCheckoutItemProps) {
       <div className={styles.details}>
         <div>
           <h2>{item.name}</h2>
-          <FavoriteButtons ProductID={item.id} />
+          <FavoriteButtons ProductID={+item.id} />
         </div>
         <p>{`${item.sex}\`s ${item.type}`} shoes</p>
         <p>

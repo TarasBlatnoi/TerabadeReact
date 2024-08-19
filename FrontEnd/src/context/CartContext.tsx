@@ -27,6 +27,9 @@ export interface CartItemType {
   price: number
   image: string
   quantity?: number
+  sex: string
+  type: string
+  size: number
 }
 
 interface CartState {

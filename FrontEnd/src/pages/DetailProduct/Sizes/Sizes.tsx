@@ -1,15 +1,23 @@
-import { useState } from "react"
 import styles from "./Sizes.module.css"
 
 interface SizesProps {
   begin: number
   end: number
   step: number
+  chosedSize: number
+  setChoseSize: (value: number) => void
+  addToCartClicked: boolean
 }
 
-const Sizes = ({ begin, end, step }: SizesProps) => {
+const Sizes = ({
+  begin,
+  end,
+  step,
+  chosedSize,
+  setChoseSize,
+  addToCartClicked,
+}: SizesProps) => {
   const sizesElements = []
-  const [chosedSize, setChoseSize] = useState(0)
   for (let i = begin; i < end; i += step) {
     sizesElements.push(
       <div
@@ -22,7 +30,7 @@ const Sizes = ({ begin, end, step }: SizesProps) => {
         key={i}
       >
         {i}
-      </div>
+      </div>,
     )
   }
   return (
@@ -31,7 +39,14 @@ const Sizes = ({ begin, end, step }: SizesProps) => {
         <p>Обрати розмір</p>
         <p>Довідник розмірів</p>
       </div>
-      <div className={styles.sizeRectContainer}>{sizesElements}</div>
+      <div
+        className={`${styles.sizeRectContainer} ${addToCartClicked && !chosedSize ? styles.warning : ""}`}
+      >
+        {sizesElements}
+      </div>
+      {!chosedSize && addToCartClicked ? (
+        <p className={styles.warningText}>Будь ласка, оберіть розмір</p>
+      ) : null}
     </div>
   )
 }
