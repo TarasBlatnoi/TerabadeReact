@@ -18,6 +18,7 @@ import Sizes from "./Sizes/Sizes"
 import ImagesContainer from "./ImagesContainer/ImagesContainer"
 import { useImages } from "../../context/ImageContext"
 import FavoriteButtons from "./FavoriteButtons/FavoriteButtons"
+import { DetailProductType } from "../../types"
 
 function DetailProduct() {
   const params = useParams()
@@ -35,12 +36,13 @@ function DetailProduct() {
     queryKey: [params.id],
     staleTime: Infinity,
     suspense: true,
-  })
+  }) as { data: Array<DetailProductType> }
   useEffect(() => {
     setActiveImage(
       detailProduct?.images[0]?.ImageURL || "https://picsum.photos/200",
     )
   }, [setActiveImage, detailProduct])
+  console.log(detailProduct)
   const { data: parentData } = useQuery({
     queryFn: () => ProductAPI.getProducts(detailProduct.sex),
     queryKey: [detailProduct.sex],
@@ -97,6 +99,7 @@ function DetailProduct() {
               chosedSize={chosedSize}
               setChoseSize={setChoseSize}
               addToCartClicked={addToCartClicked}
+              sizes={detailProduct.sizes}
             />
             <div className={styles.actionButtons}>
               <Button

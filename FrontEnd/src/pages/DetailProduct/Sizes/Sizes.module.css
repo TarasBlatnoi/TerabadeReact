@@ -47,3 +47,8 @@
 .warningText {
   font-size: 1.4rem;
 }
+
+.sizeNotAvailable {
+  filter: brightness(0.5);
+  cursor: default;
+}

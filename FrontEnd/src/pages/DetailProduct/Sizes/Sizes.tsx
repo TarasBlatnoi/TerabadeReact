@@ -7,6 +7,7 @@ interface SizesProps {
   chosedSize: number
   setChoseSize: (value: number) => void
   addToCartClicked: boolean
+  sizes: Array<{ SizeLabel: string; InStock: number }>
 }
 
 const Sizes = ({
@@ -16,15 +17,22 @@ const Sizes = ({
   chosedSize,
   setChoseSize,
   addToCartClicked,
+  sizes,
 }: SizesProps) => {
+  const availableSizes = sizes
+    .filter(({ InStock }) => Boolean(InStock))
+    .map(({ SizeLabel }) => +SizeLabel)
+
+  console.log(availableSizes)
   const sizesElements = []
   for (let i = begin; i < end; i += step) {
     sizesElements.push(
       <div
         className={`${styles.sizeRect} ${
           chosedSize === i ? styles.sizeRectFilled : undefined
-        }`}
+        } ${!availableSizes.includes(i) ? styles.sizeNotAvailable : ""}`}
         onClick={() => {
+          if (!availableSizes.includes(i)) return
           setChoseSize(i)
         }}
         key={i}

@@ -25,8 +25,8 @@ export interface DetailProductType {
   name: string
   price: number
   productDetails: string
-  sizes: string[]
-  sex: string
+  sizes: Array<{ SizeLabel: string; InStock: number }>
+  sex: "men" | "women" | "children"
   type: string
   updatedAt: string
 }
