@@ -14,7 +14,7 @@ const asyncWrapper = (callback) => {
         args.push(req.body)
       }
       if (req.query.gender) {
-        args.push(req.query.gender)
+        args.push([...req.query.gender])
       }
       const data = await callback(...args)
       if (data.length) {

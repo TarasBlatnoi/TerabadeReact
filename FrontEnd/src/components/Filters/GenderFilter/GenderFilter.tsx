@@ -31,11 +31,23 @@ function GenderFilter() {
     console.log("filter", filter)
     console.log("filters", filters)
     console.log("gender", gender)
-
     if (filter !== gender && filters.length === 1) {
       navigate("/products")
     }
 
+    if (filters.includes(gender) && filters.length >= 2) {
+      const indexOfCurrentGender = filters.indexOf(gender)
+      filters.splice(indexOfCurrentGender, 1)
+      if (filters.length > 1) {
+        navigate(`/products`)
+      } else {
+        navigate(`/${filters[0]}`)
+      }
+    }
+
+    if (filters.length === 1 && filters.includes(gender)) {
+      navigate(`/products`)
+    }
     if (filters.length === 0) {
       navigate(`/${gender}`)
     }
@@ -59,7 +71,7 @@ function GenderFilter() {
           <CustomCheckBox
             id="men"
             callBack={() => handler("men")}
-            initialChecked={pathname === "/men"}
+            checked={pathname === "/men" || states.gender.men}
           />
           <label htmlFor="men">Чоловікам</label>
         </li>
@@ -67,7 +79,7 @@ function GenderFilter() {
           <CustomCheckBox
             id="women"
             callBack={() => handler("women")}
-            initialChecked={pathname === "/women"}
+            checked={pathname === "/women" || states.gender.women}
           />
           <label htmlFor="women">Жінкам</label>
         </li>
@@ -75,7 +87,7 @@ function GenderFilter() {
           <CustomCheckBox
             id="children"
             callBack={() => handler("children")}
-            initialChecked={pathname === "/children"}
+            checked={pathname === "/children" || states.gender.children}
           />
           <label htmlFor="children">Дітям</label>
         </li>

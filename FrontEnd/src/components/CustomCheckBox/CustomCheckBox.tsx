@@ -1,21 +1,19 @@
-import { useState } from "react"
 import styles from "./CustomCheckBox.module.css"
 
 interface CustomCheckBoxProps
   extends React.InputHTMLAttributes<HTMLInputElement> {
   callBack?: (checked: boolean) => void
   className?: string
-  initialChecked: boolean
   children?: React.ReactElement
+  checked: boolean
 }
 
 function CustomCheckBox({
   callBack,
   children,
-  initialChecked,
+  checked,
   ...props
 }: CustomCheckBoxProps) {
-  const [checked, setChecked] = useState(initialChecked)
   return (
     <div
       className={`${styles.inputContainer} ${
@@ -33,7 +31,6 @@ function CustomCheckBox({
         type="checkbox"
         onChange={(ev) => {
           callBack?.(ev.target.checked)
-          setChecked(ev.target.checked)
         }}
         checked={checked}
       />

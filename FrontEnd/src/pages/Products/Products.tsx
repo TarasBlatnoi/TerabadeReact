@@ -21,9 +21,11 @@ function Products() {
   }
   let url = gender
   if (gender === "products") {
-    url += `?${genders.map((gender) => `gender=${gender}`).join("&")}`
+    url = ""
+    if (genders.length) {
+      url += `?${genders.map((gender) => `gender=${gender}`).join("&")}`
+    }
   }
-  console.log(url)
   const { data } = useQuery({
     queryFn: () => {
       return ProductAPI.getProducts(url)
