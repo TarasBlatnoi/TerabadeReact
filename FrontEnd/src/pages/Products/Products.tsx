@@ -13,24 +13,22 @@ function Products() {
   )
   const { pathname } = useLocation()
   const gender = pathname.slice(1)
+  const genders = []
+  for (const genderName in states.gender) {
+    if (states.gender[genderName as "men" | "women" | "children"]) {
+      genders.push(genderName)
+    }
+  }
+  let url = gender
+  if (gender === "products") {
+    url += `?${genders.map((gender) => `gender=${gender}`).join("&")}`
+  }
+  console.log(url)
   const { data } = useQuery({
     queryFn: () => {
-      if (gender === "products") {
-        const genders = []
-        for (const genderName in states.gender) {
-          if (states.gender[genderName as "men" | "women" | "children"]) {
-            genders.push(genderName)
-          }
-        }
-        return ProductAPI.getProducts(
-          gender + `?${genders.map((gender) => `gender=${gender}`).join("&")}`,
-        )
-      } else {
-        console.log(gender)
-        return ProductAPI.getProducts(gender)
-      }
+      return ProductAPI.getProducts(url)
     },
-    queryKey: [gender],
+    queryKey: [gender, url],
     suspense: true,
     staleTime: Infinity,
   }) as { data: ProductType[] }
