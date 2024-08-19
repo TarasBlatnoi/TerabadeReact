@@ -44,3 +44,14 @@ export interface Review {
   text: string
   ProductID: number
 }
+
+export interface CartCheckoutItemType {
+  id: number
+  image: string
+  name: string
+  price: number
+  quantity: number
+  size: number
+  sex: string
+  type: string
+}

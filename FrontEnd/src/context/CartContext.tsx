@@ -1,6 +1,7 @@
 import {
   createContext,
   ReactNode,
+  useContext,
   useEffect,
   useReducer,
   useState,
@@ -156,4 +157,11 @@ export default function CartProvider({ children }: CartProviderProps) {
   return (
     <CartContext.Provider value={contextValue}>{children}</CartContext.Provider>
   )
+}
+
+export function useCart() {
+  const value = useContext(CartContext)
+  if (!value)
+    throw new Error("Cart context have to be used whithin CartProvider")
+  return value
 }
