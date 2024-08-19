@@ -13,14 +13,22 @@ function CartCheckoutItem({ item }: CartCheckoutItemProps) {
         <img src={item.image} alt={item.name} />
       </div>
       <div className={styles.details}>
-        <div>
-          <h2>{item.name}</h2>
-          <FavoriteButtons ProductID={+item.id} />
+        <div className={styles.titleContainer}>
+          <h1 className={styles.title}>{item.name}</h1>
+          <FavoriteButtons
+            ProductID={+item.id}
+            className={styles.favButton}
+            height="3rem"
+          />
         </div>
-        <p>{`${item.sex}\`s ${item.type}`} shoes</p>
-        <p>
-          Розмір: <span>{item.quantity}</span>
-        </p>
+        <div className={styles.typeSizeContainer}>
+          <p className={styles.description}>
+            {`${item.sex}\`s ${item.type}`} shoes
+          </p>
+          <p className={styles.size}>
+            Розмір: <span>{item.size}</span>
+          </p>
+        </div>
       </div>
     </li>
   )

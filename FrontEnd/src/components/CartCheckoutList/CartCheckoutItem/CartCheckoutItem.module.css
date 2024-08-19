@@ -1,0 +1,59 @@
+.item {
+  display: flex;
+  padding: 2rem;
+  border: 0.2rem solid rgba(255, 237, 237, 0.366);
+  border-radius: 0.5rem;
+  width: 60%;
+  background-color: #171717;
+  column-gap: 3rem;
+}
+
+.imageContainer {
+  height: 15rem;
+}
+
+.imageContainer img {
+  height: 100%;
+  object-fit: contain;
+  border-radius: 0.5rem;
+}
+
+.titleContainer {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  justify-content: space-between;
+}
+.titleContainer button {
+  margin-left: 10rem;
+}
+
+.details {
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+  row-gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.title {
+  font-size: 2rem;
+}
+.description {
+  font-size: 1.4rem;
+}
+
+.size {
+  font-size: 1.4rem;
+}
+
+.favButton {
+  border: none;
+  height: fit-content;
+}
+
+.typeSizeContainer {
+  display: flex;
+  flex-direction: column;
+  row-gap: 2rem;
+}
