@@ -33,7 +33,7 @@ function GenderFilter() {
     console.log("gender", gender)
 
     if (filter !== gender && filters.length === 1) {
-      navigate("/all")
+      navigate("/products")
     }
 
     if (filters.length === 0) {

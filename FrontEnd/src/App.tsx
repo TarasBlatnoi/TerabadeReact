@@ -34,14 +34,13 @@ const router = createBrowserRouter(
         <Route index element={<Home />} />
 
         <Route element={<ProductsLayout />}>
-          <Route path="men" element={<Products parentRouteId="men" />} />
+          <Route path="/products" element={<Products />} />
 
-          <Route path="women" element={<Products parentRouteId="women" />} />
+          <Route path="men" element={<Products />} />
 
-          <Route
-            path="children"
-            element={<Products parentRouteId="children" />}
-          />
+          <Route path="women" element={<Products />} />
+
+          <Route path="children" element={<Products />} />
         </Route>
         <Route path="cart" element={<Cart />} />
         <Route path="payment" element={<h1>Payment motherfucka</h1>} />
