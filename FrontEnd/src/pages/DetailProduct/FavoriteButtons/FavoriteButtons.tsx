@@ -12,7 +12,6 @@ interface FavoriteButtonsPropsType {
 
 const FavoriteButtons = ({ ProductID }: FavoriteButtonsPropsType) => {
   const [isAddedToFavorite, setIsAddedToFavorite] = useState(false)
-  console.log({ ProductID })
   const navigate = useNavigate()
   const { mutate, isLoading, isError } = useMutation({
     mutationFn: ProductAPI.addProductToFavorite,

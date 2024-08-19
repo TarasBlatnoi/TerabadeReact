@@ -22,7 +22,7 @@ class FavoriteProduct {
     ON product.ProductID = Images.ProductID 
     WHERE 
     ImageOrder = 0 
-    AND favoriteproduct.User_UserID = 57;
+    AND favoriteproduct.User_UserID = ?;
         `,
     addToFavorite: `
         INSERT INTO  favoriteproduct(User_UserID, Product_ProductID) VALUES(?,?);

@@ -11,12 +11,10 @@ const Favorites = () => {
   const { data } = useQuery({
     queryFn: ProductAPI.getFavoriteProducts,
     queryKey: ["products", "favorites"],
-    staleTime: Infinity,
     suspense: true,
   })
 
   let content
-
   const favProducts = data?.result
   if (data) {
     content = (
