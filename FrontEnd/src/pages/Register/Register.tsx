@@ -12,7 +12,6 @@ import * as EmailValidator from "email-validator"
 import UserAPI from "../../api/User/UserAPI"
 import { isAxiosError } from "axios"
 import { validatePassword } from "../../utils/passwordValidator"
-import GoBackLogin from "../../components/GoBackLogin/GoBackLogin"
 
 interface registerAction {
   request: Request
@@ -62,7 +61,6 @@ function Register() {
 
   return (
     <Form method="POST" className={styles.form}>
-      <GoBackLogin />
       <h2 className={styles.title}>Реєстрація</h2>
       <div className={styles.detailsContainer}>
         <Input

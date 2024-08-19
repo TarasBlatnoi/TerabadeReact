@@ -10,7 +10,6 @@ import styles from "./LoginForm.module.css"
 import Input from "../UI/Input/Input"
 import { useContext, useEffect } from "react"
 import { AuthContext } from "../../context/AuthContext"
-import GoBackLogin from "../GoBackLogin/GoBackLogin"
 
 interface ActionData {
   errors?: string[]
@@ -38,7 +37,6 @@ const LoginForm = () => {
   const errors = actionData?.errors || []
   return (
     <Form method="post" className={styles.formBox}>
-      <GoBackLogin />
       <h2 className={styles.actionTitle}>Вхід</h2>
       <div className={styles.inputsContainer}>
         <Input
