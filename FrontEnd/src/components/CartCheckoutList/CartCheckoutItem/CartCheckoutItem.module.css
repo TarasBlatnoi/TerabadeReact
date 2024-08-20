@@ -49,11 +49,44 @@
 
 .favButton {
   border: none;
-  height: fit-content;
+  height: 0;
+  width: 3rem;
 }
 
 .typeSizeContainer {
   display: flex;
   flex-direction: column;
-  row-gap: 2rem;
+  row-gap: 1.2rem;
+}
+
+.quantityContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.quantityContainer select {
+  background-color: #171717;
+  color: white;
+  border: none;
+}
+.anotherContainer {
+  display: flex;
+  flex-direction: column;
+  row-gap: 4rem;
+}
+.sizeSelectContainer {
+  display: flex;
+  align-items: center;
+  column-gap: 2rem;
+}
+
+.deleteBagContainer {
+  height: 1.6rem;
+  margin-right: 0.6rem;
+  cursor: pointer;
+}
+
+.deleteBagContainer img {
+  height: 100%;
+  object-fit: cover;
 }
