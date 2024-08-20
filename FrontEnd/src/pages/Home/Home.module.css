@@ -122,9 +122,10 @@
     font-size: 55% !important;
   }
   .rectangleBgCover {
-    height: 18rem;
-    right: 29%;
-    top: -10%;
+    height: 15rem;
+    width: 30rem;
+    right: 29% !important;
+    top: -10% !important;
   }
   .rectangle {
     padding: 4rem 3rem;
@@ -136,8 +137,8 @@
 /* 1024 */
 
 @media (max-width: 64em) {
-  /* html {
-    font-size: 62.5% !important;
+  html {
+    font-size: 50% !important;
   }
   .rectangleBgCover {
     right: 29%;
@@ -146,5 +147,5 @@
   .rectangle {
     padding: 4rem 3rem;
     border-radius: 2rem;
-  } */
+  }
 }

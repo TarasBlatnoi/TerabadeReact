@@ -3,7 +3,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-left: 7%;
+  margin-left: 5%;
   width: 45%;
 }
 
@@ -15,12 +15,64 @@
   .header__icons {
     margin-left: 0;
   }
-}
-
-@media (max-width: 75em) {
   .ulNavbarSmall {
     justify-content: space-around;
     margin-left: 3.2rem;
-    width: 40rem;
+    width: 60rem;
+  }
+}
+
+@media (max-width: 75em) {
+  .buttonIconsMenu {
+    background-color: #fbfaff;
+    display: block;
+    position: absolute;
+    border: none;
+    width: 4rem;
+    height: 4rem;
+    cursor: pointer;
+    top: 7%;
+    right: 1%;
+    z-index: 201;
+  }
+  .ulWrapper {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    display: block;
+    z-index: 10001;
+    width: 110vw;
+    height: 110vh;
+    background: rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(7px);
+    transition: all 0.4s ease-in-out;
+    opacity: 0;
+    visibility: hidden;
+  }
+
+  .visible {
+    opacity: 1;
+    visibility: visible;
+  }
+  .ulNavbarSmall {
+    background-color: #fbfaff;
+    position: absolute;
+    width: 34vw;
+    height: 110vh;
+    top: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    transition: all 0.3s ease-in-out;
+    z-index: 100;
+    gap: 4.8rem;
+    transform: translateX(100%);
+  }
+
+  .transformInitial {
+    transform: translateX(0);
   }
 }

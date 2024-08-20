@@ -15,3 +15,11 @@
   margin-right: 0.6rem;
   margin-left: 1.6rem;
 }
+
+@media (max-width: 75em) {
+  .navbarSmall {
+    justify-content: space-between;
+    padding-left: 2rem;
+    padding-right: 9rem;
+  }
+}
