@@ -11,7 +11,7 @@ type CardItemProps = {
   style?: any
 }
 
-const formaterCurrency = Intl.NumberFormat("fr-FR", {
+export const formaterCurrency = Intl.NumberFormat("fr-FR", {
   maximumFractionDigits: 0,
 })
 

@@ -12,6 +12,11 @@
   src: url(./assets/fonts/Arista-Pro-Light-trial.ttf);
 }
 
+@font-face {
+  font-family: Arista-Pro-Bold;
+  src: url(./assets/fonts/Arista-Pro-Alternate-Bold-trial.ttf);
+}
+
 /* Variables */
 :root {
   /* COLORS */

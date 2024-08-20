@@ -32,7 +32,7 @@
   width: 70%;
   display: flex;
   flex-direction: column;
-  row-gap: 0.5rem;
+  row-gap: 1rem;
   margin-top: 1rem;
 }
 
@@ -40,17 +40,15 @@
   font-size: 2rem;
 }
 .description {
-  font-size: 1.4rem;
-}
-
-.size {
-  font-size: 1.4rem;
+  font-size: 1.6rem;
+  font-family: Arista Pro Trial;
+  font-weight: 300;
 }
 
 .favButton {
   border: none;
   height: 0;
-  width: 3rem;
+  width: 2.6rem;
 }
 
 .typeSizeContainer {
@@ -59,29 +57,42 @@
   row-gap: 1.2rem;
 }
 
-.quantityContainer {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-.quantityContainer select {
-  background-color: #171717;
-  color: white;
-  border: none;
-}
-.anotherContainer {
-  display: flex;
-  flex-direction: column;
-  row-gap: 4rem;
-}
-.sizeSelectContainer {
+.actionsContainer {
   display: flex;
   align-items: center;
   column-gap: 2rem;
 }
 
+.price {
+  display: flex;
+  align-items: center;
+  column-gap: 0.5rem;
+}
+.priceTag {
+}
+.selection {
+  background-color: #171717;
+  color: white;
+  border: none;
+}
+
+.anotherContainer {
+  display: flex;
+  flex-direction: column;
+  row-gap: 4rem;
+  font-family: Arista Pro Trial;
+  font-weight: 300;
+}
+.sizeSelectContainer {
+  display: flex;
+  align-items: center;
+  column-gap: 2rem;
+  font-size: 1.3rem;
+  font-weight: 500;
+}
+
 .deleteBagContainer {
-  height: 1.6rem;
+  height: 2rem;
   margin-right: 0.6rem;
   cursor: pointer;
 }
@@ -89,4 +100,12 @@
 .deleteBagContainer img {
   height: 100%;
   object-fit: cover;
+}
+
+.currency {
+  font-size: 1.2rem;
+}
+
+.sizeSpan {
+  font-weight: bold;
 }

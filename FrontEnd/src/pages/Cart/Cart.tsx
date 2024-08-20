@@ -19,7 +19,7 @@ function Cart() {
           </section>
           <section className={styles.rightContainer}>
             <CartCheckoutSummary />
-          </section>{" "}
+          </section>
         </>
       ) : (
         <>

@@ -2,6 +2,7 @@ import { CartItemType, useCart } from "../../../context/CartContext"
 import FavoriteButtons from "../../../pages/DetailProduct/FavoriteButtons/FavoriteButtons"
 import styles from "./CartCheckoutItem.module.css"
 import deleteBag from "../../../assets/images/DeleteBag.png"
+import { formaterCurrency } from "../../CardItem/CardItem"
 
 interface CartCheckoutItemProps {
   item: CartItemType
@@ -19,25 +20,25 @@ function CartCheckoutItem({ item }: CartCheckoutItemProps) {
       <div className={styles.details}>
         <div className={styles.titleContainer}>
           <h1 className={styles.title}>{item.name}</h1>
-          <FavoriteButtons
-            ProductID={+item.id}
-            className={styles.favButton}
-            height="3rem"
-          />
+          <div className={styles.price}>
+            <h2 className={styles.priceTag}>
+              {formaterCurrency.format(item.price)}
+            </h2>
+            <span className={styles.currency}>UAH</span>
+          </div>
         </div>
         <div className={styles.anotherContainer}>
           <div className={styles.typeSizeContainer}>
             <p className={styles.description}>
               {`${item.sex}\`s ${item.type}`} shoes
             </p>
-            <p className={styles.size}>
-              Розмір: <span>{item.size}</span>
-            </p>
-          </div>
-          <div className={styles.quantityContainer}>
             <div className={styles.sizeSelectContainer}>
+              <p className={styles.size}>
+                Розмір: <span className={styles.sizeSpan}>{item.size}</span>
+              </p>
               <p>Кількість</p>
               <select
+                className={styles.selection}
                 value={item.quantity}
                 onChange={(ev) => setItemQuantity(item.id, +ev.target.value)}
               >
@@ -49,6 +50,13 @@ function CartCheckoutItem({ item }: CartCheckoutItemProps) {
                 ))}
               </select>
             </div>
+          </div>
+          <div className={styles.actionsContainer}>
+            <FavoriteButtons
+              ProductID={+item.id}
+              className={styles.favButton}
+              height="3rem"
+            />
             <div
               className={styles.deleteBagContainer}
               onClick={() => {
