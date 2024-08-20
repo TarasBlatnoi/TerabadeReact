@@ -56,6 +56,7 @@ function CartCheckoutItem({ item }: CartCheckoutItemProps) {
               ProductID={+item.id}
               className={styles.favButton}
               height="3rem"
+              fill="red"
             />
             <div
               className={styles.deleteBagContainer}

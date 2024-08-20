@@ -1,11 +1,12 @@
 .container {
-  height: 40rem;
+  min-height: 40rem;
   width: 40rem;
   padding: 2rem;
   border: 0.2rem solid white;
   display: flex;
   flex-direction: column;
   row-gap: 2.4rem;
+  border-radius: 0.5rem;
 }
 
 .cart {
@@ -23,6 +24,7 @@
   padding-bottom: 2rem;
   border-bottom: 0.2rem solid white;
   row-gap: 1rem;
+  transition: all 200ms ease-in-out;
 }
 .detailsContainer div {
   display: flex;
@@ -64,4 +66,41 @@
 
 .finalPriceTag {
   font-size: 1.5rem;
+}
+
+.svgContainer {
+  height: 2rem;
+  transition: all 200ms ease-in-out;
+  cursor: pointer;
+}
+.svgContainer img {
+  height: 90%;
+  object-fit: cover;
+}
+
+.promoCode {
+  padding-bottom: 0.3rem;
+
+  display: flex;
+  flex-direction: column;
+  row-gap: 0.4rem;
+  transition: all 500ms ease-in-out;
+}
+.openContainer {
+  transform: rotateZ(180deg);
+}
+
+.promoContainer {
+  height: 0;
+  opacity: 0;
+  transition: all 200ms ease-in-out;
+}
+
+.openInputContainer {
+  opacity: 1;
+  height: 2rem;
+}
+
+.inputContainerP input {
+  padding: 1rem 2rem;
 }
