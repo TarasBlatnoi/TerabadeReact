@@ -21,7 +21,9 @@ const Cart = () => {
     <Modal open={isOpened} className={styles.cart}>
       <div className={styles.classItemsWrapper}>
         {cartItems.map((cartItem) => {
-          return <CartItem item={cartItem} key={cartItem.id} />
+          return (
+            <CartItem item={cartItem} key={`${cartItem.id}${cartItem.size}`} />
+          )
         })}
       </div>
       {cartItems.length ? (

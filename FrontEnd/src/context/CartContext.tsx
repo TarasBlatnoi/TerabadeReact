@@ -19,8 +19,8 @@ export const CartContext = createContext({
   isOpened: false,
   openCart: () => {},
   closeCart: () => {},
-  removeItem: (id: string) => undefined,
-  setItemQuantity: (id: string, quantity: number) => undefined,
+  removeItem: (id: string, size: number) => undefined,
+  setItemQuantity: (id: string, size: number, quantity: number) => undefined,
 })
 
 export interface CartItemType {
@@ -50,10 +50,10 @@ type CartAction =
   | { type: CartActionType.ADD_ITEM; payload: CartItemType }
   | { type: CartActionType.DELETE_ITEM; payload: string }
   | { type: CartActionType.RESET_ITEMS }
-  | { type: CartActionType.REMOVE_ITEM; payload: string }
+  | { type: CartActionType.REMOVE_ITEM; payload: { id: string; size: number } }
   | {
       type: CartActionType.SET_QUANTITY
-      payload: { id: string; quantity: number }
+      payload: { id: string; size: number; quantity: number }
     }
 
 function cartReducer(state: CartState, action: CartAction) {
@@ -61,7 +61,8 @@ function cartReducer(state: CartState, action: CartAction) {
   if (type === CartActionType.ADD_ITEM) {
     const item = action.payload
     const indexOfItem = state.items.findIndex(
-      (itemInCopy) => itemInCopy.id === item.id,
+      (itemInCopy) =>
+        itemInCopy.id === item.id && itemInCopy.size === item.size,
     )
     const copyOfItems = [...state.items]
     if (indexOfItem > -1) {
@@ -116,14 +117,18 @@ function cartReducer(state: CartState, action: CartAction) {
   if (type === CartActionType.REMOVE_ITEM) {
     const itemsCopy = [...state.items]
     const indexOfItem = itemsCopy.findIndex(
-      (item) => item.id === action.payload,
+      (item) =>
+        item.id === action.payload.id && item.size === action.payload.size,
     )
     itemsCopy.splice(indexOfItem, 1)
     return { ...state, items: itemsCopy }
   }
   if (type === CartActionType.SET_QUANTITY) {
     const itemsCopy = [...state.items]
-    const item = itemsCopy.find((item) => item.id === action.payload.id)
+    const item = itemsCopy.find(
+      (item) =>
+        item.id === action.payload.id && item.size === action.payload.size,
+    )
     item!.quantity = action.payload.quantity
 
     return { ...state, items: itemsCopy }
@@ -173,11 +178,18 @@ export default function CartProvider({ children }: CartProviderProps) {
   function closeCart() {
     setIsOpened(false)
   }
-  function removeItem(id: string): undefined {
-    dispatch({ type: CartActionType.REMOVE_ITEM, payload: id })
+  function removeItem(id: string, size: number): undefined {
+    dispatch({ type: CartActionType.REMOVE_ITEM, payload: { id, size } })
   }
-  function setItemQuantity(id: string, quantity: number): undefined {
-    dispatch({ type: CartActionType.SET_QUANTITY, payload: { id, quantity } })
+  function setItemQuantity(
+    id: string,
+    size: number,
+    quantity: number,
+  ): undefined {
+    dispatch({
+      type: CartActionType.SET_QUANTITY,
+      payload: { id, size, quantity },
+    })
   }
   const contextValue = {
     cartItems: state.items,
