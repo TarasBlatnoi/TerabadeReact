@@ -1,7 +1,7 @@
 import Button from "../UI/Button/Button"
 import styles from "./CartCheckoutSummary.module.css"
 import dropSVG from "../../assets/images/Vector.svg"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { useCart } from "../../context/CartContext"
 import { formaterCurrency } from "../CardItem/CardItem"
 import { useNavigate } from "react-router-dom"
@@ -12,6 +12,11 @@ function CartCheckoutSummary() {
   const navigate = useNavigate()
   const [isAppliedCode, setIsAppliedCode] = useState(false)
   const { cartItems } = useCart()
+  const [discount, setDiscount] = useState(0)
+
+  useEffect(() => {
+    if (isAppliedCode) setDiscount(500)
+  }, [isAppliedCode])
 
   const subTotal = cartItems.reduce((prev, { price }) => prev + price, 0)
 
@@ -61,8 +66,10 @@ function CartCheckoutSummary() {
             <div
               className={styles.addPromoContainer}
               onClick={() => {
-                if (promoCode.length >= 8 && promoCode.length <= 16)
+                if (promoCode.length >= 8 && promoCode.length <= 16) {
                   setIsAppliedCode(true)
+                  setOpenPromo(false)
+                }
               }}
             >
               <p>Додати</p>
@@ -85,7 +92,7 @@ function CartCheckoutSummary() {
         <div className={`${styles.discount} ${openPromo ? styles.open : ""}`}>
           <p>Знижка по переоцінці</p>
           <p>
-            -200 <span>UAH</span>
+            -{discount} <span>UAH</span>
           </p>
         </div>
       </div>
@@ -95,7 +102,7 @@ function CartCheckoutSummary() {
         <div className={styles.finalPrice}>
           <h2>До сплати</h2>
           <p className={styles.finalPriceTag}>
-            4 799 <span>UAH</span>
+            {formaterCurrency.format(subTotal - discount)} <span>UAH</span>
           </p>
         </div>
         <Button
