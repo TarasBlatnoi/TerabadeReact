@@ -25,6 +25,7 @@ import { ImagesProvider } from "./context/ImageContext"
 import MainLayout from "./pages/MainLayout/MainLayout"
 import LoginLayout from "./pages/LoginLayout/LoginLayout"
 import Register, { action as RegisterAction } from "./pages/Register/Register"
+import Cart from "./pages/Cart/Cart"
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -42,7 +43,7 @@ const router = createBrowserRouter(
             element={<Products parentRouteId="children" />}
           />
         </Route>
-        <Route path="cart" element={<h1>Cart motherfucka</h1>} />
+        <Route path="cart" element={<Cart />} />
         <Route path="payment" element={<h1>Payment motherfucka</h1>} />
         <Route path="product" element={<Navigate to={"/"} />} />
         <Route

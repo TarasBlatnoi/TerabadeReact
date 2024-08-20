@@ -1,0 +1,114 @@
+.item {
+  display: flex;
+  padding: 2rem;
+  border: 0.2rem solid rgba(255, 237, 237, 0.366);
+  border-radius: 0.5rem;
+  width: 100%;
+  background-color: #171717;
+  column-gap: 3rem;
+}
+
+.imageContainer {
+  height: 15rem;
+}
+
+.imageContainer img {
+  height: 100%;
+  object-fit: contain;
+  border-radius: 0.5rem;
+}
+
+.titleContainer {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  justify-content: space-between;
+}
+.titleContainer button {
+  margin-left: 10rem;
+}
+
+.details {
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+  row-gap: 1rem;
+  margin-top: 1rem;
+}
+
+.title {
+  font-size: 2rem;
+}
+.description {
+  font-size: 1.9rem;
+  font-family: Arista Pro Trial;
+  font-weight: 300;
+}
+
+.favButton {
+  border: none;
+  height: 0;
+  width: 2.6rem;
+}
+
+.typeSizeContainer {
+  display: flex;
+  flex-direction: column;
+  row-gap: 1.2rem;
+}
+
+.actionsContainer {
+  display: flex;
+  align-items: center;
+  column-gap: 2rem;
+}
+
+.price {
+  column-gap: 0.5rem;
+}
+.priceTag {
+  font-family: Exo;
+  font-size: 1.8rem;
+  font-weight: 400;
+}
+.currency {
+  font-size: 1.6rem;
+}
+
+.selection {
+  background-color: #171717;
+  color: white;
+  border: none;
+  font-size: 1.3rem;
+}
+
+.anotherContainer {
+  display: flex;
+  flex-direction: column;
+  row-gap: 4rem;
+  font-family: Arista Pro Trial;
+  font-weight: 300;
+}
+.sizeSelectContainer {
+  display: flex;
+  align-items: center;
+  column-gap: 2rem;
+  font-size: 1.5rem;
+  font-weight: 500;
+}
+
+.deleteBagContainer {
+  height: 2rem;
+  margin-right: 0.6rem;
+  cursor: pointer;
+}
+
+.deleteBagContainer img {
+  height: 100%;
+  object-fit: cover;
+}
+
+.sizeSpan {
+  font-family: Exo;
+  font-weight: 300;
+}

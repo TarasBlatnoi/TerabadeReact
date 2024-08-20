@@ -18,12 +18,15 @@ import Sizes from "./Sizes/Sizes"
 import ImagesContainer from "./ImagesContainer/ImagesContainer"
 import { useImages } from "../../context/ImageContext"
 import FavoriteButtons from "./FavoriteButtons/FavoriteButtons"
+import { DetailProductType } from "../../types"
 
 function DetailProduct() {
   const params = useParams()
   const navigate = useNavigate()
   const textAreaRef = useRef<HTMLTextAreaElement>(null)
   const [reviewSent, setReviewSent] = useState(false)
+  const [chosedSize, setChoseSize] = useState(0)
+  const [addToCartClicked, setAddToCartClicked] = useState(false)
   const { setActiveImage } = useImages()
 
   const {
@@ -33,12 +36,13 @@ function DetailProduct() {
     queryKey: [params.id],
     staleTime: Infinity,
     suspense: true,
-  })
+  }) as { data: Array<DetailProductType> }
   useEffect(() => {
     setActiveImage(
       detailProduct?.images[0]?.ImageURL || "https://picsum.photos/200",
     )
   }, [setActiveImage, detailProduct])
+  console.log(detailProduct)
   const { data: parentData } = useQuery({
     queryFn: () => ProductAPI.getProducts(detailProduct.sex),
     queryKey: [detailProduct.sex],
@@ -88,17 +92,30 @@ function DetailProduct() {
               </span>{" "}
               UAH
             </p>
-            <Sizes begin={6} end={14} step={0.5} />
+            <Sizes
+              begin={6}
+              end={14}
+              step={0.5}
+              chosedSize={chosedSize}
+              setChoseSize={setChoseSize}
+              addToCartClicked={addToCartClicked}
+              sizes={detailProduct.sizes}
+            />
             <div className={styles.actionButtons}>
               <Button
                 className={styles.addToCartButton}
                 variant="secondary"
                 onClick={() => {
+                  setAddToCartClicked(true)
+                  if (!chosedSize) return
                   handleClick({
                     id: `${detailProduct.ProductID}`,
                     name: detailProduct.name,
                     image: detailProduct.images[0].ImageURL,
                     price: detailProduct.price,
+                    sex: detailProduct.sex,
+                    size: chosedSize,
+                    type: detailProduct.type,
                   })
                   openCart()
                 }}

@@ -1,0 +1,156 @@
+.container {
+  min-height: 40rem;
+  width: 40rem;
+  padding: 2rem;
+  border: 0.2rem solid white;
+  display: flex;
+  flex-direction: column;
+  row-gap: 2.4rem;
+  border-radius: 0.5rem;
+}
+
+.cart {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 1rem;
+  padding-bottom: 2rem;
+  border-bottom: 0.2rem solid white;
+  font-size: 1.4rem;
+}
+
+.detailsContainer {
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 2rem;
+  border-bottom: 0.2rem solid white;
+  row-gap: 1rem;
+}
+.detailsContainer div {
+  display: flex;
+  justify-content: space-between;
+}
+.priceOfOrder {
+  font-size: 0.9rem;
+  padding-bottom: 0.5rem;
+}
+.priceTagOrder,
+.discount {
+  font-size: 1.6rem;
+  font-family: Arista Pro Trial;
+  font-weight: 300;
+}
+
+.promo {
+  font-size: 1.6rem;
+  font-family: Arista Pro Alternate;
+  font-weight: 700;
+}
+
+.finalContainer {
+  display: flex;
+  flex-direction: column;
+  row-gap: 6rem;
+}
+
+.finalPrice {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.finalPrice h2 {
+  font-size: 1.6rem;
+}
+
+.buttonOrder {
+  padding: 1.2rem 2rem;
+  font-size: 2rem;
+  border-radius: 0.5rem;
+}
+
+.finalPriceTag {
+  font-size: 1.5rem;
+}
+
+.svgContainer {
+  height: 2rem;
+  transition: all 200ms ease-in-out;
+  cursor: pointer;
+  user-select: none;
+}
+.svgContainer img {
+  height: 90%;
+  object-fit: cover;
+}
+
+.promoCode {
+  padding-bottom: 0.3rem;
+
+  display: flex;
+  flex-direction: column;
+  row-gap: 1rem;
+  transition: all 150ms ease-in-out;
+}
+.openContainer {
+  transform: rotateZ(180deg);
+}
+
+.promoContainer {
+  display: flex;
+  width: 100%;
+  height: 0;
+  opacity: 0;
+  transition: all 150ms ease-in-out;
+}
+
+.openInputContainer {
+  opacity: 1;
+  height: 3rem;
+}
+
+.inputContainerP {
+  width: 70%;
+  border: 0;
+}
+
+.inputContainerP input {
+  width: 100%;
+  border-radius: 0.5rem;
+  border: none;
+  font-size: 1.4rem;
+  padding: 0.2rem 1.5rem;
+}
+
+.inputContainerP input:disabled {
+  color: black;
+  background-color: rgb(218 218 218 / 94%);
+}
+
+.addPromoContainer {
+  padding: 1rem 2rem;
+  border: 0.2rem solid white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 3rem;
+  cursor: pointer;
+}
+
+.promoAppliedText {
+  font-size: 1.4rem;
+  font-style: italic;
+}
+
+.cartPriceTag,
+.priceTagSubTotal,
+.priceTagDiscount {
+  font-family: Exo;
+  font-weight: 400;
+}
+
+.cartPriceTag {
+  font-size: 1.8rem;
+}
+.priceTagDiscount,
+.priceTagSubTotal {
+  font-size: 1.6rem;
+}
