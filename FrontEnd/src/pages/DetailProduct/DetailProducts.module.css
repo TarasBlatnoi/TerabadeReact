@@ -112,6 +112,7 @@ section {
 
 .readMore {
   display: inline-block;
+  cursor: pointer;
   margin-top: 0.8rem;
   font-family: Arista-Pro-Light;
   font-size: 1.8rem;

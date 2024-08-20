@@ -25,6 +25,7 @@ function DetailProduct() {
   const navigate = useNavigate()
   const textAreaRef = useRef<HTMLTextAreaElement>(null)
   const [reviewSent, setReviewSent] = useState(false)
+  const [readMore, setReactMore] = useState(false)
   const [chosedSize, setChoseSize] = useState(0)
   const [addToCartClicked, setAddToCartClicked] = useState(false)
   const { setActiveImage } = useImages()
@@ -129,15 +130,24 @@ function DetailProduct() {
               <h2>Опис</h2>
             </div>
             <p className={styles.details}>
-              {detailProduct.productDetails} also this is just a PLACEHOLDER SO
-              DON'T pay attention to it maybe once we will add some more data to
+              {` ${detailProduct.productDetails} also this is just a PLACEHOLDER SO
+              ${
+                readMore
+                  ? `DON'T pay attention to it maybe once we will add some more data to
               db that will make some sense Lorem ipsum dolor sit amet
               consectetur adipisicing elit. Ipsam doloribus adipisci voluptates
               facere animi magnam, quis aliquam reprehenderit recusandae,
               deserunt, suscipit ex temporibus impedit hic molestias tempore
-              placeat fugiat dolores.
+              placeat fugiat dolores.`
+                  : ""
+              }`}
             </p>
-            <p className={styles.readMore}>Читати більше</p>
+            <p
+              className={styles.readMore}
+              onClick={() => setReactMore((prev) => !prev)}
+            >
+              Читати більше
+            </p>
             <div className={styles.characteristicsContainer}>
               <img
                 src={CharacteristicsImg}
