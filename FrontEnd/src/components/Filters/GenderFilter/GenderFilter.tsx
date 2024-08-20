@@ -15,22 +15,21 @@ interface ReduxState {
 
 function GenderFilter() {
   const dispatch = useDispatch()
-  const { states } = useSelector((state: ReduxState) => state.filters)
+  const genderObj = useSelector(
+    (state: ReduxState) => state.filters.states.gender,
+  )
 
   const navigate = useNavigate()
   function handler(gender: "men" | "women" | "children") {
     dispatch(updateGender({ gender }))
     let filter = ""
     const filters = []
-    for (const genderState in states.gender) {
-      if (states.gender[genderState as "men" | "women" | "children"]) {
+    for (const genderState in genderObj) {
+      if (genderObj[genderState as "men" | "women" | "children"]) {
         filter = genderState
         filters.push(genderState)
       }
     }
-    console.log("filter", filter)
-    console.log("filters", filters)
-    console.log("gender", gender)
     if (filter !== gender && filters.length === 1) {
       navigate("/products")
     }
@@ -71,7 +70,7 @@ function GenderFilter() {
           <CustomCheckBox
             id="men"
             callBack={() => handler("men")}
-            checked={pathname === "/men" || states.gender.men}
+            checkedExt={pathname === "/men" || genderObj.men}
           />
           <label htmlFor="men">Чоловікам</label>
         </li>
@@ -79,7 +78,7 @@ function GenderFilter() {
           <CustomCheckBox
             id="women"
             callBack={() => handler("women")}
-            checked={pathname === "/women" || states.gender.women}
+            checkedExt={pathname === "/women" || genderObj.women}
           />
           <label htmlFor="women">Жінкам</label>
         </li>
@@ -87,7 +86,7 @@ function GenderFilter() {
           <CustomCheckBox
             id="children"
             callBack={() => handler("children")}
-            checked={pathname === "/children" || states.gender.children}
+            checkedExt={pathname === "/children" || genderObj.children}
           />
           <label htmlFor="children">Дітям</label>
         </li>
