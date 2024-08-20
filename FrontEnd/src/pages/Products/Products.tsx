@@ -34,15 +34,14 @@ function Products() {
     suspense: true,
     staleTime: Infinity,
   }) as { data: ProductType[] }
-  console.log(data)
+
   const filteredData = data
     .filter((product) => {
       if (states.price.length) {
-        if (
-          product.price >= states.price[0].min &&
-          product.price <= states.price.at(-1)!.max!
-        )
-          return true
+        const inRange = states.price
+          .map(({ min, max }) => product.price >= min && product.price <= max)
+          .includes(true)
+        if (inRange) return true
         else return false
       }
       return true
