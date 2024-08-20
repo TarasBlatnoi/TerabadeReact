@@ -26,6 +26,7 @@ function DetailProduct() {
   const textAreaRef = useRef<HTMLTextAreaElement>(null)
   const [reviewSent, setReviewSent] = useState(false)
   const [readMore, setReactMore] = useState(false)
+  const [showAll, setShowAll] = useState(false)
   const [chosedSize, setChoseSize] = useState(0)
   const [addToCartClicked, setAddToCartClicked] = useState(false)
   const { setActiveImage } = useImages()
@@ -146,7 +147,7 @@ function DetailProduct() {
               className={styles.readMore}
               onClick={() => setReactMore((prev) => !prev)}
             >
-              Читати більше
+              {readMore ? "Читати менше" : "Читати більше"}
             </p>
             <div className={styles.characteristicsContainer}>
               <img
@@ -157,12 +158,21 @@ function DetailProduct() {
               <h2 className={styles.characteristicsTitle}>Характеристики</h2>
             </div>
             <p className={styles.characteristics}>
-              {detailProduct.type} Lorem ipsum dolor sit, amet consectetur
-              adipisicing elit. Accusantium dolorem cupiditate maxime excepturi
+              {` ${detailProduct.type} Lorem ipsum dolor sit, amet consectetur
+              ${
+                showAll
+                  ? `adipisicing elit. Accusantium dolorem cupiditate maxime excepturi
               expedita provident tenetur aliquid sapiente praesentium, officiis
-              ab, ullam consectetur nobis quae neque odio dolores et dolor.
+              ab, ullam consectetur nobis quae neque odio dolores et dolor.`
+                  : ""
+              }`}
             </p>
-            <p className={styles.showAll}>Показати всі</p>
+            <p
+              className={styles.showAll}
+              onClick={() => setShowAll((prev) => !prev)}
+            >
+              {readMore ? "Сховати все" : "Показати все"}
+            </p>
             <ReviewForm handleSubmit={handleSubmit}>
               <div className={styles.reviewContainer}>
                 <textarea
