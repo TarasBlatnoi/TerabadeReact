@@ -40,7 +40,7 @@
   font-size: 2rem;
 }
 .description {
-  font-size: 1.6rem;
+  font-size: 1.9rem;
   font-family: Arista Pro Trial;
   font-weight: 300;
 }
@@ -64,12 +64,17 @@
 }
 
 .price {
-  display: flex;
-  align-items: center;
   column-gap: 0.5rem;
 }
 .priceTag {
+  font-family: Exo;
+  font-size: 1.8rem;
+  font-weight: 400;
 }
+.currency {
+  font-size: 1.6rem;
+}
+
 .selection {
   background-color: #171717;
   color: white;
@@ -88,7 +93,7 @@
   display: flex;
   align-items: center;
   column-gap: 2rem;
-  font-size: 1.3rem;
+  font-size: 1.5rem;
   font-weight: 500;
 }
 
@@ -103,10 +108,7 @@
   object-fit: cover;
 }
 
-.currency {
-  font-size: 1.2rem;
-}
-
 .sizeSpan {
-  font-weight: bold;
+  font-family: Exo;
+  font-weight: 300;
 }

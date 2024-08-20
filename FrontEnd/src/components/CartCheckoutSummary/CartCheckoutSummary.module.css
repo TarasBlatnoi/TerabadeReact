@@ -30,16 +30,20 @@
   justify-content: space-between;
 }
 .priceOfOrder {
-  font-size: 1.1rem;
+  font-size: 0.9rem;
   padding-bottom: 0.5rem;
 }
 .priceTagOrder,
 .discount {
-  font-size: 1.4rem;
+  font-size: 1.6rem;
+  font-family: Arista Pro Trial;
+  font-weight: 300;
 }
 
 .promo {
-  font-size: 1.9rem;
+  font-size: 1.6rem;
+  font-family: Arista Pro Alternate;
+  font-weight: 700;
 }
 
 .finalContainer {
@@ -54,7 +58,7 @@
   justify-content: space-between;
 }
 .finalPrice h2 {
-  font-size: 1.8rem;
+  font-size: 1.6rem;
 }
 
 .buttonOrder {
@@ -134,4 +138,19 @@
 .promoAppliedText {
   font-size: 1.4rem;
   font-style: italic;
+}
+
+.cartPriceTag,
+.priceTagSubTotal,
+.priceTagDiscount {
+  font-family: Exo;
+  font-weight: 400;
+}
+
+.cartPriceTag {
+  font-size: 1.8rem;
+}
+.priceTagDiscount,
+.priceTagSubTotal {
+  font-size: 1.6rem;
 }

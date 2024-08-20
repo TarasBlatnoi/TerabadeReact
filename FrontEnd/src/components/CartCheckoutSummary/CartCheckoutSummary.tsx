@@ -18,13 +18,16 @@ function CartCheckoutSummary() {
     if (isAppliedCode) setDiscount(500)
   }, [isAppliedCode])
 
-  const subTotal = cartItems.reduce((prev, { price }) => prev + price, 0)
+  const subTotal = cartItems.reduce(
+    (prev, { price, quantity }) => prev + price * (quantity || 1),
+    0,
+  )
 
   return (
     <form className={styles.container}>
       <div className={styles.cart}>
         <h1>Корзина</h1>
-        <p>
+        <p className={styles.cartPriceTag}>
           {formaterCurrency.format(subTotal)} <span>UAH</span>
         </p>
       </div>
@@ -77,7 +80,7 @@ function CartCheckoutSummary() {
           </div>
         </div>
         <div
-          className={`${styles.priceOfOrder} ${openPromo ? styles.open : ""}`}
+          className={`${styles.priceaOfOrder} ${openPromo ? styles.open : ""}`}
         >
           <h2>Сума замовлення</h2>
         </div>
@@ -85,13 +88,13 @@ function CartCheckoutSummary() {
           className={`${styles.priceTagOrder} ${openPromo ? styles.open : ""}`}
         >
           <p>Вартість замовлення</p>
-          <p>
+          <p className={styles.priceTagSubTotal}>
             {formaterCurrency.format(subTotal)} <span>UAH</span>
           </p>
         </div>
         <div className={`${styles.discount} ${openPromo ? styles.open : ""}`}>
-          <p>Знижка по переоцінці</p>
-          <p>
+          <p>Знижка</p>
+          <p className={styles.priceTagDiscount}>
             -{discount} <span>UAH</span>
           </p>
         </div>

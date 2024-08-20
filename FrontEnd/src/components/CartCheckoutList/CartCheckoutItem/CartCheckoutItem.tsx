@@ -22,9 +22,9 @@ function CartCheckoutItem({ item }: CartCheckoutItemProps) {
           <h1 className={styles.title}>{item.name}</h1>
           <div className={styles.price}>
             <h2 className={styles.priceTag}>
-              {formaterCurrency.format(item.price)}
+              {formaterCurrency.format(item.price * (item.quantity || 1))}
+              <span className={styles.currency}> UAH</span>
             </h2>
-            <span className={styles.currency}>UAH</span>
           </div>
         </div>
         <div className={styles.anotherContainer}>
