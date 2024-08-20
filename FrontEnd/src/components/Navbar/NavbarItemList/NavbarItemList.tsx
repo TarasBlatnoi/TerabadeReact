@@ -20,7 +20,7 @@ const NavbarItemList = ({
 }: NavbarItemListProps) => {
   const { hoverObj, dispatch } = useHeaderContext() as hoverType
   const ulRef = useOutsideClick(() =>
-    setMenuIconClicked((prev) => !prev),
+    setMenuIconClicked(false),
   ) as RefObject<HTMLUListElement>
   const windowSize = useWindowSize()
   const links = [
