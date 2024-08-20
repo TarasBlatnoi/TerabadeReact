@@ -3,8 +3,8 @@
   width: 100%;
   display: flex;
   justify-content: center;
-  align-items: center;
   column-gap: 5rem;
+  margin-top: 10rem;
 }
 
 .leftContainer {
@@ -12,6 +12,7 @@
 }
 
 .rightContainer {
+  align-self: flex-start;
 }
 .defaultMessage {
   flex-direction: column;
