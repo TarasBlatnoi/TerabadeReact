@@ -2,16 +2,25 @@ import Button from "../UI/Button/Button"
 import styles from "./CartCheckoutSummary.module.css"
 import dropSVG from "../../assets/images/Vector.svg"
 import { useState } from "react"
+import { useCart } from "../../context/CartContext"
+import { formaterCurrency } from "../CardItem/CardItem"
+import { useNavigate } from "react-router-dom"
 
 function CartCheckoutSummary() {
   const [openPromo, setOpenPromo] = useState(false)
+  const [promoCode, setPromoCode] = useState("")
+  const navigate = useNavigate()
+  const [isAppliedCode, setIsAppliedCode] = useState(false)
+  const { cartItems } = useCart()
+
+  const subTotal = cartItems.reduce((prev, { price }) => prev + price, 0)
 
   return (
-    <div className={styles.container}>
+    <form className={styles.container}>
       <div className={styles.cart}>
         <h1>Корзина</h1>
         <p>
-          4 799 <span>UAH</span>
+          {formaterCurrency.format(subTotal)} <span>UAH</span>
         </p>
       </div>
       <div
@@ -19,7 +28,14 @@ function CartCheckoutSummary() {
       >
         <div className={styles.promoCode}>
           <div>
-            <h1 className={styles.promo}>Промокод</h1>
+            <h1 className={styles.promo}>
+              Промокод{" "}
+              {isAppliedCode ? (
+                <span className={styles.promoAppliedText}>(застосований)</span>
+              ) : (
+                ""
+              )}
+            </h1>
             <div
               className={`${styles.svgContainer} ${openPromo ? styles.openContainer : ""}`}
               onClick={() => setOpenPromo((curr) => !curr)}
@@ -32,7 +48,24 @@ function CartCheckoutSummary() {
             className={`${styles.promoContainer} ${openPromo ? styles.openInputContainer : ""}`}
           >
             <div className={styles.inputContainerP}>
-              <input type="text" maxLength={16} placeholder="промокод" />
+              <input
+                type="text"
+                minLength={8}
+                maxLength={16}
+                value={promoCode}
+                onChange={(ev) => setPromoCode(ev.target.value)}
+                placeholder="промокод"
+                disabled={isAppliedCode}
+              />
+            </div>
+            <div
+              className={styles.addPromoContainer}
+              onClick={() => {
+                if (promoCode.length >= 8 && promoCode.length <= 16)
+                  setIsAppliedCode(true)
+              }}
+            >
+              <p>Додати</p>
             </div>
           </div>
         </div>
@@ -46,7 +79,7 @@ function CartCheckoutSummary() {
         >
           <p>Вартість замовлення</p>
           <p>
-            4 799 <span>UAH</span>
+            {formaterCurrency.format(subTotal)} <span>UAH</span>
           </p>
         </div>
         <div className={`${styles.discount} ${openPromo ? styles.open : ""}`}>
@@ -65,11 +98,18 @@ function CartCheckoutSummary() {
             4 799 <span>UAH</span>
           </p>
         </div>
-        <Button variant="secondary" className={styles.buttonOrder}>
+        <Button
+          variant="secondary"
+          className={styles.buttonOrder}
+          onClick={(ev) => {
+            ev.preventDefault()
+            navigate("/checkout")
+          }}
+        >
           Оформити замовлення
         </Button>
       </div>
-    </div>
+    </form>
   )
 }
 

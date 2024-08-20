@@ -24,7 +24,6 @@
   padding-bottom: 2rem;
   border-bottom: 0.2rem solid white;
   row-gap: 1rem;
-  transition: all 200ms ease-in-out;
 }
 .detailsContainer div {
   display: flex;
@@ -72,6 +71,7 @@
   height: 2rem;
   transition: all 200ms ease-in-out;
   cursor: pointer;
+  user-select: none;
 }
 .svgContainer img {
   height: 90%;
@@ -83,24 +83,55 @@
 
   display: flex;
   flex-direction: column;
-  row-gap: 0.4rem;
-  transition: all 500ms ease-in-out;
+  row-gap: 1rem;
+  transition: all 150ms ease-in-out;
 }
 .openContainer {
   transform: rotateZ(180deg);
 }
 
 .promoContainer {
+  display: flex;
+  width: 100%;
   height: 0;
   opacity: 0;
-  transition: all 200ms ease-in-out;
+  transition: all 150ms ease-in-out;
 }
 
 .openInputContainer {
   opacity: 1;
-  height: 2rem;
+  height: 3rem;
+}
+
+.inputContainerP {
+  width: 70%;
+  border: 0;
 }
 
 .inputContainerP input {
+  width: 100%;
+  border-radius: 0.5rem;
+  border: none;
+  font-size: 1.4rem;
+  padding: 0.2rem 1.5rem;
+}
+
+.inputContainerP input:disabled {
+  color: black;
+  background-color: rgb(218 218 218 / 94%);
+}
+
+.addPromoContainer {
   padding: 1rem 2rem;
+  border: 0.2rem solid white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 3rem;
+  cursor: pointer;
+}
+
+.promoAppliedText {
+  font-size: 1.4rem;
+  font-style: italic;
 }
