@@ -4,12 +4,15 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  column-gap: 5rem;
 }
 
 .leftContainer {
-  width: 70%;
+  width: 45%;
 }
 
+.rightContainer {
+}
 .defaultMessage {
   flex-direction: column;
   row-gap: 3rem;

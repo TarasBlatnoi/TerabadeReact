@@ -1,0 +1,67 @@
+.container {
+  height: 40rem;
+  width: 40rem;
+  padding: 2rem;
+  border: 0.2rem solid white;
+  display: flex;
+  flex-direction: column;
+  row-gap: 2.4rem;
+}
+
+.cart {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 1rem;
+  padding-bottom: 2rem;
+  border-bottom: 0.2rem solid white;
+  font-size: 1.4rem;
+}
+
+.detailsContainer {
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 2rem;
+  border-bottom: 0.2rem solid white;
+  row-gap: 1rem;
+}
+.detailsContainer div {
+  display: flex;
+  justify-content: space-between;
+}
+.priceOfOrder {
+  font-size: 1.1rem;
+  padding-bottom: 0.5rem;
+}
+.priceTagOrder,
+.discount {
+  font-size: 1.4rem;
+}
+
+.promo {
+  font-size: 1.9rem;
+}
+
+.finalContainer {
+  display: flex;
+  flex-direction: column;
+  row-gap: 6rem;
+}
+
+.finalPrice {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.finalPrice h2 {
+  font-size: 1.8rem;
+}
+
+.buttonOrder {
+  padding: 1.2rem 2rem;
+  font-size: 2rem;
+  border-radius: 0.5rem;
+}
+
+.finalPriceTag {
+  font-size: 1.5rem;
+}
