@@ -40,13 +40,17 @@ function CartCheckoutItem({ item }: CartCheckoutItemProps) {
               <select
                 className={styles.selection}
                 value={item.quantity}
-                onChange={(ev) => setItemQuantity(item.id, +ev.target.value)}
+                onChange={(ev) =>
+                  setItemQuantity(item.id, item.size, +ev.target.value)
+                }
               >
                 {Array.from(
                   { length: maxItemQuantityPerOrder },
                   (_, i) => i + 1,
                 ).map((value) => (
-                  <option value={value}>{value}</option>
+                  <option value={value} key={value}>
+                    {value}
+                  </option>
                 ))}
               </select>
             </div>
@@ -62,7 +66,7 @@ function CartCheckoutItem({ item }: CartCheckoutItemProps) {
               className={styles.deleteBagContainer}
               onClick={() => {
                 console.log("deleting")
-                removeItem(item.id)
+                removeItem(item.id, item.size)
               }}
             >
               <img src={deleteBag} alt="delete" />

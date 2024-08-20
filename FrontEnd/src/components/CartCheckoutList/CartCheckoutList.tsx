@@ -7,7 +7,7 @@ function CartCheckoutList() {
   return (
     <ul className={styles.list}>
       {cartItems.map((item) => (
-        <CartCheckoutItem item={item} />
+        <CartCheckoutItem item={item} key={`${item.id}${item.size}`} />
       ))}
     </ul>
   )
