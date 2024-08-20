@@ -4,3 +4,39 @@
   color: #1c1c1c;
   height: 9.6rem;
 }
+
+.buttonIconsMenu {
+  border: none;
+  background-color: #fbfaff;
+  cursor: pointer;
+  display: none;
+}
+
+.menuIcon {
+  height: 3.2rem;
+  width: 3.2rem;
+}
+
+.closeMenuIcon {
+  height: 3.2rem;
+  width: 3.2rem;
+  display: none;
+}
+
+.displayBlock {
+  display: block;
+}
+
+.displayNone {
+  display: none;
+}
+
+@media (max-width: 75em) {
+  .buttonIconsMenu {
+    display: block;
+    position: absolute;
+    top: 50%;
+    right: 3%;
+    z-index: 201;
+  }
+}

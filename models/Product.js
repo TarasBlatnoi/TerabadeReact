@@ -21,7 +21,8 @@ class Product {
     `,
     findAll: `
         SELECT * 
-        FROM terabade.product;
+        FROM terabade.product
+        WHERE sex = ? OR sex = ? OR sex = ?;
         `,
     findMenProducts: `
         SELECT  product.ProductID, name, sex, type, color, price, productDetails, ImageURL
@@ -62,9 +63,25 @@ class Product {
     }
   }
 
-  static async findAllProducts() {
-    const products = await Product.commitQuery(Product.sql.findAll)
-    return products
+  static async findAllProducts(...args) {
+    const query = args[args.length - 1]
+    let placeholders = []
+    if (query.length) {
+      placeholders = query?.map(() => "?").join(", ")
+    }
+
+    const querySQL = `
+      SELECT product.ProductID, name, sex, type, color, price, productDetails, ImageURL
+      FROM terabade.product 
+      LEFT JOIN terabade.Images ON product.ProductID = Images.ProductID
+      ${placeholders?.length ? `WHERE sex in (${placeholders}) AND (Images.ImageOrder = 0 OR Images.ImageOrder IS NULL);` : "WHERE (Images.ImageOrder = 0 OR Images.ImageOrder IS NULL);"} `
+    if (placeholders.length) {
+      const products = await Product.commitQuery(querySQL, query)
+      return products
+    } else {
+      const products = await Product.commitQuery(querySQL)
+      return products
+    }
   }
   static async findMenProducts() {
     const menProducts = await Product.commitQuery(Product.sql.findMenProducts)

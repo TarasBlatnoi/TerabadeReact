@@ -5,6 +5,7 @@ import {
   hoverType,
   actions,
 } from "../../../context/HeaderContext"
+import useWindowSize from "../../../hooks/useWindowSize"
 
 type PropsType = {
   href: string
@@ -13,22 +14,28 @@ type PropsType = {
 
 const NavbarItem = ({ href, name }: PropsType) => {
   const { hoverObj, dispatch } = useHeaderContext() as hoverType
-
+  const windowSize = useWindowSize()
   return (
     <li
       className={styles.liNavbarSmall}
-      onMouseEnter={() =>
-        dispatch({ type: actions.linkHovered, payload: name })
+      onMouseEnter={
+        windowSize > 1200
+          ? () => dispatch({ type: actions.linkHovered, payload: name })
+          : () => {}
       }
     >
       <NavLink to={href}>
         <p
-          onMouseEnter={(event: React.MouseEvent) => {
-            const target = event.target as HTMLElement
-            if (hoverObj.linkClicked !== target.innerText) {
-              dispatch({ type: actions.mouseEnterNavBarItem })
-            }
-          }}
+          onMouseEnter={
+            windowSize > 1200
+              ? (event: React.MouseEvent) => {
+                  const target = event.target as HTMLElement
+                  if (hoverObj.linkClicked !== target.innerText) {
+                    dispatch({ type: actions.mouseEnterNavBarItem })
+                  }
+                }
+              : () => {}
+          }
         >
           {name}
         </p>

@@ -19,7 +19,7 @@
   padding-right: 4rem;
 }
 
-@media screen and (width <= 800px) {
+@media (max-width: 75em) {
   .cardList {
     grid-template-columns: 1fr 1fr;
   }

@@ -37,14 +37,21 @@ const filtersSlice = createSlice({
     },
     updateGender(
       state,
-      action: { payload: { gender: "men" | "women" | "children" } }
+      action: { payload: { gender: "men" | "women" | "children" } },
     ) {
       state.states.gender[action.payload.gender] =
         !state.states.gender[action.payload.gender]
     },
+    resetGender(state) {
+      state.states.gender = {
+        men: false,
+        women: false,
+        children: false,
+      }
+    },
     updateSize(
       state,
-      action: { payload: { size: number; action: "add" | "delete" } }
+      action: { payload: { size: number; action: "add" | "delete" } },
     ) {
       if (action.payload.action === "add")
         state.states.size.push(action.payload.size)
@@ -56,7 +63,7 @@ const filtersSlice = createSlice({
     },
     updatePrice(
       state,
-      action: { payload: { min: number; max: number; checked: boolean } }
+      action: { payload: { min: number; max: number; checked: boolean } },
     ) {
       if (action.payload.checked) {
         state.states.price.push({
@@ -67,7 +74,7 @@ const filtersSlice = createSlice({
         const index = state.states.price.findIndex(
           (priceTag) =>
             priceTag.min === action.payload.min &&
-            priceTag.max === action.payload.max
+            priceTag.max === action.payload.max,
         )
 
         state.states.price.splice(index, 1)
@@ -80,7 +87,7 @@ const filtersSlice = createSlice({
     },
     updateStyle(
       state,
-      action: { payload: { style: string; action: "add" | "delete" } }
+      action: { payload: { style: string; action: "add" | "delete" } },
     ) {
       if (action.payload.action === "add")
         state.states.style.push(action.payload.style)
@@ -99,6 +106,7 @@ export const {
   updateSize,
   updateStyle,
   updateVisibility,
+  resetGender,
 } = filtersSlice.actions
 
 export default filtersSlice.reducer

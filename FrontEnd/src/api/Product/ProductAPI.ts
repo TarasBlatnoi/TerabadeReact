@@ -7,7 +7,7 @@ class ProductAPI {
     return data
   }
 
-  async getProducts(parentRoute: "men" | "women" | "children") {
+  async getProducts(parentRoute: string) {
     const { data } = await client.get(`/products/${parentRoute}`)
     return data
   }

@@ -5,23 +5,36 @@ import { useQuery } from "react-query"
 import ProductAPI from "../../api/Product/ProductAPI"
 import { useSelector } from "react-redux"
 import { storeType } from "../../store/store"
+import { useLocation } from "react-router-dom"
 
-type ProductsPropsType = {
-  parentRouteId: "men" | "women" | "children"
-}
-
-function Products({ parentRouteId }: ProductsPropsType) {
-  const { data } = useQuery({
-    queryFn: () => ProductAPI.getProducts(parentRouteId),
-    queryKey: [parentRouteId],
-    suspense: true,
-    staleTime: Infinity,
-  }) as { data: ProductType[] }
-
+function Products() {
   const { visibility: isOpenFilters, states } = useSelector(
     (store: storeType) => store.filters,
   )
-
+  const { pathname } = useLocation()
+  const gender = pathname.slice(1)
+  const genders = []
+  for (const genderName in states.gender) {
+    if (states.gender[genderName as "men" | "women" | "children"]) {
+      genders.push(genderName)
+    }
+  }
+  let url = gender
+  if (gender === "products") {
+    url = ""
+    if (genders.length) {
+      url += `?${genders.map((gender) => `gender=${gender}`).join("&")}`
+    }
+  }
+  const { data } = useQuery({
+    queryFn: () => {
+      return ProductAPI.getProducts(url)
+    },
+    queryKey: [gender, url],
+    suspense: true,
+    staleTime: Infinity,
+  }) as { data: ProductType[] }
+  console.log(data)
   const filteredData = data
     .filter((product) => {
       if (states.price.length) {

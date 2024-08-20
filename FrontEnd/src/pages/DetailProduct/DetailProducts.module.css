@@ -110,8 +110,13 @@ section {
   font-family: Arista-Pro-Light;
 }
 
+.productText {
+  height: 170vh;
+}
+
 .readMore {
   display: inline-block;
+  cursor: pointer;
   margin-top: 0.8rem;
   font-family: Arista-Pro-Light;
   font-size: 1.8rem;
@@ -140,6 +145,7 @@ section {
 .showAll {
   margin: 0.8rem 0;
   display: inline-block;
+  cursor: pointer;
   font-family: Arista-Pro-Light;
   font-size: 1.8rem;
   border-bottom: 1px solid #fbfaff;

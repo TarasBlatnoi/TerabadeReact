@@ -6,5 +6,7 @@
   height: fit-content;
   justify-content: space-around;
   z-index: 100;
+  margin-left: 4rem;
+  margin-right: 4rem;
   transform: translateY(-55%);
 }

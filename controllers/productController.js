@@ -5,12 +5,16 @@ const { Product } = require("../models/Product.js")
 const asyncWrapper = (callback) => {
   return async function (req, res) {
     const args = []
+
     try {
       if (req.params.id) {
         args.push(req.params.id)
       }
       if (req.body) {
         args.push(req.body)
+      }
+      if (req.query.gender) {
+        args.push([...req.query.gender])
       }
       const data = await callback(...args)
       if (data.length) {

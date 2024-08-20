@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react"
+import { SetStateAction, useEffect, Dispatch, RefObject } from "react"
 import NavbarItem from "../NavbarItem/NavbarItem"
 import styles from "./NavbarItemList.module.css"
 import {
@@ -7,11 +7,21 @@ import {
   actions,
 } from "../../../context/HeaderContext"
 import useWindowSize from "../../../hooks/useWindowSize"
+import useOutsideClick from "../../../hooks/useOutsideClick"
 
-const NavbarItemList = () => {
+interface NavbarItemListProps {
+  menuIconClicked: boolean
+  setMenuIconClicked: Dispatch<SetStateAction<boolean>>
+}
+
+const NavbarItemList = ({
+  menuIconClicked,
+  setMenuIconClicked,
+}: NavbarItemListProps) => {
   const { hoverObj, dispatch } = useHeaderContext() as hoverType
-
-  const ulRef = useRef<HTMLUListElement>(null)
+  const ulRef = useOutsideClick(() =>
+    setMenuIconClicked(false),
+  ) as RefObject<HTMLUListElement>
   const windowSize = useWindowSize()
   const links = [
     { name: "Чоловіки", href: "/men" },
@@ -59,7 +69,7 @@ const NavbarItemList = () => {
         ulElement.removeEventListener("mouseout", handleMouseLeave)
       }
     }
-  }, [dispatch])
+  }, [dispatch, ulRef])
 
   function handleMouseEnterList() {
     if (!hoverObj.linkClicked) {
@@ -68,21 +78,20 @@ const NavbarItemList = () => {
       dispatch({ type: actions.linkClicked, payload: "" })
     }
   }
-
-  return (
+  const ul = (
     <ul
       className={`${styles.ulNavbarSmall} ${
         hoverObj.navInteractiveHovered ? styles.heightHovered : ""
-      }`}
-      onMouseEnter={handleMouseEnterList}
+      } ${menuIconClicked ? styles.transformInitial : ""}`}
+      onMouseEnter={windowSize > 1200 ? handleMouseEnterList : () => {}}
       ref={ulRef}
-      onClick={navListClickHandler}
+      onClick={windowSize > 1200 ? navListClickHandler : () => {}}
     >
       {links.map((link, index) => {
-        if (windowSize < 1400 && link.name === "Про нас") {
+        if (windowSize < 1600 && link.name === "Про нас" && windowSize > 1400) {
           return null
         }
-        if (windowSize < 1200) {
+        if (windowSize < 1400 && windowSize > 1200) {
           if (link.name === "Розпродаж" || link.name === "Про нас") {
             return null
           }
@@ -90,6 +99,30 @@ const NavbarItemList = () => {
         return <NavbarItem key={index} name={link.name} href={link.href} />
       })}
     </ul>
+  )
+  return windowSize <= 1200 ? (
+    <div
+      className={`${styles.ulWrapper} ${menuIconClicked ? styles.visible : ""}`}
+    >
+      {menuIconClicked && (
+        <button
+          className={styles.buttonIconsMenu}
+          onClick={() => setMenuIconClicked((prev) => !prev)}
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 -960 960 960"
+            fill="#1C1C1C"
+            className={styles.closeMenuIcon}
+          >
+            <path d="m251.33-204.67-46.66-46.66L433.33-480 204.67-708.67l46.66-46.66L480-526.67l228.67-228.66 46.66 46.66L526.67-480l228.66 228.67-46.66 46.66L480-433.33 251.33-204.67Z" />
+          </svg>
+        </button>
+      )}
+      {ul}
+    </div>
+  ) : (
+    ul
   )
 }
 

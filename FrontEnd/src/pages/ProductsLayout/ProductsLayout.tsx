@@ -17,7 +17,15 @@ function ProductsLayout() {
 
   const pathname = location.pathname.replace("/", "")
   const gender =
-    pathname === "men" ? "Чоловіче" : pathname === "women" ? "Жіноче" : "Дитяче"
+    pathname === "men"
+      ? "Чоловічий одяг"
+      : pathname === "women"
+        ? "Жіночий одяг"
+        : pathname === "children"
+          ? "Дитячий одяг"
+          : pathname === "products"
+            ? "Одяг"
+            : "Одяг"
 
   return (
     <SortProvider>
@@ -25,7 +33,8 @@ function ProductsLayout() {
         <div className={styles.topContainer}>
           <div className={styles.genderNameContainer}>
             <h2>
-              {gender} взуття <span>(67)</span>
+              {`${gender} `}
+              <span>(67)</span>
             </h2>
           </div>
           <div className={styles.hideFiltersContainer}>
