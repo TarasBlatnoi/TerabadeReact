@@ -10,10 +10,10 @@ import Partners from "../../components/Partnerns/Partners"
 
 const Home = () => {
   return (
-    <div>
+    <div className={styles.mainDivWrapper}>
       <section className={styles.heroSection}>
         <Offer />
-        <div>
+        <div className={styles.offerSneakers}>
           <img src={sneakersPhoto} alt="sneakers" className={styles.sneakers} />
         </div>
       </section>

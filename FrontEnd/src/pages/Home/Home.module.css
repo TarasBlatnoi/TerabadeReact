@@ -149,3 +149,42 @@
     border-radius: 2rem;
   }
 }
+
+/*768*/
+@media (max-width: 48em) {
+  html {
+    font-size: 45% !important;
+  }
+  .rectangleBgCover {
+    display: none;
+  }
+
+  .bgImage {
+    width: 93%;
+    position: absolute;
+    z-index: -20;
+    top: 16%;
+    right: -2%;
+  }
+
+  .rectangle {
+    width: 25%;
+    padding: 4rem 2rem;
+    border-radius: 2rem;
+    left: -5%;
+    bottom: -5%;
+  }
+
+  .offerSneakers {
+    width: 50%;
+    position: absolute;
+    right: 0;
+  }
+}
+
+/*565*/
+@media (max-width: 35em) {
+  html {
+    font-size: 35% !important;
+  }
+}

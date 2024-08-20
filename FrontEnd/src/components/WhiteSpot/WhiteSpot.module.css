@@ -70,3 +70,9 @@
     height: 16rem;
   }
 }
+
+@media (max-width: 48em) {
+  .whiteSpotImg {
+    height: 50vh;
+  }
+}
