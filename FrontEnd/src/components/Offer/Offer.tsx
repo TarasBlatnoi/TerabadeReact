@@ -1,6 +1,7 @@
 import styles from "./Offer.module.css"
 import Button from "../../components/UI/Button/Button"
 import skaterPhoto from "../../assets/images/Boy1.svg"
+import ImageStateful from "../UI/ImageStateful/ImageStateful"
 function Offer() {
   return (
     <div className={styles.offer}>
@@ -13,7 +14,12 @@ function Offer() {
         <Button variant="primary" className={styles.orderButton}>
           Замовити
         </Button>
-        <img src={skaterPhoto} alt="skater" className={styles.skater}></img>
+        <ImageStateful
+          src={skaterPhoto}
+          alt="skater"
+          className={styles.skater}
+          height="78rem"
+        />
       </div>
     </div>
   )
