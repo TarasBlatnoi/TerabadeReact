@@ -10,6 +10,7 @@ const passport = require("passport")
 const authenticationRoutes = require("./routes/authenticationRoutes")
 const favoriteRoutes = require("./routes/favoriteRoutes")
 const reviewRoutes = require("./routes/reviewRoutes")
+const checkoutRoutes = require("./routes/checkoutRoutes")
 const cors = require("cors")
 require("./auth/passport")
 const session = db.session
@@ -65,6 +66,7 @@ app.use("/api/v1/products", productRoutes)
 app.use("/api/v1/favorites", favoriteRoutes)
 app.use("/api/v1", authenticationRoutes)
 app.use("/api/v1/reviews", reviewRoutes)
+app.use("/api/v1/checkout", checkoutRoutes)
 
 app.get("*", function (req, res) {
   res.sendFile(path.join(__dirname, "FrontEnd/dist", "index.html"))
