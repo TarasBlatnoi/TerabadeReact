@@ -57,6 +57,17 @@ function Products() {
       if (!states.style.length) return true
       return states.style.includes(product.type)
     })
+    .filter((product) => {
+      console.log(product)
+      if (!states.size.length) return true
+      const inRange = !!product.Sizes.filter((size: string) => {
+        if (states.size.includes(+size)) return true
+        else return false
+      }).length
+
+      if (inRange) return true
+      else return false
+    })
 
   return (
     <ul
