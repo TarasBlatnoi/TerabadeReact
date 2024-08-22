@@ -47,7 +47,7 @@ const CheckoutForm = () => {
         <PaymentElement />
       </div>
       <button disabled={!stripe} className={styles.submitButtn}>
-        Submit
+        Pay
       </button>
     </form>
   )
