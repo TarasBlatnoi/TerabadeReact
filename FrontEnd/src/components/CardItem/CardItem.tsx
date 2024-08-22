@@ -12,7 +12,7 @@ type CardItemProps = {
 }
 
 export const formaterCurrency = Intl.NumberFormat("fr-FR", {
-  maximumFractionDigits: 0,
+  maximumFractionDigits: 1,
 })
 
 const CardItem = ({ product, className, style }: CardItemProps) => {

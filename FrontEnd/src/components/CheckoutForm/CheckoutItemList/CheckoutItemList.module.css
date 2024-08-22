@@ -1,0 +1,22 @@
+.list {
+  display: flex;
+  flex-direction: column;
+  row-gap: 2rem;
+  padding: 2rem;
+  padding-top: 0;
+  list-style: none;
+  height: fit-content;
+}
+.editContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.link {
+  color: rgb(247, 244, 244);
+}
+
+.amount p {
+  font-size: 1.2rem;
+  font-family: monospace;
+}

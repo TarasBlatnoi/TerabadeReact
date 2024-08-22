@@ -22,7 +22,7 @@ function Cart() {
           </section>
         </>
       ) : (
-        <>
+        <div className={styles.defaultMessageContainer}>
           <h1 className={styles.favProductsFallback}>
             Упс, у вашому кошику поки що порожньо. Додайте взуття, яке вам
             подобається!
@@ -35,7 +35,7 @@ function Cart() {
           >
             Переглянути новинки
           </Button>
-        </>
+        </div>
       )}
     </div>
   )

@@ -32,3 +32,10 @@
 .button:hover {
   filter: brightness(1.1);
 }
+
+.defaultMessageContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  row-gap: 3rem;
+}

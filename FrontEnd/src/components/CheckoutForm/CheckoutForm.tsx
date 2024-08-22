@@ -1,10 +1,19 @@
 import { useStripe, useElements, PaymentElement } from "@stripe/react-stripe-js"
 import { useNavigate } from "react-router-dom"
+import styles from "./CheckoutForm.module.css"
+import { formaterCurrency } from "../CardItem/CardItem"
+import { useSelector } from "react-redux"
+import { storeType } from "../../store/store"
 
 const CheckoutForm = () => {
   const stripe = useStripe()
   const elements = useElements()
   const navigate = useNavigate()
+  const { paymentAmount, paymentDiscount } = useSelector(
+    (store: storeType) => store.checkout,
+  )
+  // TODO
+  const shippindPrice = 100
   const handleSubmit = async (event) => {
     // We don't want to let default form submission happen here,
     // which would refresh the page.
@@ -36,9 +45,36 @@ const CheckoutForm = () => {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <PaymentElement />
-      <button disabled={!stripe}>Submit</button>
+    <form onSubmit={handleSubmit} className={styles.formContainer}>
+      <div className={styles.paymentDetails}>
+        <div className={styles.containerPayment}>
+          <p>Subtotal</p>
+          <span>{formaterCurrency.format(paymentAmount)} UAH</span>
+        </div>
+        <div className={styles.containerPayment}>
+          <p>Shipping</p>
+          <span>{formaterCurrency.format(shippindPrice)} UAH</span>
+        </div>
+        <div className={styles.containerPayment}>
+          <p>Discount</p>
+          <span>{formaterCurrency.format(paymentDiscount)} UAH</span>
+        </div>
+        <div className={`${styles.containerPayment} ${styles.total}`}>
+          <h2>Total</h2>
+          <span>
+            {formaterCurrency.format(
+              paymentAmount - paymentDiscount + shippindPrice,
+            )}{" "}
+            UAH
+          </span>
+        </div>
+      </div>
+      <div>
+        <PaymentElement />
+      </div>
+      <button disabled={!stripe} className={styles.submitButtn}>
+        Pay
+      </button>
     </form>
   )
 }
