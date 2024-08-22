@@ -1,5 +1,6 @@
 import { useStripe, useElements, PaymentElement } from "@stripe/react-stripe-js"
 import { useNavigate } from "react-router-dom"
+import styles from "./CheckoutForm.module.css"
 
 const CheckoutForm = () => {
   const stripe = useStripe()
@@ -36,9 +37,18 @@ const CheckoutForm = () => {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <PaymentElement />
-      <button disabled={!stripe}>Submit</button>
+    <form onSubmit={handleSubmit} className={styles.formContainer}>
+      <div className={styles.totalContainer}>
+        <h1 className={styles.total}>
+          Total: <span>3499UAH</span>
+        </h1>
+      </div>
+      <div>
+        <PaymentElement />
+      </div>
+      <button disabled={!stripe} className={styles.submitButtn}>
+        Submit
+      </button>
     </form>
   )
 }

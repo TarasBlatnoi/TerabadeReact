@@ -28,13 +28,26 @@ const Checkout = () => {
   }
 
   return (
-    <>
+    <div>
       {!isLoading && (
-        <Elements stripe={stripePromise} options={options}>
+        <Elements
+          stripe={stripePromise}
+          options={{
+            appearance: {
+              theme: "flat",
+              variables: {
+                colorText: "black",
+                colorTextPlaceholder: "black",
+                colorBackground: "white",
+              },
+            },
+            clientSecret: clientSession?.clientSecret,
+          }}
+        >
           <CheckoutForm />
         </Elements>
       )}
-    </>
+    </div>
   )
 }
 
