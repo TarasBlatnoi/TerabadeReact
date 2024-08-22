@@ -1,5 +1,6 @@
 .itemsContainer {
   display: flex;
+  align-items: flex-start;
   height: 100%;
   margin-top: 10rem;
   column-gap: 5rem;
