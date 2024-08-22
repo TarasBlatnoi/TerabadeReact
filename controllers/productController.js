@@ -2,10 +2,13 @@
 
 const { Product } = require("../models/Product.js")
 
+const getAllproducts = (req, res, next) => {
+  res.json(res.paginatedResults)
+}
+
 const asyncWrapper = (callback) => {
   return async function (req, res) {
     const args = []
-
     try {
       if (req.params.id) {
         args.push(req.params.id)
@@ -29,7 +32,7 @@ const asyncWrapper = (callback) => {
   }
 }
 
-const getAllproducts = asyncWrapper(Product.findAllProducts)
+//const getAllproducts = asyncWrapper(Product.findAllProducts)
 const getMenProducts = asyncWrapper(Product.findMenProducts)
 const getProductById = asyncWrapper(Product.findById)
 const getWomenProducts = asyncWrapper(Product.findWomenProducts)
