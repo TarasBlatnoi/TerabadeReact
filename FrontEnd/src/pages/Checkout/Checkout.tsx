@@ -38,7 +38,7 @@ const Checkout = () => {
               variables: {
                 colorText: "black",
                 colorTextPlaceholder: "black",
-                colorBackground: "white",
+                colorBackground: "#ededed",
               },
             },
             clientSecret: clientSession?.clientSecret,

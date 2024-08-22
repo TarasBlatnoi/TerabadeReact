@@ -5,6 +5,12 @@ import { useEffect, useState } from "react"
 import { useCart } from "../../context/CartContext"
 import { formaterCurrency } from "../CardItem/CardItem"
 import { useNavigate } from "react-router-dom"
+import { useDispatch, useSelector } from "react-redux"
+import {
+  updateAmount,
+  updateDiscount,
+} from "../../store/Features/CheckoutSlice/CheckoutSlice"
+import { storeType } from "../../store/store"
 
 function CartCheckoutSummary() {
   const [openPromo, setOpenPromo] = useState(false)
@@ -12,16 +18,22 @@ function CartCheckoutSummary() {
   const navigate = useNavigate()
   const [isAppliedCode, setIsAppliedCode] = useState(false)
   const { cartItems } = useCart()
-  const [discount, setDiscount] = useState(0)
-
-  useEffect(() => {
-    if (isAppliedCode) setDiscount(500)
-  }, [isAppliedCode])
+  const discount = useSelector(
+    (store: storeType) => store.checkout.paymentDiscount,
+  )
+  const dispatch = useDispatch()
 
   const subTotal = cartItems.reduce(
     (prev, { price, quantity }) => prev + price * (quantity || 1),
     0,
   )
+  useEffect(() => {
+    if (isAppliedCode) dispatch(updateDiscount(500))
+  }, [isAppliedCode])
+
+  useEffect(() => {
+    dispatch(updateAmount(subTotal))
+  }, [subTotal])
 
   return (
     <form className={styles.container}>

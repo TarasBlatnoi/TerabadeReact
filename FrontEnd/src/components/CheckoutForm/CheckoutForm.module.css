@@ -29,13 +29,23 @@
 .submitButtn:active {
   transform: scale(0.98);
 }
-.totalContainer {
-  align-self: center;
+.paymentDetails {
+  display: flex;
+  flex-direction: column;
+
+  row-gap: 0.8rem;
   color: #2c2c2c;
 }
-.total {
-  font-family: Arista pro light;
+
+.containerPayment {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  align-items: center;
 }
-.totalContainer span {
-  font-size: 1.7rem;
+
+.total {
+  padding-top: 1rem;
+  border-top: 0.2rem solid gray;
 }
