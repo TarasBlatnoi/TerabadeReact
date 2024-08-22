@@ -2,14 +2,10 @@ import Button from "../UI/Button/Button"
 import styles from "./CartCheckoutSummary.module.css"
 import dropSVG from "../../assets/images/Vector.svg"
 import { useEffect, useState } from "react"
-import { useCart } from "../../context/CartContext"
 import { formaterCurrency } from "../CardItem/CardItem"
 import { useNavigate } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
-import {
-  updateAmount,
-  updateDiscount,
-} from "../../store/Features/CheckoutSlice/CheckoutSlice"
+import { updateDiscount } from "../../store/Features/CheckoutSlice/CheckoutSlice"
 import { storeType } from "../../store/store"
 
 function CartCheckoutSummary() {
@@ -17,23 +13,15 @@ function CartCheckoutSummary() {
   const [promoCode, setPromoCode] = useState("")
   const navigate = useNavigate()
   const [isAppliedCode, setIsAppliedCode] = useState(false)
-  const { cartItems } = useCart()
-  const discount = useSelector(
-    (store: storeType) => store.checkout.paymentDiscount,
+
+  const { paymentDiscount: discount, paymentAmount: subTotal } = useSelector(
+    (store: storeType) => store.checkout,
   )
   const dispatch = useDispatch()
 
-  const subTotal = cartItems.reduce(
-    (prev, { price, quantity }) => prev + price * (quantity || 1),
-    0,
-  )
   useEffect(() => {
     if (isAppliedCode) dispatch(updateDiscount(500))
   }, [isAppliedCode])
-
-  useEffect(() => {
-    dispatch(updateAmount(subTotal))
-  }, [subTotal])
 
   return (
     <form className={styles.container}>

@@ -1,11 +1,14 @@
 import {
   createContext,
   ReactNode,
+  useCallback,
   useContext,
   useEffect,
   useReducer,
   useState,
 } from "react"
+import { updateAmount } from "../store/Features/CheckoutSlice/CheckoutSlice"
+import { useDispatch } from "react-redux"
 
 export const CartContext = createContext({
   cartItems: [] as CartItemType[],
@@ -157,11 +160,28 @@ export default function CartProvider({ children }: CartProviderProps) {
   const [state, dispatch] = useReducer(cartReducer, initialState)
   const [isOpened, setIsOpened] = useState(false)
 
+  const subTotalCalc = useCallback(
+    () =>
+      state.items.reduce(
+        (prev, { price, quantity }) => prev + price * (quantity || 1),
+        0,
+      ),
+    [state.items],
+  )
+  const subTotal = subTotalCalc()
+
+  const dispatchStore = useDispatch()
+
   useEffect(() => {
     localStorage.setItem("cart", JSON.stringify(state.items))
     const id = setTimeout(() => setIsOpened(false), 3000)
+
     return () => clearTimeout(id)
   }, [state.items])
+
+  useEffect(() => {
+    dispatchStore(updateAmount(subTotal))
+  }, [subTotal])
 
   function addCartItem(item: CartItemType) {
     dispatch({ type: CartActionType.ADD_ITEM, payload: item })
