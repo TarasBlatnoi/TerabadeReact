@@ -25,20 +25,113 @@ class Product {
         WHERE sex = ? OR sex = ? OR sex = ?;
         `,
     findMenProducts: `
-        SELECT  product.ProductID, name, sex, type, color, price, productDetails, ImageURL
-        FROM terabade.product JOIN terabade.Images ON product.ProductID = Images.ProductID
-        WHERE sex = "men" AND ImageOrder = 0
-        LIMIT 9;
+ SELECT  
+    product.ProductID, 
+    name, 
+    sex, 
+    type, 
+    color, 
+    price, 
+    productDetails, 
+    ImageURL, 
+    GROUP_CONCAT(
+        CASE 
+            WHEN InStock = 1 THEN SizeLabel
+        END ORDER BY SizeLabel ASC SEPARATOR ' / '
+    ) AS Sizes
+FROM 
+    terabade.product 
+LEFT JOIN 
+    terabade.Images ON product.ProductID = Images.ProductID 
+LEFT JOIN 
+    ProductSizes ON product.ProductID = ProductSizes.ProductID 
+LEFT JOIN 
+    Sizes ON Sizes.SizeID = ProductSizes.SizeID
+WHERE 
+    sex = 'men' 
+    AND (Images.ImageOrder = 0 OR Images.ImageOrder IS NULL)
+GROUP BY 
+    product.ProductID, 
+    name, 
+    sex, 
+    type, 
+    color, 
+    price, 
+    productDetails, 
+    ImageURL;
         `,
     findWomenProducts: `
-        SELECT * 
-        FROM terabade.product
-        WHERE sex = "women";
+      SELECT  
+    product.ProductID, 
+    name, 
+    sex, 
+    type, 
+    color, 
+    price, 
+    productDetails, 
+    ImageURL, 
+    GROUP_CONCAT(
+        CASE 
+            WHEN InStock = 1 THEN SizeLabel
+        END ORDER BY SizeLabel ASC SEPARATOR ' / '
+    ) AS Sizes
+FROM 
+    terabade.product 
+LEFT JOIN 
+    terabade.Images ON product.ProductID = Images.ProductID 
+LEFT JOIN 
+    ProductSizes ON product.ProductID = ProductSizes.ProductID 
+LEFT JOIN 
+    Sizes ON Sizes.SizeID = ProductSizes.SizeID
+WHERE 
+    sex = 'women' 
+    AND (Images.ImageOrder = 0 OR Images.ImageOrder IS NULL)
+GROUP BY 
+    product.ProductID, 
+    name, 
+    sex, 
+    type, 
+    color, 
+    price, 
+    productDetails, 
+    ImageURL;
+
     `,
     findChildrenPoducts: `
-        SELECT * 
-        FROM terabade.product
-        WHERE sex = "children";
+       SELECT  
+    product.ProductID, 
+    name, 
+    sex, 
+    type, 
+    color, 
+    price, 
+    productDetails, 
+    ImageURL, 
+    GROUP_CONCAT(
+        CASE 
+            WHEN InStock = 1 THEN SizeLabel
+        END ORDER BY SizeLabel ASC SEPARATOR ' / '
+    ) AS Sizes
+FROM 
+    terabade.product 
+LEFT JOIN 
+    terabade.Images ON product.ProductID = Images.ProductID 
+LEFT JOIN 
+    ProductSizes ON product.ProductID = ProductSizes.ProductID 
+LEFT JOIN 
+    Sizes ON Sizes.SizeID = ProductSizes.SizeID
+WHERE 
+    sex = 'children' 
+    AND (Images.ImageOrder = 0 OR Images.ImageOrder IS NULL)
+GROUP BY 
+    product.ProductID, 
+    name, 
+    sex, 
+    type, 
+    color, 
+    price, 
+    productDetails, 
+    ImageURL;
     `,
     findById: `
         SELECT * 
@@ -85,6 +178,10 @@ class Product {
   }
   static async findMenProducts() {
     const menProducts = await Product.commitQuery(Product.sql.findMenProducts)
+    menProducts.forEach((product) => {
+      const Sizes = product.Sizes?.split(" / ")
+      product.Sizes = Sizes
+    })
     return menProducts
   }
 
