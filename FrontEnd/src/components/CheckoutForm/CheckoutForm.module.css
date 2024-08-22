@@ -1,5 +1,5 @@
 .formContainer {
-  height: 45rem;
+  min-height: 45rem;
   width: 34rem;
   background-color: white;
   display: flex;

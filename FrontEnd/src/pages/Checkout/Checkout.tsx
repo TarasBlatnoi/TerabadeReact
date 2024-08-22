@@ -5,6 +5,7 @@ import PaymentAPI from "../../api/Payment/PaymentAPI"
 import { useEffect } from "react"
 import { useCart } from "../../context/CartContext"
 import CheckoutForm from "../../components/CheckoutForm/CheckoutForm"
+import Spinner from "../../components/LoadingSpinner/Spinner"
 
 const stripePromise = loadStripe(
   "pk_test_51PqCC4CRwWotuxtmDHgDXKYRkOgqSsZhxzIye3rzobQkzmijwtCqE3AYEQAGD82rZYkkGrKPJQBlOpQzkeW0wNto00L12JvHps",
@@ -29,7 +30,7 @@ const Checkout = () => {
 
   return (
     <div>
-      {!isLoading && (
+      {!isLoading ? (
         <Elements
           stripe={stripePromise}
           options={{
@@ -47,6 +48,8 @@ const Checkout = () => {
         >
           <CheckoutForm />
         </Elements>
+      ) : (
+        <Spinner />
       )}
     </div>
   )
