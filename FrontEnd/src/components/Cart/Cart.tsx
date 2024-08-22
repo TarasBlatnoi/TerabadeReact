@@ -12,9 +12,9 @@ const Cart = () => {
     closeCart()
     navigate("/cart")
   }
-  function handleToPayment() {
+  function handleToCheckout() {
     closeCart()
-    navigate("/payment")
+    navigate("/checkout")
   }
 
   return (
@@ -35,7 +35,7 @@ const Cart = () => {
           >
             До кошика
           </Button>
-          <Button onClick={handleToPayment} className={styles.payButton}>
+          <Button onClick={handleToCheckout} className={styles.payButton}>
             Сплатити
           </Button>
         </div>

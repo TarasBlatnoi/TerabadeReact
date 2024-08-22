@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom"
 import styles from "./PreviewImg.module.css"
+import ImageStateful from "../../UI/ImageStateful/ImageStateful"
 
 type PreviewImgProps = {
   imgSrc: string
@@ -14,7 +15,7 @@ function PreviewImg({ imgSrc, linkTo, genderName }: PreviewImgProps) {
       <span style={{ color: genderName === "Чоловіки" ? "black" : "white" }}>
         {genderName}
       </span>
-      <img src={imgSrc} alt={imgSrc} />
+      <ImageStateful src={imgSrc} alt={imgSrc} height="62rem" />
     </div>
   )
 }
