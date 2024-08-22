@@ -12,8 +12,10 @@ const favoriteRoutes = require("./routes/favoriteRoutes")
 const reviewRoutes = require("./routes/reviewRoutes")
 const checkoutRoutes = require("./routes/checkoutRoutes")
 const cors = require("cors")
+const { paginatedResults } = require("./middlewares/paginatedResult")
 require("./auth/passport")
 const session = db.session
+const { Product } = require("./models/Product")
 
 const app = express()
 
@@ -60,9 +62,12 @@ app.use(
 
 app.use(passport.initialize())
 app.use(passport.session())
-
 app.use("/api/v1/users", userRoutes)
-app.use("/api/v1/products", productRoutes)
+app.use(
+  "/api/v1/products",
+  paginatedResults(Product.findAllProducts, Product.countProducts),
+  productRoutes,
+)
 app.use("/api/v1/favorites", favoriteRoutes)
 app.use("/api/v1", authenticationRoutes)
 app.use("/api/v1/reviews", reviewRoutes)

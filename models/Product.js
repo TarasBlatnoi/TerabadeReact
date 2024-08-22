@@ -20,12 +20,15 @@ class Product {
         ORDER BY  StockQuantity;
     `,
     findAll: `
-        SELECT * 
-        FROM terabade.product
-        WHERE sex = ? OR sex = ? OR sex = ?;
+        SELECT product.ProductID, name, sex, type, color, price, productDetails, ImageURL
+        FROM terabade.product 
+        LEFT JOIN terabade.Images ON product.ProductID = Images.ProductID
+        WHERE sex in (GENDERS_STRING) AND (Images.ImageOrder = 0 OR Images.ImageOrder IS NULL)
+        ORDER BY ProductID
+        LIMIT ? OFFSET ?;
         `,
     findMenProducts: `
- SELECT  
+    SELECT  
     product.ProductID, 
     name, 
     sex, 
@@ -39,18 +42,18 @@ class Product {
             WHEN InStock = 1 THEN SizeLabel
         END ORDER BY SizeLabel ASC SEPARATOR ' / '
     ) AS Sizes
-FROM 
+    FROM 
     terabade.product 
-LEFT JOIN 
+    LEFT JOIN 
     terabade.Images ON product.ProductID = Images.ProductID 
-LEFT JOIN 
+    LEFT JOIN 
     ProductSizes ON product.ProductID = ProductSizes.ProductID 
-LEFT JOIN 
+    LEFT JOIN 
     Sizes ON Sizes.SizeID = ProductSizes.SizeID
-WHERE 
+    WHERE 
     sex = 'men' 
     AND (Images.ImageOrder = 0 OR Images.ImageOrder IS NULL)
-GROUP BY 
+    GROUP BY 
     product.ProductID, 
     name, 
     sex, 
@@ -61,7 +64,7 @@ GROUP BY
     ImageURL;
         `,
     findWomenProducts: `
-      SELECT  
+    SELECT  
     product.ProductID, 
     name, 
     sex, 
@@ -75,18 +78,18 @@ GROUP BY
             WHEN InStock = 1 THEN SizeLabel
         END ORDER BY SizeLabel ASC SEPARATOR ' / '
     ) AS Sizes
-FROM 
+    FROM 
     terabade.product 
-LEFT JOIN 
+    LEFT JOIN 
     terabade.Images ON product.ProductID = Images.ProductID 
-LEFT JOIN 
+    LEFT JOIN 
     ProductSizes ON product.ProductID = ProductSizes.ProductID 
-LEFT JOIN 
+    LEFT JOIN 
     Sizes ON Sizes.SizeID = ProductSizes.SizeID
-WHERE 
+    WHERE 
     sex = 'women' 
     AND (Images.ImageOrder = 0 OR Images.ImageOrder IS NULL)
-GROUP BY 
+    GROUP BY 
     product.ProductID, 
     name, 
     sex, 
@@ -98,7 +101,7 @@ GROUP BY
 
     `,
     findChildrenPoducts: `
-       SELECT  
+    SELECT  
     product.ProductID, 
     name, 
     sex, 
@@ -112,18 +115,18 @@ GROUP BY
             WHEN InStock = 1 THEN SizeLabel
         END ORDER BY SizeLabel ASC SEPARATOR ' / '
     ) AS Sizes
-FROM 
+    FROM 
     terabade.product 
-LEFT JOIN 
+    LEFT JOIN 
     terabade.Images ON product.ProductID = Images.ProductID 
-LEFT JOIN 
+    LEFT JOIN 
     ProductSizes ON product.ProductID = ProductSizes.ProductID 
-LEFT JOIN 
+    LEFT JOIN 
     Sizes ON Sizes.SizeID = ProductSizes.SizeID
-WHERE 
+    WHERE 
     sex = 'children' 
     AND (Images.ImageOrder = 0 OR Images.ImageOrder IS NULL)
-GROUP BY 
+    GROUP BY 
     product.ProductID, 
     name, 
     sex, 
@@ -132,6 +135,9 @@ GROUP BY
     price, 
     productDetails, 
     ImageURL;
+    `,
+    countRows: `
+    SELECT COUNT(*) as count FROM terabade.product WHERE sex in (GENDERS_STRING);
     `,
     findById: `
         SELECT * 
@@ -156,26 +162,23 @@ GROUP BY
     }
   }
 
-  static async findAllProducts(...args) {
-    const query = args[args.length - 1]
-    let placeholders = []
-    if (query.length) {
-      placeholders = query?.map(() => "?").join(", ")
-    }
-
-    const querySQL = `
-      SELECT product.ProductID, name, sex, type, color, price, productDetails, ImageURL
-      FROM terabade.product 
-      LEFT JOIN terabade.Images ON product.ProductID = Images.ProductID
-      ${placeholders?.length ? `WHERE sex in (${placeholders}) AND (Images.ImageOrder = 0 OR Images.ImageOrder IS NULL);` : "WHERE (Images.ImageOrder = 0 OR Images.ImageOrder IS NULL);"} `
-    if (placeholders.length) {
-      const products = await Product.commitQuery(querySQL, query)
-      return products
-    } else {
-      const products = await Product.commitQuery(querySQL)
-      return products
-    }
+  static async countProducts(gendersString) {
+    const query = Product.sql.countRows.replace("GENDERS_STRING", gendersString)
+    const count = await Product.commitQuery(query)
+    return count[0]
   }
+
+  static async findAllProducts(...args) {
+    const sql = Product.sql.findAll.replace(
+      "GENDERS_STRING",
+      args[args.length - 1],
+    )
+    args.pop()
+    const stringArgs = args.map((arg) => arg.toString())
+    const products = await Product.commitQuery(sql, stringArgs)
+    return products
+  }
+
   static async findMenProducts() {
     const menProducts = await Product.commitQuery(Product.sql.findMenProducts)
     menProducts.forEach((product) => {
