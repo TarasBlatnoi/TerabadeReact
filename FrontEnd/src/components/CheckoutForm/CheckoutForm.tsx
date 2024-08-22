@@ -12,6 +12,8 @@ const CheckoutForm = () => {
   const { paymentAmount, paymentDiscount } = useSelector(
     (store: storeType) => store.checkout,
   )
+  // TODO
+  const shippindPrice = 100
   const handleSubmit = async (event) => {
     // We don't want to let default form submission happen here,
     // which would refresh the page.
@@ -51,7 +53,7 @@ const CheckoutForm = () => {
         </div>
         <div className={styles.containerPayment}>
           <p>Shipping</p>
-          <span>{formaterCurrency.format(100)} UAH</span>
+          <span>{formaterCurrency.format(shippindPrice)} UAH</span>
         </div>
         <div className={styles.containerPayment}>
           <p>Discount</p>
@@ -60,7 +62,10 @@ const CheckoutForm = () => {
         <div className={`${styles.containerPayment} ${styles.total}`}>
           <h2>Total</h2>
           <span>
-            {formaterCurrency.format(paymentAmount - paymentDiscount)} UAH
+            {formaterCurrency.format(
+              paymentAmount - paymentDiscount + shippindPrice,
+            )}{" "}
+            UAH
           </span>
         </div>
       </div>

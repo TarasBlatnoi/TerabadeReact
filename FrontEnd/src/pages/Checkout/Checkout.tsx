@@ -41,6 +41,7 @@ const Checkout = () => {
                 colorBackground: "#ededed",
               },
             },
+
             clientSecret: clientSession?.clientSecret,
           }}
         >
