@@ -5,8 +5,8 @@ const { createGenderFilterString } = require("../utils/createGendersString.js")
 const { paginatedResult } = require("../utils/paginatedResult.js")
 const catchAsync = require("../utils/catchAsync.js")
 
-const getAllproducts = catchAsync(async (req, res, next) => {
-  const filterString = createGenderFilterString(req.path)
+const getProducts = catchAsync(async (req, res) => {
+  const filterString = createGenderFilterString(req.path, req.query.gender)
   const pageOptions = {}
   pageOptions.page = req.query.page || 1
   pageOptions.limit = req.query.limit || 9
@@ -51,21 +51,14 @@ const asyncWrapper = (callback) => {
   }
 }
 
-//const getAllproducts = asyncWrapper(Product.findAllProducts)
-const getMenProducts = asyncWrapper(Product.findMenProducts)
 const getProductById = asyncWrapper(Product.findById)
-const getWomenProducts = asyncWrapper(Product.findWomenProducts)
-const getChildrenProducts = asyncWrapper(Product.findChildrenPoducts)
 const getImagesForProduct = asyncWrapper(Product.findImagesForProduct)
 // const updateProduct = asyncWrapper(Product.updateById)
 // const deleteProduct = asyncWrapper(Product.deleteById)
 
 module.exports = {
-  getAllproducts,
   getProductById,
-  getMenProducts,
-  getWomenProducts,
-  getChildrenProducts,
+  getProducts,
   getImagesForProduct,
   //   updateProduct,
   //   deleteProduct,
