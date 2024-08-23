@@ -44,7 +44,7 @@ function DetailProduct() {
       detailProduct?.images[0]?.ImageURL || "https://picsum.photos/200",
     )
   }, [setActiveImage, detailProduct])
-  console.log(detailProduct)
+
   const { data: parentData } = useQuery({
     queryFn: () => ProductAPI.getProducts(detailProduct.sex),
     queryKey: [detailProduct.sex],
@@ -198,7 +198,7 @@ function DetailProduct() {
           </div>
         </div>
       </section>
-      <YouMightAlsoLike products={parentData} />
+      <YouMightAlsoLike products={parentData.response} />
     </div>
   )
 }
