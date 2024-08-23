@@ -20,10 +20,27 @@ class Product {
         ORDER BY  StockQuantity;
     `,
     findAll: `
-        SELECT product.ProductID, name, sex, type, color, price, productDetails, ImageURL
+        SELECT product.ProductID, name, sex, type, color, price, productDetails, ImageURL,  GROUP_CONCAT(
+        CASE 
+            WHEN InStock = 1 THEN SizeLabel
+        END ORDER BY SizeLabel ASC SEPARATOR ' / '
+    ) AS Sizes
         FROM terabade.product 
         LEFT JOIN terabade.Images ON product.ProductID = Images.ProductID
+        LEFT JOIN 
+        ProductSizes ON product.ProductID = ProductSizes.ProductID 
+        LEFT JOIN 
+        Sizes ON Sizes.SizeID = ProductSizes.SizeID
         WHERE sex in (GENDERS_STRING) AND (Images.ImageOrder = 0 OR Images.ImageOrder IS NULL)
+        GROUP BY 
+        product.ProductID, 
+        name, 
+        sex, 
+        type, 
+        color, 
+        price, 
+        productDetails, 
+        ImageURL
         ORDER BY ProductID
         LIMIT ? OFFSET ?;
         `,
