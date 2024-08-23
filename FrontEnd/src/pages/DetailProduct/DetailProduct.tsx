@@ -75,7 +75,7 @@ function DetailProduct() {
     addCartItem(item)
   }
   return (
-    <div>
+    <div className={styles.container}>
       <div className={styles.goBack}>
         <Link to={`../${detailProduct.sex}`} className={styles.goBackLink}>
           <img src={goBackImg} alt="go back" className={styles.goBackImg} />

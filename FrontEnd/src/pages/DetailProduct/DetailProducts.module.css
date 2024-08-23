@@ -195,3 +195,6 @@ textarea:focus {
   outline: none;
   box-shadow: 0 0 5px rgba(249, 195, 31, 1);
 }
+.container {
+  width: 100%;
+}
