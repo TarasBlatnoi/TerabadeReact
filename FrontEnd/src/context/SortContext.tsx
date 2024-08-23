@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from "react"
+import { createContext, SetStateAction, useContext, useState } from "react"
 
 enum sortingOptions {
   standard = "Новинки",
@@ -8,11 +8,11 @@ enum sortingOptions {
 
 type ContextValueType = {
   productsSortMethod: sortingOptions
-  setProductsSortMethod: Function
+  setProductsSortMethod: React.Dispatch<SetStateAction<sortingOptions>>
 }
 
 const SortContext = createContext(
-  null
+  null,
 ) as React.Context<null | ContextValueType>
 
 type FiltersProviderProps = {
@@ -21,8 +21,8 @@ type FiltersProviderProps = {
 
 function SortProvider({ children }: FiltersProviderProps) {
   const [productsSortMethod, setProductsSortMethod] = useState(
-    sortingOptions.standard
-  ) as [sortingOptions, Function]
+    sortingOptions.standard,
+  ) as [sortingOptions, React.Dispatch<SetStateAction<sortingOptions>>]
 
   return (
     <SortContext.Provider
