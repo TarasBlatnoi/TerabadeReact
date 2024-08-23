@@ -90,7 +90,7 @@
 .heart:before {
   transform: rotate(-45deg);
   position: relative;
-  right: -26%;
+  right: -33%;
 }
 
 .heart::after {

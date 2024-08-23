@@ -41,6 +41,7 @@ const Favorites = () => {
     )
     mutate(id)
   }
+
   let content
   if (optimisticFav) {
     content = (
