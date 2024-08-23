@@ -8,8 +8,10 @@ import Carousel from "../../components/Carousel/Carousel"
 import ThreePoints from "../../components/ThreePoints/ThreePoints"
 import Partners from "../../components/Partnerns/Partners"
 import ImageStateful from "../../components/UI/ImageStateful/ImageStateful"
+import { useState } from "react"
 
 const Home = () => {
+  const [isLoading, setIsLoading] = useState(true)
   return (
     <>
       <div className={styles.mainDivWrapper}>
@@ -33,8 +35,12 @@ const Home = () => {
             alt="area-steps"
             className={styles.whiteArea}
             height="89rem"
+            setIsLoading={setIsLoading}
           />
-          <div className={styles.rectangleBgCover}></div>
+          <div
+            className={styles.rectangleBgCover}
+            style={{ visibility: isLoading ? "hidden" : "visible" }}
+          ></div>
           <div className={styles.rectangle}>
             <h2 className={styles.bestHeading}>Найкращі</h2>
           </div>
