@@ -6,12 +6,14 @@ import ProductAPI from "../../api/Product/ProductAPI"
 import { useSelector } from "react-redux"
 import { storeType } from "../../store/store"
 import { useLocation } from "react-router-dom"
+import { sortingOptions, useSort } from "../../context/SortContext"
 
 function Products() {
   const { visibility: isOpenFilters, states } = useSelector(
     (store: storeType) => store.filters,
   )
   const { pathname } = useLocation()
+  const { productsSortMethod } = useSort()
   const gender = pathname.slice(1)
   const genders = []
   for (const genderName in states.gender) {
@@ -67,6 +69,16 @@ function Products() {
 
       if (inRange) return true
       else return false
+    })
+    .sort((a, b) => {
+      switch (productsSortMethod) {
+        case sortingOptions.standard:
+          return -1
+        case sortingOptions.priceAscending:
+          return b.price - a.price
+        case sortingOptions.priceDescending:
+          return a.price - b.price
+      }
     })
 
   return (
