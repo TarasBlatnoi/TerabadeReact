@@ -19,15 +19,7 @@ function CustomCheckBox({
   const checked = checkedExt !== undefined ? checkedExt : checkedInternal
   return (
     <div
-      className={`${styles.inputContainer} ${
-        !children
-          ? checked
-            ? styles.checked
-            : checked && children
-              ? styles.checkedSize
-              : ""
-          : styles.sizeContainer
-      }`}
+      className={`${styles.inputContainer}  ${children && checked ? styles.checkedSize : !children && checked ? styles.checked : ""}`}
     >
       <input
         {...props}

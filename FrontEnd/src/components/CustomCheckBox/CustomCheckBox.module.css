@@ -29,14 +29,15 @@
   content: "⚫️";
 }
 
-.sizeContainer {
+.sizeContainer div {
   width: 100%;
   height: 100%;
   position: absolute;
   top: 0;
-  background-color: #f9c31f;
+  background-color: white;
 }
 
-.checkedSize {
+.checkedSize div {
   border-radius: 2px solid white;
+  background-color: #f9c31f;
 }

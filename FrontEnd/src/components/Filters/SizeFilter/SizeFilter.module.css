@@ -1,5 +1,5 @@
 .item {
-  background: #f9c31f;
+  background: white;
   display: flex;
   justify-content: center;
   color: black;
@@ -8,6 +8,7 @@
   border-radius: 0.4rem;
   cursor: pointer;
   position: relative;
+  align-items: center;
 }
 .item * {
   font-size: inherit;

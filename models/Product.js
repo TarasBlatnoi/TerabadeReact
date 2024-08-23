@@ -183,7 +183,7 @@ class Product {
     const menProducts = await Product.commitQuery(Product.sql.findMenProducts)
     menProducts.forEach((product) => {
       const Sizes = product.Sizes?.split(" / ")
-      product.Sizes = Sizes
+      product.Sizes = Sizes || []
     })
     return menProducts
   }

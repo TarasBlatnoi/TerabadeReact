@@ -9,6 +9,7 @@ export interface ProductType {
   sex: string
   type: string
   updatedAt: string
+  Sizes: Array<string>
 }
 
 export interface ImageObject {
