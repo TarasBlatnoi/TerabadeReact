@@ -65,3 +65,34 @@
   color: white;
   background-color: transparent;
 }
+.heart {
+  position: absolute;
+  left: 85%;
+  top: 2%;
+
+  cursor: pointer;
+}
+
+.heart:before,
+.heart:after {
+  content: "";
+  border: 0.8rem solid #f9c31f;
+  display: inline-block;
+  height: 3rem;
+  background-color: #f9c31f;
+  width: 2rem;
+  border-top-left-radius: 6rem;
+  border-top-right-radius: 6rem;
+  z-index: 100000;
+  cursor: pointer;
+}
+
+.heart:before {
+  transform: rotate(-45deg);
+  position: relative;
+  right: -26%;
+}
+
+.heart::after {
+  transform: rotateZ(45deg);
+}

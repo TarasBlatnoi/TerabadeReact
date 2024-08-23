@@ -15,6 +15,7 @@ const Favorites = () => {
     queryFn: ProductAPI.getFavoriteProducts,
     queryKey: ["favorites"],
     suspense: true,
+    staleTime: Infinity,
   }) as { data: { result: ProductType[] } }
 
   const favProducts = data?.result
@@ -48,11 +49,12 @@ const Favorites = () => {
           return (
             <CardItem key={product.ProductID} product={product} edit={edit}>
               <div
-                style={{ position: "absolute" }}
-                onClick={() => handleDeleteFavorite(product.ProductID)}
-              >
-                <button>Delete</button>
-              </div>
+                onClick={(ev) => {
+                  handleDeleteFavorite(product.ProductID)
+                  ev.stopPropagation()
+                }}
+                className={styles.heart}
+              ></div>
             </CardItem>
           )
         })}

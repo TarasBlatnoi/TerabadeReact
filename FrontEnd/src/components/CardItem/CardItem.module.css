@@ -12,6 +12,7 @@
   justify-content: space-between;
   cursor: pointer;
   row-gap: 2rem;
+  position: relative;
 }
 .itemExpanded {
   height: calc(45rem + 10vw);
