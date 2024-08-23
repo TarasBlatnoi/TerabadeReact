@@ -1,10 +1,29 @@
 "use strict"
 
 const { Product } = require("../models/Product.js")
+const { createGenderFilterString } = require("../utils/createGendersString.js")
+const { paginatedResult } = require("../utils/paginatedResult.js")
+const catchAsync = require("../utils/catchAsync.js")
 
-const getAllproducts = (req, res, next) => {
-  res.json(res.paginatedResults)
-}
+const getAllproducts = catchAsync(async (req, res, next) => {
+  const filterString = createGenderFilterString(req.path)
+  const pageOptions = {}
+  pageOptions.page = req.query.page || 1
+  pageOptions.limit = req.query.limit || 9
+  const response = await paginatedResult(
+    Product.countProducts,
+    filterString,
+    pageOptions,
+  )
+  const offset = (pageOptions.page - 1) * pageOptions.limit
+  const products = await Product.findAllProducts(
+    pageOptions.limit,
+    offset,
+    filterString,
+  )
+  response.response = products
+  res.json(response)
+})
 
 const asyncWrapper = (callback) => {
   return async function (req, res) {
