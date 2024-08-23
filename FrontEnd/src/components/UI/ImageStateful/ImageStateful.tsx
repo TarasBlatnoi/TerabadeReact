@@ -1,4 +1,4 @@
-import { ReactNode, useEffect, useState } from "react"
+import { Dispatch, ReactNode, useEffect, useState } from "react"
 
 interface Props {
   src: string
@@ -6,6 +6,7 @@ interface Props {
   className?: string
   alt: string
   height: string
+  setIsLoading?: Dispatch<React.SetStateAction<boolean>>
 }
 
 const ImageStateful = ({
@@ -14,12 +15,16 @@ const ImageStateful = ({
   src,
   height,
   fallback = <p>Failed to load</p>,
+  setIsLoading,
   ...props
 }: Props) => {
   const [state, setState] = useState("loading")
   useEffect(() => {
     const img = new Image()
-    img.onload = () => setState("success")
+    img.onload = () => {
+      setState("success")
+      setIsLoading?.(false)
+    }
     img.onerror = () => setState("error")
     img.src = src
   }, [])
