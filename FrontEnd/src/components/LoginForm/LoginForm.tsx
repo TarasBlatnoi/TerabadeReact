@@ -30,7 +30,7 @@ const LoginForm = () => {
   useEffect(() => {
     if (actionData?.user) {
       setIsLoggedIn(true)
-      navigate(-1)
+      navigate("/")
     }
   }, [actionData, navigate, setIsLoggedIn])
 

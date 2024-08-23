@@ -1,34 +1,83 @@
-import { useQuery } from "react-query"
+import { useMutation, useQuery, useQueryClient } from "react-query"
 import ProductAPI from "../../api/Product/ProductAPI"
 import { ProductType } from "../../types"
 import CardItem from "../../components/CardItem/CardItem"
 import styles from "./Favorites.module.css"
 import Button from "../../components/UI/Button/Button"
 import { useNavigate } from "react-router-dom"
+import { useEffect, useState } from "react"
 
 const Favorites = () => {
+  const queryClient = useQueryClient()
   const navigate = useNavigate()
+  const [edit, setEdit] = useState(false)
   const { data } = useQuery({
     queryFn: ProductAPI.getFavoriteProducts,
-    queryKey: ["products", "favorites"],
+    queryKey: ["favorites"],
     suspense: true,
+    staleTime: Infinity,
+  }) as { data: { result: ProductType[] } }
+
+  const favProducts = data?.result
+
+  const [optimisticFav, setOptimisticFav] = useState(favProducts)
+
+  useEffect(() => {
+    setOptimisticFav(favProducts)
+  }, [favProducts.length])
+
+  const { mutate } = useMutation({
+    mutationFn: ProductAPI.deleteFavoriteProduct,
+    onSuccess() {
+      queryClient.invalidateQueries(["favorites"])
+    },
+    onError() {
+      setOptimisticFav(favProducts)
+    },
   })
+  function handleDeleteFavorite(id: number) {
+    setOptimisticFav((curr) =>
+      curr.filter((product) => product.ProductID !== id),
+    )
+    mutate(id)
+  }
 
   let content
-  const favProducts = data?.result
-  if (data) {
+  if (optimisticFav) {
     content = (
       <ul className={styles.cardList}>
-        {favProducts.map((product: ProductType) => {
-          return <CardItem key={product.ProductID} product={product} />
+        {optimisticFav.map((product: ProductType) => {
+          return (
+            <CardItem key={product.ProductID} product={product} edit={edit}>
+              <div
+                onClick={(ev) => {
+                  handleDeleteFavorite(product.ProductID)
+                  ev.stopPropagation()
+                }}
+                className={styles.heart}
+              ></div>
+            </CardItem>
+          )
         })}
       </ul>
     )
   }
+
   return (
     <>
-      {favProducts?.length ? (
-        content
+      {optimisticFav?.length ? (
+        <div className={styles.favContainer}>
+          <div className={styles.editContainer}>
+            <h1>{!edit ? "Ваші улюблені" : "Редагувати улюблені"}</h1>
+            <button
+              className={styles.editButtn}
+              onClick={() => setEdit((curr) => !curr)}
+            >
+              {edit ? "Готово" : `Редагувати`}
+            </button>
+          </div>
+          {content}
+        </div>
       ) : (
         <div className={styles.container}>
           <h1 className={styles.favProductsFallback}>
