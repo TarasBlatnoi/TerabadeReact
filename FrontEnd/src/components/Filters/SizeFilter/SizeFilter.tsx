@@ -14,7 +14,7 @@ function SizeFilter() {
           ? [v]
           : [...prev, prev[i - 1] + (prev[i - 1] < 13 ? 0.5 : 1)]
       },
-      [3]
+      [3],
     )
     return results
   }, [])
