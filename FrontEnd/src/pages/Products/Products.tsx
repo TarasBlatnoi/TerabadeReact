@@ -85,14 +85,58 @@ function Products() {
     [hasMore, isLoading],
   )
 
+  const filteredData = scrollingData?.response
+    .filter((product) => {
+      if (states.price.length) {
+        const inRange = states.price
+          .map(({ min, max }) => product.price >= min && product.price <= max)
+          .includes(true)
+        if (inRange) return true
+        else return false
+      }
+      return true
+    })
+    .filter((product) => {
+      if (!Object.values(states.gender).includes(true)) return true
+      const enabledGenderFilters = Object.entries(states.gender)
+        .filter(([, checked]) => checked)
+        .map(([gender]) => gender)
+      return enabledGenderFilters.includes(product.sex)
+    })
+    .filter((product) => {
+      if (!states.style.length) return true
+      return states.style.includes(product.type)
+    })
+    .filter((product) => {
+      console.log(product)
+      if (!states.size.length) return true
+      const inRange = !!product.Sizes.filter((size: string) => {
+        if (states.size.includes(+size)) return true
+        else return false
+      }).length
+
+      if (inRange) return true
+      else return false
+    })
+    .sort((a, b) => {
+      switch (productsSortMethod) {
+        case sortingOptions.standard:
+          return 0
+        case sortingOptions.priceAscending:
+          return b.price - a.price
+        case sortingOptions.priceDescending:
+          return a.price - b.price
+      }
+    })
+
   return (
     <ul
       className={`${styles.cardList} ${
         !isOpenFilters ? styles.expandedList : ""
       }`}
     >
-      {scrollingData.response.map((product: ProductType, index: number) => {
-        if (scrollingData.response.length - 1 === index) {
+      {filteredData.map((product: ProductType, index: number) => {
+        if (filteredData.length - 1 === index) {
           return (
             <CardItem
               key={product.ProductID}

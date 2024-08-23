@@ -4,12 +4,12 @@ import { useNavigate } from "react-router-dom"
 import { useSelector } from "react-redux"
 import { storeType } from "../../store/store"
 import { useImages } from "../../context/ImageContext"
-import { ReactNode } from "react"
-import { forwardRef } from "react"
+import { forwardRef, ReactNode } from "react"
 
 type CardItemProps = {
   product: ProductType
   className?: string
+  style?: any
   children?: ReactNode
   edit?: boolean
 }
@@ -19,7 +19,7 @@ export const formaterCurrency = Intl.NumberFormat("fr-FR", {
 })
 
 const CardItem = forwardRef<HTMLLIElement, CardItemProps>(
-  ({ product, className = "" }: CardItemProps, ref) => {
+  ({ product, className, style, children, edit }: CardItemProps, ref) => {
     const navigate = useNavigate()
     const { setActiveImage } = useImages()
     const isOpenFilters = useSelector(
@@ -31,6 +31,7 @@ const CardItem = forwardRef<HTMLLIElement, CardItemProps>(
         className={`${styles.item} ${className} ${
           !isOpenFilters ? styles.itemExpanded : ""
         }`}
+        style={style}
         onClick={() => {
           setActiveImage(product.ImageURL)
           window.scrollTo(0, 0)
@@ -38,6 +39,7 @@ const CardItem = forwardRef<HTMLLIElement, CardItemProps>(
         }}
         ref={ref}
       >
+        {edit ? children : null}
         <div className={styles.imageContainer}>
           <img
             src={product.ImageURL || "https://picsum.photos/200"}
@@ -49,7 +51,7 @@ const CardItem = forwardRef<HTMLLIElement, CardItemProps>(
             <h1 className={styles.productName}>{product.name}</h1>
             <p className={styles.productType}>{product.type}</p>
             <p className={styles.price}>
-              {formaterCurrency.format(product.price)} <span>UAH</span>{" "}
+              {formaterCurrency.format(product.price)} <span>UAH</span>
             </p>
           </div>
         </div>
