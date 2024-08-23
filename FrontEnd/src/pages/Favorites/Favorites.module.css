@@ -7,10 +7,6 @@
   width: 100%;
   justify-content: center;
   gap: 3rem;
-  padding-left: 3rem;
-  padding-right: 1rem;
-  padding: 2rem 8rem;
-  margin-top: 4rem;
 }
 
 @media screen and (width <= 1000px) {
@@ -45,4 +41,27 @@
 
 .button:hover {
   filter: brightness(1.1);
+}
+
+.favContainer {
+  display: flex;
+  flex-direction: column;
+  row-gap: 4rem;
+  padding-top: 2rem;
+  width: 85vw;
+  margin-top: 5rem;
+}
+.editContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+.editButtn {
+  border: 0.2rem solid white;
+  border-radius: 1rem;
+  padding: 1rem;
+  font-size: 1.2rem;
+  color: white;
+  background-color: transparent;
 }
