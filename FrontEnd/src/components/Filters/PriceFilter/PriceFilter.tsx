@@ -1,7 +1,6 @@
-import { useDispatch } from "react-redux"
 import CustomCheckBox from "../../CustomCheckBox/CustomCheckBox"
 import styles from "../GenderFilter/GenderFilter.module.css"
-import { useNavigate, useSearchParams } from "react-router-dom"
+import { useSearchParams } from "react-router-dom"
 
 function PriceFilter() {
   const [searchParams, setSearchParams] = useSearchParams()
@@ -9,29 +8,32 @@ function PriceFilter() {
   const maxSearchQuery = searchParams.get("max")?.split(",") || []
 
   function handler(min: string, max: string, checked: boolean) {
-    setSearchParams((prev) => {
-      const minQuery = prev.get("min")?.split(",")
-      const maxQuery = prev.get("max")?.split(",")
+    setSearchParams((searchParams) => {
+      const minQuery = searchParams.get("min")?.split(",")
+      const maxQuery = searchParams.get("max")?.split(",")
       console.log(minQuery, maxQuery)
-      if (!minQuery && !maxQuery && checked) return { max: max, min: min }
-      else if (maxQuery && minQuery && checked)
-        return {
-          max: [...maxQuery, max].join(","),
-          min: [...minQuery, min].join(","),
-        }
-      else if (maxQuery && minQuery && !checked) {
-        console.log(
-          [...maxQuery.filter((maxValue) => maxValue !== max)].join(","),
-        )
-        return {
-          max:
-            [...maxQuery.filter((maxValue) => maxValue !== max)].join(",") ||
-            [],
-          min:
-            [...minQuery.filter((minValue) => minValue !== min)].join(",") ||
-            [],
+      if (!minQuery && !maxQuery && checked) {
+        searchParams.set("max", max)
+        searchParams.set("min", min)
+      } else if (maxQuery && minQuery && checked) {
+        searchParams.set("max", [...maxQuery, max].join(","))
+        searchParams.set("min", [...minQuery, min].join(","))
+      } else if (maxQuery && minQuery && !checked) {
+        const queryParam = [
+          ...maxQuery.filter((maxValue) => maxValue !== max),
+        ].join(",")
+        if (!queryParam) {
+          searchParams.delete("max")
+          searchParams.delete("min")
+        } else {
+          searchParams.set("max", queryParam)
+          searchParams.set(
+            "min",
+            [...minQuery.filter((minValue) => minValue !== min)].join(","),
+          )
         }
       }
+      return searchParams
     })
   }
   function isIncluded(min: string, max: string) {

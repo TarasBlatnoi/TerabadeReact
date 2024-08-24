@@ -70,8 +70,9 @@ function Products() {
       return enabledGenderFilters.includes(product.sex)
     })
     .filter((product) => {
-      if (!states.style.length) return true
-      return states.style.includes(product.type)
+      const styles = searchParams.get("style")?.split(",") || []
+      if (!styles.length) return true
+      return styles.includes(product.type)
     })
     .filter((product) => {
       if (!states.size.length) return true
