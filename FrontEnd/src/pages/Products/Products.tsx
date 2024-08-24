@@ -75,9 +75,10 @@ function Products() {
       return styles.includes(product.type)
     })
     .filter((product) => {
-      if (!states.size.length) return true
+      const sizeParam = searchParams.get("size")?.split(",") || []
+      if (!sizeParam.length) return true
       const inRange = !!product.Sizes.filter((size: string) => {
-        if (states.size.includes(+size)) return true
+        if (sizeParam.includes(size)) return true
         else return false
       }).length
 
