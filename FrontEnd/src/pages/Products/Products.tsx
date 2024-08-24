@@ -24,7 +24,6 @@ function Products() {
   const [scrollingData, setScrollingData] = useState<ScrollingData>({
     response: [],
   })
-
   const observer = useRef<IntersectionObserver | null>(null)
 
   // Generate URL based on filters and page number
@@ -55,11 +54,14 @@ function Products() {
 
   useEffect(() => {
     if (data) {
-      setScrollingData((prevData) => ({
-        ...data,
-        response: [...prevData.response, ...data.response],
-      }))
-
+      setScrollingData((prevData) => {
+        console.log({ prevData })
+        console.log({ data })
+        return {
+          ...data,
+          response: [...new Set([...prevData.response, ...data.response])],
+        }
+      })
       if (data.next) {
         setHasMore(true)
       } else {
@@ -111,7 +113,6 @@ function Products() {
       return states.style.includes(product.type)
     })
     .filter((product) => {
-      console.log(product)
       if (!states.size.length) return true
       const inRange = !!product.Sizes.filter((size: string) => {
         if (states.size.includes(+size)) return true
