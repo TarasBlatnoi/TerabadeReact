@@ -74,11 +74,14 @@ function Products() {
 
       if (observer.current) observer.current.disconnect()
 
-      observer.current = new IntersectionObserver((entries) => {
-        if (entries[0].isIntersecting && hasMore) {
-          setPageNumber((prev) => prev + 1)
-        }
-      })
+      observer.current = new IntersectionObserver(
+        (entries) => {
+          if (entries[0].isIntersecting && hasMore) {
+            setPageNumber((prev) => prev + 1)
+          }
+        },
+        { rootMargin: "50%" },
+      )
 
       if (node) observer.current.observe(node)
     },
