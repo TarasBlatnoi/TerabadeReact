@@ -12,7 +12,7 @@ const favoriteRoutes = require("./routes/favoriteRoutes")
 const reviewRoutes = require("./routes/reviewRoutes")
 const checkoutRoutes = require("./routes/checkoutRoutes")
 const cors = require("cors")
-const { paginatedResults } = require("./middlewares/paginatedResult")
+const { paginatedResults } = require("./utils/paginatedResult")
 require("./auth/passport")
 const session = db.session
 const { Product } = require("./models/Product")
@@ -63,11 +63,7 @@ app.use(
 app.use(passport.initialize())
 app.use(passport.session())
 app.use("/api/v1/users", userRoutes)
-app.use(
-  "/api/v1/products",
-  paginatedResults(Product.findAllProducts, Product.countProducts),
-  productRoutes,
-)
+app.use("/api/v1/products", productRoutes)
 app.use("/api/v1/favorites", favoriteRoutes)
 app.use("/api/v1", authenticationRoutes)
 app.use("/api/v1/reviews", reviewRoutes)
@@ -78,10 +74,12 @@ app.get("*", function (req, res) {
 })
 app.use((err, req, res, next) => {
   console.error(err)
+  err.statusCode = err.statusCode || 500
+  err.status = err.status || "error"
   if (err) {
     res
-      .status(500)
-      .json({ message: "Internal Server Error", error: err.message })
+      .status(err.statusCode)
+      .json({ status: err.status, message: err.message })
   }
 })
 const closeServer = (server) => {
