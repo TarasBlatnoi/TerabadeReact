@@ -5,7 +5,7 @@ import { useQuery } from "react-query"
 import ProductAPI from "../../api/Product/ProductAPI"
 import { useSelector } from "react-redux"
 import { storeType } from "../../store/store"
-import { useLocation } from "react-router-dom"
+import { useLocation, useSearchParams } from "react-router-dom"
 import { sortingOptions, useSort } from "../../context/SortContext"
 
 function Products() {
@@ -13,6 +13,7 @@ function Products() {
     (store: storeType) => store.filters,
   )
   const { pathname } = useLocation()
+  const [searchParams, setSearchParams] = useSearchParams()
   const { productsSortMethod } = useSort()
   const gender = pathname.slice(1)
   const genders = []
@@ -39,8 +40,18 @@ function Products() {
 
   const filteredData = data
     .filter((product) => {
-      if (states.price.length) {
-        const inRange = states.price
+      const [min, max] = ["min", "max"].map((queryParam) => {
+        return searchParams
+          .getAll(queryParam)
+          .map((value) => +value)
+          .sort((a, b) => a - b)
+      })
+
+      if (min.length && max.length) {
+        const inRange = Array.from({ length: min.length }, (_, index) => ({
+          min: min[index],
+          max: max[index],
+        }))
           .map(({ min, max }) => product.price >= min && product.price <= max)
           .includes(true)
         if (inRange) return true
