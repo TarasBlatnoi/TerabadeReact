@@ -60,7 +60,6 @@ function Products() {
       return states.style.includes(product.type)
     })
     .filter((product) => {
-      console.log(product)
       if (!states.size.length) return true
       const inRange = !!product.Sizes.filter((size: string) => {
         if (states.size.includes(+size)) return true
