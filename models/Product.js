@@ -84,7 +84,10 @@ class Product {
     args.pop()
     const stringArgs = args.map((arg) => arg.toString())
     const products = await Product.commitQuery(sql, stringArgs)
-    return products
+    return products.map((product) => {
+      product.Sizes = product.Sizes?.split(" / ") || []
+      return product
+    })
   }
 
   static async findMenProducts() {
