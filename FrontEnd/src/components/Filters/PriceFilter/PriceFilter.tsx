@@ -5,24 +5,31 @@ import { useNavigate, useSearchParams } from "react-router-dom"
 
 function PriceFilter() {
   const [searchParams, setSearchParams] = useSearchParams()
-  const minSearchQuery = searchParams.getAll("min")
-  const maxSearchQuery = searchParams.getAll("max")
+  const minSearchQuery = searchParams.get("min")?.split(",") || []
+  const maxSearchQuery = searchParams.get("max")?.split(",") || []
 
   function handler(min: string, max: string, checked: boolean) {
     setSearchParams((prev) => {
-      const minQuery = prev.getAll("min")
-      const maxQuery = prev.getAll("max")
+      const minQuery = prev.get("min")?.split(",")
+      const maxQuery = prev.get("max")?.split(",")
       console.log(minQuery, maxQuery)
       if (!minQuery && !maxQuery && checked) return { max: max, min: min }
       else if (maxQuery && minQuery && checked)
         return {
-          max: [...maxQuery, max],
-          min: [...minQuery, min],
+          max: [...maxQuery, max].join(","),
+          min: [...minQuery, min].join(","),
         }
       else if (maxQuery && minQuery && !checked) {
+        console.log(
+          [...maxQuery.filter((maxValue) => maxValue !== max)].join(","),
+        )
         return {
-          max: [...maxQuery.filter((maxValue) => maxValue !== max)],
-          min: [...minQuery.filter((minValue) => minValue !== min)],
+          max:
+            [...maxQuery.filter((maxValue) => maxValue !== max)].join(",") ||
+            [],
+          min:
+            [...minQuery.filter((minValue) => minValue !== min)].join(",") ||
+            [],
         }
       }
     })

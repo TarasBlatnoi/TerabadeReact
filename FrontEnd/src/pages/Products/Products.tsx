@@ -41,10 +41,13 @@ function Products() {
   const filteredData = data
     .filter((product) => {
       const [min, max] = ["min", "max"].map((queryParam) => {
-        return searchParams
-          .getAll(queryParam)
-          .map((value) => +value)
-          .sort((a, b) => a - b)
+        return (
+          searchParams
+            .get(queryParam)
+            ?.split(",")
+            .map((value) => +value)
+            .sort((a, b) => a - b) || []
+        )
       })
 
       if (min.length && max.length) {
