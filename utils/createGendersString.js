@@ -1,4 +1,4 @@
-exports.createGenderString = (path, gendersQuery) => {
+exports.createGenderFilterString = (path, gendersQuery) => {
   if (path !== "/") {
     return `"${path.slice(1)}"`
   } else {
