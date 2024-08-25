@@ -18,7 +18,12 @@ const Cart = () => {
   }
 
   return (
-    <Modal open={isOpened} className={styles.cart} closeModal={closeCart}>
+    <Modal
+      open={isOpened}
+      className={styles.cart}
+      closeModal={closeCart}
+      dialogFirst
+    >
       <div className={styles.classItemsWrapper}>
         {cartItems.map((cartItem) => {
           return (

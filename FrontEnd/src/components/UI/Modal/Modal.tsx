@@ -8,12 +8,22 @@ interface ModalProps {
   children: ReactNode
   className: string
   closeModal: () => void
+  dialogFirst?: boolean
 }
 
-const Modal = ({ open, children, className = "", closeModal }: ModalProps) => {
+const Modal = ({
+  open,
+  children,
+  className = "",
+  closeModal,
+  dialogFirst,
+}: ModalProps) => {
   const [closedByUser, setCloseByUser] = useState(false)
   const [internalOpen, setInternalOpen] = useState(false)
   const ref = useOutsideClick(() => {
+    if (dialogFirst) {
+      setInternalOpen(false)
+    }
     setCloseByUser(true)
     closeModal()
   }) as RefObject<HTMLDialogElement>
