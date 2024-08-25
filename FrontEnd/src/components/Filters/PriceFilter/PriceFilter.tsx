@@ -39,7 +39,7 @@ function PriceFilter() {
   function isIncluded(min: string, max: string) {
     return minSearchQuery.includes(min) && maxSearchQuery.includes(max)
   }
-  console.log({ priceFilter })
+
   return (
     <div className={styles.container}>
       <h1>Ціна</h1>

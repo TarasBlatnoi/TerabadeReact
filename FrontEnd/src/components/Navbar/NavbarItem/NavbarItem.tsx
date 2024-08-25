@@ -1,10 +1,5 @@
 import styles from "./NavbarItem.module.css"
-import {
-  NavLink,
-  useLocation,
-  useNavigate,
-  useSearchParams,
-} from "react-router-dom"
+import { useLocation, useNavigate } from "react-router-dom"
 import {
   useHeaderContext,
   hoverType,
@@ -20,7 +15,6 @@ type PropsType = {
 const NavbarItem = ({ href, name }: PropsType) => {
   const location = useLocation()
   const navigate = useNavigate()
-  console.log(location)
   const { hoverObj, dispatch } = useHeaderContext() as hoverType
   const windowSize = useWindowSize()
   return (
@@ -48,6 +42,7 @@ const NavbarItem = ({ href, name }: PropsType) => {
             navigate(href)
           }
         }}
+        className={styles.itemLink}
       >
         <p
           onMouseEnter={
