@@ -33,10 +33,13 @@ function Products() {
 
   const { productsSortMethod } = useSort()
   const gendersQuery = searchParams.get("gender")?.split(",")
+  console.log(gendersQuery, gendersQuery?.length)
+  const gendersQueryStr = gendersQuery?.join(" ")
+
   const genderKeys = useMemo(() => {
     return gendersQuery?.length ? gendersQuery : ["products"]
-  }, [gendersQuery?.length])
-  //const genderKeys = gendersQuery?.length ? gendersQuery : ["products"]
+  }, [gendersQueryStr])
+
   useEffect(() => {
     setPageNumber(1)
     setHasMore(false)
