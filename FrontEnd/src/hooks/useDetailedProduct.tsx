@@ -1,13 +1,15 @@
 import { useQuery } from "react-query"
 import ProductAPI from "../api/Product/ProductAPI"
 import { DetailProductType } from "../types"
+import { useParams } from "react-router-dom"
 
-function useDetailedProduct(productId: string) {
+function useDetailedProduct() {
+  const params = useParams()
   const {
     data: [detailProduct],
   } = useQuery({
-    queryFn: () => ProductAPI.getById(productId),
-    queryKey: [productId],
+    queryFn: () => ProductAPI.getById(params.id!),
+    queryKey: [params.id!],
     staleTime: Infinity,
     suspense: true,
   }) as { data: Array<DetailProductType> }

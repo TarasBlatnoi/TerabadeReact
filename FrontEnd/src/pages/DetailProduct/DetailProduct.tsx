@@ -1,5 +1,5 @@
 import ProductAPI from "../../api/Product/ProductAPI"
-import { Link, useParams } from "react-router-dom"
+import { Link } from "react-router-dom"
 import { CartContext } from "../../context/CartContext"
 import { useContext, useEffect, useState } from "react"
 import { CartItemType } from "../../context/CartContext"
@@ -18,11 +18,10 @@ import CharacteristicsReadAll from "./CharacteristicsReadAll/CharacteristicsRead
 import ReviewForm from "./ReviewForm/ReviewForm"
 
 function DetailProduct() {
-  const params = useParams()
   const [chosedSize, setChoseSize] = useState(0)
   const [addToCartClicked, setAddToCartClicked] = useState(false)
   const { setActiveImage } = useImages()
-  const detailProduct = useDetailedProduct(params.id!)
+  const detailProduct = useDetailedProduct()
 
   useEffect(() => {
     setActiveImage(
