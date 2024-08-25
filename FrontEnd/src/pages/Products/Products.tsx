@@ -5,7 +5,7 @@ import { useQuery } from "react-query"
 import ProductAPI from "../../api/Product/ProductAPI"
 import { useSelector } from "react-redux"
 import { storeType } from "../../store/store"
-import { useLocation } from "react-router-dom"
+import { useLocation, useSearchParams } from "react-router-dom"
 import { useCallback, useEffect, useRef, useState } from "react"
 
 // Define the type for the state
