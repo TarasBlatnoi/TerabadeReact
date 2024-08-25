@@ -1,0 +1,27 @@
+.characteristicsContainer {
+  display: flex;
+  margin-top: 6.4rem;
+  margin-bottom: 1.6rem;
+  align-items: center;
+  gap: 0.2rem;
+}
+
+.characteristics {
+  font-size: 1.6rem;
+  font-size: 1.6rem;
+  line-height: 2rem;
+  font-family: Arista-Pro-Light;
+}
+
+.characteristicsIcon {
+  width: 3rem;
+}
+
+.showAll {
+  margin: 0.8rem 0;
+  display: inline-block;
+  cursor: pointer;
+  font-family: Arista-Pro-Light;
+  font-size: 1.8rem;
+  border-bottom: 1px solid #fbfaff;
+}
