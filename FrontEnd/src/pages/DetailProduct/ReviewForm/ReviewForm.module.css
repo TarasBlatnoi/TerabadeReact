@@ -1,0 +1,40 @@
+.reviewContainer {
+  width: 43rem;
+  display: flex;
+  flex-direction: column;
+  justify-self: flex-end;
+  gap: 1.6rem;
+}
+
+.buttonSubmitReview {
+  width: 13rem;
+  font-size: 1.6rem;
+  margin-left: auto;
+  border-radius: 1rem;
+  height: 2.7rem;
+}
+
+.reviewContainer textarea {
+  margin-top: 4.8rem;
+  resize: none;
+
+  color: #ffffff;
+  font-size: 1.6rem;
+  padding: 1.2rem;
+  height: 10rem;
+  width: 100%;
+  border-radius: 1rem;
+  border: 1px solid #ffffff;
+  background-color: #1e1e1e;
+}
+
+.reviewContainer textarea::placeholder {
+  color: #ffffff;
+  font-size: 1.6rem;
+}
+
+.reviewContainer textarea:focus {
+  border-color: #f9c31f;
+  outline: none;
+  box-shadow: 0 0 5px rgba(249, 195, 31, 1);
+}

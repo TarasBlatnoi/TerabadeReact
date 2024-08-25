@@ -23,7 +23,6 @@ const Sizes = ({
     .filter(({ InStock }) => Boolean(InStock))
     .map(({ SizeLabel }) => +SizeLabel)
 
-  console.log(availableSizes)
   const sizesElements = []
   for (let i = begin; i < end; i += step) {
     sizesElements.push(

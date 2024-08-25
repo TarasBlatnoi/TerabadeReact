@@ -1,16 +1,16 @@
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import CustomCheckBox from "../../CustomCheckBox/CustomCheckBox"
 import styles from "../GenderFilter/GenderFilter.module.css"
 import { updatePrice } from "../../../store/Features/FiltersSlice/FiltersSlice"
 
 function PriceFilter() {
   const dispath = useDispatch()
-
+  const priceFilter = useSelector((store) => store.filters)
   function handler(min: number, max: number, checked: boolean) {
     console.log("hello")
     dispath(updatePrice({ min, max, checked }))
   }
-
+  console.log({ priceFilter })
   return (
     <div className={styles.container}>
       <h1>Ціна</h1>
