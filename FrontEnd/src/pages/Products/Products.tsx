@@ -9,37 +9,21 @@ import { useCallback, useRef } from "react"
 
 import { sortingOptions, useSort } from "../../context/SortContext"
 import { useProducts } from "../../hooks/useProducts"
+import { useIntersection } from "../../hooks/useIntersection"
 
 function Products() {
   const { visibility: isOpenFilters, states } = useSelector(
     (store: storeType) => store.filters,
   )
 
-  const observer = useRef<IntersectionObserver | null>(null)
   const { isLoading, scrollingData, hasMore, searchParams, setPageNumber } =
     useProducts()
-
+  const { lastProductElementRef } = useIntersection({
+    isLoading,
+    hasMore,
+    setPageNumber,
+  })
   const { productsSortMethod } = useSort()
-
-  const lastProductElementRef = useCallback(
-    (node: HTMLLIElement | null) => {
-      if (isLoading) return
-
-      if (observer.current) observer.current.disconnect()
-
-      observer.current = new IntersectionObserver(
-        (entries) => {
-          if (entries[0].isIntersecting && hasMore) {
-            setPageNumber((prev) => prev + 1)
-          }
-        },
-        { rootMargin: "50%" },
-      )
-
-      if (node) observer.current.observe(node)
-    },
-    [hasMore, isLoading, setPageNumber],
-  )
 
   const filteredData = scrollingData?.response
     .filter((product) => {
