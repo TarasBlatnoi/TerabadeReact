@@ -8,6 +8,10 @@ interface SizesProps {
   setChoseSize: (value: number) => void
   addToCartClicked: boolean
   sizes: Array<{ SizeLabel: string; InStock: number }>
+  gridLayout?: { gridTemplateColumns: string }
+  sizeRect: string
+  sizeRectFilled: string
+  sizeNotAvailable: string
 }
 
 const Sizes = ({
@@ -18,6 +22,10 @@ const Sizes = ({
   setChoseSize,
   addToCartClicked,
   sizes,
+  gridLayout,
+  sizeRect,
+  sizeRectFilled,
+  sizeNotAvailable,
 }: SizesProps) => {
   const availableSizes = sizes
     .filter(({ InStock }) => Boolean(InStock))
@@ -27,9 +35,9 @@ const Sizes = ({
   for (let i = begin; i < end; i += step) {
     sizesElements.push(
       <div
-        className={`${styles.sizeRect} ${
-          chosedSize === i ? styles.sizeRectFilled : undefined
-        } ${!availableSizes.includes(i) ? styles.sizeNotAvailable : ""}`}
+        className={`${sizeRect} ${
+          chosedSize === i ? sizeRectFilled : ""
+        } ${!availableSizes.includes(i) ? sizeNotAvailable : ""}`}
         onClick={() => {
           if (!availableSizes.includes(i)) return
           setChoseSize(i)
@@ -47,7 +55,8 @@ const Sizes = ({
         <p>Довідник розмірів</p>
       </div>
       <div
-        className={`${styles.sizeRectContainer} ${addToCartClicked && !chosedSize ? styles.warning : ""}`}
+        className={`${styles.sizeRectContainer} ${addToCartClicked && !chosedSize ? styles.warning : ""} `}
+        style={gridLayout}
       >
         {sizesElements}
       </div>

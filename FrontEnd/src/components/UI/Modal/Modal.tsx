@@ -51,7 +51,7 @@ const Modal = ({
   )
   return createPortal(
     <div
-      className={`${styles.dialogWrapper} ${!open ? `${styles.closing}` : styles.visible} ${closedByUser && styles.visible}`}
+      className={`${styles.dialogWrapper} ${!open ? `${styles.closing}` : styles.visible} ${closedByUser ? styles.visible : ""}`}
       ref={wrapperRef}
       onTransitionEnd={() => {
         if (!open) {
@@ -65,8 +65,8 @@ const Modal = ({
     >
       <dialog
         ref={ref}
-        className={`${className} ${addTransition && internalOpen && open ? addTransition : ""}`}
-        open={openImmidiately && !internalOpen ? open : internalOpen}
+        className={`${className} ${addTransition && internalOpen ? addTransition : ""}`}
+        open={openImmidiately ? open : internalOpen}
         style={{ zIndex: "300" }}
       >
         {children}

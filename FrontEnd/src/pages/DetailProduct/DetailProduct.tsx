@@ -8,7 +8,7 @@ import styles from "./DetailProducts.module.css"
 import Button from "../../components/UI/Button/Button"
 import { useQuery } from "react-query"
 import YouMightAlsoLike from "../../components/YouMightAlsoLike/YouMightAlsoLike"
-import Sizes from "./Sizes/Sizes"
+import Sizes from "../../components/Sizes/Sizes"
 import ImagesContainer from "./ImagesContainer/ImagesContainer"
 import { useImages } from "../../context/ImageContext"
 import FavoriteButtons from "./FavoriteButtons/FavoriteButtons"
@@ -57,16 +57,19 @@ function DetailProduct() {
             <p className={styles.productPrice}>
               <span className={styles.productPriceNumber}>
                 {detailProduct.price}
-              </span>{" "}
+              </span>
               UAH
             </p>
             <Sizes
               begin={6}
               end={14}
               step={0.5}
+              sizeRect={styles.sizeRect}
+              sizeRectFilled={styles.sizeRectFilled}
               chosedSize={chosedSize}
               setChoseSize={setChoseSize}
               addToCartClicked={addToCartClicked}
+              sizeNotAvailable={styles.sizeNotAvailable}
               sizes={detailProduct.sizes}
             />
             <div className={styles.actionButtons}>

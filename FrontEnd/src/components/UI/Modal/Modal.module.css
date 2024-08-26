@@ -18,12 +18,12 @@
   opacity: 0;
 }
 
-.notVisible {
-  display: none;
-}
-
 .visible {
   display: block;
+}
+
+.notVisible {
+  display: none;
 }
 
 /* .opened {

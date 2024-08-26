@@ -16,7 +16,7 @@ class FavoriteProduct {
         CASE 
             WHEN ProductSizes.InStock = 1 THEN Sizes.SizeLabel
         END ORDER BY Sizes.SizeLabel ASC SEPARATOR ' / '
-    ) AS SizeLabels
+    ) AS Sizes
 FROM 
     product 
     JOIN favoriteproduct 
@@ -96,11 +96,15 @@ GROUP BY
   }
 
   static async findAllFavoriteProducts(userId) {
-    return FavoriteProduct.modifyFavoriteProduct(
+    const products = await FavoriteProduct.modifyFavoriteProduct(
       userId,
       null,
       FavoriteProduct.sqlQueries.getAll,
     )
+    return products.map((product) => {
+      product.Sizes = product.Sizes?.split(" / ") || []
+      return product
+    })
   }
 
   static async addFavoriteProduct(userId, ProductID) {

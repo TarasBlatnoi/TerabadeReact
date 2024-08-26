@@ -108,20 +108,77 @@
 }
 
 .modal {
-  width: 70rem;
-  height: 37rem;
+  width: 80rem;
+  height: 40rem;
   padding: 1.6rem;
   position: fixed;
   bottom: 50%;
   left: 50%;
-  transform: translate(-50%, 100%);
   border-radius: 2rem;
   background-color: #fbfaff;
-  opacity: 0;
-  transition: all 0.3s ease-in-out;
+  transform: translate3d(-50%, 60%, 0);
+  transition: transform 0.15s ease-in-out;
 }
 
 .transformCenter {
-  opacity: 1;
-  transform: translate(-50%, 54%);
+  transform: translate3d(-50%, 52%, 0);
+}
+
+.choseSizeWrapper {
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.8rem;
+  height: 100%;
+  width: 100%;
+}
+
+.choseSizeImg {
+  margin-top: -20%;
+}
+
+.sexText {
+  margin-bottom: 0.8rem;
+}
+
+.price {
+  margin-top: 0.8rem;
+}
+
+.name {
+  font-size: 3.2rem;
+}
+
+.sizeRect {
+  width: 5rem;
+  height: 3rem;
+  cursor: pointer;
+  font-family: sans-serif;
+  font-size: 1.6rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 200;
+  border-radius: 0.3rem;
+  border: 1px solid rgb(197, 197, 197);
+}
+
+.sizeRectFilled {
+  background-color: #f9c31f;
+  border: none;
+  color: black;
+}
+
+.sizeNotAvailable {
+  border: 1px solid rgb(197, 197, 197);
+  opacity: 0.3;
+  cursor: default;
+}
+
+.addToCart {
+  font-size: 1.8rem;
+  border-radius: 2rem;
+  margin-top: 1.8rem;
+  width: 100%;
+  height: 5rem;
 }
