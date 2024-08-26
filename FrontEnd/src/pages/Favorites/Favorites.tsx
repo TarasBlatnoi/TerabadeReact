@@ -6,11 +6,15 @@ import styles from "./Favorites.module.css"
 import Button from "../../components/UI/Button/Button"
 import { useNavigate } from "react-router-dom"
 import { useEffect, useState } from "react"
+import Modal from "../../components/UI/Modal/Modal"
 
 const Favorites = () => {
   const queryClient = useQueryClient()
   const navigate = useNavigate()
   const [edit, setEdit] = useState(false)
+  const [chosenProduct, setChosenProduct] = useState<ProductType>(
+    null as unknown as ProductType,
+  )
   const { data } = useQuery({
     queryFn: ProductAPI.getFavoriteProducts,
     queryKey: ["favorites"],
@@ -48,7 +52,24 @@ const Favorites = () => {
       <ul className={styles.cardList}>
         {optimisticFav.map((product: ProductType) => {
           return (
-            <CardItem key={product.ProductID} product={product} edit={edit}>
+            <CardItem
+              key={product.ProductID}
+              product={product}
+              edit={edit}
+              button={
+                <Button
+                  className={styles.pickSizeButton}
+                  variant="secondary"
+                  onClick={(event) => {
+                    event.stopPropagation()
+                    setChosenProduct(product)
+                  }}
+                  disabled={false}
+                >
+                  Обрати розмір
+                </Button>
+              }
+            >
               <div
                 onClick={(ev) => {
                   handleDeleteFavorite(product.ProductID)
@@ -59,6 +80,18 @@ const Favorites = () => {
             </CardItem>
           )
         })}
+        <Modal
+          open={!!chosenProduct}
+          className={`${styles.modal}`}
+          addTransition={styles.transformCenter}
+          openImmidiately
+          closeModal={() => {
+            setChosenProduct(null as unknown as ProductType)
+          }}
+        >
+          <div className={styles.choseSizeWrapper}> {chosenProduct?.name}</div>
+          <h1>{chosenProduct?.productDetails}</h1>
+        </Modal>
       </ul>
     )
   }

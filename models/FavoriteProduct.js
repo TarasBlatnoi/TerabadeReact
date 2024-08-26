@@ -5,24 +5,40 @@ class FavoriteProduct {
     getAll: `
     SELECT 
     product.ProductID, 
-    name, 
-    sex, 
-    type, 
-    color, 
-    price, 
-    productDetails, 
-    ImageURL
-    FROM 
+    product.name, 
+    product.sex, 
+    product.type, 
+    product.color, 
+    product.price, 
+    product.productDetails, 
+    Images.ImageURL,
+    GROUP_CONCAT(
+        CASE 
+            WHEN ProductSizes.InStock = 1 THEN Sizes.SizeLabel
+        END ORDER BY Sizes.SizeLabel ASC SEPARATOR ' / '
+    ) AS SizeLabels
+FROM 
     product 
-    JOIN 
-    favoriteproduct 
-    ON product.ProductID = favoriteproduct.Product_ProductID
-    JOIN 
-    Images 
-    ON product.ProductID = Images.ProductID 
-    WHERE 
-    ImageOrder = 0 
-    AND favoriteproduct.User_UserID = ?;
+    JOIN favoriteproduct 
+        ON product.ProductID = favoriteproduct.Product_ProductID
+    JOIN Images 
+        ON product.ProductID = Images.ProductID 
+    LEFT JOIN ProductSizes 
+        ON product.ProductID = ProductSizes.ProductID
+    LEFT JOIN Sizes 
+        ON ProductSizes.SizeID = Sizes.SizeID
+WHERE 
+	(Images.ImageOrder = 0 OR Images.ImageOrder IS NULL) 
+    AND favoriteproduct.User_UserID = 51
+GROUP BY 
+    product.ProductID, 
+    product.name, 
+    product.sex, 
+    product.type, 
+    product.color, 
+    product.price, 
+    product.productDetails, 
+    Images.ImageURL;
         `,
     addToFavorite: `
         INSERT INTO  favoriteproduct(User_UserID, Product_ProductID) VALUES(?,?);

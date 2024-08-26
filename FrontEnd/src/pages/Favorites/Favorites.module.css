@@ -96,3 +96,32 @@
 .heart::after {
   transform: rotateZ(45deg);
 }
+
+.pickSizeButton {
+  font-size: 1.8rem;
+  width: 35%;
+  height: 9%;
+  position: absolute;
+  right: 6%;
+  bottom: 6%;
+  border-radius: 1.5rem;
+}
+
+.modal {
+  width: 65rem;
+  height: 37rem;
+  padding: 1.6rem;
+  position: fixed;
+  bottom: 50%;
+  left: 50%;
+  transform: translate(-50%, 79%);
+  border-radius: 2rem;
+  background-color: #fbfaff;
+  opacity: 0;
+  transition: all 0.3s ease-in-out;
+}
+
+.transformCenter {
+  opacity: 1;
+  transform: translate(-50%, 54%);
+}

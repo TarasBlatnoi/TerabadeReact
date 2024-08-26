@@ -9,14 +9,18 @@ interface ModalProps {
   className: string
   closeModal: () => void
   dialogFirst?: boolean
+  addTransition?: string
+  openImmidiately?: boolean
 }
 
 const Modal = ({
   open,
   children,
+  addTransition,
   className = "",
   closeModal,
   dialogFirst,
+  openImmidiately,
 }: ModalProps) => {
   const [closedByUser, setCloseByUser] = useState(false)
   const [internalOpen, setInternalOpen] = useState(false)
@@ -29,7 +33,6 @@ const Modal = ({
   }) as RefObject<HTMLDialogElement>
   const wrapperRef = useRef<HTMLDivElement>(null)
   const modalRoot = document.getElementById("modal")
-
   useEffect(() => {
     if (open) {
       setInternalOpen(true)
@@ -38,12 +41,14 @@ const Modal = ({
       })
       return () => clearTimeout(timeout)
     }
-  }, [open])
+  }, [open, setInternalOpen, addTransition, ref])
 
   if (!modalRoot) {
     return null
   }
-
+  console.log(
+    `${className} ${addTransition && internalOpen ? addTransition : ""}`,
+  )
   return createPortal(
     <div
       className={`${styles.dialogWrapper} ${!open ? `${styles.closing}` : styles.visible} ${closedByUser ? styles.visible : ""}`}
@@ -60,8 +65,8 @@ const Modal = ({
     >
       <dialog
         ref={ref}
-        className={`${className}`}
-        open={internalOpen}
+        className={`${className} ${addTransition && internalOpen ? addTransition : ""}`}
+        open={openImmidiately ? open : internalOpen}
         style={{ zIndex: "300" }}
       >
         {children}

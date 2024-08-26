@@ -1,5 +1,6 @@
 .modalDiv {
-  position: sticky;
+  position: fixed;
+  width: 100%;
   top: 10%;
   z-index: 200;
 }

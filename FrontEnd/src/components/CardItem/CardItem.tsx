@@ -12,6 +12,7 @@ type CardItemProps = {
   style?: any
   children?: ReactNode
   edit?: boolean
+  button?: ReactNode
 }
 
 export const formaterCurrency = Intl.NumberFormat("fr-FR", {
@@ -19,13 +20,15 @@ export const formaterCurrency = Intl.NumberFormat("fr-FR", {
 })
 
 const CardItem = forwardRef<HTMLLIElement, CardItemProps>(
-  ({ product, className, style, children, edit }: CardItemProps, ref) => {
+  (
+    { product, className, style, children, edit, button }: CardItemProps,
+    ref,
+  ) => {
     const navigate = useNavigate()
     const { setActiveImage } = useImages()
     const isOpenFilters = useSelector(
       (store: storeType) => store.filters.visibility,
     )
-
     return (
       <li
         className={`${styles.item} ${className} ${
@@ -55,6 +58,7 @@ const CardItem = forwardRef<HTMLLIElement, CardItemProps>(
             </p>
           </div>
         </div>
+        {button}
       </li>
     )
   },
