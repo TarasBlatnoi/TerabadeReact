@@ -1,10 +1,11 @@
 .container {
   height: 2.4rem;
   cursor: pointer;
+  margin-left: 0.25rem;
 }
 
 .container img {
-  height: 87%;
+  height: 94%;
   object-fit: cover;
 }
 

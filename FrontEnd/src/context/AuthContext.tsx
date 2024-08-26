@@ -6,6 +6,7 @@ export const AuthContext = createContext({
   setIsLoggedIn: (value: boolean) => {
     console.log(value)
   },
+  isLoading: false,
 })
 
 interface AuthProviderProps {
@@ -14,9 +15,11 @@ interface AuthProviderProps {
 
 const AuthContextProvider = ({ children }: AuthProviderProps) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false)
+  const [isLoading, setIsLoading] = useState(true)
   useEffect(() => {
     async function sendReqCheckAuth() {
       try {
+        setIsLoading(true)
         const res = await AuthAPI.checkAuth()
         if (res.authenticated) {
           setIsLoggedIn(true)
@@ -26,13 +29,15 @@ const AuthContextProvider = ({ children }: AuthProviderProps) => {
       } catch (err) {
         setIsLoggedIn(false)
         throw err
+      } finally {
+        setIsLoading(false)
       }
     }
 
     sendReqCheckAuth()
   }, [])
   return (
-    <AuthContext.Provider value={{ isLoggedIn, setIsLoggedIn }}>
+    <AuthContext.Provider value={{ isLoggedIn, setIsLoggedIn, isLoading }}>
       {children}
     </AuthContext.Provider>
   )
