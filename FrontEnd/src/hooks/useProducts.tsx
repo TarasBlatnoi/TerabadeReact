@@ -78,7 +78,6 @@ export function useProducts() {
     hasMore,
     setHasMore,
     setPageNumber,
-    searchParams,
     pageNumber,
   }
 }
