@@ -8,9 +8,7 @@ interface ModalProps {
   children: ReactNode
   className: string
   closeModal: () => void
-  dialogFirst?: boolean
   addTransition?: string
-  openImmidiately?: boolean
 }
 
 const Modal = ({
@@ -19,16 +17,10 @@ const Modal = ({
   addTransition,
   className = "",
   closeModal,
-  dialogFirst,
-  openImmidiately,
 }: ModalProps) => {
-  const [closedByUser, setCloseByUser] = useState(false)
   const [internalOpen, setInternalOpen] = useState(false)
   const ref = useOutsideClick(() => {
-    if (dialogFirst) {
-      setInternalOpen(false)
-    }
-    setCloseByUser(true)
+    setInternalOpen(false)
     closeModal()
   }) as RefObject<HTMLDialogElement>
   const wrapperRef = useRef<HTMLDivElement>(null)
@@ -36,37 +28,26 @@ const Modal = ({
   useEffect(() => {
     if (open) {
       setInternalOpen(true)
-      const timeout = setTimeout(() => {
-        wrapperRef?.current?.classList.add(styles.opening)
-      })
-      return () => clearTimeout(timeout)
     }
-  }, [open, setInternalOpen, addTransition, ref])
+  }, [open])
 
   if (!modalRoot) {
     return null
   }
-  console.log(
-    `${className} ${addTransition && internalOpen ? addTransition : ""}`,
-  )
+
+  if (!open) {
+    return null
+  }
+
   return createPortal(
     <div
-      className={`${styles.dialogWrapper} ${!open ? `${styles.closing}` : styles.visible} ${closedByUser ? styles.visible : ""}`}
+      className={`${styles.dialogWrapper} ${open && styles.visible} ${internalOpen && styles.visible} ${internalOpen && styles.opening}`}
       ref={wrapperRef}
-      onTransitionEnd={() => {
-        if (!open) {
-          const dialogs = document.querySelectorAll(`.${styles.dialogWrapper}`)
-          setInternalOpen(false)
-          dialogs.forEach((dialog) => {
-            dialog.classList.remove(styles.visible)
-          })
-        }
-      }}
     >
       <dialog
         ref={ref}
         className={`${className} ${addTransition && internalOpen ? addTransition : ""}`}
-        open={openImmidiately ? open : internalOpen}
+        open={open}
         style={{ zIndex: "300" }}
       >
         {children}

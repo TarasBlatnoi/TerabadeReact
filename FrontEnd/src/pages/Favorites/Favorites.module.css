@@ -117,10 +117,12 @@
   border-radius: 2rem;
   background-color: #fbfaff;
   transform: translate3d(-50%, 60%, 0);
-  transition: transform 0.15s ease-in-out;
+  opacity: 0;
+  transition: all 0.15s ease-in-out;
 }
 
 .transformCenter {
+  opacity: 1;
   transform: translate3d(-50%, 52%, 0);
 }
 

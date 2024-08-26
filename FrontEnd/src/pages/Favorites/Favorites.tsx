@@ -91,8 +91,8 @@ const Favorites = () => {
           open={openModal}
           className={`${styles.modal}`}
           addTransition={styles.transformCenter}
-          openImmidiately
           closeModal={() => {
+            setChoseSize(0)
             setOpenModal(false)
           }}
         >
