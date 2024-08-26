@@ -27,6 +27,7 @@ import LoginLayout from "./pages/LoginLayout/LoginLayout"
 import Register, { action as RegisterAction } from "./pages/Register/Register"
 import Checkout from "./pages/Checkout/Checkout"
 import Cart from "./pages/Cart/Cart"
+import NotFound from "./pages/NotFound/NotFound"
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -62,6 +63,7 @@ const router = createBrowserRouter(
         />
         <Route path="register" element={<Register />} action={RegisterAction} />
       </Route>
+      <Route path="*" element={<NotFound />} />
     </Route>,
   ),
 )
