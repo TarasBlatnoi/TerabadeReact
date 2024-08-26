@@ -158,6 +158,7 @@ interface CartProviderProps {
 
 export default function CartProvider({ children }: CartProviderProps) {
   const [state, dispatch] = useReducer(cartReducer, initialState)
+  const [hasMounted, setHasMounted] = useState(false)
   const [isOpened, setIsOpened] = useState(false)
 
   const subTotalCalc = useCallback(
@@ -173,10 +174,14 @@ export default function CartProvider({ children }: CartProviderProps) {
   const dispatchStore = useDispatch()
 
   useEffect(() => {
-    localStorage.setItem("cart", JSON.stringify(state.items))
-    const id = setTimeout(() => setIsOpened(false), 3000)
+    if (hasMounted) {
+      localStorage.setItem("cart", JSON.stringify(state.items))
+      const id = setTimeout(() => setIsOpened(false), 3000)
 
-    return () => clearTimeout(id)
+      return () => clearTimeout(id)
+    } else {
+      setHasMounted(true)
+    }
   }, [state.items])
 
   useEffect(() => {

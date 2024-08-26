@@ -3,9 +3,27 @@
   height: 115vh;
   position: absolute;
   top: -20vh;
-  transition: all 0.4s ease-in-out;
+  transition: all 0.3s ease-in-out;
   background: rgba(255, 255, 255, 0.5);
   backdrop-filter: blur(7px);
+  opacity: 0;
+  display: none;
+}
+
+.opening {
+  opacity: 1;
+}
+
+.closing {
+  opacity: 0;
+}
+
+.visible {
+  display: block;
+}
+
+.notVisible {
+  display: none;
 }
 
 /* .opened {

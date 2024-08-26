@@ -4,6 +4,7 @@
 }
 
 .sizesTextConteiner {
+  width: 100%;
   display: flex;
   justify-content: space-between;
   font-size: 1.6rem;
@@ -20,25 +21,6 @@
   align-self: flex-start;
 }
 
-.sizeRect {
-  width: 5rem;
-  height: 3rem;
-  cursor: pointer;
-  font-family: sans-serif;
-  font-size: 1.6rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 200;
-  border-radius: 0.3rem;
-  border: 1px solid #fbfaff;
-}
-
-.sizeRectFilled {
-  background-color: #f9c31f;
-  color: black;
-}
-
 .warning {
   border-radius: 0.5rem;
   border: 0.2rem solid rgb(255, 30, 0);
@@ -46,9 +28,4 @@
 
 .warningText {
   font-size: 1.4rem;
-}
-
-.sizeNotAvailable {
-  filter: brightness(0.5);
-  cursor: default;
 }

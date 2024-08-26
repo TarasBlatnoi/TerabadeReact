@@ -5,12 +5,22 @@ import CardItem from "../../components/CardItem/CardItem"
 import styles from "./Favorites.module.css"
 import Button from "../../components/UI/Button/Button"
 import { useNavigate } from "react-router-dom"
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
+import Modal from "../../components/UI/Modal/Modal"
+import { formaterCurrency } from "../../components/CardItem/CardItem"
+import Sizes from "../../components/Sizes/Sizes"
+import { CartContext } from "../../context/CartContext"
 
 const Favorites = () => {
   const queryClient = useQueryClient()
   const navigate = useNavigate()
   const [edit, setEdit] = useState(false)
+  const [openModal, setOpenModal] = useState(false)
+  const [chosedSize, setChoseSize] = useState(0)
+  const [addToCartClicked, setAddToCartClicked] = useState(false)
+  const [chosenProduct, setChosenProduct] = useState<ProductType>(
+    null as unknown as ProductType,
+  )
   const { data } = useQuery({
     queryFn: ProductAPI.getFavoriteProducts,
     queryKey: ["favorites"],
@@ -19,7 +29,7 @@ const Favorites = () => {
   }) as { data: { result: ProductType[] } }
 
   const favProducts = data?.result
-
+  const { addCartItem, openCart } = useContext(CartContext)
   const [optimisticFav, setOptimisticFav] = useState(favProducts)
 
   useEffect(() => {
@@ -48,7 +58,25 @@ const Favorites = () => {
       <ul className={styles.cardList}>
         {optimisticFav.map((product: ProductType) => {
           return (
-            <CardItem key={product.ProductID} product={product} edit={edit}>
+            <CardItem
+              key={product.ProductID}
+              product={product}
+              edit={edit}
+              button={
+                <Button
+                  className={styles.pickSizeButton}
+                  variant="secondary"
+                  onClick={(event) => {
+                    event.stopPropagation()
+                    setChosenProduct(product)
+                    setOpenModal(true)
+                  }}
+                  disabled={false}
+                >
+                  Обрати розмір
+                </Button>
+              }
+            >
               <div
                 onClick={(ev) => {
                   handleDeleteFavorite(product.ProductID)
@@ -59,6 +87,76 @@ const Favorites = () => {
             </CardItem>
           )
         })}
+        <Modal
+          open={openModal}
+          className={`${styles.modal}`}
+          addTransition={styles.transformCenter}
+          openImmidiately
+          closeModal={() => {
+            setOpenModal(false)
+          }}
+        >
+          <div className={styles.choseSizeWrapper}>
+            {chosenProduct && (
+              <>
+                <img
+                  src={chosenProduct.ImageURL}
+                  alt="chosenProduct?.name"
+                  className={styles.choseSizeImg}
+                />
+                <div className={styles.textWrapper}>
+                  <h2 className={styles.sexText}>{chosenProduct.sex}</h2>
+                  <h1 className={styles.name}>{chosenProduct.name}</h1>
+                  <p className={styles.price}>
+                    UAH
+                    {` ${formaterCurrency.format(chosenProduct.price)}`}
+                  </p>
+                  <div className={styles.selectSize}>
+                    <Sizes
+                      begin={6}
+                      end={14}
+                      step={0.5}
+                      gridLayout={{
+                        gridTemplateColumns: "1fr 1fr 1fr 1fr 1fr 1fr",
+                      }}
+                      sizeRect={styles.sizeRect}
+                      sizeRectFilled={styles.sizeRectFilled}
+                      sizeNotAvailable={styles.sizeNotAvailable}
+                      chosedSize={chosedSize}
+                      setChoseSize={setChoseSize}
+                      addToCartClicked={addToCartClicked}
+                      sizes={chosenProduct.Sizes.map((size) => ({
+                        SizeLabel: size,
+                        InStock: 1,
+                      }))}
+                    />
+                  </div>
+                  <Button
+                    className={styles.addToCart}
+                    variant="secondary"
+                    onClick={() => {
+                      setAddToCartClicked(true)
+                      if (!chosedSize) return
+                      addCartItem({
+                        id: `${chosenProduct.ProductID}`,
+                        name: chosenProduct.name,
+                        image: chosenProduct.ImageURL,
+                        price: chosenProduct.price,
+                        sex: chosenProduct.sex,
+                        size: chosedSize,
+                        type: chosenProduct.type,
+                      })
+                      setOpenModal(false)
+                      openCart()
+                    }}
+                  >
+                    Додати в кошик
+                  </Button>
+                </div>
+              </>
+            )}
+          </div>
+        </Modal>
       </ul>
     )
   }
