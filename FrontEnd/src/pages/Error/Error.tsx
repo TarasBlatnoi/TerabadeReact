@@ -1,5 +1,4 @@
 import { useRouteError, isRouteErrorResponse } from "react-router-dom"
-import Header from "../../components/Header"
 
 function Error() {
   const error = useRouteError()
@@ -11,12 +10,9 @@ function Error() {
   }
 
   return (
-    <>
-      <Header />
-      <div>
-        <h1>{message}</h1>
-      </div>
-    </>
+    <div>
+      <h1>{message}</h1>
+    </div>
   )
 }
 

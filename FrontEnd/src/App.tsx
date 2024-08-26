@@ -28,6 +28,8 @@ import Register, { action as RegisterAction } from "./pages/Register/Register"
 import Checkout from "./pages/Checkout/Checkout"
 import Cart from "./pages/Cart/Cart"
 import NotFound from "./pages/NotFound/NotFound"
+import { ErrorBoundary } from "react-error-boundary"
+import ErrorFallback from "./components/ErrorFallback/ErrorFallback"
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -35,7 +37,13 @@ const router = createBrowserRouter(
       <Route element={<Layout />} errorElement={<Error />}>
         <Route index element={<Home />} />
 
-        <Route element={<ProductsLayout />}>
+        <Route
+          element={
+            <ErrorBoundary FallbackComponent={ErrorFallback}>
+              <ProductsLayout />
+            </ErrorBoundary>
+          }
+        >
           <Route path="products" element={<Products />} />
         </Route>
         <Route path="cart" element={<Cart />} />

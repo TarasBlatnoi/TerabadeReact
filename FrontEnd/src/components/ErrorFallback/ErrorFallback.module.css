@@ -1,0 +1,23 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  padding: 2rem;
+}
+
+.errorContainer {
+  display: flex;
+  flex-direction: column;
+  row-gap: 4rem;
+  justify-content: center;
+  align-items: center;
+}
+
+.button {
+  font-size: 2rem;
+  padding: 1rem 2rem;
+  width: fit-content;
+  border-radius: 1rem;
+}
+.button:hover {
+  filter: brightness(1.05);
+}
