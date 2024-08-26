@@ -41,18 +41,21 @@ const Home = () => {
             className={styles.rectangleBgCover}
             style={{ visibility: isLoading ? "hidden" : "visible" }}
           ></div>
-          <div className={styles.rectangle}>
+          <div
+            className={styles.rectangle}
+            style={{ visibility: isLoading ? "hidden" : "visible" }}
+          >
             <h2 className={styles.bestHeading}>Найкращі</h2>
           </div>
         </div>
 
-        <Carousel />
+        <Carousel isLoading={isLoading} />
         <h2 className={styles.sneakersText}>
           Кросівки - це не просто взуття, це стиль життя, що дозволяє крокувати
           вперед з комфортом та впевненістю
         </h2>
-        <ThreePoints />
-        <Partners />
+        <ThreePoints isLoading={isLoading} />
+        <Partners isLoading={isLoading} />
       </div>
     </>
   )

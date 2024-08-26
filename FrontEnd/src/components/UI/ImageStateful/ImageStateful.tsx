@@ -27,6 +27,12 @@ const ImageStateful = ({
     }
     img.onerror = () => setState("error")
     img.src = src
+    return () => {
+      setState("loading")
+      setIsLoading?.(true)
+      img.onload = null
+      img.onerror = null
+    }
   }, [])
 
   return (
