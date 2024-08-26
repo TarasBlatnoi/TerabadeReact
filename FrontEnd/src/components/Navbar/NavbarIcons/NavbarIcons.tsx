@@ -10,7 +10,7 @@ import LogoutButton from "./LogoutButton/LogoutButton"
 
 const NavbarIcons = () => {
   const { openCart, cartItems } = useContext(CartContext)
-  const { isLoggedIn } = useContext(AuthContext)
+  const { isLoggedIn, isLoading } = useContext(AuthContext)
 
   return (
     <div className={styles.header__icons}>
@@ -23,14 +23,18 @@ const NavbarIcons = () => {
         </span>
         <div className={styles.cartItems}>{cartItems.length}</div>
       </div>
-      {!isLoggedIn ? (
+      {isLoading ? (
+        <div className={`${styles.userIcon} ${styles.loadingPlaceholder}`}>
+          <img className={styles.icon} src={userIcon} alt="user" />
+        </div>
+      ) : isLoggedIn ? (
+        <LogoutButton />
+      ) : (
         <div className={styles.userIcon}>
           <Link to="login">
             <img className={styles.icon} src={userIcon} alt="user" />
           </Link>
         </div>
-      ) : (
-        <LogoutButton />
       )}
     </div>
   )
