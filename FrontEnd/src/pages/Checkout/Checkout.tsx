@@ -26,10 +26,6 @@ const Checkout = () => {
     mutate({ items: cartItems })
   }, [])
 
-  const options = {
-    clientSecret: clientSession?.clientSecret,
-  }
-
   return (
     <div className={styles.container}>
       {!isLoading ? (
