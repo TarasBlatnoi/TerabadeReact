@@ -8,8 +8,9 @@ class ProductAPI {
   }
 
   async getProducts(parentRoute: string) {
-    const { data } = await client.get(`/products/${parentRoute}`)
-    return data
+    const res = await client.get(`/products/${parentRoute}`)
+    if (res.status !== 200) throw new Error("some error has occured")
+    return res.data
   }
   async getMenProducts() {
     const { data } = await client.get(`/products/men`)
