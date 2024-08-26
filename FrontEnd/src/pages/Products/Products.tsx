@@ -5,20 +5,23 @@ import { useQuery } from "react-query"
 import ProductAPI from "../../api/Product/ProductAPI"
 import { useSelector } from "react-redux"
 import { storeType } from "../../store/store"
-import { useLocation, useSearchParams } from "react-router-dom"
-import { useCallback, useEffect, useRef, useState } from "react"
+import { useSearchParams } from "react-router-dom"
+import { useCallback, useEffect, useMemo, useRef, useState } from "react"
 
 // Define the type for the state
 interface ScrollingData {
   response: ProductType[]
 }
+
 import { sortingOptions, useSort } from "../../context/SortContext"
 
 function Products() {
   const { visibility: isOpenFilters, states } = useSelector(
     (store: storeType) => store.filters,
   )
-  const { pathname } = useLocation()
+
+  const [searchParams, setSearchParams] = useSearchParams()
+
   const [hasMore, setHasMore] = useState<boolean>(false)
   const [pageNumber, setPageNumber] = useState<number>(1)
   const [scrollingData, setScrollingData] = useState<ScrollingData>({
@@ -27,39 +30,55 @@ function Products() {
   const observer = useRef<IntersectionObserver | null>(null)
 
   // Generate URL based on filters and page number
-  const { productsSortMethod } = useSort()
-  const gender = pathname.slice(1)
-  const genders = []
-  for (const genderName in states.gender) {
-    if (states.gender[genderName as "men" | "women" | "children"]) {
-      genders.push(genderName)
-    }
-  }
 
-  let url = gender
-  const pagingQueries = `limit=9&page=${pageNumber}`
-  if (gender === "products") {
-    url = ""
-    if (genders.length) {
-      url += `?${genders.map((gender) => `gender=${gender}`).join("&")}`
-    }
+  const { productsSortMethod } = useSort()
+  const gendersQuery = searchParams.get("gender")?.split(",")
+  console.log(gendersQuery, gendersQuery?.length)
+  const gendersQueryStr = gendersQuery?.join(" ")
+
+  const genderKeys = useMemo(() => {
+    return gendersQuery?.length ? gendersQuery : ["products"]
+  }, [gendersQueryStr])
+
+  useEffect(() => {
+    setPageNumber(1)
+    setHasMore(false)
+    setScrollingData({ response: [] })
+  }, [genderKeys])
+
+  let url = ""
+  if (!gendersQuery) url = ""
+  else if (gendersQuery) {
+    url += "?"
+    if (gendersQuery.length === 1) url += "gender=" + gendersQuery[0] + "&"
+    else
+      url += gendersQuery.reduce((acc, val) => acc + "gender=" + val + "&", "")
   }
-  url += url.includes("?") ? `&${pagingQueries}` : `?${pagingQueries}`
+  const pagingQueries = `limit=9&page=${pageNumber}`
+
+  url += url?.includes("?") ? pagingQueries : "?" + pagingQueries
 
   const { data, isLoading } = useQuery({
     queryFn: () => ProductAPI.getProducts(url),
-    queryKey: [gender, pageNumber],
+    queryKey: [...genderKeys, pageNumber],
     staleTime: Infinity,
   })
 
   useEffect(() => {
     if (data) {
       setScrollingData((prevData) => {
-        console.log({ prevData })
-        console.log({ data })
         return {
           ...data,
-          response: [...new Set([...prevData.response, ...data.response])],
+          response: [
+            ...new Set([
+              ...prevData.response.filter((product) =>
+                genderKeys[0] === "products"
+                  ? true
+                  : genderKeys.includes(product.sex),
+              ),
+              ...data.response,
+            ]),
+          ],
         }
       })
       if (data.next) {
@@ -69,6 +88,8 @@ function Products() {
       }
     }
   }, [data])
+
+  console.log(genderKeys)
 
   const lastProductElementRef = useCallback(
     (node: HTMLLIElement | null) => {
@@ -92,8 +113,21 @@ function Products() {
 
   const filteredData = scrollingData?.response
     .filter((product) => {
-      if (states.price.length) {
-        const inRange = states.price
+      const [min, max] = ["min", "max"].map((queryParam) => {
+        return (
+          searchParams
+            .get(queryParam)
+            ?.split(",")
+            .map((value) => +value)
+            .sort((a, b) => a - b) || []
+        )
+      })
+
+      if (min.length && max.length) {
+        const inRange = Array.from({ length: min.length }, (_, index) => ({
+          min: min[index],
+          max: max[index],
+        }))
           .map(({ min, max }) => product.price >= min && product.price <= max)
           .includes(true)
         if (inRange) return true
@@ -109,13 +143,15 @@ function Products() {
       return enabledGenderFilters.includes(product.sex)
     })
     .filter((product) => {
-      if (!states.style.length) return true
-      return states.style.includes(product.type)
+      const styles = searchParams.get("style")?.split(",") || []
+      if (!styles.length) return true
+      return styles.includes(product.type)
     })
     .filter((product) => {
-      if (!states.size.length) return true
+      const sizeParam = searchParams.get("size")?.split(",") || []
+      if (!sizeParam.length) return true
       const inRange = !!product.Sizes.filter((size: string) => {
-        if (states.size.includes(+size)) return true
+        if (sizeParam.includes(size)) return true
         else return false
       }).length
 

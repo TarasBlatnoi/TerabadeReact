@@ -1,3 +1,6 @@
 .liNavbarSmall {
   font-size: 1.8rem;
 }
+.itemLink {
+  cursor: pointer;
+}

@@ -24,9 +24,9 @@ const NavbarItemList = ({
   ) as RefObject<HTMLUListElement>
   const windowSize = useWindowSize()
   const links = [
-    { name: "Чоловіки", href: "/men" },
-    { name: "Жінки", href: "/women" },
-    { name: "Діти", href: "/children" },
+    { name: "Чоловіки", href: "/products?gender=men" },
+    { name: "Жінки", href: "/products?gender=women" },
+    { name: "Діти", href: "/products?gender=children" },
     { name: "Розпродаж", href: "/sale" },
     { name: "Про нас", href: "/about" },
   ]

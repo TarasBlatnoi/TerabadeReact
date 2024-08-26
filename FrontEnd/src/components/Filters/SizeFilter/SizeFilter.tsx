@@ -2,8 +2,7 @@ import { useMemo } from "react"
 import styles from "./SizeFilter.module.css"
 import stylesFilter from "../GenderFilter/GenderFilter.module.css"
 import CustomCheckBox from "../../CustomCheckBox/CustomCheckBox"
-import { useDispatch } from "react-redux"
-import { updateSize } from "../../../store/Features/FiltersSlice/FiltersSlice"
+import { useSearchParams } from "react-router-dom"
 
 function SizeFilter() {
   const sizes = useMemo(() => {
@@ -19,10 +18,27 @@ function SizeFilter() {
     return results
   }, [])
 
-  const dispatch = useDispatch()
+  const [searchParams, setSearchParams] = useSearchParams()
 
-  function handler(size: number, checked: boolean) {
-    dispatch(updateSize({ size, action: checked ? "add" : "delete" }))
+  function handler(size: string, checked: boolean) {
+    setSearchParams((searchParams) => {
+      const sizeQuery = searchParams.get("size")?.split(",")
+      if (!sizeQuery) searchParams.set("size", size)
+      else if (sizeQuery && checked) {
+        searchParams.set("size", [...sizeQuery, size].join(","))
+      } else if (sizeQuery && !checked) {
+        const queryParam = sizeQuery
+          .filter((sizeValue) => sizeValue !== size)
+          .join(",")
+        if (!queryParam) searchParams.delete("size")
+        else searchParams.set("size", queryParam)
+      }
+      return searchParams
+    })
+  }
+
+  function isIncluded(size: string) {
+    return searchParams.get("size")?.split(",").includes(size)
   }
 
   return (
@@ -34,7 +50,8 @@ function SizeFilter() {
             <li className={styles.item} key={size}>
               <CustomCheckBox
                 style={{ width: "100%", height: "100%" }}
-                callBack={(checked) => handler(size, checked)}
+                callBack={(checked) => handler(String(size), checked)}
+                checkedExt={isIncluded(String(size))}
               >
                 <div className={styles.sizeContainer}>
                   <span>{size}</span>
