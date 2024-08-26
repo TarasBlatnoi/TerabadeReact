@@ -176,7 +176,7 @@ export default function CartProvider({ children }: CartProviderProps) {
   useEffect(() => {
     if (hasMounted) {
       localStorage.setItem("cart", JSON.stringify(state.items))
-      const id = setTimeout(() => setIsOpened(false), 3000)
+      const id = setTimeout(() => setIsOpened(false), 10000)
 
       return () => clearTimeout(id)
     } else {
