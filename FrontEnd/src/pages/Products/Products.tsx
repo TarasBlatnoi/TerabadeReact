@@ -1,96 +1,25 @@
 import CardItem from "../../components/CardItem/CardItem"
 import { ProductType } from "../../types"
 import styles from "./Products.module.css"
-import { useQuery } from "react-query"
-import ProductAPI from "../../api/Product/ProductAPI"
 import { useSelector } from "react-redux"
 import { storeType } from "../../store/store"
-import { useSearchParams } from "react-router-dom"
-import { useCallback, useEffect, useMemo, useRef, useState } from "react"
+import { useCallback, useRef } from "react"
 
 // Define the type for the state
-interface ScrollingData {
-  response: ProductType[]
-}
 
 import { sortingOptions, useSort } from "../../context/SortContext"
-import { useFetchedData } from "../../hooks/useFetchedData"
+import { useProducts } from "../../hooks/useProducts"
 
 function Products() {
   const { visibility: isOpenFilters, states } = useSelector(
     (store: storeType) => store.filters,
   )
 
-  const [searchParams, setSearchParams] = useSearchParams()
-
-  const [hasMore, setHasMore] = useState<boolean>(false)
-  const [pageNumber, setPageNumber] = useState<number>(1)
-  const [scrollingData, setScrollingData] = useState<ScrollingData>({
-    response: [],
-  })
   const observer = useRef<IntersectionObserver | null>(null)
-
-  // Generate URL based on filters and page number
+  const { isLoading, scrollingData, hasMore, searchParams, setPageNumber } =
+    useProducts()
 
   const { productsSortMethod } = useSort()
-  const gendersQuery = searchParams.get("gender")?.split(",")
-  console.log(gendersQuery, gendersQuery?.length)
-  const gendersQueryStr = gendersQuery?.join(" ")
-
-  const genderKeys = useMemo(() => {
-    return gendersQuery?.length ? gendersQuery : ["products"]
-  }, [gendersQueryStr])
-
-  useEffect(() => {
-    setPageNumber(1)
-    setHasMore(false)
-    setScrollingData({ response: [] })
-  }, [genderKeys])
-
-  let url = ""
-  if (!gendersQuery) url = ""
-  else if (gendersQuery) {
-    url += "?"
-    if (gendersQuery.length === 1) url += "gender=" + gendersQuery[0] + "&"
-    else
-      url += gendersQuery.reduce((acc, val) => acc + "gender=" + val + "&", "")
-  }
-  const pagingQueries = `limit=9&page=${pageNumber}`
-
-  url += url?.includes("?") ? pagingQueries : "?" + pagingQueries
-
-  const { data, isLoading } = useFetchedData(
-    () => ProductAPI.getProducts(url),
-    ...genderKeys,
-    pageNumber,
-  )
-
-  useEffect(() => {
-    if (data) {
-      setScrollingData((prevData) => {
-        return {
-          ...data,
-          response: [
-            ...new Set([
-              ...prevData.response.filter((product) =>
-                genderKeys[0] === "products"
-                  ? true
-                  : genderKeys.includes(product.sex),
-              ),
-              ...data.response,
-            ]),
-          ],
-        }
-      })
-      if (data.next) {
-        setHasMore(true)
-      } else {
-        setHasMore(false)
-      }
-    }
-  }, [data])
-
-  console.log(genderKeys)
 
   const lastProductElementRef = useCallback(
     (node: HTMLLIElement | null) => {
@@ -109,7 +38,7 @@ function Products() {
 
       if (node) observer.current.observe(node)
     },
-    [hasMore, isLoading],
+    [hasMore, isLoading, setPageNumber],
   )
 
   const filteredData = scrollingData?.response
