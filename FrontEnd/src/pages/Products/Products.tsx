@@ -14,6 +14,7 @@ interface ScrollingData {
 }
 
 import { sortingOptions, useSort } from "../../context/SortContext"
+import { useFetchedData } from "../../hooks/useFetchedData"
 
 function Products() {
   const { visibility: isOpenFilters, states } = useSelector(
@@ -58,11 +59,11 @@ function Products() {
 
   url += url?.includes("?") ? pagingQueries : "?" + pagingQueries
 
-  const { data, isLoading } = useQuery({
-    queryFn: () => ProductAPI.getProducts(url),
-    queryKey: [...genderKeys, pageNumber],
-    staleTime: Infinity,
-  })
+  const { data, isLoading } = useFetchedData(
+    () => ProductAPI.getProducts(url),
+    ...genderKeys,
+    pageNumber,
+  )
 
   useEffect(() => {
     if (data) {
