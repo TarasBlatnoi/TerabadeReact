@@ -31,6 +31,7 @@ import NotFound from "./pages/NotFound/NotFound"
 import { ErrorBoundary } from "react-error-boundary"
 import ErrorFallback from "./components/ErrorFallback/ErrorFallback"
 import { ProductsProvider } from "./context/ProductsContext"
+import Spinner from "./components/LoadingSpinner/Spinner"
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -62,7 +63,7 @@ const router = createBrowserRouter(
         <Route
           path="login"
           element={
-            <Suspense fallback={<p>Loading login page...</p>}>
+            <Suspense fallback={<Spinner />} key={"login"}>
               <Login />
             </Suspense>
           }

@@ -10,6 +10,7 @@ import Modal from "../../components/UI/Modal/Modal"
 import { formaterCurrency } from "../../components/CardItem/CardItem"
 import Sizes from "../../components/Sizes/Sizes"
 import { useCart } from "../../context/CartContext"
+import Spinner from "../../components/LoadingSpinner/Spinner"
 
 const Favorites = () => {
   const queryClient = useQueryClient()
@@ -21,12 +22,11 @@ const Favorites = () => {
   const [chosenProduct, setChosenProduct] = useState<ProductType>(
     null as unknown as ProductType,
   )
-  const { data } = useQuery({
+  const { data, isLoading } = useQuery({
     queryFn: ProductAPI.getFavoriteProducts,
     queryKey: ["favorites"],
-    suspense: true,
     staleTime: Infinity,
-  }) as { data: { result: ProductType[] } }
+  }) as { data: { result: ProductType[] }; isLoading: boolean }
 
   const favProducts = data?.result
   const { addCartItem, openCart } = useCart()
@@ -34,7 +34,7 @@ const Favorites = () => {
 
   useEffect(() => {
     setOptimisticFav(favProducts)
-  }, [favProducts.length])
+  }, [favProducts?.length])
 
   const { mutate } = useMutation({
     mutationFn: ProductAPI.deleteFavoriteProduct,
@@ -163,7 +163,8 @@ const Favorites = () => {
 
   return (
     <>
-      {optimisticFav?.length ? (
+      {isLoading && <Spinner />}
+      {optimisticFav?.length && (
         <div className={styles.favContainer}>
           <div className={styles.editContainer}>
             <h1>{!edit ? "Ваші улюблені" : "Редагувати улюблені"}</h1>
@@ -176,7 +177,8 @@ const Favorites = () => {
           </div>
           {content}
         </div>
-      ) : (
+      )}
+      {!isLoading && !optimisticFav?.length && (
         <div className={styles.container}>
           <h1 className={styles.favProductsFallback}>
             Ще нічого не додано до улюблених. Переглянь наші новинки!

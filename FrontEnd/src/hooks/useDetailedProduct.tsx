@@ -11,7 +11,6 @@ function useDetailedProduct() {
     queryFn: () => ProductAPI.getById(params.id!),
     queryKey: [params.id!],
     staleTime: Infinity,
-    suspense: true,
   }) as { data: Array<DetailProductType> }
   return detailProduct
 }

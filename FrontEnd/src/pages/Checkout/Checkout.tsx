@@ -44,7 +44,6 @@ const Checkout = () => {
             clientSecret: clientSession?.clientSecret,
           }}
         >
-          {" "}
           <div className={styles.itemsContainer}>
             <CheckoutForm />
             <CheckoutItemList />

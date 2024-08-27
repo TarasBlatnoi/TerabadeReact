@@ -8,6 +8,7 @@ import { useIntersection } from "../../hooks/useIntersection"
 import { useFilteredData } from "../../hooks/useFilteredData"
 import { useProductsCount } from "../../context/ProductsContext"
 import { useEffect } from "react"
+import Spinner from "../../components/LoadingSpinner/Spinner"
 
 function Products() {
   const isOpenFilters = useSelector(
@@ -30,25 +31,27 @@ function Products() {
   const { filteredData } = useFilteredData(scrollingData.response)
 
   return (
-    <ul
-      className={`${styles.cardList} ${
-        !isOpenFilters ? styles.expandedList : ""
-      }`}
-    >
-      {filteredData.map((product: ProductType, index: number) => {
-        if (filteredData.length - 1 === index) {
-          return (
-            <CardItem
-              key={product.ProductID}
-              ref={lastProductElementRef}
-              product={product}
-            />
-          )
-        }
-        return <CardItem key={product.ProductID} product={product} />
-      })}
-      {isLoading && <div>Loading...</div>}
-    </ul>
+    <>
+      <ul
+        className={`${styles.cardList} ${
+          !isOpenFilters ? styles.expandedList : ""
+        }`}
+      >
+        {filteredData.map((product: ProductType, index: number) => {
+          if (filteredData.length - 1 === index) {
+            return (
+              <CardItem
+                key={product.ProductID}
+                ref={lastProductElementRef}
+                product={product}
+              />
+            )
+          }
+          return <CardItem key={product.ProductID} product={product} />
+        })}
+      </ul>
+      {isLoading && <Spinner />}
+    </>
   )
 }
 

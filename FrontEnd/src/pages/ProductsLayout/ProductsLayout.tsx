@@ -4,10 +4,8 @@ import HideFiltersButton from "../../components/HideFiltersButton/HideFiltersBut
 import { SortProvider } from "../../context/SortContext"
 import SortSelection from "../../components/SortSelection/SortSelection"
 import Filters from "../../components/Filters/Filters"
-import { Suspense } from "react"
 import { useSelector } from "react-redux"
 import { storeType } from "../../store/store"
-import Spinner from "../../components/LoadingSpinner/Spinner"
 import { useProductsCount } from "../../context/ProductsContext"
 
 function ProductsLayout() {
@@ -57,9 +55,7 @@ function ProductsLayout() {
               !isOpenFilters ? styles.sectionProductsExpanded : ""
             }`}
           >
-            <Suspense fallback={<Spinner />}>
-              <Outlet />
-            </Suspense>
+            <Outlet />
           </section>
         </div>
       </div>

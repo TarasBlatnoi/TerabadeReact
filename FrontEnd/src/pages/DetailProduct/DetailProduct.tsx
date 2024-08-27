@@ -33,7 +33,6 @@ function DetailProduct() {
     queryFn: () => ProductAPI.getProducts(detailProduct.sex),
     queryKey: [detailProduct.sex],
     staleTime: Infinity,
-    suspense: true,
   })
 
   const { addCartItem, openCart } = useCart()

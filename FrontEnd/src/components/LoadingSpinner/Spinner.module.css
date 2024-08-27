@@ -1,4 +1,6 @@
 .spinner {
+  margin: 0 auto;
+  margin-top: 10rem;
   height: 5rem;
   aspect-ratio: 1;
   border-radius: 50%;
