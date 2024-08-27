@@ -1,4 +1,4 @@
-import {
+import React, {
   createContext,
   ReactNode,
   useCallback,
@@ -10,21 +10,17 @@ import {
 import { updateAmount } from "../store/Features/CheckoutSlice/CheckoutSlice"
 import { useDispatch } from "react-redux"
 
-export const CartContext = createContext({
-  cartItems: [] as CartItemType[],
-  addCartItem: (item: CartItemType) => {
-    console.log(item)
-  },
-  deleteCartItem: (id: string) => {
-    console.log(id)
-  },
-  resetCartItems: () => {},
-  isOpened: false,
-  openCart: () => {},
-  closeCart: () => {},
-  removeItem: (id: string, size: number) => undefined,
-  setItemQuantity: (id: string, size: number, quantity: number) => undefined,
-})
+export const CartContext = createContext(null) as React.Context<null | {
+  cartItems: CartItemType[]
+  addCartItem: (item: CartItemType) => void
+  deleteCartItem: (id: string) => void
+  resetCartItems: () => void
+  isOpened: boolean
+  openCart: () => void
+  closeCart: () => void
+  removeItem: (id: string, size: number) => void
+  setItemQuantity: (id: string, size: number, quantity: number) => void
+}>
 
 export interface CartItemType {
   id: string
@@ -182,11 +178,11 @@ export default function CartProvider({ children }: CartProviderProps) {
     } else {
       setHasMounted(true)
     }
-  }, [state.items])
+  }, [state.items, hasMounted])
 
   useEffect(() => {
     dispatchStore(updateAmount(subTotal))
-  }, [subTotal])
+  }, [subTotal, dispatchStore])
 
   function addCartItem(item: CartItemType) {
     dispatch({ type: CartActionType.ADD_ITEM, payload: item })
@@ -216,19 +212,23 @@ export default function CartProvider({ children }: CartProviderProps) {
       payload: { id, size, quantity },
     })
   }
-  const contextValue = {
-    cartItems: state.items,
-    addCartItem,
-    deleteCartItem,
-    resetCartItems,
-    isOpened,
-    openCart,
-    closeCart,
-    setItemQuantity,
-    removeItem,
-  }
+
   return (
-    <CartContext.Provider value={contextValue}>{children}</CartContext.Provider>
+    <CartContext.Provider
+      value={{
+        cartItems: state.items,
+        addCartItem,
+        deleteCartItem,
+        resetCartItems,
+        isOpened,
+        openCart,
+        closeCart,
+        setItemQuantity,
+        removeItem,
+      }}
+    >
+      {children}
+    </CartContext.Provider>
   )
 }
 

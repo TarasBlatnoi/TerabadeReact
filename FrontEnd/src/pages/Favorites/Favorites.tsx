@@ -5,11 +5,11 @@ import CardItem from "../../components/CardItem/CardItem"
 import styles from "./Favorites.module.css"
 import Button from "../../components/UI/Button/Button"
 import { useNavigate } from "react-router-dom"
-import { useContext, useEffect, useState } from "react"
+import { useEffect, useState } from "react"
 import Modal from "../../components/UI/Modal/Modal"
 import { formaterCurrency } from "../../components/CardItem/CardItem"
 import Sizes from "../../components/Sizes/Sizes"
-import { CartContext } from "../../context/CartContext"
+import { useCart } from "../../context/CartContext"
 
 const Favorites = () => {
   const queryClient = useQueryClient()
@@ -29,7 +29,7 @@ const Favorites = () => {
   }) as { data: { result: ProductType[] } }
 
   const favProducts = data?.result
-  const { addCartItem, openCart } = useContext(CartContext)
+  const { addCartItem, openCart } = useCart()
   const [optimisticFav, setOptimisticFav] = useState(favProducts)
 
   useEffect(() => {

@@ -1,12 +1,11 @@
-import { useContext } from "react"
 import Modal from "../UI/Modal/Modal"
-import { CartContext } from "../../context/CartContext"
+import { useCart } from "../../context/CartContext"
 import styles from "./Cart.module.css"
 import CartItem from "./CartItem/CartItem"
 import Button from "../UI/Button/Button"
 import { useNavigate } from "react-router-dom"
 const Cart = () => {
-  const { isOpened, cartItems, closeCart } = useContext(CartContext)
+  const { isOpened, cartItems, closeCart } = useCart()
   const navigate = useNavigate()
   function handleToCart() {
     closeCart()

@@ -6,6 +6,7 @@ import { useSearchParams } from "react-router-dom"
 
 interface ScrollingData {
   response: ProductType[]
+  totalResults: number
 }
 
 export function useProducts() {
@@ -13,6 +14,7 @@ export function useProducts() {
   const [pageNumber, setPageNumber] = useState<number>(1)
   const [scrollingData, setScrollingData] = useState<ScrollingData>({
     response: [],
+    totalResults: 0,
   })
   const [searchParams] = useSearchParams()
 
@@ -39,12 +41,15 @@ export function useProducts() {
     () => ProductAPI.getProducts(url),
     ...genderKeys,
     pageNumber,
-  )
+  ) as {
+    data: { response: ProductType[]; totalResults: number; next: boolean }
+    isLoading: boolean
+  }
 
   useEffect(() => {
     setPageNumber(1)
     setHasMore(false)
-    setScrollingData({ response: [] })
+    setScrollingData({ response: [], totalResults: 0 })
   }, [genderKeys])
 
   useEffect(() => {
