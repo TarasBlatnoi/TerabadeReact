@@ -7,11 +7,8 @@ import PreviewImgList from "../../components/PreviewImgList/PreviewImgList"
 import Carousel from "../../components/Carousel/Carousel"
 import ThreePoints from "../../components/ThreePoints/ThreePoints"
 import Partners from "../../components/Partnerns/Partners"
-import ImageStateful from "../../components/UI/ImageStateful/ImageStateful"
-import { useState } from "react"
 
 const Home = () => {
-  const [isLoading, setIsLoading] = useState(true)
   return (
     <>
       <div className={styles.mainDivWrapper}>
@@ -19,43 +16,34 @@ const Home = () => {
           <Offer />
 
           <div className={styles.offerSneakers}>
-            <ImageStateful
+            <img
               src={sneakersPhoto}
               className={styles.sneakers}
               alt="sneakers"
-              height={"71rem"}
             />
           </div>
         </section>
         <PreviewImgList />
 
         <div className={styles.bgImage}>
-          <ImageStateful
+          <img
             src={middleWhiteSpot}
             alt="area-steps"
             className={styles.whiteArea}
-            height="89rem"
-            setIsLoading={setIsLoading}
           />
-          <div
-            className={styles.rectangleBgCover}
-            style={{ visibility: isLoading ? "hidden" : "visible" }}
-          ></div>
-          <div
-            className={styles.rectangle}
-            style={{ visibility: isLoading ? "hidden" : "visible" }}
-          >
+          <div className={styles.rectangleBgCover}></div>
+          <div className={styles.rectangle}>
             <h2 className={styles.bestHeading}>Найкращі</h2>
           </div>
         </div>
 
-        <Carousel isLoading={isLoading} />
+        <Carousel />
         <h2 className={styles.sneakersText}>
           Кросівки - це не просто взуття, це стиль життя, що дозволяє крокувати
           вперед з комфортом та впевненістю
         </h2>
-        <ThreePoints isLoading={isLoading} />
-        <Partners isLoading={isLoading} />
+        <ThreePoints />
+        <Partners />
       </div>
     </>
   )

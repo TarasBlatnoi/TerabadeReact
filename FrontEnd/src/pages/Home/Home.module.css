@@ -34,6 +34,7 @@
 
 .bgImage {
   width: 93%;
+  aspect-ratio: 1795 / 1113;
   position: absolute;
   z-index: -20;
   top: 16%;
@@ -177,8 +178,6 @@
 
   .offerSneakers {
     width: 50%;
-    position: absolute;
-    right: 0;
   }
 }
 

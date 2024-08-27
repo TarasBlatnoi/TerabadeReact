@@ -22,7 +22,7 @@
   color: #fbfaff;
 }
 
-section {
+.container section {
   display: flex;
   justify-content: center;
   align-items: center;

@@ -2,16 +2,9 @@ import AdventureCarousel from "../../assets/images/AdventureCarousel.jpg"
 import styles from "./Caroutsel.module.css"
 import Button from "../../components/UI/Button/Button"
 
-interface CaroutselProps {
-  isLoading: boolean
-}
-
-const Carousel = ({ isLoading }: CaroutselProps) => {
+const Carousel = () => {
   return (
-    <div
-      className={styles.carousel}
-      style={{ visibility: isLoading ? "hidden" : "visible" }}
-    >
+    <div className={styles.carousel}>
       <div className={styles.carouselText}>
         <h2 className={styles.carouselTitle}>
           Nike Air Zoom Pegasus 38 Shield

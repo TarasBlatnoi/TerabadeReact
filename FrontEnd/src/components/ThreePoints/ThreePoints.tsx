@@ -5,16 +5,9 @@ import thirdShoe from "../../assets/images/Mask group (1).jpg"
 import ropeFirst from "../../assets/images/Мотузка№1 1.png"
 import ropeSecond from "../../assets/images/Мотузка№1 2.png"
 
-interface ThreePointsProps {
-  isLoading: boolean
-}
-
-const ThreePoints = ({ isLoading }: ThreePointsProps) => {
+const ThreePoints = () => {
   return (
-    <div
-      className={styles.threePointContainer}
-      style={{ visibility: isLoading ? "hidden" : "visible" }}
-    >
+    <div className={styles.threePointContainer}>
       <div>
         <img
           className={styles.imageShoe}
