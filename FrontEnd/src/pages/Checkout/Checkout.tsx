@@ -38,6 +38,7 @@ const Checkout = () => {
                 colorText: "black",
                 colorTextPlaceholder: "black",
                 colorBackground: "#ededed",
+                fontSizeBase: "0.8rem",
               },
             },
 
