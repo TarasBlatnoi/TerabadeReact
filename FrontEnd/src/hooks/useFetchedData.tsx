@@ -9,9 +9,10 @@ export function useFetchedData(
     queryFn: queryFn,
     staleTime: Infinity,
   })
+  const errorObj = error as Error
 
   if (isError)
-    throw new Error(error?.message || "Some error has occured, try again")
+    throw new Error(errorObj?.message || "Some error has occured, try again")
 
   return { data, isLoading }
 }

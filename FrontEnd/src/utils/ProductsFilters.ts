@@ -1,4 +1,5 @@
-import { ProductType } from "@/types"
+import { ProductType } from "../types/index"
+import { sortingOptions } from "../context/SortContext"
 export class Products {
   data: ProductType[] = []
   searchParams: URLSearchParams = new URLSearchParams()
@@ -55,7 +56,7 @@ export class Products {
     return this
   }
 
-  sortByPrice(productsSortMethod, sortingOptions) {
+  sortByPrice(productsSortMethod: string) {
     this.data.sort((a, b) => {
       switch (productsSortMethod) {
         case sortingOptions.standard:
@@ -64,6 +65,8 @@ export class Products {
           return b.price - a.price
         case sortingOptions.priceDescending:
           return a.price - b.price
+        default:
+          return 0
       }
     })
     return this

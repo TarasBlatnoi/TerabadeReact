@@ -1,7 +1,7 @@
 import ProductAPI from "../../api/Product/ProductAPI"
 import { Link } from "react-router-dom"
-import { CartContext } from "../../context/CartContext"
-import { useContext, useEffect, useState } from "react"
+import { useCart } from "../../context/CartContext"
+import { useEffect, useState } from "react"
 import { CartItemType } from "../../context/CartContext"
 import goBackImg from "../../assets/images/back-svgrepo-com 1.svg"
 import styles from "./DetailProducts.module.css"
@@ -36,7 +36,7 @@ function DetailProduct() {
     suspense: true,
   })
 
-  const { addCartItem, openCart } = useContext(CartContext)
+  const { addCartItem, openCart } = useCart()
   function handleClick(item: CartItemType) {
     addCartItem(item)
   }

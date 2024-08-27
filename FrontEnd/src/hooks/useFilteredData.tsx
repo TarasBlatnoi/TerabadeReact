@@ -1,5 +1,5 @@
 import { useSearchParams } from "react-router-dom"
-import { sortingOptions, useSort } from "../context/SortContext"
+import { useSort } from "../context/SortContext"
 import { ProductType } from "../types"
 import { Products } from "../utils/ProductsFilters"
 
@@ -13,7 +13,7 @@ export function useFilteredData(data: ProductType[]) {
     .filteByPrice()
     .filterBySize()
     .filterByStyle()
-    .sortByPrice(productsSortMethod, sortingOptions).data
+    .sortByPrice(productsSortMethod).data
 
   return { filteredData }
 }

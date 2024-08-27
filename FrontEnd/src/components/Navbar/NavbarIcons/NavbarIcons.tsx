@@ -4,12 +4,12 @@ import heartIcon from "../../../assets/images/heart.svg"
 import baskerIcon from "../../../assets/images/Basket.svg"
 import { Link } from "react-router-dom"
 import { useContext } from "react"
-import { CartContext } from "../../../context/CartContext"
+import { useCart } from "../../../context/CartContext"
 import { AuthContext } from "../../../context/AuthContext"
 import LogoutButton from "./LogoutButton/LogoutButton"
 
 const NavbarIcons = () => {
-  const { openCart, cartItems } = useContext(CartContext)
+  const { openCart, cartItems } = useCart()
   const { isLoggedIn, isLoading } = useContext(AuthContext)
 
   return (
