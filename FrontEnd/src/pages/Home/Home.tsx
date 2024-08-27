@@ -7,8 +7,10 @@ import PreviewImgList from "../../components/PreviewImgList/PreviewImgList"
 import Carousel from "../../components/Carousel/Carousel"
 import ThreePoints from "../../components/ThreePoints/ThreePoints"
 import Partners from "../../components/Partnerns/Partners"
+import { useState } from "react"
 
 const Home = () => {
+  const [isLoading, setIsLoading] = useState(true)
   return (
     <>
       <div className={styles.mainDivWrapper}>
@@ -20,6 +22,9 @@ const Home = () => {
               src={sneakersPhoto}
               className={styles.sneakers}
               alt="sneakers"
+              onLoad={() => {
+                setIsLoading(false)
+              }}
             />
           </div>
         </section>
@@ -31,7 +36,10 @@ const Home = () => {
             alt="area-steps"
             className={styles.whiteArea}
           />
-          <div className={styles.rectangleBgCover}></div>
+          <div
+            className={styles.rectangleBgCover}
+            style={{ visibility: isLoading ? "hidden" : "visible" }}
+          ></div>
           <div className={styles.rectangle}>
             <h2 className={styles.bestHeading}>Найкращі</h2>
           </div>
