@@ -36,7 +36,7 @@ function TypeFilter() {
 
   return (
     <div className={styles.container}>
-      <h1>Ціна</h1>
+      <h1>Тип</h1>
       <ul className={styles.list}>
         <li>
           <CustomCheckBox
