@@ -25,6 +25,7 @@ const whitelist = [
   "http://localhost:8080",
   "http://localhost:5173",
   "https://terabade-dfdc3e3cb126.herokuapp.com",
+  "https://r.stripe.com/b",
 ]
 const corsOptions = {
   origin: function (origin, callback) {

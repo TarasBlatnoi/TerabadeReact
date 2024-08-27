@@ -5,7 +5,11 @@ import thirdShoe from "../../assets/images/Mask group (1).jpg"
 import ropeFirst from "../../assets/images/Мотузка№1 1.png"
 import ropeSecond from "../../assets/images/Мотузка№1 2.png"
 
-const ThreePoints = ({ isLoading }) => {
+interface ThreePointsProps {
+  isLoading: boolean
+}
+
+const ThreePoints = ({ isLoading }: ThreePointsProps) => {
   return (
     <div
       className={styles.threePointContainer}

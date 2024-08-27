@@ -4,7 +4,11 @@ import nike from "../../assets/images/Nike-Logo-PNG 1.png"
 import puma from "../../assets/images/puma-logo-png-7 1.png"
 import reebok from "../../assets/images/Reebok-Logo-Background-PNG-Image 1.png"
 
-const Partners = ({ isLoading }) => {
+interface PartnersProps {
+  isLoading: boolean
+}
+
+const Partners = ({ isLoading }: PartnersProps) => {
   return (
     <>
       {!isLoading && (
