@@ -30,6 +30,7 @@ import Cart from "./pages/Cart/Cart"
 import NotFound from "./pages/NotFound/NotFound"
 import { ErrorBoundary } from "react-error-boundary"
 import ErrorFallback from "./components/ErrorFallback/ErrorFallback"
+import { ProductsProvider } from "./context/ProductsContext"
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -82,9 +83,11 @@ function App() {
       <QueryClientProvider client={queryClient}>
         <Provider store={store}>
           <CartProvider>
-            <AuthContextProvider>
-              <RouterProvider router={router} />
-            </AuthContextProvider>
+            <ProductsProvider>
+              <AuthContextProvider>
+                <RouterProvider router={router} />
+              </AuthContextProvider>
+            </ProductsProvider>
           </CartProvider>
         </Provider>
       </QueryClientProvider>

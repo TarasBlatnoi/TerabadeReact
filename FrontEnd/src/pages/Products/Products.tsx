@@ -6,13 +6,20 @@ import { storeType } from "../../store/store"
 import { useProducts } from "../../hooks/useProducts"
 import { useIntersection } from "../../hooks/useIntersection"
 import { useFilteredData } from "../../hooks/useFilteredData"
+import { useProductsCount } from "../../context/ProductsContext"
+import { useEffect } from "react"
 
 function Products() {
   const isOpenFilters = useSelector(
     (store: storeType) => store.filters.visibility,
   )
+  const { setProductsAmount } = useProductsCount()
 
   const { isLoading, scrollingData, hasMore, setPageNumber } = useProducts()
+
+  useEffect(() => {
+    setProductsAmount(scrollingData?.totalResults || 0)
+  }, [scrollingData?.totalResults])
 
   const { lastProductElementRef } = useIntersection({
     isLoading,

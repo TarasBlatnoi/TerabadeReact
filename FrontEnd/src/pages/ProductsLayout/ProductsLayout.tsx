@@ -8,12 +8,14 @@ import { Suspense } from "react"
 import { useSelector } from "react-redux"
 import { storeType } from "../../store/store"
 import Spinner from "../../components/LoadingSpinner/Spinner"
+import { useProductsCount } from "../../context/ProductsContext"
 
 function ProductsLayout() {
   const location = useLocation()
   const isOpenFilters = useSelector(
     (store: storeType) => store.filters.visibility,
   )
+  const { productsAmount } = useProductsCount()
 
   const pathname = location.pathname.replace("/", "")
   const gender =
@@ -34,7 +36,7 @@ function ProductsLayout() {
           <div className={styles.genderNameContainer}>
             <h2>
               {`${gender} `}
-              <span>(67)</span>
+              <span>({productsAmount})</span>
             </h2>
           </div>
           <div className={styles.hideFiltersContainer}>
