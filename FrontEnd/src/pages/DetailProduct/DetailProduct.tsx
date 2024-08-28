@@ -1,5 +1,5 @@
 import ProductAPI from "../../api/Product/ProductAPI"
-import { Link } from "react-router-dom"
+import { Link, useLocation } from "react-router-dom"
 import { useCart } from "../../context/CartContext"
 import { useEffect, useState } from "react"
 import { CartItemType } from "../../context/CartContext"
@@ -22,7 +22,7 @@ function DetailProduct() {
   const [addToCartClicked, setAddToCartClicked] = useState(false)
   const { setActiveImage } = useImages()
   const detailProduct = useDetailedProduct()
-
+  const prevLocation = useLocation().state.previousLocationPathname
   useEffect(() => {
     setActiveImage(
       detailProduct?.images[0]?.ImageURL || "https://picsum.photos/200",
@@ -33,6 +33,7 @@ function DetailProduct() {
     queryFn: () => ProductAPI.getProducts(detailProduct.sex),
     queryKey: [detailProduct.sex],
     staleTime: Infinity,
+    suspense: true,
   })
 
   const { addCartItem, openCart } = useCart()
@@ -42,7 +43,7 @@ function DetailProduct() {
   return (
     <div className={styles.container}>
       <div className={styles.goBack}>
-        <Link to={`../${detailProduct.sex}`} className={styles.goBackLink}>
+        <Link to={`../../${prevLocation}`} className={styles.goBackLink}>
           <img src={goBackImg} alt="go back" className={styles.goBackImg} />
           <p className={styles.goBackText}>Повернутись</p>
         </Link>

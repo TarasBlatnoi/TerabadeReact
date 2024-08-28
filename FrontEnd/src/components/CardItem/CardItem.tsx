@@ -1,6 +1,6 @@
 import styles from "./CardItem.module.css"
 import { ProductType } from "../../types"
-import { useNavigate } from "react-router-dom"
+import { useLocation, useNavigate, useSearchParams } from "react-router-dom"
 import { useSelector } from "react-redux"
 import { storeType } from "../../store/store"
 import { useImages } from "../../context/ImageContext"
@@ -26,9 +26,13 @@ const CardItem = forwardRef<HTMLLIElement, CardItemProps>(
   ) => {
     const navigate = useNavigate()
     const { setActiveImage } = useImages()
+    const location = useLocation()
     const isOpenFilters = useSelector(
       (store: storeType) => store.filters.visibility,
     )
+    const [searchParams] = useSearchParams()
+    const searchParamsString = searchParams.toString()
+    console.log(`/product/`)
     return (
       <li
         className={`${styles.item} ${className} ${
@@ -38,7 +42,11 @@ const CardItem = forwardRef<HTMLLIElement, CardItemProps>(
         onClick={() => {
           setActiveImage(product.ImageURL)
           window.scrollTo(0, 0)
-          navigate(`/product/${product.ProductID}`)
+          navigate(`/product/${product.ProductID}`, {
+            state: {
+              previousLocationPathname: `${location.pathname}?${searchParamsString}`,
+            },
+          })
         }}
         ref={ref}
       >
