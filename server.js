@@ -12,10 +12,8 @@ const favoriteRoutes = require("./routes/favoriteRoutes")
 const reviewRoutes = require("./routes/reviewRoutes")
 const checkoutRoutes = require("./routes/checkoutRoutes")
 const cors = require("cors")
-const { paginatedResults } = require("./utils/paginatedResult")
 require("./auth/passport")
 const session = db.session
-const { Product } = require("./models/Product")
 
 const app = express()
 
