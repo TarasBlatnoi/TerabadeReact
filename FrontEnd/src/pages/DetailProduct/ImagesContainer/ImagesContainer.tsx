@@ -26,7 +26,7 @@ const ImagesContainer = ({ detailProduct }: ImagesContainerProps) => {
       {detailProduct.images.map((image: ImageObject) => (
         <img
           key={image.ImageOrder}
-          src={image.ImageURL}
+          src={image.ImageURL || "https://picsum.photos/200"}
           alt={detailProduct.name}
           className={`${
             activeImage === image.ImageURL ? styles.mainImage : styles.hidden

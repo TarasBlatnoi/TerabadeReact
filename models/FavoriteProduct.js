@@ -29,7 +29,7 @@ FROM
         ON ProductSizes.SizeID = Sizes.SizeID
 WHERE 
 	(Images.ImageOrder = 0 OR Images.ImageOrder IS NULL) 
-    AND favoriteproduct.User_UserID = 51
+    AND favoriteproduct.User_UserID = ?
 GROUP BY 
     product.ProductID, 
     product.name, 
@@ -96,11 +96,13 @@ GROUP BY
   }
 
   static async findAllFavoriteProducts(userId) {
+    console.log(userId)
     const products = await FavoriteProduct.modifyFavoriteProduct(
       userId,
       null,
       FavoriteProduct.sqlQueries.getAll,
     )
+    console.log(products)
     return products.map((product) => {
       product.Sizes = product.Sizes?.split(" / ") || []
       return product

@@ -3,7 +3,7 @@
   width: 100vw;
   display: flex;
   align-items: center;
-  padding-top: 20rem;
+  padding-top: 10vh;
   flex-direction: column;
   background-color: white;
 }
